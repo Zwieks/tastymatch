@@ -20,9 +20,5 @@
 // Route::get('auth/register', 'Auth\AuthController@getRegister');
 // Route::post('auth/register', 'Auth\AuthController@postRegister');
 
-Route::get('/', function () {
-    return view('master', ['name' => 'Marleen']);
-   // return view('auth.login');
-});
 
 Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);
