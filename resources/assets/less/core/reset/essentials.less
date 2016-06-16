@@ -1,0 +1,187 @@
+// Clearfix
+.clearfix,
+.cf {
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+// Algemene classnames
+.nomargin,
+.nom {
+	margin: 0;
+}
+
+.nopadding .nop {
+	padding: 0;
+}
+
+.nomp {
+	margin: 0;
+	padding: 0;
+}
+
+.block {
+	display: block;
+}
+
+.dnone {
+	display: none;
+}
+
+.inline {
+	display: inline;
+}
+
+.center {
+	display: block;
+	margin: auto;
+}
+
+.hide,
+.hidden {
+	position: absolute;
+	left: -9999px;
+}
+
+.fleft {
+	float: left;
+}
+
+.fright {
+	float: right;
+}
+
+.clear {
+	clear: both;
+}
+
+.cleft {
+	clear: left;
+}
+
+.cright {
+	clear: right;
+}
+
+.tcenter {
+	text-align: center;
+}
+
+.tleft {
+	text-align: left;
+}
+
+.tright {
+	text-align: right;
+}
+
+.vbottom {
+	vertical-align: bottom;
+}
+
+.vmiddle {
+	vertical-align: middle;
+}
+
+.vtop {
+	vertical-align: top;
+}
+
+.absolute {
+	position: absolute;
+}
+
+.relative {
+	position: relative;
+}
+
+.fixed {
+	position: fixed;
+}
+
+.overflow {
+	overflow: hidden;
+}
+
+.b,
+.bold,
+.strong {
+	font-weight: @fontBold;
+}
+
+.i,
+.em,
+.italic {
+	font-style: italic;
+}
+
+.normal {
+	font-weight: normal;
+}
+
+.u,
+.underline {
+	text-decoration: underline;
+}
+
+.tnone {
+	text-decoration: none;
+}
+
+.small {
+	font-size: 0.9em;
+}
+
+.lower {
+	text-transform: lowercase;
+}
+
+.upper {
+	text-transform: uppercase;
+}
+
+.capitalize {
+	text-transform: capitalize;
+}
+
+.truncate {
+	display: block;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.default {
+	cursor: default;
+}
+
+.pointer,
+.js-hover {
+	cursor: pointer;
+}
+
+.mobiletext {
+	display: none;
+}
+
+.break-word {
+	-ms-word-break: break-word;
+	word-break: break-word;
+	-webkit-hyphens: auto;
+	-moz-hyphens: auto;
+	-ms-hyphens: auto;
+	hyphens: auto;
+}
+
+.hide-text {
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.hide-from-layout {
+	display: none !important;
+}

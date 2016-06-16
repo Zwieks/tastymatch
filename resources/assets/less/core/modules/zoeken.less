@@ -1,0 +1,71 @@
+// Search form (in header.tpl)
+.page-searchbox button {
+    margin: 0;
+}
+
+// Search form (on search results page)
+.search-form {
+    .displayflex;
+    margin-bottom: @spacing;
+}
+
+.search-button {
+    margin: 0;
+}
+
+.search-result a {
+    display: block;
+    color: @textColor;
+}
+
+.search-result-url {
+    .displayflex;
+
+    li {
+        display: inline-block;
+    }
+}
+
+// Search results pager (on search results page)
+.search-pager-simple {
+    text-align: right;
+
+    .active-page {
+        float: left;
+    }
+
+    .pager-next {
+        margin-left: @spacing;
+    }
+}
+
+// Extended pager (on search results page)
+.search-pager-complete {
+    text-align: center;
+
+    li:not(.pager-prev):not(.pager-next) a {
+        padding: 0 @spacing/4;
+    }
+
+    .active {
+        font-weight: @fontBold;
+    }
+}
+
+// Simple pager (on search results page)
+.search-pager {
+    li,
+    a {
+        display: inline-block;
+    }
+
+    .pager-prev > *:before {
+        float: left;
+        margin-right: @spacing/4;
+    }
+
+    .pager-next > *:before {
+        float: right;
+        margin-left: @spacing/4;
+    }
+}

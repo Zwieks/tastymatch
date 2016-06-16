@@ -1,0 +1,20 @@
+// Headings
+h1,
+h2,
+h3,
+h4 {
+    .transition();
+    .break-word; // Break words when they do not fit on one rule
+    font-weight: @fontBold;
+    margin: 0 0 @spacing;
+}
+
+@media @bp-MobileM {
+    h1 {
+        font-size: unit(@largeHeadingSize*2, vmin); // Make font-size responsive
+    }
+}
+
+hr {
+    border-bottom: 1px solid @lightGrey;
+}

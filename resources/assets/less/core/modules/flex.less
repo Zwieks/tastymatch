@@ -1,0 +1,38 @@
+
+/*
+ *  This is for 2 and 3 column layout (by default)
+ *
+ *  Kirra flexmodule settings:
+ *  - Aantal kolommen in grid:                  '2' en '3'
+ *  - Grid forceren:                            Ja
+ *  - CSS-klasse voor gridcontainer:            'js-flexwrapper page-flexwrapper'
+ *  - CSS-klasse voor gridrij:                  'flex-row'
+ *  - CSS-klasse voor gridcel:                  'flex-box width-1-3'
+ *  - Celbreedte opgeven via stijlattribuut:    'Nee'
+ *  - De overige 2 velden zijn leeg
+ */
+
+.flex-row {
+	.cf;
+	.displayflex;
+	.flex-wrap(wrap);
+	margin-left: -@gutterWidth/2;
+	margin-right: -@spacing/2;
+}
+
+.flex-box {
+	padding: 0 @gutterWidth/2;
+	width: 100%;
+
+	&.width-1-2 {
+		width: 100%/2;
+	}
+
+	&.width-1-3 {
+		width: 100%/3;
+	}
+
+	&.width-2-3 {
+		width: 100%/3*2;
+	}
+}

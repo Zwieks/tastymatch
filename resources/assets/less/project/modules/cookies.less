@@ -1,0 +1,54 @@
+html {
+    div#cookie-bar {
+        .box-shadow(@shadow);
+        .border-radius();
+        width: 100%;
+        max-width: 320px; // Minimum mobiele breedte
+        padding: @spacing @spacing 0;
+        bottom: @spacing/2;
+        right: @spacing/2;
+        background: lighten(@lightGrey, 10%);
+
+        // Make it fullscreen on smaller devices
+        @media @bp-MobileM {
+            .box-shadow(none);
+            .border-radius(0);
+            max-width: none;
+            bottom: 0;
+            right: 0;
+        }
+
+        a {
+            color: @primColor;
+            text-decoration: none;
+
+            &:hover,
+            &:focus {
+                color: @secColor;
+            }
+        }
+
+        span.cookie-buttons {
+            padding: @spacing/2 0 0;
+
+            .disallow-cookies {
+                background: transparent;
+
+                &:hover,
+                &:focus {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    .cookie-explanation-container {
+        .border-radius();
+        border: 1px dotted @lightGrey;
+        background: lighten(@lightGrey, 10%);
+    }
+
+    .cookie-explanation {
+        padding: @spacing/2 @spacing @spacing/2 @spacing*2; // Make space for the icon
+    }
+}

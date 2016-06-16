@@ -1,0 +1,134 @@
+.page-breadcrumb {
+	margin: @spacing 0;
+
+	a {
+		color: @textColor;
+		line-height: @spacing;
+		display: inline-block;
+	}
+}
+
+.crumb-level1 {
+	color: @textColor;
+
+	&:before {
+		content: '›';
+	}
+
+	&:last-child {
+		&:hover,
+		&:focus {
+			.crumb-toggle:before {
+				content: '\25B2';
+			}
+		}
+	}
+}
+
+.crumb-active {
+	background: lighten(@lightGrey, 10%);
+}
+
+.subcrumb {
+	.border-radius();
+	.box-shadow(0 0 0 1px @lightGrey); // Creates a 1px border on the outside of the element
+	background: #fff;
+	min-width: 240px;
+
+	a {
+		padding: @spacing/4 @spacing/2;
+		display: block;
+
+		&:hover,
+		&:focus {
+			background: fadein(@lightGrey, -50%);
+		}
+	}
+
+	li:not(:first-child) a {
+		border-top: 1px solid @lightGrey;
+	}
+}
+
+.crumb-arrow:before {
+	content: attr(data-arrow);
+}
+
+@media @bp-TabletS {
+	.page-breadcrumb {
+		height: @spacing;
+		margin-top: @spacing;
+
+		> ol {
+			.border-radius();
+			top: @spacing*1.25;
+			left: -@spacing/2;
+			background: #fff;
+			width: calc(100% ~'+' @spacing);
+		}
+	}
+
+	.open-breadcrumb { // This class is set on .page-breadcrumb
+		> ol {
+			.box-shadow(0 1px 3px rgba(0,0,0,.25));
+		}
+
+		.breadcrumb-toggler {
+			background: @lightGrey;
+
+			&:before {
+				content: '\25B2'; // Arrow up
+			}
+		}
+	}
+
+	.crumb-level1 {
+		&:not(:nth-last-child(2)) {
+			a {
+				padding: @spacing/4 @spacing/2;
+
+				&:hover,
+				&:focus {
+					background: fadein(@lightGrey, -50%);
+				}
+			}
+
+			&:not(:first-child) a {
+				border-top: 1px solid @lightGrey;
+			}
+		}
+
+		&:nth-last-child(2) {
+			top: -@spacing*1.25;
+			left: @spacing*2;
+			max-width: calc(100% ~'-' @spacing*2.5);
+
+			.crumb-name {
+				text-decoration: underline;
+			}
+		}
+	}
+
+	.breadcrumb-toggler {
+		.border-radius(50%);
+		width: @spacing;
+		min-height: @spacing;
+		border: 1px solid @lightGrey;
+		background: #fff;
+		color: @textColor;
+
+		&:before {
+			content: attr(data-arrow);
+		}
+
+		&:hover,
+		&:focus {
+			background: @lightGrey;
+			border-color: @lightGrey;
+		}
+	}
+
+	.no-crumb-button .crumb-level1:nth-last-child(2) {
+		left: 0;
+	}
+}

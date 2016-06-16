@@ -1,0 +1,191 @@
+/* default form elements */
+[type=text],
+[type=email],
+[type=tel],
+[type=password],
+[type=number],
+[type=search],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=month],
+[type=time],
+[type=week],
+[type=url],
+textarea,
+select,
+button {
+	.border-radius(@inputRadius);
+	.box-shadow(@inputShadow);
+	.transition();
+	.appearance(none);
+	font-family: @baseFont;
+	font-size: @baseFontSize;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-weight: normal;
+	width: 100%;
+	min-height: @inputHeight;
+	padding: 0 @inputPadding;
+	background: @inputBg;
+	border: @borderWidth solid @borderColor;
+	display: block;
+
+	&.disabled {
+		opacity: .5;
+	}
+
+	&:focus {
+		outline: 0;
+		border-color: @focusColor;
+	}
+}
+
+[disabled] {
+	cursor: not-allowed;
+}
+
+.style-select {
+	.border-radius(@inputRadius);
+	.box-shadow(@inputShadow);
+	.transition();
+	height: @inputHeight;
+	width: 100%;
+	position: relative;
+	border: solid @borderWidth @borderColor;
+	background: @inputBg;
+	overflow: hidden;
+	z-index: 1;
+
+	// Arrow
+	&:before {
+		.centerY;
+		display: block;
+		right: 0;
+		text-align: center;
+		width: @inputHeight; // Make it square
+		z-index: -1; // Make it non-clickable
+	}
+
+	select {
+		width: 100%;
+		padding: 0 @inputHeight 0 @inputPadding;
+		border: 0;
+		text-indent: 0.01px; // Firefox hack
+		background: transparent;
+		line-height: calc(@inputHeight ~'-' @borderWidth*4);
+
+		// Hide arrow for older IE's
+		&::-ms-expand {
+			display: none;
+		}
+	}
+
+	&.focus {
+		border-color: @focusColor;
+	}
+}
+
+// Custom scrollbar for textarea's en multiple selects (desktop only)
+html:not(.touch-device) textarea,
+html:not(.touch-device) select[multiple] {
+	&::-webkit-scrollbar {
+		-webkit-border-radius: 6px;
+		width: 12px;
+		height: 12px;
+		background: @inputBg;
+	}
+
+	&::-webkit-scrollbar-thumb {
+		-webkit-border-radius: 6px;
+		background: @grey;
+		border: 3px solid @inputBg;
+	}
+}
+
+select[multiple] {
+	height: auto;
+	padding: 0;
+	overflow: auto;
+
+	option {
+		padding: @spacing/4 @spacing/2;
+		word-wrap: break-word;
+	}
+}
+
+textarea {
+	padding-top: @inputPadding/2;
+	padding-bottom: @inputPadding/2;
+	resize: vertical;
+	overflow: auto;
+	vertical-align: top;
+}
+
+// Placeholder colors
+::-webkit-input-placeholder { color: @placeHolderColor; }
+::-moz-placeholder { color: @placeHolderColor; }
+:-moz-placeholder { color: @placeHolderColor; }
+:-ms-input-placeholder { color: @placeHolderColor; }
+.placeholder { color: @placeHolderColor !important; }
+/* end default form elements */
+
+
+
+/* submit buttons */
+button,
+[type=submit] {
+	&:extend(.btn all);
+	.appearance(none);
+	width: auto;
+
+	&:focus {
+		outline: 0;
+	}
+}
+/* end submit buttons */
+
+
+
+/* form heading */
+legend {
+	&:extend(h2);
+}
+/* end form heading */
+
+
+
+/* form tooltip */
+.form-tooltip[data-title] {
+	.border-radius(50%);
+	width: @spacing*0.75;
+	height: @spacing*0.75;
+	line-height: @spacing*0.75;
+	text-align: center;
+	position: absolute;
+	top: 0;
+	right: 0;
+	margin: 0;
+
+	// Align them to the right
+	&:after {
+		.translateX(0);
+		left: auto;
+		right: 0;
+	}
+}
+/* end form tooltip */
+
+
+
+/* descriptions for inputs */
+.form-description {
+	display: block;
+	clear: both;
+	color: @grey;
+	margin: 0;
+	font-size: @smallFontSize;
+	font-style: italic;
+	padding-top: @spacing/4;
+}
+/* end descriptions for inputs */

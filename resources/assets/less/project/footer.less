@@ -1,0 +1,24 @@
+.page-footer {
+    .inner {
+        .displayflex;
+        .justify-content(space-between);
+    }
+}
+
+.page-footermenu,
+.footer-credits {
+    .displayflex;
+    float: right;
+
+    li:not(:last-child) {
+        margin-right: @spacing;
+    }
+
+    a {
+        display: inline-block;
+
+        &:hover,
+        &:focus {
+        }
+    }
+}

@@ -25,4 +25,4 @@ Route::get('/', function () {
    // return view('auth.login');
 });
 
-Route::get('blade', function () { return view('page'); });
+Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);

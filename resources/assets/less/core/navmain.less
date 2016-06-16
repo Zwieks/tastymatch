@@ -1,0 +1,28 @@
+.page-mainmenu {
+    .level-1 {
+        .displayflex;
+        margin-bottom: 0;
+    }
+
+    .level-1-item {
+        float: left;
+        position: relative;
+
+        > a {
+            display: inline-block;
+        }
+    }
+
+    .level-2 {
+        .transition();
+        position: absolute;
+        left: 0;
+        top: 100%;
+        z-index: 10;
+        margin: 0;
+    }
+
+    .level-2-item > a {
+        display: block;
+    }
+}

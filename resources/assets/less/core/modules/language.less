@@ -1,0 +1,58 @@
+// Header login dropdown
+.language {
+	margin: 0 0 0 @spacing;
+	position: relative;
+
+	&:hover,
+	&:focus {
+		.dropdown-menu {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+
+	a {
+		.displayflex;
+		.align-items(center);
+
+		img {
+			.flex-order(1);
+			margin-left: @spacing/2;
+		}
+	}
+
+	// This is the active selected language
+	.dropdown > a {
+		.displayflex;
+		.align-items(center);
+		height: @headerHeight;
+
+		.caret {
+			.flex-order(1);
+			margin-left: @spacing/2;
+
+			&:before {
+				content: '▾';
+			}
+		}
+
+		@media @navBreakPoint {
+			height: @responsiveHeaderHeight;
+		}
+	}
+
+	.dropdown-menu {
+		.transition();
+		position: absolute;
+		top: 100%;
+		left: 0;
+		min-width: 100%;
+		opacity: 0;
+		visibility: hidden;
+		background: #fff;
+
+		a {
+			.justify-content(space-between);
+		}
+	}
+}

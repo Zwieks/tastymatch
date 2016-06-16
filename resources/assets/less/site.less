@@ -1,0 +1,80 @@
+///* VARIABLES */
+@import (reference) "project/variables.less";
+
+/* RESET (do not edit the files below) */
+@import "core/reset/normalize.less";
+@import "core/reset/essentials.less";
+@import "core/reset/iwink.less";
+@import (reference) "core/reset/mixins.less";
+@import (reference) "core/reset/mixins-flex.less";
+
+/* CORE FRAMEWORK STYLING (do not edit the files below) */
+@import "core/framework.less";
+@import "core/grid.less";
+@import "core/typography.less";
+@import "core/buttons.less";
+@import "core/tooltip.less";
+@import "core/navmain.less";
+& when (@breadcrumb     = true) { @import "core/breadcrumb.less"; }
+& when (@responsive     = true) { @import "core/inav.less"; }
+& when (@icons          = true) { @import "core/icons.less"; }
+& when (@submenu        = true) { @import "core/submenu.less"; }
+
+/* DEFAULT COMPONENT STYLING (do not edit the files below) */
+@import "core/components/form-base.less"; // Is always loaded, not depended on the module
+@import "core/components/compblock.less";
+@import "core/components/alinea.less";
+@import "core/components/tables.less";
+@import "core/components/images.less";
+@import "core/components/quote.less";
+@import "core/components/iframe.less";
+@import "core/components/sitemap.less";
+
+/* CORE MODULE STYLING (do not edit the files below) */
+& when (@moduleYoutube  = true) { @import "core/modules/youtube.less"; }
+& when (@moduleSearch   = true) { @import "core/modules/zoeken.less"; }
+& when (@moduleFlex     = true) { @import "core/modules/flex.less"; }
+& when (@moduleCookies  = true) { @import "core/modules/cookies.less"; }
+& when (@moduleMaps     = true) { @import "core/modules/googlemaps.less"; }
+& when (@moduleLogin    = true) { @import "core/modules/login.less"; }
+& when (@moduleLanguage = true) { @import "core/modules/language.less"; }
+& when (@moduleForms    = true) { @import "core/components/form-items.less";
+								  @import "core/components/form-errors.less"; }
+
+/*
+ *  DO NOT EDIT ABOVE FILES, ONLY THE FILES BELOW!
+ */
+
+/* PROJECT SPECIFIC BASIC STYLING */
+@import "project/commons.less";
+@import "project/framework.less";
+@import "project/grid.less";
+@import "project/typography.less";
+@import "project/buttons.less";
+@import "project/tooltip.less";
+@import "project/browser.less";
+@import "project/header.less";
+@import "project/navmain.less";
+@import "project/footer.less";
+@import "project/homepage.less";
+& when (@breadcrumb     = true) { @import "project/breadcrumb.less"; }
+& when (@responsive     = true) { @import "project/inav.less"; }
+& when (@icons          = true) { @import "project/icons.less"; }
+& when (@submenu        = true) { @import "project/submenu.less"; }
+
+/* PROJECT SPECIFIC COMPONENTS */
+@import "project/components/alinea.less";
+@import "project/components/tables.less";
+@import "project/components/images.less";
+@import "project/components/quote.less";
+
+& when (@moduleYoutube          = true) { @import "project/modules/youtube.less"; }
+& when (@moduleFlex             = true) { @import "project/modules/flex.less"; }
+& when (@moduleSearch           = true) { @import "project/modules/zoeken.less"; }
+& when (@moduleCookies          = true) { @import "project/modules/cookies.less"; }
+& when (@moduleMaps             = true) { @import "project/modules/googlemaps.less"; }
+& when (@moduleForms            = true) { @import "project/components/forms.less"; }
+& when (@animatingFormLabels    = true) { @import "project/components/form-animating-labels.less"; }
+
+/* PLACE YOUR OWN CSS STYLING DOWN HERE WITH @IMPORTS */
+// Example: @import "project/components/customcomponent.less";

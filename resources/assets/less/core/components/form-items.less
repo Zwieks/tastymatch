@@ -1,0 +1,141 @@
+/* radio's and checkboxes */
+[type=radio], // With input for extra strength in selector
+[type=checkbox] { // With input for extra strength in selector
+	display: none;
+
+	// active radio button
+	&:checked + label {
+		&:before {
+			border-color: @focusColor;
+		}
+
+		&:after {
+			.transform(translateY(-50%) scale(1)) !important;
+			border-color: @focusColor;
+		}
+	}
+}
+
+.form-input-radio,
+.form-input-multipleselect-checkboxes,
+.form-input-checkbox {
+	label {
+		display: inline-block;
+		margin-left: 0;
+		float: none;
+	}
+
+	&.keuze:not(.form-input-radio) > label,
+	ul label {
+		font-weight: normal;
+	}
+
+	label:not(.multiple-title) {
+		padding-left: @spacing;
+		position: relative;
+
+		&:before,
+		&:after {
+			.transition();
+			.border-radius(@inputRadius/2);
+			.centerY;
+			content: '';
+			display: block;
+			width: @radioCheckboxSize;
+			height: @radioCheckboxSize;
+			line-height: @radioCheckboxSize;
+			left: 0;
+			border: 1px solid darken(@borderColor, 15%); // Better visibility by darkening them
+		}
+
+		// Box
+		&:before {
+			background: @inputBg;
+		}
+
+		// Fill
+		&:after {
+			.transform(translateY(-50%) scale(0));
+			border: 0;
+			background: @textColor;
+		}
+
+		// hover effect checkbox
+		&:hover,
+		&:focus {
+			&:before {
+				border-color: @focusColor;
+			}
+		}
+	}
+}
+
+// Make radio buttons round
+.form-input-radio label:not(.multiple-title) {
+	&:before,
+	&:after {
+		.border-radius(50%);
+	}
+}
+/* end radio's and checkboxes */
+
+
+
+/* date field */
+.form-input-date .style-select {
+    width: 32%;
+    max-width: 168px;
+    float: left;
+
+    &:not(:first-of-type) {
+        margin-left: 2%;
+    }
+}
+/* end date field */
+
+
+
+/* upload button */
+.form-input-file .filewrapper {
+	.border-radius(@inputRadius);
+	.box-shadow(@inputShadow);
+	width: 100%;
+	background: @inputBg;
+	border: @borderWidth solid @borderColor;
+	padding: @spacing/4;
+	margin: 0;
+}
+
+[type=file] {
+	padding: 0;
+	min-height: 0;
+	width: 100%;
+	border: 0;
+
+	&::-webkit-file-upload-button {
+		&:extend(.btn);
+		margin-bottom: 0;
+	}
+
+	&:hover::-webkit-file-upload-button,
+	&:focus::-webkit-file-upload-button {
+		&:extend(.btn:hover);
+		outline: 0;
+	}
+
+	&:focus {
+		outline: 0;
+	}
+
+	// IE Correction for upload button
+	&::-ms-value {
+		border: 0;
+		background: #fff;
+	}
+
+	&::-ms-browse {
+		.btn;
+		margin: 0;
+	}
+}
+/* end upload button */

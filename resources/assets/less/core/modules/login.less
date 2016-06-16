@@ -1,0 +1,54 @@
+// Header login buttons
+.login {
+	.displayflex;
+	margin: 0 0 0 @spacing;
+	position: relative;
+
+	> li {
+		.displayflex;
+		.align-items(center);
+
+		&:not(:first-child) {
+			margin-left: @spacing;
+		}
+	}
+
+	a {
+		.displayflex;
+		.align-items(center);
+	}
+
+	.caret:before {
+		content: '▾';
+	}
+
+	// Dropdown arrow trigger
+	.dropdown {
+		&:hover,
+		&:focus {
+			.dropdown-menu {
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+
+		> a {
+			height: @headerHeight;
+
+			@media @navBreakPoint {
+				height: @responsiveHeaderHeight;
+			}
+		}
+	}
+
+	.dropdown-menu {
+		.transition();
+		position: absolute;
+		top: 100%;
+		left: 0;
+		background: #fff;
+		min-width: 100%;
+		opacity: 0;
+		visibility: hidden;
+	}
+}

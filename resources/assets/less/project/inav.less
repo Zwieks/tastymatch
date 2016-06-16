@@ -1,0 +1,105 @@
+.nav-trigger {
+	display: none;
+}
+
+.nav-toggle {
+	width: @hamburgerHeight;
+
+	span {
+		&,
+		&:before,
+		&:after {
+			.border-radius(2px); // Half the height value
+			height: 4px;
+			margin-top: -2px;
+			background: @hamburgerColor;
+		}
+	}
+
+	&:not(.active):hover span {
+		&,
+		&:before,
+		&:after {
+			background: #000;
+		}
+	}
+
+	strong {
+		text-transform: uppercase;
+	}
+
+	&.active span:before,
+	&.active span:after {
+		background: #000;
+	}
+}
+
+.nav-wrapper {
+	// Default subnav icon
+	.open-subnav:before {
+		content: '▾';
+		font-size: 14px; // Always in px because of IE
+	}
+
+	a {
+		color: #fff;
+		word-wrap: break-word; // Break long menu titles
+	}
+
+	// First level styling
+	> ul > li {
+		> a {
+			padding: @spacing/4 @spacing;
+		}
+
+		&.subnav > a {
+			padding-right: @spacing*2; // Extra room for the icon
+		}
+	}
+
+	// Second level styling
+	ul ul a {
+		.transition-duration(@navSpeed/2);
+		.translateZ(0); // Aceclerate transition
+		line-height: 0;
+		padding: 0 @spacing 0 @spacing*2;
+		opacity: 0;
+	}
+
+	// Active subnav icon
+	.open {
+		a {
+			opacity: 1;
+			padding-top: @spacing/4;
+			padding-bottom: @spacing/4;
+			line-height: @baseLineHeight;
+		}
+
+		.open-subnav:before {
+			.transform(translate(-50%, -50%) rotate(180deg));
+		}
+	}
+
+	// The button to open the responsive subnavigation
+	.open-subnav {
+		.border-radius(50%);
+		top: @spacing/4; // Same as padding-top from opened subnav anchor
+		right: @spacing/2;
+		width: @spacing*0.9; // Same as .opened anchor line-height
+		height: @spacing*0.9; // Same as .opened anchor line-height
+		background: #fff;
+
+		&:hover,
+		&:focus {
+			background: #000;
+			color: #fff;
+		}
+	}
+}
+
+@media @navBreakPoint {
+	// @TODO: Complete this list with all the elements that are pushed into the responsive navigation
+	.page-mainmenu {
+		display: none;
+	}
+}

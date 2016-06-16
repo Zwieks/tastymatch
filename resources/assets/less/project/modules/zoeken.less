@@ -1,0 +1,42 @@
+// Search form (in header.tpl)
+.page-searchbox {
+    .displayflex;
+    margin-left: @spacing;
+    max-width: calc(320px ~'-' @spacing*2);
+
+    // Search input field
+    input {
+    }
+
+    // Search submit button
+    button {
+    }
+}
+
+// Search result (on search results page)
+.search-result-url {
+    color: @grey;
+    font-size: @smallFontSize;
+    margin-bottom: @spacing/2;
+
+    li:not(:first-child):before {
+        content: '›';
+        padding: 0 @spacing/4;
+    }
+}
+
+// Simple pager (on search results page)
+.search-pager {
+    .pager-prev > *:before {
+        content: '‹';
+    }
+
+    .pager-next > *:before {
+        content: '›';
+    }
+}
+
+// Marked text (on search results page)
+.highlighted {
+    background: fadein(yellow, -50%);
+}

@@ -1,0 +1,49 @@
+/* header */
+.page-header {
+    .box-shadow(@shadow);
+    width: 100%;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    height: @headerHeight;
+    background: #fff;
+
+    & when (@fixedHeader = true) {
+        position: fixed;
+    }
+
+    .inner {
+        .displayflex;
+        .justify-content(space-between);
+        .align-items(center);
+        height: @headerHeight;
+
+        @media @navBreakPoint {
+            height: @responsiveHeaderHeight;
+        }
+    }
+}
+/* end header */
+
+
+
+/* tiny header (set with jquery.header.js) */
+.tiny-header .page-header {
+    // @TODO: Als er een verkleinde header is (op scroll), deze dan hier opmaken.
+    // @TODO: Als er geen verkleinde header is, deze regels verwijderen en de Javascript verwijderen.
+}
+/* end tiny header (set with jquery.header.js) */
+
+
+
+/* logo  */
+.page-logo {
+    height: @headerHeight;
+    padding: @spacing 0;
+
+    img {
+        max-width: none;
+        height: 100%;
+    }
+}
+/* end logo  */

@@ -1,0 +1,95 @@
+// Default image styling
+.comp-image,
+.comp-imageuitlijning {
+	img {
+		margin: auto;
+		max-width: none;
+		width: 100%; // Makes image look like they're loaded progressively
+	}
+}
+
+.image-caption {
+	margin: 0;
+}
+
+// Image with alignment
+.comp-imageuitlijning {
+	&.align-links {
+		float: left;
+		margin-right: @spacing;
+	}
+
+	&.align-rechts {
+		float: right;
+		margin-left: @spacing;
+	}
+
+	&.align-gecentreerd {
+		width: 100%;
+		clear: both;
+	}
+}
+
+// Zoomable images
+html:not(.touch-device) [data-zoom] img {
+	cursor: -webkit-zoom-in;
+	cursor: -moz-zoom-in;
+	cursor: zoom-in;
+}
+
+.zoom-container {
+	.translateZ(0);
+	.transition(.3s ease-in-out);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 200;
+	background: fadein(@navOverlayColor, -100%);
+	cursor: -webkit-zoom-out;
+	cursor: -moz-zoom-out;
+	cursor: zoom-out;
+
+	img {
+		.translate(-50%, -50%);
+		position: absolute;
+	}
+
+	.loader {
+		.transition();
+		z-index: 1;
+		width: 36px;
+		height: 36px;
+	}
+
+	.large-image {
+		top: 50%;
+		left: 50%;
+		max-height: 100%;
+	}
+
+	// Overrules Javascript initial positioning so it animates
+	&.enlarge-image {
+		background: @navOverlayColor;
+
+		.loader {
+			opacity: 0;
+		}
+
+		.zoom-wrapper {
+			top: 30px !important;
+			right: 30px !important;
+			left: 30px !important;
+			bottom: 30px !important;
+		}
+	}
+}
+
+.zoom-wrapper {
+	.translateZ(0);
+	.transition(.3s ease-in-out);
+	.backface-visibility(hidden);
+	position: absolute;
+	display: block;
+}

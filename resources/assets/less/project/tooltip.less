@@ -1,0 +1,19 @@
+[data-title] {
+	&:after {
+		.border-radius();
+		opacity: 0;
+		visibility: hidden;
+		background: #000;
+		padding: 0 @spacing/4;
+		color: #fff;
+		font-size: @smallFontSize;
+
+	}
+
+	&:hover:after,
+	&:focus:after {
+		opacity: 1;
+		visibility: visible;
+		margin-bottom: @spacing/6;
+	}
+}

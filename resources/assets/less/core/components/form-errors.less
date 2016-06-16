@@ -1,0 +1,65 @@
+/* error reports */
+.form-error {
+	.border-radius();
+	background: @errorColor;
+	color: #fff;
+	padding: @spacing/2;
+	margin: 0 0 @spacing;
+	font-weight: @fontBold;
+
+	p,
+	ul {
+		margin: 0 0 @spacing/2;
+	}
+
+	ul {
+		list-style: disc outside;
+		padding-left: @spacing*0.75;
+	}
+}
+
+div.input-error { // Has to be a div, otherwise the input-fields are also styled (same classname)
+	padding-right: @spacing; // Spacing for the tooltip (if the tooltip is positioned in the top right corner)
+
+	p {
+		.border-radius();
+		display: inline-block;
+		background: @errorColor;
+		color: #fff;
+		padding: @spacing/4 @spacing/2;
+		position: relative;
+		font-size: @smallFontSize;
+		margin: 0 0 @spacing/2;
+		white-space: nowrap;
+
+		// Triangle
+		&:before {
+			.border-radius();
+			content: '';
+			display: block;
+			width: 0;
+			height: 0;
+			border: 6px solid transparent;
+			border-top-color: @errorColor;
+			overflow: hidden;
+			position: absolute;
+			left: @spacing/2;
+			top: 100%;
+			margin-top: -1px; // 1px correction to be sure arrow is positioned correctly
+		}
+	}
+}
+
+.errors {
+	.border-radius();
+	background: @errorColor;
+	color: #fff;
+	padding: @spacing/2;
+	margin: 0 0 @spacing;
+	list-style: disc inside;
+
+	li {
+		padding-left: @spacing*0.75;
+	}
+}
+/* end error reports */

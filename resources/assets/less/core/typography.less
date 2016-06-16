@@ -1,0 +1,89 @@
+html {
+    font-size: @rootFontSize;
+}
+
+body {
+    font-family: @baseFont;
+    font-size: unit(@baseFontSize, em);
+    line-height: @baseLineHeight;
+    color: @textColor;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: none;
+}
+
+.baseFont {
+    font-family: @baseFont;
+}
+
+.baseHeading {
+    font-family: @baseHeading;
+}
+
+.iconFont {
+    font-family: @iconFont;
+}
+
+.smallFontSize {
+    font-size: @smallFontSize;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    .translateZ(0); // Make text-rendering perform better
+    font-family: @baseHeading;
+    line-height: @baseHeadingLineHeight;
+    text-rendering: optimizelegibility; // Render fonts nicer on devices
+    margin: 0;
+
+    .touch-device & {
+        text-rendering: optimizeSpeed; // Render fonts faster on touch devices
+    }
+}
+
+h1 {
+    font-size: @largeHeadingSize;
+}
+
+h2 {
+    font-size: @mediumHeadingSize;
+}
+
+h3 {
+    font-size: @smallHeadingSize;
+}
+
+h4 {
+    font-size: @baseFontSize;
+}
+
+p,
+address,
+ul,
+ol,
+table,
+blockquote,
+dl {
+    margin: 0 0 @spacing;
+    padding: 0;
+}
+
+ul,
+ol {
+    ul,
+    ol {
+        margin: 0;
+    }
+}
+
+hr {
+    height: 0;
+    padding: 0;
+    border: 0;
+    margin: 0 0 @spacing;
+    overflow: hidden;
+    display: block;
+    clear: both;
+}

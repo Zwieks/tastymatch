@@ -1,0 +1,30 @@
+.comp-alinea {
+	.cf;
+	margin-bottom: 0;
+
+	strong,
+	b {
+		font-weight: @fontBold;
+	}
+
+	object,
+	embed,
+	iframe {
+		width: 100% !important;
+		margin-bottom: @spacing;
+	}
+
+	img[style*='float:right'] {
+		max-width: 100%/3;
+		margin-left: @spacing;
+	}
+
+	img[style*='float:left'] {
+		max-width: 100%/3;
+		margin-right: @spacing;
+	}
+
+	.comp-youtube iframe {
+		opacity: 1;
+	}
+}

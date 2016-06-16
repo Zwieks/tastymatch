@@ -1,0 +1,94 @@
+
+// The main grid wrapper
+.page-overview {
+	.displayflex;
+	.flex-wrap(wrap);
+	margin-bottom: @spacing;
+
+	&[data-alignment='center'] {
+		.justify-content(center);
+	}
+
+	&[data-alignment='right'] {
+		.justify-content(flex-end);
+	}
+
+	&[data-gutter='1'] {
+		margin-left: -@gutterWidth/2;
+		margin-right: -@gutterWidth/2;
+		margin-bottom: 0;
+
+		.page-overview-block {
+			padding-left: @gutterWidth/2;
+			padding-right: @gutterWidth/2;
+			margin-bottom: @gutterWidth;
+		}
+
+		> h1,
+		> h2 {
+			padding-left: @gutterWidth/2;
+			padding-right: @gutterWidth/2;
+		}
+	}
+
+	&[data-gutter='0'] .text {
+		padding-left: @gutterWidth/2;
+		padding-right: @gutterWidth/2;
+	}
+
+	> h1,
+	> h2 {
+		width: 100%;
+	}
+}
+
+// The items within the grid wrapper
+.page-overview-block {
+	[data-width] & {
+		.flex(1);
+	}
+
+	[data-columns='1'] & { width: 100%; }
+	[data-columns='2'] & { width: 100%/2; }
+	[data-columns='3'] & { width: 100%/3; }
+	[data-columns='4'] & { width: 100%/4; }
+	[data-columns='5'] & { width: 100%/5; }
+	[data-columns='6'] & { width: 100%/6; }
+
+	.page-overview-block-inner {
+		display: block;
+		text-decoration: none;
+		width: 100%;
+	}
+
+	// Overrule responsive images Javascript bug
+	.image {
+		position: relative;
+		padding-top: percentage(@previewRatio);
+
+		> div {
+			display: block !important; // Prevents spacing below the element
+			max-width: none !important; // Helps IE
+			height: 100% !important;
+			padding: 0 !important;
+		}
+
+		img {
+			position: absolute !important;
+			width: 100% !important;
+			height: auto !important;
+			left: 0 !important;
+			top: 0 !important; // Default aligned to the top
+		}
+
+		&[data-image-alignment='center'] img {
+			.translateY(-50%) !important;
+			top: 50% !important;
+		}
+
+		&[data-image-alignment='bottom'] img {
+			top: auto !important;
+			bottom: 0 !important;
+		}
+	}
+}

@@ -1,0 +1,56 @@
+// Links
+a {
+    .transition();
+    color: @primColor;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: @secColor;
+    }
+}
+
+// Default button
+.btn {
+    .transition();
+    .border-radius();
+    padding: @spacing/4 @spacing/2;
+    border: 0;
+    background: @primColor;
+    color: #fff;
+    font-weight: @fontBold;
+
+    &:hover,
+    &:focus {
+        background-color: @secColor;
+    }
+
+    // Optional icon styling (with data-icon attribute)
+    &:before {
+        float: right;
+        margin-left: @spacing/4;
+    }
+}
+
+// Bigger button
+.call-to-action {
+    &:extend(.btn all);
+    padding: @spacing/2 @spacing;
+}
+
+// Small button
+.readmore {
+    .transition();
+    font-weight: @fontBold;
+
+    // Optional icon styling
+    &:before {
+        content: '›';
+        float: right;
+        margin-left: @spacing/4;
+    }
+
+    &:hover,
+    &:focus {
+    }
+}

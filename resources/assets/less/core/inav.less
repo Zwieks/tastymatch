@@ -1,0 +1,354 @@
+.page-header,
+.page-website-wrapper {
+	.transition(@navSpeed ease-in-out);
+}
+
+.page-website-wrapper {
+	.translate3d(0, 0, 0); // Fixed elements don't work in this wrapper because of the transform property
+	.displayflex;
+	.flex-direction(column);
+	min-height: calc(100vh ~'-' @headerHeight);
+}
+
+.nav-toggle {
+	.transition(@navSpeed ease-in-out);
+	top: 0;
+	left: 0;
+	display: none;
+	cursor: pointer;
+	position: relative;
+	font-size: @smallFontSize;
+	text-align: center;
+	z-index: 10;
+	height: @hamburgerHeight;
+
+	.wrapper {
+		.translate(-50%, -50%);
+		position: absolute;
+		display: block;
+		top: 50%;
+		left: 50%;
+		width: @spacing;
+	}
+
+	// Menu lines
+	span {
+		cursor: pointer;
+
+		&,
+		&:before,
+		&:after {
+			.transition(@navSpeed/2 ease-in-out);
+			.translateZ(0);
+			width: 100%;
+			position: absolute;
+			display: block;
+			top: 50%;
+			left: 0;
+		}
+
+		&:before {
+			.translateY(-200%);
+			content: '';
+		}
+
+		&:after {
+			.translateY(200%);
+			content: '';
+		}
+	}
+
+	& when (@hamburgerText = false) {
+		strong {
+			display: none;
+		}
+	}
+}
+
+.page-mobile-nav-container {
+	display: none;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	width: 0;
+	z-index: 110; // Placed over the header because of the .navtoggle button
+}
+
+// Dark overlay over website
+.nav-closer {
+	.transition(opacity @navSpeed ease-in-out);
+	content: '';
+	background: @navOverlayColor;
+	width: 100vw;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	display: block;
+	opacity: 0;
+	visibility: hidden;
+	cursor: url(/img/cursor-close.png), auto;
+	z-index: -1;
+}
+
+.nav-wrapper {
+	.transition(@navSpeed ease-in-out);
+	height: 100%;
+	background: @navBg;
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	position: absolute;
+	top: 0;
+
+	// Inner shadow
+	&:before {
+		.gradient(linear; rgba(0,0,0,0), #000; 90deg);
+		opacity: @navShadow;
+		content: '';
+		display: block;
+		width: @spacing/4;
+		height: 100%;
+		position: absolute;
+		top: 0;
+		z-index: 1;
+	}
+
+	a {
+		display: block;
+	}
+
+	li {
+		position: relative;
+	}
+
+	// Subnavigation
+	ul {
+		margin: 0;
+
+		ul {
+			.transition(@navSpeed ease-in-out);
+			overflow: hidden;
+		}
+	}
+
+	// The button to open the responsive subnavigation
+	.open-subnav {
+		.transition();
+		-webkit-tap-highlight-color: transparent;
+		position: absolute;
+		text-align: center;
+		cursor: pointer;
+
+		&:before {
+			.transition();
+			.center;
+		}
+	}
+}
+
+@media @navBreakPoint {
+	.nav-toggle,
+	.page-mobile-nav-container {
+		display: block;
+	}
+
+	.nav-trigger:checked ~ .page-mobile-nav-container {
+		.nav-toggle span {
+			background: transparent;
+
+			&:before {
+				.rotate(45deg);
+			}
+
+			&:after {
+				.rotate(-45deg);
+			}
+		}
+
+		.nav-closer {
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}
+
+
+
+
+/* Specific styling for nav from the left */
+& when (@hamburger = left) {
+	@media @navBreakPoint {
+		.nav-toggle {
+			left: 100%;
+		}
+
+		.page-mobile-nav-container {
+			left: 0;
+		}
+
+		.nav-wrapper {
+			.translate3d(-@navWidth, 0, 0);
+			width: @navWidth;
+			left: 0;
+
+			&:before {
+				right: 0;
+			}
+		}
+
+		.nav-closer {
+			left: 0;
+		}
+
+		.nav-trigger:checked {
+			~ .page-mobile-nav-container .nav-toggle,
+			~ .page-header,
+			~ .page-website-wrapper {
+				.translateX(@navWidth);
+			}
+
+			~ .page-mobile-nav-container .nav-wrapper {
+				.translateX(0);
+			}
+		}
+	}
+}
+
+
+
+/* Specific styling for nav from the right */
+& when (@hamburger = right) {
+	@media @navBreakPoint {
+		.nav-toggle {
+			.translateX(-100%);
+			right: 100%;
+			left: auto;
+		}
+
+		.page-mobile-nav-container {
+			right: 0;
+		}
+
+		.nav-wrapper {
+			.translate3d(@navWidth, 0, 0);
+			width: @navWidth;
+			right: 0;
+
+			&:before {
+				.scaleX(-1);
+				left: 0;
+			}
+		}
+
+		.nav-closer {
+			right: 0;
+		}
+
+		.nav-trigger:checked {
+			~ .page-header,
+			~ .page-website-wrapper {
+				.translateX(-@navWidth);
+			}
+
+			~ .page-mobile-nav-container {
+				.nav-toggle {
+					.translateX(calc(-100%~'-'@navWidth));
+				}
+
+				.nav-wrapper {
+					.translateX(0);
+				}
+			}
+		}
+	}
+}
+
+
+
+/* Specific styling for nav from the top */
+& when (@hamburger = top) {
+	@media @navBreakPoint {
+		.page-mobile-nav-container {
+			.translate3d(0, -100%, 0);
+			.transition(@navSpeed ease-in-out);
+			width: 100%;
+			bottom: auto;
+		}
+
+		.nav-toggle {
+			position: absolute;
+			top: 100%;
+		}
+
+		.nav-closer {
+			height: 200vh;
+			bottom: auto;
+		}
+
+		.nav-wrapper {
+			width: 100%;
+			position: relative;
+			top: auto;
+			bottom: auto;
+			height: auto;
+			max-height: calc(100vh~'-'@hamburgerHeight); // viewport height - height of .nav-toggle
+			z-index: 2;
+
+			// No shadow
+			&:before {
+				display: none;
+			}
+		}
+
+		.nav-trigger:checked ~ .page-mobile-nav-container {
+			.translateY(0);
+		}
+	}
+}
+
+
+
+/* Specific styling for nav as overlay */
+& when (@hamburger = overlay) {
+	@media @navBreakPoint {
+		.page-mobile-nav-container {
+			width: 100%;
+			bottom: auto;
+			left: 0;
+
+			.nav-closer {
+				display: none;
+			}
+
+			.nav-toggle {
+				left: auto;
+				right: 0;
+				position: absolute;
+			}
+
+			.nav-wrapper {
+				.scale(.8);
+				opacity: 0;
+				width: 100%;
+				height: 100%;
+				padding: @spacing*2;
+				visibility: hidden;
+				position: fixed;
+
+				// Hide shadow
+				&:before {
+					display: none;
+				}
+
+				> *:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		.nav-trigger:checked ~ .page-mobile-nav-container .nav-wrapper {
+			.scale(1);
+			opacity: 1;
+			visibility: visible;
+		}
+	}
+}

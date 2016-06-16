@@ -1,0 +1,69 @@
+html {
+    margin-top: 0 !important; // Cookie-bar fix
+
+    div#cookie-bar {
+        font: @baseFontSize @baseFont;
+        line-height: @baseLineHeight;
+        color: @textColor;
+        top: auto !important;
+        left: auto !important;
+        border: 0;
+        filter: none;
+        position: fixed;
+
+        i.icon {
+            position: static;
+            width: 2rem;
+            height: 2rem;
+            margin: 0 @spacing/4 0 0;
+            float: left;
+            background-size: cover;
+        }
+
+        span.cookie-buttons {
+            .cf;
+            width: 100%;
+            position: relative;
+
+            button {
+                width: auto;
+                float: left;
+            }
+
+            .allow-cookies {
+                &:extend(.btn all);
+                margin-right: @spacing;
+            }
+
+            .disallow-cookies {
+                color: @textColor;
+                padding-left: 0;
+                padding-right: 0;
+                margin-bottom: @spacing;
+                border: 0;
+            }
+        }
+    }
+
+    .cookie-explanation-container {
+        width: 100% !important; // Overrule Kirra Javascript
+        height: auto !important; // Overrule Kirra Javascript
+        margin: 0 auto @spacing;
+    }
+
+    .cookie-explanation {
+        color: @textColor;
+        font-family: @baseFont;
+        font-style: normal;
+        font-size: @baseFontSize;
+        text-align: left;
+        line-height: @baseLineHeight;
+        top: 0 !important; // Overrule Kirra Javascript
+
+        button.request-cookies {
+            &:extend(.btn all);
+            width: auto;
+            margin-top: @spacing;
+        }
+    }
+}

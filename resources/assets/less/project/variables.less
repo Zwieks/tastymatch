@@ -1,0 +1,114 @@
+/* Grid settings */
+@columnWidth:               7.2rem;
+@columnsTotal:              12;
+@gutterWidth:               2.4rem;
+
+/* Framework settings */
+@asideLeftColumns:          3; // Set this to '0' when there is no left column
+@asideRightColumns:         3; // Set this to '0' when there is no right column
+
+/* Dimensions settings */
+@siteWidth:                 ((@columnsTotal + 1) * @gutterWidth) + (@columnsTotal * @columnWidth);
+@maxWidth:                  @siteWidth*1.25;
+@minWidth:                  98.4rem; // For a minimum horizontal resolution of 1024px
+@spacing:                   2.4rem;
+@headerHeight:              @spacing*4; // Only for desktop
+
+// Styling
+@shadow:                    0 @spacing/4 @spacing/2 rgba(0,0,0,.125);
+@borderRadius:              .4rem;
+@animSpeed:                 .15s;
+@slowAnimSpeed:             @animSpeed*2;
+@tableBorder:               @lightGrey;
+@tableHeadBg:               lighten(@lightGrey, 10%);
+@bodyBackground:            #fff;
+@contentBackground:         #fff;
+@previewRatio:              2/3; // Used for image overview blocks (overview-* image ratio)
+@fixedHeader:               true;
+
+/* Typography */
+@baseFont:                  Arial, sans-serif;
+@baseFontSize:              1.5rem;
+@baseLineHeight:            unit(@baseFontSize); // No unit! So it scales with the font-size
+@baseHeading:               'Arial', @baseFont;
+@baseHeadingLineHeight:     @baseLineHeight*0.8;
+@largeHeadingSize:          3.6rem;
+@mediumHeadingSize:         2.4rem;
+@smallHeadingSize:          1.8rem;
+@rootFontSize:              62.5%; // Makes 1rem => 10px
+@iconFont:                  'fontawesome'; // @TODO: Set the correct fontname (e.g. energystock.woff means 'energystock' as value)
+@smallFontSize:             @baseFontSize*0.875;
+@fontLight:                 300;
+@fontNormal:                normal;
+@fontBold:                  bold;
+@fontBolder:                bolder;
+
+/* Color settings */
+// TODO: Check all color settings
+@black:                     #000;
+@white:                     #fff;
+@textColor:                 #333;
+@primColor:                 red;
+@secColor:                  blue;
+@grey:                      #999;
+@lightGrey:                 #ddd;
+@errorColor:                #f00;
+@successColor:              green;
+@placeHolderColor:          @grey;
+// NOTE! Extend or add colors like this:
+// @primColorDarker:        darken(@primColor, 10%);
+// @primColorLighter:       lighten(@primColor, 10%);
+// @terColor:               green;
+// @quadColor:              pink;
+
+/* Form styling */
+@inputHeight:               @spacing*1.5;
+@inputRadius:               @borderRadius;
+@inputBg:                   #fff;
+@inputShadow:               none;
+@inputPadding:              @spacing/2;
+@radioCheckboxSize:         @spacing/2;
+@inputPadding:              @spacing/2;
+@borderWidth:               1px; // Always use px
+@borderColor:		        @lightGrey;
+@focusColor:                @textColor;
+
+/* Responsive */
+@responsive:                true; // When set to false, variables below are not used
+@navBreakPoint:             ~"screen and (max-width: 1023px)";
+@hamburgerColor:            @primColor;
+@hamburgerHeight:           @spacing*2;
+@responsiveHeaderHeight:    @spacing*2; // Is set when @navBreakPoints is reached
+@hamburger:                 left; // Options: left, right, top or overlay
+@hamburgerText:             false; // Set to 'true to show hamburger text 'menu'
+@navShadowOpacity: 	        0.25; // Only for @hamburger = left or right
+@navWidth:                  240px; // Only for @hamburger = left or right
+@navOverlayColor:           rgba(0,0,0,0.25); // Not for @hamburger = overlay
+@navSpeed:                  @slowAnimSpeed;
+@navShadow:                 0.25;
+@navBg:                     @grey;
+
+/* Breakpoints */
+@bp-Desktop:                ~"screen and (min-width: 1024px)";
+@bp-TabletL:                ~"screen and (max-width: 1023px)";
+@bp-TabletM:                ~"screen and (max-width: 896px)";
+@bp-TabletS:                ~"screen and (max-width: 768px)";
+@bp-MobileL:                ~"screen and (max-width: 640px)";
+@bp-MobileM:                ~"screen and (max-width: 480px)";
+@bp-MobileS:                ~"screen and (max-width: 320px)";
+
+/* Functionalities */
+@animatingFormLabels:       true;
+@breadcrumb:                true;
+@icons:                     true;
+@submenu:                   false;
+
+/* Modules */
+@moduleLogin:               false;
+@moduleLanguage:            false;
+@moduleCookies:             true;
+@moduleFlex:                true;
+@moduleForms:               true;
+@moduleSearch:              true;
+@moduleMaps:                true;
+@moduleYoutube:             true; // @TODO: When this module is not active, remove jquery.youtube.js from the project and it's includes

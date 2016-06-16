@@ -1,0 +1,18 @@
+[data-title] {
+    position: relative;
+
+    &:after {
+        .transition();
+        .translateX(-50%);
+        content: attr(data-title);
+        display: inline-block;
+        white-space: nowrap; // Forces the tooltip over one rule
+        font-weight: normal;
+        font-style: normal;
+        line-height: @baseLineHeight;
+        position: absolute;
+        bottom: 100%;
+        left: 50%;
+        z-index: 10;
+    }
+}

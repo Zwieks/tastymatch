@@ -1,0 +1,75 @@
+
+
+
+/*
+ *  Basis custom form styling
+ */
+
+
+
+// select arrow
+.style-select:before {
+	content: '▾';
+	font-size: 14px;
+}
+
+// multiple select
+select[multiple] {
+	max-height: @spacing*5;
+}
+
+// textarea
+textarea {
+	height: @spacing*5;
+}
+
+// form tooltip
+.form-tooltip[data-title] {
+	background: @grey;
+	cursor: help;
+	font-size: 1rem;
+	color: #fff;
+}
+
+
+
+/* end general webbeheer form */
+form ul,
+form ol {
+	margin: 0;
+}
+
+.velden {
+	> li {
+		.displayflex;
+		.flex-wrap(wrap);
+		margin-bottom: @spacing/2;
+		position: relative;
+		clear: both;
+		width: 100%;
+
+		// Remove clearfix because of flexbox solution
+		&:after {
+			display: none;
+		}
+	}
+
+	// The main label
+	label {
+		display: block;
+		width: 100%;
+		font-weight: @fontBold;
+		margin-bottom: @spacing/4;
+		padding-right: @spacing*1.5; // Make space for the tooltip
+
+		// Star for required fields
+		em {
+			margin-left: @spacing/6;
+			color: @errorColor;
+			font-style: normal;
+		}
+	}
+}
+/* end general webbeheer form */
+
+

@@ -1,0 +1,1 @@
+{"version":3,"sources":["app.scss"],"names":[],"mappings":"AAEA;EACC,aAAY,EAKZ;EAND;IAIE,cAAa,EACb","file":"app.css","sourcesContent":["// @import \"node_modules/bootstrap-sass/assets/stylesheets/bootstrap\";\r\n\r\nmain{\r\n\tcolor:green;\r\n\r\n\tp{\r\n\t\tcolor:yellow;\r\n\t}\r\n}\r\n\r\n"],"sourceRoot":"/source/"}

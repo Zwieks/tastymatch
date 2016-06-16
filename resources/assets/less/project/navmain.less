@@ -1,0 +1,49 @@
+.page-mainmenu {
+    .level-1-item {
+
+        &:not(:first-child) {
+            margin-left: @spacing;
+        }
+
+        > a {
+            .displayflex;
+            .align-items(center);
+            height: @headerHeight;
+
+            @media @navBreakPoint {
+                height: @responsiveHeaderHeight;
+            }
+        }
+
+        // active menu item
+        &.active > a {
+        }
+
+        // open subnavigation
+        &.hover,
+        &:hover,
+        &:focus {
+            .level-2 {
+                opacity: 1;
+                visibility: visible;
+            }
+        }
+    }
+
+    // arrow to show subnav
+    .subnav > a:after {
+        content: '▾';
+        padding-left: @spacing/4;
+    }
+
+    .level-2 {
+        opacity: 0;
+        width: 240px;
+        min-width: 100%; // makes it have the width of it's parent item
+        visibility: hidden;
+    }
+
+    .level-2-item > a {
+        padding: 0 @spacing/2;
+    }
+}

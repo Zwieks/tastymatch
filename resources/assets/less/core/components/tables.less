@@ -1,0 +1,47 @@
+// Default table styling
+.webapp-table,
+.comp-alinea table {
+	border-bottom: 1px solid @tableBorder;
+	border-collapse: collapse;
+
+	th {
+		background: @tableHeadBg;
+		text-align: left;
+	}
+
+	td,
+	th {
+		border-right: 1px solid @tableBorder;
+		border-top: 1px solid @tableBorder;
+
+		&:first-child {
+			border-left: 1px solid @tableBorder;
+		}
+	}
+}
+
+// Hide border when this is set in Kirra (but not for tables in tables)
+.comp-alinea table[border="0"] {
+	border: 0 !important;
+
+	> thead,
+	> tbody,
+	> tfoot {
+		> tr > td,
+		> tr > th {
+			border: 0 !important;
+		}
+	}
+}
+
+// Making the webapp table component responsive
+.comp-table {
+	max-width: calc(100vw ~'-' @spacing*2); // Negative spacing is the padding on the .inner div (can be changed on breakpoints)
+	overflow-x: auto;
+	-webkit-overflow-scrolling: touch;
+
+	table {
+		margin-bottom: 0;
+		width: 100%;
+	}
+}

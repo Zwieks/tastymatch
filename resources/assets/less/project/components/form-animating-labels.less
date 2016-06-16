@@ -1,0 +1,72 @@
+
+/*
+ *	Animating labels on focus and with value
+ *  Works with Javascript function animateLabels() in jquery.animating-labels.js
+ */
+
+.animating-label {
+	// The selectors to which the animating labels apply
+	// @TODO: These selectors are also specified in jquery.animating-labels.js, make sure they match!
+	&.form-input-textfield,
+	&.form-input-textarea,
+	&.form-input-select:not(.form-input-radio):not(.form-input-multipleselect),
+	&.field-email,
+	&.field-textfield {
+		margin-top: @spacing; // Extra space for the animated label
+	}
+
+	&:first-child {
+		margin-top: 0;
+	}
+
+	label[for] {
+		.border-radius(@borderRadius @borderRadius 0 0);
+		.transition();
+		.translateZ(0);
+		.truncate; // Always force the label over one rule
+		width: auto;
+		color: @placeHolderColor;
+		position: absolute;
+		top: (@inputHeight - @spacing) / 2; // The @spacing value in this calculation is the same value as the margin-top value specified at the top of this stylesheet
+		left: 0;
+		display: inline-block;
+		padding: 0 @inputPadding;
+		max-width: 100%;
+		z-index: 2;
+		font-weight: normal;
+		margin: 0;
+		pointer-events: none; // Make them none-clickable
+	}
+
+	// Align the tooltip at the center of the input
+	.form-tooltip[data-title] {
+		.centerY;
+		right: (@inputHeight - @spacing*0.75) / 2; // @spacing*0.75 = height of the tooltip
+	}
+
+	// Align the form errors to the right to make room for the animating label
+	div.input-error {
+		position: absolute;
+		bottom: 100%;
+		right: 0;
+		padding-right: 0;
+	}
+}
+
+// Animate the label up
+.has-focus,
+.has-value {
+	input,
+	textarea,
+	.style-select {
+		.border-radius(0 @inputRadius @inputRadius @inputRadius);
+	}
+
+	label[for] {
+		.translateY(-100%);
+		font-size: @smallFontSize;
+		top: 0;
+		background: @focusColor;
+		color: #fff;
+	}
+}

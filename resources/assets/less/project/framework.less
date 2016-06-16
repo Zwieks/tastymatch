@@ -1,0 +1,72 @@
+.page-content {
+	.align-items(baseline);
+}
+
+// Make the framework responsive
+@media @bp-TabletM {
+	// Make the middle slightly bigger
+	.page-middle {
+		.flex-order(1);
+		min-width: 100% - percentage((@asideLeftColumns + 1) / @columnsTotal);
+	}
+
+	// Make the left slightly smaller
+	.page-left {
+		.flex-order(2);
+		width: percentage((@asideLeftColumns + 1) / @columnsTotal);
+	}
+
+	.page-right {
+		.flex-order(3);
+		width: 100%;
+
+		// Make the components 50% wide
+		> * {
+			width: calc(50% ~'-' @gutterWidth/2);
+			float: left;
+
+			&:nth-child(odd) {
+				clear: both;
+				margin-right: @gutterWidth;
+			}
+		}
+	}
+}
+
+@media @bp-MobileL {
+	.page-left {
+		width: 100%;
+
+		// Make the components 50% wide
+		> * {
+			width: calc(50% ~'-' @gutterWidth/2);
+			float: left;
+
+			&:nth-child(odd) {
+				clear: both;
+				margin-right: @gutterWidth;
+			}
+		}
+	}
+}
+
+// Make all components in the sidebar 100% wide
+@media @bp-MobileM {
+	.page-left,
+	.page-right {
+		> * {
+			width: 100%;
+			float: none;
+
+			&:nth-child(odd) {
+				clear: both;
+				margin-right: 0;
+			}
+		}
+	}
+
+	.inner {
+		padding-left: @gutterWidth/2;
+		padding-right: @gutterWidth/2;
+	}
+}
