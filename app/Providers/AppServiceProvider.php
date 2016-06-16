@@ -13,7 +13,17 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        view()->composer('*', function($view){
+            $view_array = explode('.', $view->getName());
+
+            /* Current template name */
+            $type = $view_array[1];
+
+            /* Browser Locale */
+            $locale = App()->getLocale();
+
+            $view->with(compact('type', 'locale'));
+        });
     }
 
     /**
