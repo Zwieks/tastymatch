@@ -1,6 +1,11 @@
-<!-- [TID] -->
+<!-- [{{$debugpath}}] -->
 <article class="page-middle">
-	{* @TODO: Vergeet niet in al je middle.tpl templates de page-meta.tpl te renderen *}
+	<div class="page-content-container">
+		{{ Lang::get('intro.welcome') }} {{ $globals->title }}
+		{{ Lang::get('intro.slogan') }}
+		@yield('content')
+	</div>
+<!-- 	{* @TODO: Vergeet niet in al je middle.tpl templates de page-meta.tpl te renderen *}
 	{render style='page-meta'}
 	<h1 itemprop="name">{$this->getTitle()|escape}</h1>
 
@@ -18,5 +23,5 @@
 		</div>
 	{/if}
 
-	{render style='extracontent'}
+	{render style='extracontent'} -->
 </article>

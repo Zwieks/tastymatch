@@ -1,4 +1,4 @@
-<!-- [TID] -->
+<!-- [{{$debugpath}}] -->
 {cache}
 	<article class="search-result">
 		<a href="{$this->getUrl()|escape}">

@@ -1,12 +1,10 @@
 @extends('layouts.master')
+@section('title', Lang::get('basicpage.title'))
+@section('menu-item-name', 'Home')
 @section('content')	
-	@if (DB::connection()->getDatabaseName())
+	<p>sadfasdf</p>
+@stop
 
-	   {{"Yes! successfully connected to the DB:"}}
-	   {{DB::connection()->getDatabaseName()}}
-	@endif
+@section('script')
 
-	@foreach ($users as $user)
-	    <p>This is user {{ $user->name }}</p>
-	@endforeach
 @stop

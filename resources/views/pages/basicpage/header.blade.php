@@ -1,4 +1,4 @@
-<!--[TID]-->
+<!-- [{{$debugpath}}] -->
 <header class="page-header">
 	<div class="inner">
 		<figure class="page-logo">
@@ -7,7 +7,7 @@
 			 </a>
 		</figure>
 
-		{render style='navmain'}
+		@include(navmain')
 
 		{tray 'topright'}
 

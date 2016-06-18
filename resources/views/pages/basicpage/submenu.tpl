@@ -1,4 +1,4 @@
-<!-- [TID] -->
+<!-- [{{$debugpath}}] -->
 
 {*
 	@TODO: Wanneer dit project geen submenu bevat:

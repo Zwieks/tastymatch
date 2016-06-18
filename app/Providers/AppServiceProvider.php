@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,7 +23,14 @@ class AppServiceProvider extends ServiceProvider
             /* Browser Locale */
             $locale = App()->getLocale();
 
-            $view->with(compact('type', 'locale'));
+            /* Get the global site information */
+            $globals = DB::select('select * from global_info');
+            $globals = $globals[0];
+
+            /* Set debug path */
+            $debugpath = 'views/'.str_replace('.', '/', $view->getName()).'.php';
+
+            $view->with(compact('type', 'locale', 'debugpath', 'globals'));
         });
     }
 

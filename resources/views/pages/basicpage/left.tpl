@@ -1,4 +1,4 @@
-<!-- [TID] -->
+<!-- [{{$debugpath}}] -->
 <aside class="page-left">
 	{$this->renderContainer('left', 'side')}
 
