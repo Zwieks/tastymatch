@@ -1,66 +1,21 @@
 <!-- [{{$debugpath}}] -->
-
-{* VARIABLES *}
-
-{$website_name = $website->getWebsiteName()}
-
-{if $this->getTitle()}
-	{$sm_title = $this->getTitle()}
-{/if}
-
-{if $this->getDescription()}
-	{$sm_desc = $this->getDescription()}
-{elseif $alinea && $alinea->tekst}
-	{$sm_desc = $alinea->tekst|html_truncate:160}
-{/if}
-
-{if $startpagina && $startpagina->getName()}
-	{$homeTitle = $startpagina->getName()|escape}
-{/if}
-
-{* OPEN GRAPH / FACEBOOK *}
+<!-- OPEN GRAPH / FACEBOOK -->
 <meta property="og:type" content="article">
-<meta property="og:locale" content="{$this->getLocale()|escape}">
-{if $this->getType() === 'homepage' && $startpagina && $homeTitle}
-	<meta property="og:url" content="{$this->getFullUrl()|escape|replace:$homeTitle:''}">
-{else}
-	<meta property="og:url" content="{$this->getFullUrl()|escape}">
-{/if}
-{if $settings && $settings->title}
-	<meta property="og:site_name" content="{$settings->title|escape}">
-{/if}
-{if $sm_title}
-	<meta property="og:title" content="{$sm_title|escape}">
-{/if}
-{if $sm_desc}
-	<meta property="og:description" content="{$sm_desc|escape}">
-{/if}
-{if $image && $image->attachment}
-	<meta property="og:image" content="{upload file=$image->attachment style='og_image' fullurl=true noimg=true}">
-{/if}
+<meta property="og:locale" content="{{ Lang::getLocale() }}">
+<meta property="og:url" content="{{ Request::url() }}">
+<meta property="og:site_name" content="{{ $globals->title }}">
+<meta property="og:title" content="@yield('title')">
+<meta property="og:description" content="@yield('description')">
+<meta property="og:image" content="{{ asset('img/social/logo_1200x630.png') }}">
 
-{* TWITTER CARDS *}
+<!-- TWITTER CARDS -->
 <meta name="twitter:card" content="summary">
-{if $image && $image->attachment}
-	<meta name="twitter:image" content="{upload file=$image->attachment style='tw_image' fullurl=true noimg=true}">
-{/if}
-{if $sm_title}
-	<meta name="twitter:title" content="{$sm_title|escape}">
-{/if}
-{if $sm_desc}
-	<meta name="twitter:description" content="{$sm_desc|escape}">
-{/if}
+<meta name="twitter:image" content="{{ asset('img/social/logo_1260x675.png') }}">
+<meta name="twitter:title" content="@yield('title')">
+<meta name="twitter:description" content="@yield('description')">
 
-{* GOOGLE+ *}
-{if $sm_title}
-	<meta itemprop="name" content="{$sm_title|escape}">
-{/if}
-{if $website_name}
-	<meta itemprop="headline" content="{$website_name|escape}">
-{/if}
-{if $sm_desc}
-	<meta itemprop="description" content="{$sm_desc|escape}">
-{/if}
-{if $image && $image->attachment}
-	<meta itemprop="image" content="{upload file=$image->attachment style='itemprop_image' fullurl=true noimg=true}">
-{/if}
+<!-- GOOGLE+ -->
+<meta itemprop="name" content="@yield('title')">
+<meta itemprop="headline" content="{{ $globals->title }}">
+<meta itemprop="description" content="@yield('description')">
+<meta itemprop="image" content="{{ asset('img/social/logo_900x600.png') }}">

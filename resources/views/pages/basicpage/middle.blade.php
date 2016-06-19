@@ -1,5 +1,7 @@
 <!-- [{{$debugpath}}] -->
 <article class="page-middle">
+	@include('pages.basicpage.page-meta')
+	<h1 itemprop="name">@yield('title')</h1>
 	<div class="page-content-container">
 		{{ Lang::get('intro.welcome') }} {{ $globals->title }}
 		{{ Lang::get('intro.slogan') }}

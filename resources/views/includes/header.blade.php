@@ -11,7 +11,7 @@
 
 		<!-- {tray 'topright'} -->
 
-		@if ($type != 'homepage')
+		@if (Request::path() != '/')
 			<div itemscope itemtype="http://schema.org/WebSite">
 			<link itemprop="url" href="{$smarty.server.SERVER_NAME|escape}">
 		@endif
@@ -20,7 +20,7 @@
 			<input type="search" name="q" placeholder="{_ 'Vul uw zoekterm in'}" itemprop="query-input">
 			<button type="submit">{_ 'Zoek'}</button>
 		</form> -->
-		@if ($type != 'homepage')
+		@if (Request::path() != '/')
 			</div>
 		@endif
 	</div>

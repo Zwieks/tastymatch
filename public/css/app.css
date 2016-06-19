@@ -2010,7 +2010,7 @@ html .cookie-explanation button.request-cookies {
   border-radius: 0.4rem;
   padding: 0.6rem 1.2rem;
   border: 0;
-  background: red;
+  background: #E3262E;
   color: #fff;
   font-weight: bold;
   margin: 0;
@@ -2175,7 +2175,7 @@ hr {
 }
 a {
   transition: 0.15s ease-out;
-  color: red;
+  color: #E3262E;
   text-decoration: none;
 }
 a:hover,
@@ -2193,7 +2193,7 @@ html .cookie-explanation button.request-cookies,
   border-radius: 0.4rem;
   padding: 0.6rem 1.2rem;
   border: 0;
-  background: red;
+  background: #E3262E;
   color: #fff;
   font-weight: bold;
 }
@@ -2252,19 +2252,19 @@ html .cookie-explanation button.request-cookies:before,
 /* text selection */
 .text-selection {
   color: #fff;
-  background: red;
+  background: #E3262E;
 }
 ::-moz-selection {
   color: #fff;
-  background: red;
+  background: #E3262E;
 }
 ::selection {
   color: #fff;
-  background: red;
+  background: #E3262E;
 }
 ::-moz-selection {
   color: #fff;
-  background: red;
+  background: #E3262E;
 }
 .scrollbar-measure {
   width: 100px;
@@ -2493,7 +2493,7 @@ html .cookie-explanation button.request-cookies:before,
   border-radius: 2px;
   height: 4px;
   margin-top: -2px;
-  background: red;
+  background: #E3262E;
 }
 .nav-toggle:not(.active):hover span,
 .nav-toggle:not(.active):hover span:before,
@@ -2728,7 +2728,7 @@ html div#cookie-bar {
   }
 }
 html div#cookie-bar a {
-  color: red;
+  color: #E3262E;
   text-decoration: none;
 }
 html div#cookie-bar a:hover,

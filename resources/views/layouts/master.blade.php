@@ -4,13 +4,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 
-        @include('pages.basicpage.page-meta')
+        @include('pages.basicpage.head-meta')
         @include('pages.basicpage.head-socials')
+
+        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" />
 
         <title>@yield('title')</title>
     </head>
 
-    <body @if ($type === 'homepage') itemscope itemtype="http://schema.org/WebSite"@endif class="component-{{$type}} preload">
+    <body @if (Request::path() === '/') itemscope itemtype="http://schema.org/WebSite"@endif class="component-@if(Request::path() === '/s')homepage @else{{ $type }} @endif preload">
        <!--  heading for document outline  -->
         <h2 class="hide-from-layout">@yield('title')</h2>
 

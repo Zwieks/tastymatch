@@ -1,6 +1,8 @@
 @extends('layouts.master')
 @section('title', Lang::get('basicpage.title'))
-@section('menu-item-name', 'Home')
+@section('description', Lang::get('basicpage.description'));
+
+@section('menu-item-name', 'home')
 @section('content')	
 	<p>sadfasdf</p>
 @stop
