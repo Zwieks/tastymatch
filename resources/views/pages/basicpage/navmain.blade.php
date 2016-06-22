@@ -3,11 +3,47 @@
 	<h2 class="hide-from-layout nocontent">{{ Lang::get('basicpage.mainnavtitle') }}</h2>
 	<ul class="level-1">
 		<li class="home level-1-item">
-			<a href="/" itemprop="url">
-				<span itemprop="name">{{ Lang::get('basicpage.titlemainnav') }}</span>
+			<a href="/" itemprop="url" data-icon="o">
+				<span itemprop="name">{{ Lang::get('menus.home') }}</span>
 			</a>
 			<meta itemprop="position" content="1">
 		</li>
+
+		<li class="level-1-item">
+			<a href="{{ Lang::get('mainmenu.register-url') }}" itemprop="url" data-icon="a">
+				<span itemprop="name">{{ Lang::get('menus.register') }}</span>
+			</a>
+			<meta itemprop="position" content="2">
+		</li>	
+
+		<li class="level-1-item">
+			<a href="{{ Lang::get('mainmenu.blog-url') }}" itemprop="url" data-icon="b">
+				<span itemprop="name">{{ Lang::get('menus.blog') }}</span>
+			</a>
+			<meta itemprop="position" content="2">
+		</li>	
+
+		<li class="level-1-item">
+			<a href="{{ Lang::get('mainmenu.about-url') }}" itemprop="url" data-icon="c">
+				<span itemprop="name">{{ Lang::get('menus.about') }}</span>
+			</a>
+			<meta itemprop="position" content="2">
+		</li>	
+
+
+		<li class="level-1-item">
+			<a href="{{ Lang::get('mainmenu.contact-url') }}" itemprop="url" data-icon="e">
+				<span itemprop="name">{{ Lang::get('menus.contact') }}</span>
+			</a>
+			<meta itemprop="position" content="2">
+		</li>	
+
+		<li class="level-1-item">
+			<a href="{{ Lang::get('mainmenu.login-url') }}" itemprop="url" data-icon="n">
+				<span itemprop="name">{{ Lang::get('menus.login') }}</span>
+			</a>
+			<meta itemprop="position" content="2">
+		</li>	
 
 <!-- 		{symbol 'hoofdmenu'}
 		{if $hoofdmenu}

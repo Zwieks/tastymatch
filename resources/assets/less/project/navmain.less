@@ -2,13 +2,30 @@
     .level-1-item {
 
         &:not(:first-child) {
-            margin-left: @spacing;
+            margin-left: @spacing*1.5;
         }
 
         > a {
             .displayflex;
             .align-items(center);
             height: @headerHeight;
+            padding-top: @spacing;
+            color:@textColor;
+            font-size: @smallerHeadingSize;
+            font-weight: 600;
+
+            &:before{
+                .center;
+                top:@spacing*1.5;
+                font-size: 20px;
+            }
+
+            &:hover,
+            &:focus{
+                span{
+                   color:@primColor;                
+                }
+            }
 
             @media @navBreakPoint {
                 height: @responsiveHeaderHeight;

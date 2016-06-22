@@ -1,7 +1,7 @@
 <!-- [{{$debugpath}}] -->
 <meta itemprop="image" content="{{ URL::asset('img/logo.svg') }} ">
 <meta itemprop="headline" content="@yield('title')">
-<meta itemprop="datePublished" content="{{File::lastModified(Route::getCurrentRoute()->getPath())}}">
+{{-- <meta itemprop="datePublished" content="{{File::lastModified(Route::getCurrentRoute()->getPath())}}"> --}}
 <meta itemprop="url" content="{{Request::url()}}">
 <meta itemprop="keywords" content="{{ Lang::get('basicpage.keywords') }}">
 

@@ -1,7 +1,7 @@
-<!-- resources/views/auth/register.blade.php -->
+<!-- resources/views/auth/inschrijven.blade.php -->
 @extends('layouts.master')
 @section('title', 'Hallo')
-@section('description', 'test')
+@section('description', 'test');
 
 @section('menu-item-name', 'home')
 @section('content') 

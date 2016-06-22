@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-    <html lang='{{$locale}}' itemscope itemtype= @if ($type === 'homepage'){{"http://schema.org/WebSite"}} @else {{"http://schema.org/WebPage"}} @endif>
+    <html lang='{{$locale}}' itemscope itemtype= @if($type === 'homepage') "http://schema.org/WebSite" @else "http://schema.org/WebPage" @endif>
     <head>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
@@ -7,8 +7,10 @@
         @include('pages.basicpage.head-meta')
         @include('pages.basicpage.head-socials')
 
-        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" />
-
+        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" >
+        <link rel="stylesheet" href="{{ URL::asset('css/fontstyle.css') }}" >
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
+        
         <title>@yield('title')</title>
     </head>
 
@@ -42,4 +44,3 @@
         @yield('page-scripts')
     </body>
 </html>
-
