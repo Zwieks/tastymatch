@@ -3,6 +3,7 @@
 }
 
 .nav-toggle {
+	top: (@responsiveHeaderHeight - @hamburgerHeight)/2;
 	width: @hamburgerHeight;
 
 	span {
@@ -49,7 +50,16 @@
 	// First level styling
 	> ul > li {
 		> a {
-			padding: @spacing/4 @spacing;
+			padding: @spacing/1.5 @spacing/2 @spacing/1.5 @spacing*2.5;
+			font-size: @smallerHeadingSize;
+			border-top: 1px solid @borderColorMenuTop;		
+   			border-bottom: 1px solid @borderColorMenuBottom;
+
+			&:before{
+				.centerY;
+				left:@spacing;
+				font-size: 18px;
+			}
 		}
 
 		&.subnav > a {

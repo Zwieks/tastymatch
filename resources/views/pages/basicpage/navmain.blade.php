@@ -10,21 +10,21 @@
 		</li>
 
 		<li class="level-1-item">
-			<a href="{{ Lang::get('mainmenu.register-url') }}" itemprop="url" data-icon="a">
+			<a href="{{ Lang::get('menus.register-url') }}" itemprop="url" data-icon="a">
 				<span itemprop="name">{{ Lang::get('menus.register') }}</span>
 			</a>
 			<meta itemprop="position" content="2">
 		</li>	
 
 		<li class="level-1-item">
-			<a href="{{ Lang::get('mainmenu.blog-url') }}" itemprop="url" data-icon="b">
+			<a href="{{ Lang::get('menus.blog-url') }}" itemprop="url" data-icon="b">
 				<span itemprop="name">{{ Lang::get('menus.blog') }}</span>
 			</a>
 			<meta itemprop="position" content="2">
 		</li>	
 
 		<li class="level-1-item">
-			<a href="{{ Lang::get('mainmenu.about-url') }}" itemprop="url" data-icon="c">
+			<a href="{{ Lang::get('menus.about-url') }}" itemprop="url" data-icon="c">
 				<span itemprop="name">{{ Lang::get('menus.about') }}</span>
 			</a>
 			<meta itemprop="position" content="2">
@@ -32,14 +32,14 @@
 
 
 		<li class="level-1-item">
-			<a href="{{ Lang::get('mainmenu.contact-url') }}" itemprop="url" data-icon="e">
+			<a href="{{ Lang::get('menus.contact-url') }}" itemprop="url" data-icon="e">
 				<span itemprop="name">{{ Lang::get('menus.contact') }}</span>
 			</a>
 			<meta itemprop="position" content="2">
 		</li>	
 
 		<li class="level-1-item">
-			<a href="{{ Lang::get('mainmenu.login-url') }}" itemprop="url" data-icon="n">
+			<a href="{{ Lang::get('menus.login-url') }}" itemprop="url" data-icon="n">
 				<span itemprop="name">{{ Lang::get('menus.login') }}</span>
 			</a>
 			<meta itemprop="position" content="2">

@@ -625,7 +625,7 @@ body {
 }
 @media screen and (max-width: 1023px) {
   body {
-    padding-top: 4.8rem;
+    padding-top: 7.2rem;
   }
 }
 .page-content {
@@ -2280,7 +2280,6 @@ html .cookie-explanation button.request-cookies:before,
   z-index: 100;
   top: 0;
   left: 0;
-  height: 9.6rem;
   background: #fff;
   position: fixed;
 }
@@ -2301,7 +2300,11 @@ html .cookie-explanation button.request-cookies:before,
 }
 @media screen and (max-width: 1023px) {
   .page-header .inner {
-    height: 4.8rem;
+    -moz-justify-content: center;
+    -ms-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 7.2rem;
   }
 }
 /* end header */
@@ -2351,7 +2354,7 @@ html .cookie-explanation button.request-cookies:before,
 }
 @media screen and (max-width: 1023px) {
   .page-mainmenu .level-1-item > a {
-    height: 4.8rem;
+    height: 7.2rem;
   }
 }
 .page-mainmenu .level-1-item.hover .level-2,
@@ -2458,7 +2461,7 @@ html .cookie-explanation button.request-cookies:before,
   color: #E3262E;
 }
 .footer-credits {
-  width: 100vw;
+  width: 100%;
   position: relative;
   background: #282a2b;
   margin-bottom: 0;
@@ -2467,6 +2470,31 @@ html .cookie-explanation button.request-cookies:before,
 .footer-credits a {
   font-weight: 700;
   font-size: 1.4rem;
+}
+@media screen and (max-width: 768px) {
+  .page-footermenu li:not(:last-child) {
+    margin-right: 0;
+  }
+  .page-footermenu li:not(:last-child):after {
+    content: "";
+  }
+  .page-footermenu li {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 0.6rem;
+  }
+  .page-footermenu ul {
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: -ms-flex;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+  .footer-credits a {
+    font-size: 1.2rem;
+  }
 }
 .page-breadcrumb {
   margin: 2.4rem 0;
@@ -2572,6 +2600,7 @@ html .cookie-explanation button.request-cookies:before,
   display: none;
 }
 .nav-toggle {
+  top: 1.2rem;
   width: 4.8rem;
 }
 .nav-toggle span,
@@ -2603,7 +2632,17 @@ html .cookie-explanation button.request-cookies:before,
   word-wrap: break-word;
 }
 .nav-wrapper > ul > li > a {
-  padding: 0.6rem 2.4rem;
+  padding: 1.6rem 1.2rem 1.6rem 6rem;
+  font-size: 1.4rem;
+  border-top: 1px solid #57544e;
+  border-bottom: 1px solid #312e2a;
+}
+.nav-wrapper > ul > li > a:before {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 2.4rem;
+  font-size: 18px;
 }
 .nav-wrapper > ul > li.subnav > a {
   padding-right: 4.8rem;
