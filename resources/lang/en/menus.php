@@ -4,7 +4,9 @@ return [
 	'home' 			=> 'Home',
 
     'login'			=> 'Login',
-    'login-url' 	=> '/auth/login',
+    'login-url' 	=> '/login',
+
+    'logout'        => 'Logout',
 
     'contact' 		=> 'Contact',
     'contact-url' 	=> '/contact',   
@@ -16,7 +18,7 @@ return [
     'blog-url' 		=> '/blog',   
 
     'register' 		=> 'Register',
-    'register-url' 	=> '/auth/register',
+    'register-url' 	=> '/register',
 
     'terms'         => 'Terms and conditions',
     'terms-url'     => '/terms',
@@ -26,4 +28,10 @@ return [
 
     'cookies'       => 'Cookies',
     'cookies-url'   => '/cookies',   
+
+    'facebook'      => 'Facebook',
+    'facebook-url'  => '/login/facebook', 
+
+    'provision'     => 'User provision',
+    'provision-url' => '/userprovision',
 ];

@@ -31,6 +31,21 @@ textarea {
 	color: #fff;
 }
 
+.form-input-date{
+	#PersonForm_date_of_birth{
+		width: 100%;
+	}
+}
+
+.multiple-wrapper{
+	li{
+		display: inline-block;
+	}
+
+	label{
+		cursor: pointer;
+	}
+}
 
 
 /* end general webbeheer form */
@@ -58,6 +73,7 @@ form ol {
 	label {
 		display: block;
 		width: 100%;
+		font-size: @smallerHeadingSize;
 		font-weight: @fontBold;
 		margin-bottom: @spacing/4;
 		padding-right: @spacing*1.5; // Make space for the tooltip
@@ -69,6 +85,45 @@ form ol {
 			font-style: normal;
 		}
 	}
+
+	.checkbox{
+		label{
+			cursor: pointer;
+		}
+	}
+
+	.help-block{
+		color: @errorColor;
+		font-size: @smallestHeadingSize;
+		width: 100%;
+	}
+}
+
+.detail-summary{
+	margin-bottom: @spacing/2;
+
+	input{
+		width: 100%;
+		border: none;
+		font-size: @smallestHeadingSize;
+		padding: 0;
+    	min-height: auto;
+	}
+}
+
+.api-error{
+	display: none;
+}
+
+.kvkwrapper{
+	display: block;
+	width: 100%;
+}
+
+.description-text{
+	font-style: italic;
+	font-weight: normal;
+	margin-bottom: @spacing/2;
 }
 /* end general webbeheer form */
 

@@ -18,7 +18,11 @@ class AppServiceProvider extends ServiceProvider
             $view_array = explode('.', $view->getName());
 
             /* Current template name */
-            $type = $view_array[1];
+            if(isset($view_array[1])){
+                $type = $view_array[1];
+            }else{
+                $type = $view_array[0];
+            }
 
             /* Browser Locale */
             $locale = App()->getLocale();

@@ -1,0 +1,57 @@
+.comp-login{
+	.displayflex;
+	.flex-wrap(wrap);
+	padding-bottom: @spacing;
+
+	.login-title{
+		width: 100%;
+	}
+
+	.social-login,
+	.formlogin{
+		position: relative;
+		width:50%;
+	}
+
+	.social-login{
+		padding-right:@spacing*3;
+		border-right:1px solid @borderColor;
+
+		&:before{
+			.centerY;
+			right: -@spacing/2;
+			background: #fff;
+			text-align: center;
+			width: @spacing;
+			height: @spacing;
+			text-transform: uppercase;
+			font-size: 12px;
+			line-height: @spacing;
+		}
+	}
+
+	.formlogin{
+		padding-left:@spacing*3;
+	}
+
+	.facebook-btn{
+		width: 100%;
+	}
+
+	@media @bp-MobileL {
+		.social-login,
+		.formlogin{
+	        width: 100%;
+	        padding:0;
+	        border:0;
+
+	        &:before{
+	        	display: none;
+	        }
+	    }    
+    }
+}
+
+.comp-resetpw{
+	
+}

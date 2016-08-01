@@ -4,7 +4,13 @@
 
 @section('menu-item-name', 'home')
 @section('content')	
-	<p>sadfasdf</p>
+
+@if(Auth::check())
+	@include('pages.homepage.entertainer-home')
+@else
+	<p>NOT loggedin</p>
+@endif
+
 @stop
 
 @section('script')

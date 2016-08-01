@@ -1,3 +1,35 @@
 // Place your styling here for elements that appear on multiple places in the website.
 .date {
 }
+
+.seo-title{
+	display: none;
+}
+
+.compblock{
+	border-bottom: 1px solid @borderColor;
+
+	&:last-child{
+		border-bottom: 0;
+	}
+}
+
+html[lang='nl']{
+	.comp-login{
+		.social-login{
+			&:before{
+				content:'of';
+			}
+		}	
+	}
+}
+
+html[lang='en']{
+	.comp-login{
+		.social-login{
+			&:before{
+				content:'or';
+			}
+		}	
+	}
+}

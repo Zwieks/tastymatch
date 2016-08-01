@@ -1,10 +1,10 @@
 <!-- [{{$debugpath}}] -->
 <article class="page-middle">
 	@include('pages.basicpage.page-meta')
-	<h1 itemprop="name">@yield('title')</h1>
+	<h1 itemprop="name" class="seo-title">@yield('title')</h1>
 	<div class="page-content-container">
-		{{ Lang::get('intro.welcome') }} {{ $globals->title }}
-		{{ Lang::get('intro.slogan') }}
+<!-- 		{{ Lang::get('intro.welcome') }} {{ $globals->title }}
+		{{ Lang::get('intro.slogan') }} -->
 		@yield('content')
 	</div>
 <!-- 	{* @TODO: Vergeet niet in al je middle.tpl templates de page-meta.tpl te renderen *}

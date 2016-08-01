@@ -4,7 +4,9 @@ return [
 	'home' 			=> 'Home',
 
     'login'			=> 'Inloggen',
-    'login-url' 	=> '/auth/inloggen',
+    'login-url' 	=> '/inloggen',
+
+    'logout'        => 'Uitloggen',
 
     'contact' 		=> 'Contact',
     'contact-url' 	=> '/contact',   
@@ -16,7 +18,7 @@ return [
     'blog-url' 		=> '/blog',   
 
     'register' 		=> 'Inschrijven',
-    'register-url' 	=> '/auth/inschrijven',
+    'register-url' 	=> '/inschrijven',
 
     'terms'         => 'Algemene voorwaarden',
     'terms-url'     => '/algemenevoorwaarden',
@@ -25,5 +27,11 @@ return [
     'userterms-url' => '/gebruikersbepalingen', 
 
     'cookies'       => 'Cookies',
-    'cookies-url'   => '/cookies',         
+    'cookies-url'   => '/cookies',     
+
+    'facebook'      => 'Facebook',
+    'facebook-url'  => '/inloggen/facebook',    
+
+    'provision'     => 'Gebruikersbepalingen',
+    'provision-url' => '/gebruikersbepalingen',  
 ];
