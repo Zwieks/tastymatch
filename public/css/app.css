@@ -3069,6 +3069,9 @@ form ol {
   display: block;
   width: 100%;
 }
+#js-typechange {
+  display: none;
+}
 .description-text {
   font-style: italic;
   font-weight: normal;

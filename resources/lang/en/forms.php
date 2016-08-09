@@ -20,4 +20,7 @@ return [
     'day' => 'Day',
     'year' => 'Year',
     'confirmation' => 'I agree with the',
+	'registertype' => 'Registration type',
+	'commercial' => 'Commercial',
+	'consumer' => 'Consumer',
 ];

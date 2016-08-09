@@ -20,4 +20,7 @@ return [
     'day' => 'Dag',
     'year' => 'Jaar',
     'confirmation' => 'Ja, ik ga akkoord met de',
+	'registertype' => 'Registratie type',
+	'commercial' => 'Zakelijk',
+	'consumer' => 'Prive',
 ];

@@ -41,7 +41,6 @@ jQuery(document).on('change', '#js-kvkapi', function($) {
 		dataType: 'json',
   		success: function(data){
   			var response = jQuery.parseJSON(data);
-
   			if(response.totalItemCount != 0 && response != false){
 	  			var handelsnaam = response._embedded['rechtspersoon'][0]['handelsnaam'];
 	  			var straat = response._embedded['rechtspersoon'][0]['straat'];
@@ -63,4 +62,14 @@ jQuery(document).on('change', '#js-kvkapi', function($) {
     		jQuery("#js-kvkinfo-wrapper").append(html);
 		}
 	});
+});
+
+jQuery(document).on('change', '.typechange', function($) {
+	var value = jQuery(this).val();
+
+	if(value == 'commercial'){
+		jQuery('#js-typechange').fadeIn();
+	}else{
+		jQuery('#js-typechange').fadeOut();
+	}
 });

@@ -11,6 +11,27 @@
         <ul class="velden">
             {{ csrf_field() }}
 
+            <li class="{{ $errors->has('confirm') ? ' has-error' : '' }}">
+                <ul class="multiple-wrapper">
+                    <li class="clearfix form-input-radio keuze">
+                        <label class="multiple-title">{{ Lang::get('forms.registertype') }}</label>
+                        <ul>
+                            <li class="clearfix">
+                                <input class="radio typechange" type="radio" value="consumer" name="form-247-268" id="input-268-269" checked="checked">
+                                <label for="input-268-269">{{ Lang::get('forms.consumer') }}</label>
+                            </li>
+
+                            <li class="clearfix">
+                                <input class="radio typechange" type="radio" value="commercial" name="form-247-268" id="input-268-270">
+                                <label for="input-268-270">{{ Lang::get('forms.commercial') }}</label>
+                            </li>
+
+                        </ul>
+                        <span class="form-tooltip" data-title="Radio button tooltip">?</span>
+                    </li>
+                </ul>
+            </li>
+
             <li class="{{ $errors->has('name') ? ' has-error' : '' }}">
                 <label for="name" class="animating-label">{{ Lang::get('forms.firstname') }}</label>
 
@@ -106,31 +127,34 @@
                         <strong>{{ $errors->first('password_confirmation') }}</strong>
                     </span>
                 @endif
-            </li class="{{ $errors->has('password_confirmation') ? ' has-error' : '' }}">
-
-            <li>
-                <label for="js-kvkapi" class="animating-label">{{ Lang::get('forms.businessdetails') }}</label>
-
-                <input id="js-kvkapi" type="text" class="form-control" name="business_details">
-
-                @if ($errors->has('business'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('business') }}</strong>
-                    </span>
-                @endif                
             </li>
 
-            <li>
-                <label class="animating-label">{{ Lang::get('forms.businessdetailsinfo') }}</label>
+            <li id="js-typechange">
+                <ul class="velden">
+                    <li>
+                        <label for="js-kvkapi" class="animating-label">{{ Lang::get('forms.businessdetails') }}</label>
 
-                <div id="js-kvkinfo-wrapper" class="kvkwrapper">
-                    <p class='description-text'>{{ Lang::get('forms.kvknoinfo') }}</p>
-                </div>  
+                        <input id="js-kvkapi" type="text" class="form-control" name="business_details">
 
-                <span class="help-block api-error">
-                    <strong>{{ Lang::get('forms.apierrorkvk') }}</strong>
-                </span>
-          
+                        @if ($errors->has('business'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('business') }}</strong>
+                            </span>
+                        @endif
+                    </li>
+
+                    <li>
+                        <label class="animating-label">{{ Lang::get('forms.businessdetailsinfo') }}</label>
+
+                        <div id="js-kvkinfo-wrapper" class="kvkwrapper">
+                            <p class='description-text'>{{ Lang::get('forms.kvknoinfo') }}</p>
+                        </div>
+
+                        <span class="help-block api-error">
+                            <strong>{{ Lang::get('forms.apierrorkvk') }}</strong>
+                        </span>
+                    </li>
+                </ul>
             </li>
 
             <li class="{{ $errors->has('confirm') ? ' has-error' : '' }}">

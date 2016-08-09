@@ -28,6 +28,13 @@ class ApiController extends Controller
 
     public function showDetails(Request $request){
         $data = $request->all(); // This will get all the request data.
+
+        //Check if the value is empty
+        if($data['value'] == ''){
+            $json_output = false;
+            return response()->json($json_output);
+        }
+
         $key = '2c4cce55a0283c1f6124a5e731cb972d1f3e3281ed9e7b2c7fb2f21f0119f6c0';
         $fields = '&fields[]=postcode&fields[]=huisnummer&fields[]=plaats&fields[]=postcode&fields[]=plaats&fields[]=straat&fields[]=type&fields[]=actief';
         $jsonurl = "https://overheid.io/api/kvk?query=".$data['value'].$fields."&ovio-api-key=".$key;
@@ -38,7 +45,7 @@ class ApiController extends Controller
         $get_token = $this->CheckBusinessName($data['value']);
 
         if($get_token == false){
-            return response()->json($json_output); // This will dump and die
+            return response()->json($json_output);
         }else{
             $json_output = false;
             return response()->json($json_output);
