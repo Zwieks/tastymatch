@@ -11,23 +11,17 @@
         <ul class="velden">
             {{ csrf_field() }}
 
-            <li class="{{ $errors->has('confirm') ? ' has-error' : '' }}">
+            <li class="{{ $errors->has('lastname') ? ' has-error' : '' }}">
+                <label class="multiple-title">{{ Lang::get('forms.registertype') }}</label>
                 <ul class="multiple-wrapper">
-                    <li class="clearfix form-input-radio keuze">
-                        <label class="multiple-title">{{ Lang::get('forms.registertype') }}</label>
-                        <ul>
-                            <li class="clearfix">
-                                <input class="radio typechange" type="radio" value="consumer" name="form-247-268" id="input-268-269" checked="checked">
-                                <label for="input-268-269">{{ Lang::get('forms.consumer') }}</label>
-                            </li>
+                    <li class="form-input-radio">
+                        <input class="radio typechange" type="radio" value="consumer" name="type" id="typeconsumer" checked="checked">
+                        <label for="typeconsumer">{{ Lang::get('forms.consumer') }}</label>
+                    </li>
 
-                            <li class="clearfix">
-                                <input class="radio typechange" type="radio" value="commercial" name="form-247-268" id="input-268-270">
-                                <label for="input-268-270">{{ Lang::get('forms.commercial') }}</label>
-                            </li>
-
-                        </ul>
-                        <span class="form-tooltip" data-title="Radio button tooltip">?</span>
+                    <li class="form-input-radio">
+                        <input class="radio typechange" type="radio" value="commercial" name="type" id="typecommercial">
+                        <label for="typecommercial">{{ Lang::get('forms.commercial') }}</label>
                     </li>
                 </ul>
             </li>

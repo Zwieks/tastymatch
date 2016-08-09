@@ -66,7 +66,7 @@ class AuthController extends Controller
             'zip' => 'required|max:10',
             'city' => 'required|max:100',
             'confirm' => 'required|filled',
-            'user_type' => 'required|numeric',
+            'type' => 'required|max:25',
         ]);
     }
 
@@ -94,7 +94,8 @@ class AuthController extends Controller
             'tradename' => $data['tradename'],
             'streetnumber' => $data['streetnumber'],
             'zip' => $data['zip'],
-            'city' => $data['city'],               
+            'city' => $data['city'],
+            'type' => $data['type'],
         ]);
     }
 
