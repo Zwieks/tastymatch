@@ -23,4 +23,11 @@ return [
 	'registertype' => 'Registratie type',
 	'commercial' => 'Zakelijk',
 	'consumer' => 'Prive',
+	'birthday' => 'Geboortedatum',
+	'gender' => 'Geslacht',
+	'genderfemale' => 'Vrouw',
+	'gendermale' => 'Man',
+	'legendregister' => 'Registreer je vandaag!',
+	'headercontact' => 'Contactpersoon',
+	'headerbusinessdetails' => 'Bedrijfsgegevens',
 ];

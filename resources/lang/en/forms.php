@@ -23,4 +23,11 @@ return [
 	'registertype' => 'Registration type',
 	'commercial' => 'Commercial',
 	'consumer' => 'Consumer',
+	'birthday' => 'Birthday',
+	'gender' => 'Gender',
+	'genderfemale' => 'Female',
+	'gendermale' => 'Male',
+	'legendregister' => 'Join our community today!',
+	'headercontact' => 'Contact',
+	'headerbusinessdetails' => 'Business details',
 ];
