@@ -61,13 +61,39 @@ class AuthController extends Controller
             'day' => 'required|numeric',
             'month' => 'required|max:25',
             'year' => 'required|numeric',
-            'tradename' => 'required|max:100',
-            'streetnumber' => 'required|max:100',
-            'zip' => 'required|max:10',
-            'city' => 'required|max:100',
+            'tradename' => 'max:100',
+            'streetnumber' => 'max:100',
+            'zip' => 'max:10',
+            'city' => 'max:100',
             'confirm' => 'required|filled',
             'type' => 'required|max:25',
         ]);
+    }
+
+    /**
+     * Check if the KVK input fields are set.
+     *
+     * @param  array  $data
+     * @return data
+     */
+    protected function checkkvk($data){
+        if(!isset($data['tradename'])){
+            $data['tradename'] = '';
+        }
+
+        if(!isset($data['streetnumber'])){
+            $data['streetnumber'] ='';
+        }
+
+        if(!isset($data['zip'])){
+            $data['zip'] = '';
+        }
+
+        if(!isset($data['city'])){
+            $data['city'] = '';
+        }
+
+        return $data;
     }
 
     /**
@@ -83,6 +109,9 @@ class AuthController extends Controller
         $day = $data['day'];
 
         $DB_date = Carbon::createFromDate($year,$month,$day);
+
+        //check KVK inputs
+        $data = $this->checkkvk($data);
 
         return User::create([
             'name' => $data['name'],

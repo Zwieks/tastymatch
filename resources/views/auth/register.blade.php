@@ -6,7 +6,7 @@
 @section('menu-item-name', 'home')
 @section('content') 
 
-<form class="formlogin" role="form" method="POST" action="{{ url('/register') }}">
+<form name="general-registration" class="formlogin" role="form" method="POST" action="{{ url('/register') }}">
     <fieldset>
         <ul class="velden">
             {{ csrf_field() }}
