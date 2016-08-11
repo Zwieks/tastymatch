@@ -20,7 +20,7 @@ return [
     'day' => 'Day',
     'year' => 'Year',
     'confirmation' => 'I agree with the',
-	'registertype' => 'Registration type',
+	'registertype' => 'Type',
 	'commercial' => 'Commercial',
 	'consumer' => 'Consumer',
 	'birthday' => 'Birthday',
@@ -29,5 +29,8 @@ return [
 	'gendermale' => 'Male',
 	'legendregister' => 'Join our community today!',
 	'headercontact' => 'Contact',
+	'headerlogin' => 'Login details',
+	'commercialdetails' => 'Business details',
 	'headerbusinessdetails' => 'Business details',
+	'headerregistrationtype' => 'Do you want a commercial or consumer account?',
 ];

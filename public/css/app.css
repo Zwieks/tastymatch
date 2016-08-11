@@ -863,7 +863,6 @@ button,
 [type=submit],
 html div#cookie-bar span.cookie-buttons .allow-cookies,
 html .cookie-explanation button.request-cookies,
-[type=file]::-webkit-file-upload-button,
 .call-to-action,
 .facebook-btn,
 .twitter-btm,
@@ -1268,7 +1267,7 @@ button {
   -moz-osx-font-smoothing: grayscale;
   font-weight: normal;
   width: 100%;
-  min-height: 3.6rem;
+  height: 3.6rem;
   padding: 0 1.2rem;
   background: #fff;
   border: 1px solid #e5e5e5;
@@ -1949,7 +1948,7 @@ html .cookie-explanation button.request-cookies {
 .form-input-checkbox label:not(.multiple-title):after {
   transform: translateY(-50%) scale(0);
   border: 0;
-  background: #333;
+  background: #E3262E;
 }
 .form-input-radio label:not(.multiple-title):hover:before,
 .form-input-multipleselect-checkboxes label:not(.multiple-title):hover:before,
@@ -1991,10 +1990,46 @@ html .cookie-explanation button.request-cookies {
   border: 0;
 }
 [type=file]::-webkit-file-upload-button {
+  display: inline-block;
+  margin-bottom: 2.4rem;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.15s ease-out;
+  padding: 1.2rem 2.4rem;
+  border: 0;
+  background: #E3262E;
+  color: #fff;
+  font-weight: bold;
+  height: auto;
   margin-bottom: 0;
 }
-[type=file]:hover::-webkit-file-upload-button,
-[type=file]:focus::-webkit-file-upload-button {
+[type=file]::-webkit-file-upload-button:hover,
+[type=file]::-webkit-file-upload-button:focus {
+  opacity: 0.9;
+  color: #fff;
+}
+[type=file]::-webkit-file-upload-button:before {
+  float: right;
+  margin-left: 0.6rem;
+}
+[type=file]:hover::-webkit-file-upload-button .btn:hover,
+[type=file]:focus::-webkit-file-upload-button .btn:hover,
+[type=file]:hover::-webkit-file-upload-button button:hover,
+[type=file]:focus::-webkit-file-upload-button button:hover,
+[type=file]:hover::-webkit-file-upload-button [type=submit]:hover,
+[type=file]:focus::-webkit-file-upload-button [type=submit]:hover,
+[type=file]:hover::-webkit-file-upload-button html div#cookie-bar span.cookie-buttons .allow-cookies:hover,
+[type=file]:focus::-webkit-file-upload-button html div#cookie-bar span.cookie-buttons .allow-cookies:hover,
+[type=file]:hover::-webkit-file-upload-button html .cookie-explanation button.request-cookies:hover,
+[type=file]:focus::-webkit-file-upload-button html .cookie-explanation button.request-cookies:hover,
+[type=file]:hover::-webkit-file-upload-button .call-to-action:hover,
+[type=file]:focus::-webkit-file-upload-button .call-to-action:hover,
+[type=file]:hover::-webkit-file-upload-button .facebook-btn:hover,
+[type=file]:focus::-webkit-file-upload-button .facebook-btn:hover,
+[type=file]:hover::-webkit-file-upload-button .twitter-btm:hover,
+[type=file]:focus::-webkit-file-upload-button .twitter-btm:hover,
+[type=file]:hover::-webkit-file-upload-button .googleplus-btn:hover,
+[type=file]:focus::-webkit-file-upload-button .googleplus-btn:hover {
   outline: 0;
 }
 [type=file]:focus {
@@ -2015,6 +2050,7 @@ html .cookie-explanation button.request-cookies {
   background: #E3262E;
   color: #fff;
   font-weight: bold;
+  height: auto;
   margin: 0;
 }
 [type=file]::-ms-browse:hover,
@@ -2215,7 +2251,6 @@ button,
 [type=submit],
 html div#cookie-bar span.cookie-buttons .allow-cookies,
 html .cookie-explanation button.request-cookies,
-[type=file]::-webkit-file-upload-button,
 .call-to-action,
 .facebook-btn,
 .twitter-btm,
@@ -2226,6 +2261,7 @@ html .cookie-explanation button.request-cookies,
   background: #E3262E;
   color: #fff;
   font-weight: bold;
+  height: auto;
 }
 .btn:hover,
 .btn:focus,
@@ -2237,8 +2273,6 @@ html div#cookie-bar span.cookie-buttons .allow-cookies:hover,
 html div#cookie-bar span.cookie-buttons .allow-cookies:focus,
 html .cookie-explanation button.request-cookies:hover,
 html .cookie-explanation button.request-cookies:focus,
-[type=file]:hover::-webkit-file-upload-button,
-[type=file]:focus::-webkit-file-upload-button,
 .call-to-action:hover,
 .call-to-action:focus,
 .facebook-btn:hover,
@@ -2986,6 +3020,27 @@ html .cookie-explanation {
 /*
  *  Basis custom form styling
  */
+[type=text],
+[type=email],
+[type=tel],
+[type=password],
+[type=number],
+[type=search],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=month],
+[type=time],
+[type=week],
+[type=url],
+.form-input-date {
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
+  width: auto;
+}
 legend {
   font-weight: 500;
   font-size: 2.8rem;
@@ -3007,13 +3062,11 @@ textarea {
   color: #fff;
 }
 .form-input-date #PersonForm_date_of_birth {
-  width: 100%;
-}
-.multiple-wrapper li {
-  display: inline-block;
-}
-.multiple-wrapper label {
-  cursor: pointer;
+  -webkit-flex-grow: 1;
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1;
 }
 /* end general webbeheer form */
 form ul,
@@ -3036,17 +3089,21 @@ form ol {
   display: none;
 }
 .velden > li.form-input-heading h2 {
-  margin-bottom: 0;
+  margin-bottom: 1.2rem;
 }
 .velden > li.separator {
+  display: -moz-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -ms-inline-flex;
+  display: inline-flex;
   width: 100%;
   height: 1px;
   background: #e5e5e5;
-  margin: 3.6rem 0;
+  margin: 2.4rem 0 3.6rem 0;
 }
 .velden label {
   display: block;
-  width: 100%;
+  width: 14.4rem;
   font-size: 1.4rem;
   font-weight: bold;
   margin-bottom: 0.6rem;
@@ -3064,6 +3121,13 @@ form ol {
   color: #f00;
   font-size: 1.2rem;
   width: 100%;
+}
+.velden .multiple-wrapper li {
+  display: inline-block;
+}
+.velden .multiple-wrapper label {
+  cursor: pointer;
+  width: auto;
 }
 .detail-summary {
   margin-bottom: 1.2rem;

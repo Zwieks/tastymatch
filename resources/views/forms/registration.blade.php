@@ -5,7 +5,7 @@
             {{ csrf_field() }}
 
             <li class="form-input-heading">
-                <h2>{{ Lang::get('forms.headercontact') }}</h2>
+                <h2>{{ Lang::get('forms.headerregistrationtype') }}</h2>
             </li>
 
             <li class="{{ $errors->has('lastname') ? ' has-error' : '' }}">
@@ -21,6 +21,12 @@
                         <label for="typecommercial">{{ Lang::get('forms.commercial') }}</label>
                     </li>
                 </ul>
+            </li>
+
+            <li class="separator"></li>
+
+            <li class="form-input-heading">
+                <h2>{{ Lang::get('forms.headercontact') }}</h2>
             </li>
 
             <li class="{{ $errors->has('name') ? ' has-error' : '' }}">
@@ -46,8 +52,6 @@
                     </span>
                 @endif
             </li>
-
-            <li class="separator"></li>
 
             <li class="{{ $errors->has('lastname') ? ' has-error' : '' }}">
                 <label class="multiple-title">{{ Lang::get('forms.gender') }}</label>
@@ -90,6 +94,12 @@
                 </div>
             </li>
 
+            <li class="separator"></li>
+
+            <li class="form-input-heading">
+                <h2>{{ Lang::get('forms.headerlogin') }}</h2>
+            </li>
+
             <li class="{{ $errors->has('email') ? ' has-error' : '' }}">
                 <label for="email" class="animating-label">{{ Lang::get('forms.email') }}</label>
 
@@ -128,6 +138,12 @@
 
             <li id="js-typechange">
                 <ul class="velden">
+                    <li class="separator"></li>
+
+                    <li class="form-input-heading">
+                        <h2>{{ Lang::get('forms.commercialdetails') }}</h2>
+                    </li>
+
                     <li>
                         <label for="js-kvkapi" class="animating-label">{{ Lang::get('forms.businessdetails') }}</label>
 
@@ -153,6 +169,8 @@
                     </li>
                 </ul>
             </li>
+
+            <li class="separator"></li>
 
             <li class="{{ $errors->has('confirm') ? ' has-error' : '' }}">
                 <ul class="multiple-wrapper">

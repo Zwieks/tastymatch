@@ -20,7 +20,7 @@ return [
     'day' => 'Dag',
     'year' => 'Jaar',
     'confirmation' => 'Ja, ik ga akkoord met de',
-	'registertype' => 'Registratie type',
+	'registertype' => 'Type',
 	'commercial' => 'Zakelijk',
 	'consumer' => 'Prive',
 	'birthday' => 'Geboortedatum',
@@ -29,5 +29,8 @@ return [
 	'gendermale' => 'Man',
 	'legendregister' => 'Registreer je vandaag!',
 	'headercontact' => 'Contactpersoon',
+	'headerlogin' => 'Login gegevens',
+	'commercialdetails' => 'Zakelijke gegevens',
 	'headerbusinessdetails' => 'Bedrijfsgegevens',
+	'headerregistrationtype' => 'Wil je een zakelijk of prive account?',
 ];

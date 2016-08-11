@@ -57,7 +57,7 @@
 		&:after {
 			.transform(translateY(-50%) scale(0));
 			border: 0;
-			background: @textColor;
+			background: @primColor;
 		}
 
 		// hover effect checkbox
@@ -113,14 +113,17 @@
 	border: 0;
 
 	&::-webkit-file-upload-button {
-		&:extend(.btn);
+		.btn;
 		margin-bottom: 0;
 	}
 
 	&:hover::-webkit-file-upload-button,
 	&:focus::-webkit-file-upload-button {
-		&:extend(.btn:hover);
-		outline: 0;
+		.btn{
+			&:hover{
+				outline: 0;
+			}
+		}
 	}
 
 	&:focus {

@@ -5,6 +5,24 @@
  *  Basis custom form styling
  */
 
+[type=text],
+[type=email],
+[type=tel],
+[type=password],
+[type=number],
+[type=search],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=month],
+[type=time],
+[type=week],
+[type=url],
+.form-input-date{
+	.flex-grow(1);
+	width: auto;
+}
+
 legend{
 	font-weight: 500;
 	font-size: 2.8rem;
@@ -36,20 +54,9 @@ textarea {
 
 .form-input-date{
 	#PersonForm_date_of_birth{
-		width: 100%;
+		.flex-grow(1);
 	}
 }
-
-.multiple-wrapper{
-	li{
-		display: inline-block;
-	}
-
-	label{
-		cursor: pointer;
-	}
-}
-
 
 /* end general webbeheer form */
 form ul,
@@ -73,22 +80,23 @@ form ol {
 
 		&.form-input-heading{
 			h2{
-				margin-bottom: 0;
+				margin-bottom: @spacing/2;
 			}
 		}
 
 		&.separator{
+			.displayflex(inline-flex);
 			width: 100%;
 			height:1px;
 			background: @borderColor;
-			margin:@spacing*1.5 0;
+			margin:@spacing 0 @spacing*1.5 0;
 		}
 	}
 
 	// The main label
 	label {
 		display: block;
-		width: 100%;
+		width: @spacing*6;
 		font-size: @smallerHeadingSize;
 		font-weight: @fontBold;
 		margin-bottom: @spacing/4;
@@ -112,6 +120,17 @@ form ol {
 		color: @errorColor;
 		font-size: @smallestHeadingSize;
 		width: 100%;
+	}
+
+	.multiple-wrapper{
+		li{
+			display: inline-block;
+		}
+
+		label{
+			cursor: pointer;
+			width: auto;
+		}
 	}
 }
 
