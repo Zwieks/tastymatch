@@ -15,7 +15,7 @@
         <title>@yield('title')</title>
     </head>
 
-    <body @if (Request::path() === '/') itemscope itemtype="http://schema.org/WebSite"@endif class="component-@if(Request::path() === '/')homepage @else{{ $type }} @endif preload">
+    <body @if (Request::path() === '/') itemscope itemtype="http://schema.org/WebSite"@endif class="component-@yield('type') preload">
        <!--  heading for document outline  -->
         <h2 class="hide-from-layout">@yield('title')</h2>
 
