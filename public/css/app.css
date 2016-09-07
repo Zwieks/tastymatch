@@ -2184,6 +2184,9 @@ div.input-error p:before {
  *  DO NOT EDIT ABOVE FILES, ONLY THE FILES BELOW!
  */
 /* PROJECT SPECIFIC BASIC STYLING */
+.arz-gradient {
+  background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
+}
 .seo-title {
   display: none;
 }
@@ -2200,7 +2203,6 @@ html[lang='en'] .comp-login .social-login:before {
   content: 'or';
 }
 .page-content {
-  margin-top: -2.4rem;
   padding-top: 4.8rem;
   background: #fff;
 }
@@ -3287,5 +3289,96 @@ form ol {
   color: #fff;
 }
 /* PLACE YOUR OWN CSS STYLING DOWN HERE WITH @IMPORTS */
+.page-hero-image {
+  background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
+  padding-top: 20%;
+  position: relative;
+}
+.page-hero-image img {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  max-width: none;
+  height: auto;
+}
+@media screen and (max-width: 1280px) {
+  .page-hero-image {
+    padding-top: 40%;
+  }
+}
+@media screen and (max-width: 896px) {
+  .page-hero-image {
+    padding-top: 50%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .page-hero-image {
+    padding-top: 100%;
+  }
+}
+.page-hero-image-default {
+  padding-top: 20%;
+  position: relative;
+}
+.page-hero-image-default img {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  max-width: none;
+  height: 100%;
+}
+@media screen and (max-width: 1280px) {
+  .page-hero-image-default {
+    padding-top: 20%;
+  }
+}
+@media screen and (max-width: 896px) {
+  .page-hero-image-default {
+    padding-top: 20%;
+  }
+}
+@media screen and (max-width: 320px) {
+  .page-hero-image-default {
+    padding-top: 100%;
+  }
+}
+.page-hero {
+  position: relative;
+  overflow: hidden;
+}
+.page-hero h1 {
+  margin-bottom: 0;
+}
+.page-hero .site-info-wrapper {
+  width: calc(52.5rem + 14.4rem);
+  position: absolute;
+  margin-left: calc(( 100vw - 121.2rem ) / 2 - 1.2rem);
+  margin-bottom: 4.8rem;
+  bottom: 0;
+  color: #fff;
+}
+.page-hero .site-info-wrapper p {
+  line-height: 1.75;
+  font-weight: 300;
+  font-style: normal;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+.page-hero .page-breadcrumb {
+  margin: 0;
+}
+.image-overlay {
+  background-color: #E3262E;
+}
+.image-overlay img {
+  opacity: 0.2;
+}
 
 /*# sourceMappingURL=app.css.map */

@@ -1,24 +1,32 @@
 <!-- {{$debugpath}} -->
 <main class="page-wrapper">
 	<article class="inner">
-
-
 		@if ($type != 'homepage')
 			<!-- {render style='breadcrumb'} -->
 		@endif
 
 		<div class="page-content page-overview">
-			@include('pages.basicpage.middle')
-<!-- 			{if $hoofdmenulevel = $this->getBreadcrumbs(2)|reset}
-				{$submenu = $hoofdmenulevel->getMenuItems()}
-			{/if}
-			{if $this->countChildComponents('left') || $submenu}
-				{render style='left'}
-			{/if}
+			@hasSection('content')
+				<div class="page-middle">
+					@include('pages.basicpage.page-meta')
 
-			{if $this->countChildComponents('right')}
-				{render style='right'}
-			{/if} -->
+					<h1 itemprop="name" class="seo-title">@yield('title')</h1>
+
+					@yield('content')
+				</div>
+			@endif
+
+			@hasSection('right')
+				<aside class="page-right">
+					@yield('right')
+				</aside>
+			@endif
+
+			@hasSection('left')
+				<aside class="page-left">
+					@yield('left')
+				</aside>
+			@endif
 		</div>
 	</article>
 </main>

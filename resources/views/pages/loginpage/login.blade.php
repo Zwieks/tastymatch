@@ -1,4 +1,5 @@
 @extends('layouts.master')
+@section('type', 'loginpage')
 @section('title', Lang::get('basicpage.title'))
 @section('description', Lang::get('basicpage.description'))
 
