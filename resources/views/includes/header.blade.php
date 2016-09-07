@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <header class="page-header">
 	<div class="inner">
 		<figure class="page-logo">

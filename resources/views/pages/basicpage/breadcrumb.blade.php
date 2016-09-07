@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 {if $breadcrumb = $this->getBreadcrumbs(2)}
 	<nav class="page-breadcrumb" id="js-breadcrumb">
 		<h2 class="hide-from-layout nocontent">{_ 'Broodkruimelnavigatie'}</h2>

@@ -14,12 +14,24 @@ html {
 body {
     background: @bodyBackground;
 
-    & when (@fixedHeader = true) {
-        padding-top: @headerHeight;
+    & when (@responsive = true) {
+        & when (@fixedHeader = true) {
+            padding-top: @headerHeight;
 
-        @media @navBreakPoint {
-            padding-top: @responsiveHeaderHeight;
+            @media @navBreakPoint {
+                padding-top: @responsiveHeaderHeight;
+            }
         }
+    }
+}
+
+.page-wrapper {
+    & when (@stickyFooter = true) {
+        .flex-grow(1);
+    }
+
+    > .inner {
+        background: @contentBackground;
     }
 }
 

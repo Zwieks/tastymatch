@@ -16,124 +16,124 @@
 // CSS3 filters
 .filter(@value) {
     -webkit-filter: @value;
-       -moz-filter: @value;
-        -ms-filter: @value;
-         -o-filter: @value;
-            filter: @value;
+    -moz-filter: @value;
+    -ms-filter: @value;
+    -o-filter: @value;
+    filter: @value;
 }
 
 // CSS blur
 .blur(@radius: 5px) {
     -webkit-filter: blur(@radius);
-       -moz-filter: blur(@radius);
-        -ms-filter: blur(@radius);
-         -o-filter: blur(@radius);
-            filter: blur(@radius);
+    -moz-filter: blur(@radius);
+    -ms-filter: blur(@radius);
+    -o-filter: blur(@radius);
+    filter: blur(@radius);
 }
 
 // Border radius
 .border-radius(@radius: @borderRadius) {
-  -webkit-border-radius: @radius;
-     -moz-border-radius: @radius;
-          border-radius: @radius;
+    -webkit-border-radius: @radius;
+    -moz-border-radius: @radius;
+    border-radius: @radius;
 }
 
 // Backface visibility
 .backface-visibility(@value: hidden) {
-  -webkit-backface-visibility: @value;
-     -moz-backface-visibility: @value;
-          backface-visibility: @value;
+    -webkit-backface-visibility: @value;
+    -moz-backface-visibility: @value;
+    backface-visibility: @value;
 }
 
 // Appearence {
 .appearance(@argument: none) {
     -webkit-appearance: @argument;
-       -moz-appearance: @argument;
-        -ms-appearance: @argument;
-            appearance: @argument;
+    -moz-appearance: @argument;
+    -ms-appearance: @argument;
+    appearance: @argument;
 }
 
 // Transitions
 .transition(@value: @animSpeed ease-out) {
-  -webkit-transition: @value;
-     -moz-transition: @value;
-       -o-transition: @value;
-          transition: @value;
+    -webkit-transition: @value;
+    -moz-transition: @value;
+    -o-transition: @value;
+    transition: @value;
 }
 
 // Transition delay
 .transition-delay(@value: @animSpeed) {
-  -webkit-transition-delay: @value;
-     -moz-transition-delay: @value;
-       -o-transition-delay: @value;
-          transition-delay: @value;
+    -webkit-transition-delay: @value;
+    -moz-transition-delay: @value;
+    -o-transition-delay: @value;
+    transition-delay: @value;
 }
 
 // Transition delay
 .transition-duration(@value: @animSpeed) {
     -webkit-transition-duration: @value;
-       -moz-transition-duration: @value;
-         -o-transition-duration: @value;
-            transition-duration: @value;
+    -moz-transition-duration: @value;
+    -o-transition-duration: @value;
+    transition-duration: @value;
 }
 
 // Drop shadow
 .box-shadow(@boxShadow: @shadow) {
-  -webkit-box-shadow: @boxShadow;
-     -moz-box-shadow: @boxShadow;
-          box-shadow: @boxShadow;
+    -webkit-box-shadow: @boxShadow;
+    -moz-box-shadow: @boxShadow;
+    box-shadow: @boxShadow;
 }
 
 // Box sizing
 .box-sizing(@sizing: border-box) {
-  -webkit-box-sizing: @sizing;
-     -moz-box-sizing: @sizing;
-      -ms-box-sizing: @sizing;
-          box-sizing: @sizing;
+    -webkit-box-sizing: @sizing;
+    -moz-box-sizing: @sizing;
+    -ms-box-sizing: @sizing;
+    box-sizing: @sizing;
 }
 
 .user-select(@argument: none) {
-  -webkit-user-select: @argument;
-     -moz-user-select: @argument;
-      -ms-user-select: @argument;
-       -o-user-select: @argument;
-          user-select: @argument;
+    -webkit-user-select: @argument;
+    -moz-user-select: @argument;
+    -ms-user-select: @argument;
+    -o-user-select: @argument;
+    user-select: @argument;
 }
 
 // Columns
 .columns(@colcount: 2, @colgap: @spacing) {
-   -webkit-column-count: @colcount;
-     -webkit-column-gap: @colgap;
-      -moz-column-count: @colcount;
-        -moz-column-gap: @colgap;
-           column-count: @colcount;
-             column-gap: @colgap;
+    -webkit-column-count: @colcount;
+    -webkit-column-gap: @colgap;
+    -moz-column-count: @colcount;
+    -moz-column-gap: @colgap;
+    column-count: @colcount;
+    column-gap: @colgap;
 }
 
 // Background size
 .background-size(@value: cover) {
-  -webkit-background-size: @value; // Android 2.1 - 2.3
-     -moz-background-size: @value; // FireFox 3.6
-       -o-background-size: @value; // Opera 10.0 - 10.1
-          background-size: @value;
+    -webkit-background-size: @value; // Android 2.1 - 2.3
+    -moz-background-size: @value; // FireFox 3.6
+    -o-background-size: @value; // Opera 10.0 - 10.1
+    background-size: @value;
 }
 
 // Background clip
 .background-clip(@argument: padding-box) {
-  -webkit-background-clip: @argument;
-     -moz-background-clip: @argument;
-      -ms-background-clip: @argument;
-       -o-background-clip: @argument;
-          background-clip: @argument;
+    -webkit-background-clip: @argument;
+    -moz-background-clip: @argument;
+    -ms-background-clip: @argument;
+    -o-background-clip: @argument;
+    background-clip: @argument;
 }
 
 // Animation
 .animation(@animation) {
-  -webkit-animation: @animation;
-     -moz-animation: @animation;
-      -ms-animation: @animation;
-       -o-animation: @animation;
-          animation: @animation;
+    -webkit-animation: @animation;
+    -moz-animation: @animation;
+    -ms-animation: @animation;
+    -o-animation: @animation;
+    animation: @animation;
 }
 
 // Animation
@@ -156,128 +156,146 @@
 
 // Transform style
 .transform-style(@value: preserve-3d) {
-  -webkit-transform-style: @value;
-     -moz-transform-style: @value;
-      -ms-transform-style: @value;
-       -o-transform-style: @value;
-          transform-style: @value;
+    -webkit-transform-style: @value;
+    -moz-transform-style: @value;
+    -ms-transform-style: @value;
+    -o-transform-style: @value;
+    transform-style: @value;
 }
 
 // Transform origin
 .transform-origin(@value) {
-  -webkit-transform-origin: @value;
-     -moz-transform-origin: @value;
-      -ms-transform-origin: @value;
-       -o-transform-origin: @value;
-          transform-origin: @value;
+    -webkit-transform-origin: @value;
+    -moz-transform-origin: @value;
+    -ms-transform-origin: @value;
+    -o-transform-origin: @value;
+    transform-origin: @value;
 }
 
 // Perspective
 .perspective(@value) {
-  -webkit-perspective: @value;
-     -moz-perspective: @value;
-      -ms-perspective: @value;
-       -o-perspective: @value;
-          perspective: @value;
+    -webkit-perspective: @value;
+    -moz-perspective: @value;
+    -ms-perspective: @value;
+    -o-perspective: @value;
+    perspective: @value;
 }
 
 // Algemene transform
 .transform(@value) {
-  -webkit-transform: @value;
-     -moz-transform: @value;
-      -ms-transform: @value;
-       -o-transform: @value;
-          transform: @value;
+    -webkit-transform: @value;
+    -moz-transform: @value;
+    -ms-transform: @value;
+    -o-transform: @value;
+    transform: @value;
 }
 
 // Transform rotate
 .rotate(@degrees) {
-  -webkit-transform: rotate(@degrees);
-     -moz-transform: rotate(@degrees);
-      -ms-transform: rotate(@degrees);
-       -o-transform: rotate(@degrees);
-          transform: rotate(@degrees);
+    -webkit-transform: rotate(@degrees);
+    -moz-transform: rotate(@degrees);
+    -ms-transform: rotate(@degrees);
+    -o-transform: rotate(@degrees);
+    transform: rotate(@degrees);
 }
 
 // Transform rotate X
 .rotateX(@degrees) {
-  -webkit-transform: rotateX(@degrees);
-     -moz-transform: rotateX(@degrees);
-      -ms-transform: rotateX(@degrees);
-       -o-transform: rotateX(@degrees);
-          transform: rotateX(@degrees);
+    -webkit-transform: rotateX(@degrees);
+    -moz-transform: rotateX(@degrees);
+    -ms-transform: rotateX(@degrees);
+    -o-transform: rotateX(@degrees);
+    transform: rotateX(@degrees);
 }
 
 // Transform rotate Y
 .rotateY(@degrees) {
-  -webkit-transform: rotateY(@degrees);
-     -moz-transform: rotateY(@degrees);
-      -ms-transform: rotateY(@degrees);
-       -o-transform: rotateY(@degrees);
-          transform: rotateY(@degrees);
+    -webkit-transform: rotateY(@degrees);
+    -moz-transform: rotateY(@degrees);
+    -ms-transform: rotateY(@degrees);
+    -o-transform: rotateY(@degrees);
+    transform: rotateY(@degrees);
 }
 
 // Transform rotate 3d
 .rotate3d(@x, @y, @z) {
-  -webkit-transform: rotate(@x, @y, @z);
-     -moz-transform: rotate(@x, @y, @z);
-      -ms-transform: rotate(@x, @y, @z);
-       -o-transform: rotate(@x, @y, @z);
-          transform: rotate(@x, @y, @z);
+    -webkit-transform: rotate(@x, @y, @z);
+    -moz-transform: rotate(@x, @y, @z);
+    -ms-transform: rotate(@x, @y, @z);
+    -o-transform: rotate(@x, @y, @z);
+    transform: rotate(@x, @y, @z);
 }
 
 // Transform scale 3d
 .scale3d(@x, @y, @z) {
-  -webkit-transform: scale3d(@x, @y, @z);
-     -moz-transform: scale3d(@x, @y, @z);
-      -ms-transform: scale3d(@x, @y, @z);
-       -o-transform: scale3d(@x, @y, @z);
-          transform: scale3d(@x, @y, @z);
+    -webkit-transform: scale3d(@x, @y, @z);
+    -moz-transform: scale3d(@x, @y, @z);
+    -ms-transform: scale3d(@x, @y, @z);
+    -o-transform: scale3d(@x, @y, @z);
+    transform: scale3d(@x, @y, @z);
 }
 
 // Transform scale-x
 .scaleX(@ratio) {
-  -webkit-transform: scaleX(@ratio);
-     -moz-transform: scaleX(@ratio);
-      -ms-transform: scaleX(@ratio);
-       -o-transform: scaleX(@ratio);
-          transform: scaleX(@ratio);
+    -webkit-transform: scaleX(@ratio);
+    -moz-transform: scaleX(@ratio);
+    -ms-transform: scaleX(@ratio);
+    -o-transform: scaleX(@ratio);
+    transform: scaleX(@ratio);
 }
 
 // Transform scale-y
 .scaleY(@ratio) {
-  -webkit-transform: scaleY(@ratio);
-     -moz-transform: scaleY(@ratio);
-      -ms-transform: scaleY(@ratio);
-       -o-transform: scaleY(@ratio);
-          transform: scaleY(@ratio);
+    -webkit-transform: scaleY(@ratio);
+    -moz-transform: scaleY(@ratio);
+    -ms-transform: scaleY(@ratio);
+    -o-transform: scaleY(@ratio);
+    transform: scaleY(@ratio);
 }
 
 // Transform scale
 .scale(@ratio) {
-  -webkit-transform: scale(@ratio);
-     -moz-transform: scale(@ratio);
-      -ms-transform: scale(@ratio);
-       -o-transform: scale(@ratio);
-          transform: scale(@ratio);
+    -webkit-transform: scale(@ratio);
+    -moz-transform: scale(@ratio);
+    -ms-transform: scale(@ratio);
+    -o-transform: scale(@ratio);
+    transform: scale(@ratio);
 }
 
 // Transform skew
 .skew(@x, @y) {
-  -webkit-transform: skew(@x, @y);
-     -moz-transform: skew(@x, @y);
-      -ms-transform: skew(@x, @y);
-       -o-transform: skew(@x, @y);
-          transform: skew(@x, @y);
+    -webkit-transform: skew(@x, @y);
+    -moz-transform: skew(@x, @y);
+    -ms-transform: skew(@x, @y);
+    -o-transform: skew(@x, @y);
+    transform: skew(@x, @y);
+}
+
+// Transform skewX
+.skewX(@x) {
+    -webkit-transform: skew(@x);
+    -moz-transform: skew(@x);
+    -ms-transform: skew(@x);
+    -o-transform: skew(@x);
+    transform: skew(@x);
+}
+
+// Transform skewY
+.skewY(@y) {
+    -webkit-transform: skew(@y);
+    -moz-transform: skew(@y);
+    -ms-transform: skew(@y);
+    -o-transform: skew(@y);
+    transform: skew(@y);
 }
 
 // Transform translate
 .translate(@x, @y) {
-  -webkit-transform: translate(@x, @y);
-     -moz-transform: translate(@x, @y);
-      -ms-transform: translate(@x, @y);
-       -o-transform: translate(@x, @y);
-          transform: translate(@x, @y);
+    -webkit-transform: translate(@x, @y);
+    -moz-transform: translate(@x, @y);
+    -ms-transform: translate(@x, @y);
+    -o-transform: translate(@x, @y);
+    transform: translate(@x, @y);
 }
 
 // Transform translate X
@@ -291,11 +309,11 @@
 
 // Transform translate Y
 .translateY(@value) {
-  -webkit-transform: translateY(@value);
-     -moz-transform: translateY(@value);
-      -ms-transform: translateY(@value);
-       -o-transform: translateY(@value);
-          transform: translateY(@value);
+    -webkit-transform: translateY(@value);
+    -moz-transform: translateY(@value);
+    -ms-transform: translateY(@value);
+    -o-transform: translateY(@value);
+    transform: translateY(@value);
 }
 
 // Transform translate 3D
@@ -318,20 +336,20 @@
 
 // Transform X rotate
 .rotateX(@deg) {
-  -webkit-transform: rotateX(@deg);
-     -moz-transform: rotateX(@deg);
-      -ms-transform: rotateX(@deg);
-       -o-transform: rotateX(@deg);
-          transform: rotateX(@deg);
+    -webkit-transform: rotateX(@deg);
+    -moz-transform: rotateX(@deg);
+    -ms-transform: rotateX(@deg);
+    -o-transform: rotateX(@deg);
+    transform: rotateX(@deg);
 }
 
 // Transform Y rotate
 .rotateY(@deg) {
-  -webkit-transform: rotateY(@deg);
-     -moz-transform: rotateY(@deg);
-      -ms-transform: rotateY(@deg);
-       -o-transform: rotateY(@deg);
-          transform: rotateY(@deg);
+    -webkit-transform: rotateY(@deg);
+    -moz-transform: rotateY(@deg);
+    -ms-transform: rotateY(@deg);
+    -o-transform: rotateY(@deg);
+    transform: rotateY(@deg);
 }
 
 // Center element top and left
@@ -354,4 +372,50 @@
     .translateY(-50%);
     position: absolute;
     top: 50%;
+}
+
+// Reset Kirra's responsive images
+.responsive-image-reset {
+    > div[style] {
+        padding-top: percentage(@previewRatio) !important; // Equal to 'overview' responsive uploadgateway ratio
+    }
+
+    // Always make the image fit exactly the box (this disabled the POI functionality from Kirra)
+    img {
+        .translateX(0) !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
+}
+
+// Fullscreen background images (causes extra scrollbar when site isn't responsive)
+.full-screen-background(@background: @contentBackground) {
+    position: relative;
+    z-index: 1;
+
+    &:after {
+        .centerX;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        content: '';
+        background: @background;
+        width: 400vw;
+    }
+}
+
+// Object in responsive ratio
+.responsive-ratio-object(@ratio_width: 300, @ratio_height: 200) {
+    position: relative;
+    padding-top: 100% / @ratio_width * @ratio_height;
+
+    > * {
+        position: absolute !important;
+        top: 0 !important;
+        left: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+    }
 }

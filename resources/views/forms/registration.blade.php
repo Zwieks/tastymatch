@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 <form name="general-registration" class="formlogin" role="form" method="POST" action="{{ url('/register') }}">
     <fieldset>
         <legend>{{ Lang::get('forms.legendregister')  }}</legend>

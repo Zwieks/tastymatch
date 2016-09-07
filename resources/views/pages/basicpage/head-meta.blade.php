@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <meta name="description" content="{{ Lang::get('basicpage.description') }}" />
 <meta name="keywords" content="{{ Lang::get('basicpage.keywords') }}" />

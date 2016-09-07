@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <!-- OPEN GRAPH / FACEBOOK -->
 <meta property="og:type" content="article">
 <meta property="og:locale" content="{{ Lang::getLocale() }}">

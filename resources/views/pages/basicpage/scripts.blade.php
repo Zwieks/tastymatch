@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <script type="text/javascript" src="{{ URL::asset('js/jquery.browser.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.viewport.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.header.js') }}"></script>

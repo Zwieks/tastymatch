@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <footer class="page-footer">
 	<div class="inner">
 

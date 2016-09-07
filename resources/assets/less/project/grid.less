@@ -1,1 +1,15 @@
 // @TODO: Make the grid responsive and add extra column widths in this stylesheet
+
+[data-columns='6']{
+	@media @bp-MobileL {
+		.page-overview-block {
+			width: 100%/3;
+		}
+	}
+
+	@media @bp-MobileS {
+		.page-overview-block {
+			width: 100%/2;
+		}
+	}
+}

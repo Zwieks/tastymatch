@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             $globals = $globals[0];
 
             /* Set debug path */
-            $debugpath = 'views/'.str_replace('.', '/', $view->getName()).'.php';
+            $debugpath = 'resources/views/'.str_replace('.', '/', $view->getName()).'.blade.php';
 
             $view->with(compact('type', 'locale', 'debugpath', 'globals'));
         });

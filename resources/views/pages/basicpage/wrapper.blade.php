@@ -1,6 +1,6 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <main class="page-wrapper">
-	<div class="inner">
+	<article class="inner">
 
 
 		@if ($type != 'homepage')
@@ -20,5 +20,5 @@
 				{render style='right'}
 			{/if} -->
 		</div>
-	</div>
+	</article>
 </main>

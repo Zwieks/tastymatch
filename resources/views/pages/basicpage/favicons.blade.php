@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 {*
 	@TODO: Generate all icons with: http://realfavicongenerator.net/
 	Place them in the root of the project!

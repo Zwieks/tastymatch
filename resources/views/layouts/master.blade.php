@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 <!DOCTYPE html>
     <html lang='{{$locale}}' itemscope itemtype= @if($type === 'homepage') "http://schema.org/WebSite" @else "http://schema.org/WebPage" @endif>
     <head>

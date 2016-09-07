@@ -1,28 +1,32 @@
 /* Grid settings */
-@columnWidth:               7.2rem;
+@columnWidth:               7.5rem;
 @columnsTotal:              12;
 @gutterWidth:               2.4rem;
 
 /* Framework settings */
 @asideLeftColumns:          3; // Set this to '0' when there is no left column
-@asideRightColumns:         3; // Set this to '0' when there is no right column
+@asideRightColumns:         4; // Set this to '0' when there is no right column
 
 /* Dimensions settings */
 @siteWidth:                 ((@columnsTotal + 1) * @gutterWidth) + (@columnsTotal * @columnWidth);
-@maxWidth:                  @siteWidth*1.25;
+@maxWidth:                  152.4rem;
 @minWidth:                  98.4rem; // For a minimum horizontal resolution of 1024px
 @spacing:                   2.4rem;
-@headerHeight:              @spacing*4; // Only for desktop
+@headerHeight:              @spacing*3.75; // Only for desktop
+@previewRatio:              3/4; // Used for image overview blocks (overview-* image ratio) TODO: Check all upload gateways
 
 // Styling
 @shadow:                    0 @spacing/4 @spacing/2 rgba(0,0,0,.125);
 @borderRadius:              0;
+
+/* Animations */
 @animSpeed:                 .15s;
 @slowAnimSpeed:             @animSpeed*2;
+
 @tableBorder:               @lightGrey;
 @tableHeadBg:               lighten(@lightGrey, 10%);
 @bodyBackground:            #fff;
-@contentBackground:         #ffff;
+@contentBackground:         #fff;
 @previewRatio:              2/3; // Used for image overview blocks (overview-* image ratio)
 @fixedHeader:               true;
 
@@ -46,7 +50,6 @@
 @fontBolder:                bolder;
 
 /* Color settings */
-// TODO: Check all color settings
 @black:                     #000;
 @white:                     #fff;
 @textColor:                 #333;
@@ -106,10 +109,12 @@
 @bp-MobileS:                ~"screen and (max-width: 320px)";
 
 /* Functionalities */
+@fixedHeader:               true; // Gives the .page-header a position: fixed
 @animatingFormLabels:       true;
 @breadcrumb:                true;
 @icons:                     true;
 @submenu:                   false;
+@stickyFooter:              true; // The sticky footer doesn't work in IE11
 
 /* Modules */
 @moduleLogin:               false;
@@ -119,4 +124,4 @@
 @moduleForms:               true;
 @moduleSearch:              true;
 @moduleMaps:                true;
-@moduleYoutube:             true; // @TODO: When this module is not active, remove jquery.youtube.js from the project and it's includes
+@moduleYoutube:             true;

@@ -1,4 +1,4 @@
-<!-- [{{$debugpath}}] -->
+<!-- {{$debugpath}} -->
 <footer class="page-footer">
 	<div class='footer-wrapper'>
 		<nav class="page-footermenu" itemscope itemtype="http://schema.org/SiteNavigationElement">

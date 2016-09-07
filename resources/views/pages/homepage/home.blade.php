@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 @extends('layouts.master')
 @section('title', Lang::get('basicpage.title'))
 @section('description', Lang::get('basicpage.description'))
