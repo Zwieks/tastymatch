@@ -7,7 +7,7 @@
 @section('menu-item-name', 'inloggen')
 
 @section('content')
-    @include('pages.loginpage.login')
+    @include('pages.loginpage.view')
 @stop
 
 @section('script')

@@ -11,7 +11,7 @@
 @stop
 
 @section('content')
-    @include('forms.registration')
+    @include('pages.registrationpage.view')
 @stop
 
 @section('right')
