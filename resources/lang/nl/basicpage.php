@@ -9,6 +9,9 @@ return [
     'titlemainnav' => 'Home',
     'description' => 'Wij brengen foodstands en evenementen samen op een online platform, daarnaast bieden wij vele voordelen voor uw bedrijf.',
 
+	'mail-webmaster' => 'webmaster@tastymatch.nl',
+	'mail-info' => 'info@tastymatch.nl',
+
     'footercredits' => '© 2016 - ontwikkeling door TastyMatch',
     'seo-footertitle' => 'Secundaire navigatie',
 ];

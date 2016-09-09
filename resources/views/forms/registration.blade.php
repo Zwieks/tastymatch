@@ -136,10 +136,9 @@
                     </span>
                 @endif
             </li>
-
+            <li class="separator"></li>
             <li id="js-typechange">
                 <ul class="velden">
-                    <li class="separator"></li>
 
                     <li class="form-input-heading">
                         <h2>{{ Lang::get('forms.commercialdetails') }}</h2>

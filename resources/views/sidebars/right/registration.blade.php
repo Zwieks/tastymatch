@@ -1,2 +1,2 @@
 <!-- {{$debugpath}} -->
-asdfasdf
+@include('sidebars.templates.explanation')
