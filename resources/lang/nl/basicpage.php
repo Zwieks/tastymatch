@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'name' => 'TastyMatch',
 	'title' => 'TastyMatch het online platform voor evenementen en foodstands',
     'keywords' => 'Tasty, Match, TastyMatch, evenementen, foodtrucks',
     'slogan' => 'Het online platform voor evenementen en foodstands.',

@@ -15,4 +15,9 @@
 
         <img src="{{ $path }}" alt="{{ $alt }}">
     </picture>
+
+    @hasSection('heroalinea')
+        @yield('heroalinea')
+    @endif
+
 </div>
