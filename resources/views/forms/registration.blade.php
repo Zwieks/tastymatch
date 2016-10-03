@@ -136,39 +136,41 @@
                     </span>
                 @endif
             </li>
-            <li class="separator"></li>
-            <li id="js-typechange">
-                <ul class="velden">
 
-                    <li class="form-input-heading">
-                        <h2>{{ Lang::get('forms.commercialdetails') }}</h2>
-                    </li>
+            <div id="js-typechange">
+                <li>
+                    <ul class="velden">
+                        <li class="separator"></li>
+                        <li class="form-input-heading">
+                            <h2>{{ Lang::get('forms.commercialdetails') }}</h2>
+                        </li>
 
-                    <li>
-                        <label for="js-kvkapi" class="animating-label">{{ Lang::get('forms.businessdetails') }}</label>
+                        <li>
+                            <label for="js-kvkapi" class="animating-label">{{ Lang::get('forms.businessdetails') }}</label>
 
-                        <input id="js-kvkapi" type="text" class="form-control" name="business_details" value="{{ old('business_details') }}">
+                            <input id="js-kvkapi" type="text" class="form-control" name="business_details" value="{{ old('business_details') }}">
 
-                        @if ($errors->has('business'))
-                            <span class="help-block">
-                                <strong>{{ $errors->first('business') }}</strong>
+                            @if ($errors->has('business'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('business') }}</strong>
+                                </span>
+                            @endif
+                        </li>
+
+                        <li>
+                            <label class="animating-label">{{ Lang::get('forms.businessdetailsinfo') }}</label>
+
+                            <div id="js-kvkinfo-wrapper" class="kvkwrapper">
+                                <p class='description-text'>{{ Lang::get('forms.kvknoinfo') }}</p>
+                            </div>
+
+                            <span class="help-block api-error">
+                                <strong>{{ Lang::get('forms.apierrorkvk') }}</strong>
                             </span>
-                        @endif
-                    </li>
-
-                    <li>
-                        <label class="animating-label">{{ Lang::get('forms.businessdetailsinfo') }}</label>
-
-                        <div id="js-kvkinfo-wrapper" class="kvkwrapper">
-                            <p class='description-text'>{{ Lang::get('forms.kvknoinfo') }}</p>
-                        </div>
-
-                        <span class="help-block api-error">
-                            <strong>{{ Lang::get('forms.apierrorkvk') }}</strong>
-                        </span>
-                    </li>
-                </ul>
-            </li>
+                        </li>
+                    </ul>
+                </li>
+            </div>
 
             <li class="separator"></li>
 

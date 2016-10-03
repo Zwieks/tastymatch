@@ -17,11 +17,11 @@
 		padding-top: 100%/5; // Uploadgateway ratio for this resolution
 	}
 
-	@media screen and (max-width: 896px) {
-		padding-top: 100%/5; // Uploadgateway ratio for this resolution
+	@media screen and (max-width: 768px) {
+		padding-top: 100%/2; // Uploadgateway ratio for this resolution
 	}
 
-	@media screen and (max-width: 320px) {
+	@media screen and (max-width: 388px) {
 		padding-top: 100%; // Uploadgateway ratio for this resolution
 	}
 }
@@ -74,6 +74,14 @@
 		color:@white;
 		text-align: center;
 
+		@media @bp-TabletL{
+			padding:0 @spacing;
+		}
+
+		@media @bp-MobileM{
+			padding:0 @spacing/2;
+		}
+
 		p{
 			line-height: 1.75;
 			font-weight: 300;
@@ -83,6 +91,16 @@
 
 		.site-info-title{
 			font-size:@largeHeadingSize;
+
+			@media @bp-TabletL{
+				font-size: @MediumLargeHeadingSize;
+				margin-bottom: @spacing/2;
+			}
+
+			@media @bp-MobileM{
+				font-size: @mediumHeadingSize;
+			}
+
 			span{
 				font-weight:bold;
 			}
@@ -90,6 +108,15 @@
 
 		.site-info-text{
 			font-size:@mediumHeadingSize;
+
+			@media @bp-TabletL{
+				font-size: @mediumSmallHeadingSize;
+				margin-bottom: @spacing/2;
+			}
+
+			@media @bp-MobileM{
+				font-size: 1.6rem;
+			}
 		}
 	}
 

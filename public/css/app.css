@@ -3091,6 +3091,11 @@ html .cookie-explanation {
 /*
  *  Basis custom form styling
  */
+@media screen and (max-width: 896px) {
+  .webbeheer-formulier {
+    margin-bottom: 2.4rem;
+  }
+}
 [type=text],
 [type=email],
 [type=tel],
@@ -3139,6 +3144,26 @@ textarea {
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
+@media screen and (max-width: 388px) {
+  .form-input-date #PersonForm_date_of_birth {
+    -webkit-flex-grow: initial;
+    -moz-flex-grow: initial;
+    -ms-flex-grow: initial;
+    -ms-flex-positive: initial;
+    flex-grow: initial;
+    width: 100%;
+  }
+}
+@media screen and (max-width: 388px) {
+  .form-input-date #PersonForm_date_of_birth .style-select {
+    width: 100%;
+    max-width: 100%;
+    margin: 0.6rem 0 0 0;
+  }
+}
+.form-input-date #PersonForm_date_of_birth select {
+  width: 100%;
+}
 /* end general webbeheer form */
 form ul,
 form ol {
@@ -3156,6 +3181,11 @@ form ol {
   clear: both;
   width: 80%;
 }
+@media screen and (max-width: 896px) {
+  .velden > li {
+    width: 100%;
+  }
+}
 .velden > li:after {
   display: none;
 }
@@ -3171,6 +3201,11 @@ form ol {
   height: 1px;
   background: #e5e5e5;
   margin: 2.4rem 0 3.6rem 0;
+}
+@media screen and (max-width: 896px) {
+  .velden .buttons {
+    text-align: right;
+  }
 }
 .velden label {
   display: block;
@@ -3201,7 +3236,7 @@ form ol {
   width: auto;
 }
 .detail-summary {
-  margin-bottom: 1.2rem;
+  margin-bottom: 0;
 }
 .detail-summary input {
   width: 100%;
@@ -3209,6 +3244,7 @@ form ol {
   font-size: 1.2rem;
   padding: 0;
   min-height: auto;
+  height: 2.4rem;
 }
 .api-error {
   display: none;
@@ -3332,12 +3368,12 @@ form ol {
     padding-top: 20%;
   }
 }
-@media screen and (max-width: 896px) {
+@media screen and (max-width: 768px) {
   .page-hero-image {
-    padding-top: 20%;
+    padding-top: 50%;
   }
 }
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 388px) {
   .page-hero-image {
     padding-top: 100%;
   }
@@ -3402,6 +3438,16 @@ form ol {
   color: #fff;
   text-align: center;
 }
+@media screen and (max-width: 1023px) {
+  .page-hero .site-info-wrapper {
+    padding: 0 2.4rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .page-hero .site-info-wrapper {
+    padding: 0 1.2rem;
+  }
+}
 .page-hero .site-info-wrapper p {
   line-height: 1.75;
   font-weight: 300;
@@ -3411,11 +3457,33 @@ form ol {
 .page-hero .site-info-wrapper .site-info-title {
   font-size: 4.5rem;
 }
+@media screen and (max-width: 1023px) {
+  .page-hero .site-info-wrapper .site-info-title {
+    font-size: 3.2rem;
+    margin-bottom: 1.2rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .page-hero .site-info-wrapper .site-info-title {
+    font-size: 2.4rem;
+  }
+}
 .page-hero .site-info-wrapper .site-info-title span {
   font-weight: bold;
 }
 .page-hero .site-info-wrapper .site-info-text {
   font-size: 2.4rem;
+}
+@media screen and (max-width: 1023px) {
+  .page-hero .site-info-wrapper .site-info-text {
+    font-size: 2.1rem;
+    margin-bottom: 1.2rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .page-hero .site-info-wrapper .site-info-text {
+    font-size: 1.6rem;
+  }
 }
 .page-hero .page-breadcrumb {
   margin: 0;
