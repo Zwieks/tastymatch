@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Controllers\Controller;
 
-class UserController extends Controller
+class GlobalController extends Controller
 {
     /**
      * Show a list of all of the application's users.

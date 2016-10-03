@@ -38,6 +38,9 @@ Route::post('/inschrijven', 'Auth\AuthController@postRegister');
 // Homepage
 Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);
 
+// Contact
+Route::get('/contact', 'ContactController@index');
+
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 Route::auth();
