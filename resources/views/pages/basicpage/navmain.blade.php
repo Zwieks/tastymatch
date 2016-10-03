@@ -31,7 +31,7 @@
 				<meta itemprop="position" content="2">
 			</li>
 		@else
-			<li class="level-1-item {{(current_page(Lang::get('menus.register'))) ? 'active' : current_page()}}">
+			<li class="level-1-item {{(current_page(Lang::get('menus.register'))) ? 'active' : current_page( Lang::get('menus.contact'))}}">
 				<a href="{{ Lang::get('menus.register-url') }}" itemprop="url" data-icon="a">
 					<span itemprop="name">{{ Lang::get('menus.register') }}</span>
 				</a>
