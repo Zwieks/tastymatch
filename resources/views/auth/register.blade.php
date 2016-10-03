@@ -3,6 +3,7 @@
 @section('title', 'Hallo')
 @section('type','registration ')
 @section('description', 'test')
+@section('menu', Lang::get('menus.register-url'))
 
 @section('menu-item-name', 'home')
 

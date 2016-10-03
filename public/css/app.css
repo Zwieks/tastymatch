@@ -2511,6 +2511,9 @@ html .cookie-explanation button.request-cookies:before,
     height: 7.2rem;
   }
 }
+.page-mainmenu .level-1-item.active > a {
+  color: #E3262E;
+}
 .page-mainmenu .level-1-item.hover .level-2,
 .page-mainmenu .level-1-item:hover .level-2,
 .page-mainmenu .level-1-item:focus .level-2 {

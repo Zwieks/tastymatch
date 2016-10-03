@@ -13,14 +13,14 @@ return [
     |
     */
 
-    'accepted'             => 'The :attribute must be accepted.',
-    'active_url'           => 'The :attribute is not a valid URL.',
-    'after'                => 'The :attribute must be a date after :date.',
-    'alpha'                => 'The :attribute may only contain letters.',
-    'alpha_dash'           => 'The :attribute may only contain letters, numbers, and dashes.',
-    'alpha_num'            => 'The :attribute may only contain letters and numbers.',
-    'array'                => 'The :attribute must be an array.',
-    'before'               => 'The :attribute must be a date before :date.',
+    'accepted'             => 'Het :attribute moet worden geaccepteerd.',
+    'active_url'           => 'De :attribute is geen valide URL.',
+    'after'                => 'De :attribute must be a date after :date.',
+    'alpha'                => 'De :attribute may only contain letters.',
+    'alpha_dash'           => 'De :attribute may only contain letters, numbers, and dashes.',
+    'alpha_num'            => 'De :attribute may only contain letters and numbers.',
+    'array'                => 'De :attribute must be an array.',
+    'before'               => 'De :attribute must be a date before :date.',
     'between'              => [
         'numeric' => 'The :attribute must be between :min and :max.',
         'file'    => 'The :attribute must be between :min and :max kilobytes.',
