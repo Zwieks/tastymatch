@@ -2,16 +2,6 @@
 	display: none;
 }
 
-.has-hero{
-	.page-website-wrapper{
-		min-height: calc(100vh ~'-' @headerHeight);
-
-		@media @navBreakPoint {
-			min-height: calc(100vh ~'-' @responsiveHeaderHeight);
-		}
-	}
-}
-
 .nav-toggle {
 	top: (@responsiveHeaderHeight - @hamburgerHeight)/2;
 	width: @hamburgerHeight;
