@@ -33,4 +33,10 @@ return [
 	'commercialdetails' => 'Zakelijke gegevens',
 	'headerbusinessdetails' => 'Bedrijfsgegevens',
 	'headerregistrationtype' => 'Wil je een zakelijk of prive account?',
+    'chamberofcommerce' => 'KVK',
+    'valueaddedtax' => 'BTW',
+    'iban' => 'IBAN',
+    'bic' => 'BIC',
+    'support' => 'Support',
+    'sales' => 'Verkoop',
 ];

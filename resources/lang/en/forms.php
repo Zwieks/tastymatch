@@ -33,4 +33,11 @@ return [
 	'commercialdetails' => 'Business details',
 	'headerbusinessdetails' => 'Business details',
 	'headerregistrationtype' => 'Do you want a commercial or consumer account?',
+    'chamberofcommerce' => 'CC',
+    'valueaddedtax' => 'VAT',
+    'iban' => 'IBAN',
+    'bic' => 'BIC',
+    'support' => 'Support',
+    'sales' => 'Sales',
+    'billing' => 'Billing',
 ];

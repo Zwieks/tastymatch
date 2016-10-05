@@ -3266,6 +3266,57 @@ form ol {
   margin: 0;
   font-size: 1.3rem;
 }
+.contact-wrapper {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+}
+.contact-logo-wrapper {
+  width: 33.33333333%;
+}
+.contact-info-wrapper {
+  width: 66.66666667%;
+}
+.contact-items-wrapper {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  margin-bottom: 2.4rem;
+}
+.contact-text-wrapper h3,
+.contact-text-wrapper p {
+  width: 100%;
+  display: block;
+}
+.contact-items {
+  margin-right: 14.4rem;
+}
+.contact-items:last-child {
+  margin-right: 0;
+}
+.contact-items h3,
+.contact-items dt {
+  font-weight: bold;
+}
+.contact-items dt,
+.contact-items dd {
+  float: left;
+}
+.contact-items dt {
+  clear: both;
+  margin-right: 5px;
+}
+.contact-items dd {
+  margin-left: 0px;
+}
 .page-hero-image {
   background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
   padding-top: 20%;

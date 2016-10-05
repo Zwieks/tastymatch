@@ -14,8 +14,8 @@ class ContactController extends Controller
 	 */
 	public function index()
 	{
-		$users = DB::select('select * from users where id = ?', [1]);
+		$globalinfo = DB::select('select `kvk`,`email` from global_info');
 
-		return view('auth.contact', ['users' => $users]);
+		return view('auth.contact', ['globalinfo' => $globalinfo]);
 	}
 }

@@ -1,0 +1,59 @@
+.component-contact{
+
+}
+
+.contact-wrapper{
+	.displayflex;
+	.flex-wrap(wrap);
+}
+
+.contact-logo-wrapper{
+	width: 100%/3;
+}
+
+.contact-info-wrapper{
+	width: 100%/3*2;
+}
+
+.contact-items-wrapper{
+	.displayflex;
+	.justify-content(flex-start);
+
+	margin-bottom: @spacing;
+}
+
+.contact-text-wrapper{
+	h3,
+	p{
+		width: 100%;
+		display: block;
+	}
+}
+
+.contact-items{
+
+	margin-right: @spacing*6;
+
+	&:last-child{
+		margin-right: 0;
+	}
+
+	h3,
+	dt{
+		font-weight: bold;
+	}
+
+	dt,
+	dd{
+		float: left;
+	}
+
+	dt{
+		clear: both;
+		margin-right: 5px;
+	}
+
+	dd {
+  		margin-left: 0px;
+	}
+}
