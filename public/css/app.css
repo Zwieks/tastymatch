@@ -2672,14 +2672,6 @@ html .cookie-explanation button.request-cookies:before,
 .nav-trigger {
   display: none;
 }
-.has-hero .page-website-wrapper {
-  min-height: calc(100vh - 9rem);
-}
-@media (max-width: 1023px) {
-  .has-hero .page-website-wrapper {
-    min-height: calc(100vh - 7.2rem);
-  }
-}
 .nav-toggle {
   top: 1.2rem;
   width: 4.8rem;
