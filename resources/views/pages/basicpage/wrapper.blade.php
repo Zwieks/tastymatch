@@ -1,5 +1,9 @@
 <!-- {{$debugpath}} -->
 <main class="page-wrapper">
+	@hasSection('heroimage')
+		@yield('heroimage')
+	@endif
+
 	<article class="inner">
 		@if ($type != 'homepage')
 			<!-- {render style='breadcrumb'} -->

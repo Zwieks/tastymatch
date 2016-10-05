@@ -13,6 +13,7 @@
 @minWidth:                  98.4rem; // For a minimum horizontal resolution of 1024px
 @spacing:                   2.4rem;
 @headerHeight:              @spacing*3.75; // Only for desktop
+@footerHeight:              @spacing*6.5;
 @previewRatio:              3/4; // Used for image overview blocks (overview-* image ratio) TODO: Check all upload gateways
 
 // Styling
@@ -46,7 +47,7 @@
 @smallerHeadingSize:        1.4rem;
 @smallestHeadingSize:       1.2rem;
 @rootFontSize:              62.5%; // Makes 1rem => 10px
-@iconFont:                  'tastymatch'; // @TODO: Set the correct fontname (e.g. energystock.woff means 'energystock' as value)
+@iconFont:                  'tastymatch';
 @smallFontSize:             @baseFontSize*0.875;
 @fontLight:                 300;
 @fontNormal:                normal;
@@ -89,19 +90,21 @@
 @focusColor:                @textColor;
 
 /* Responsive */
-@responsive:                true; // When set to false, variables below are not used
-@navBreakPoint:             ~"screen and (max-width: 1023px)";
-@hamburgerColor:            @primColor;
-@hamburgerHeight:           @spacing*2;
-@responsiveHeaderHeight:    @spacing*3; // Is set when @navBreakPoints is reached
+@responsive:                true; // When set to false, variables below are not used and website behaves mot-responsive. TODO: Change the viewport meta tag in basicpage > view.tpl
+@navBreakPoint:             ~"(max-width: 1023px)";
+@responsiveHeaderHeight:    @spacing*3; // Is set when @navBreakPoints is reached on .page-header
+@hamburgerHeight:           @spacing*2; // Is set when @navBreakPoints is reached on .page-header@hamburgerHeight:           @spacing*2;
+@hamburgerBackground:       transparent; // Background color of the hamburger icon
+@hamburgerLinesHeight:      0.4rem; // The height of each hamburger line
+@hamburgerLinesColor:       @white; // The color of the 3 lines in the hamburger icon
 @hamburger:                 left; // Options: left, right, top or overlay
 @hamburgerText:             false; // Set to 'true to show hamburger text 'menu'
-@navShadowOpacity: 	        0.25; // Only for @hamburger = left or right
-@navWidth:                  240px; // Only for @hamburger = left or right
+@hamburgerColor:            @primColor;
+@navShadow: 	            0; // Only for @hamburger = left or right
+@navWidth:                  24rem; // Only for @hamburger = left or right
 @navOverlayColor:           rgba(0,0,0,0.25); // Not for @hamburger = overlay
-@navSpeed:                  @slowAnimSpeed;
-@navShadow:                 0.25;
-@navBg:                     @grey;
+@navSpeed:                  @slowAnimSpeed; // The slide-in speed of the transition of the sliding responsive navigation
+@navBg:                     @grey; // The background color of the responsive navigation
 
 /* Breakpoints */
 @bp-Desktop:                ~"screen and (min-width: 1024px)";

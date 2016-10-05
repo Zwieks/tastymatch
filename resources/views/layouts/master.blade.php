@@ -24,10 +24,6 @@
 
         @include('includes.header')
 
-        @hasSection('heroimage')
-            @yield('heroimage')
-        @endif
-
         <div class="page-website-wrapper">
             @include('pages.basicpage.wrapper')
             @include('includes.footer')

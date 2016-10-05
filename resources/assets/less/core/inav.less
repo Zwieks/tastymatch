@@ -1,6 +1,7 @@
 .page-header,
 .page-website-wrapper {
 	.transition(@navSpeed ease-in-out);
+	will-change: transform;
 }
 
 .page-website-wrapper {
@@ -8,6 +9,24 @@
 	.displayflex;
 	.flex-direction(column);
 	min-height: calc(100vh ~'-' @headerHeight);
+
+	@media @navBreakPoint {
+		min-height: calc(100vh ~'-' @responsiveHeaderHeight);
+	}
+
+	.kirra-frontend-bar-enabled & {
+		@media (min-width: 768px) {
+			min-height: calc(100vh ~'-' @headerHeight ~'-' 36px); // 36px = height of the front-end-bar
+		}
+
+		@media (min-width: 768px) and @navBreakPoint {
+			min-height: calc(100vh ~'-' @responsiveHeaderHeight ~'-' 36px); // 36px = height of the front-end-bar
+		}
+	}
+}
+
+.nav-trigger {
+	display: none;
 }
 
 .nav-toggle {
@@ -16,18 +35,17 @@
 	left: 0;
 	display: none;
 	cursor: pointer;
-	position: relative;
+	position: fixed;
 	font-size: @smallFontSize;
 	text-align: center;
 	z-index: 10;
+	width: @hamburgerHeight;
 	height: @hamburgerHeight;
+	background: @hamburgerBackground;
 
 	.wrapper {
-		.translate(-50%, -50%);
-		position: absolute;
+		.center;
 		display: block;
-		top: 50%;
-		left: 50%;
 		width: @spacing;
 	}
 
@@ -40,6 +58,8 @@
 		&:after {
 			.transition(@navSpeed/2 ease-in-out);
 			.translateZ(0);
+			height: @hamburgerLinesHeight;
+			background: @hamburgerLinesColor;
 			width: 100%;
 			position: absolute;
 			display: block;
@@ -48,12 +68,12 @@
 		}
 
 		&:before {
-			.translateY(-200%);
+			.transform(translateY(-100%) translateY(@hamburgerHeight/4));
 			content: '';
 		}
 
 		&:after {
-			.translateY(200%);
+			.translateY(-200%);
 			content: '';
 		}
 	}
@@ -72,6 +92,7 @@
 	bottom: 0;
 	width: 0;
 	z-index: 110; // Placed over the header because of the .navtoggle button
+	will-change: transform;
 }
 
 // Dark overlay over website
@@ -178,7 +199,7 @@
 & when (@hamburger = left) {
 	@media @navBreakPoint {
 		.nav-toggle {
-			left: 100%;
+			left: 0;
 		}
 
 		.page-mobile-nav-container {
@@ -220,8 +241,7 @@
 	@media @navBreakPoint {
 		.nav-toggle {
 			.translateX(-100%);
-			right: 100%;
-			left: auto;
+			left: 100%;
 		}
 
 		.page-mobile-nav-container {
@@ -251,7 +271,7 @@
 
 			~ .page-mobile-nav-container {
 				.nav-toggle {
-					.translateX(calc(-100%~'-'@navWidth));
+					.transform(translateX(-100%) translateX(-@navWidth));
 				}
 
 				.nav-wrapper {

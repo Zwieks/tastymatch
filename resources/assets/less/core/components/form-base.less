@@ -25,7 +25,7 @@ button {
 	-moz-osx-font-smoothing: grayscale;
 	font-weight: normal;
 	width: 100%;
-	height: @inputHeight;
+	min-height: @inputHeight;
 	padding: 0 @inputPadding;
 	background: @inputBg;
 	border: @borderWidth solid @borderColor;
@@ -39,6 +39,10 @@ button {
 		outline: 0;
 		border-color: @focusColor;
 	}
+}
+
+[type=search]::-ms-clear {
+	display: none;
 }
 
 [disabled] {
@@ -68,12 +72,13 @@ button {
 	}
 
 	select {
-		width: auto;
+		width: 100%;
 		padding: 0 @inputHeight 0 @inputPadding;
 		border: 0;
 		text-indent: 0.01px; // Firefox hack
 		background: transparent;
-		line-height: calc(@inputHeight ~'-' @borderWidth*4);
+		height: calc(@inputHeight ~'-' @borderWidth*2);
+		min-height: 0;
 
 		// Hide arrow for older IE's
 		&::-ms-expand {
@@ -127,7 +132,6 @@ textarea {
 ::-moz-placeholder { color: @placeHolderColor; }
 :-moz-placeholder { color: @placeHolderColor; }
 :-ms-input-placeholder { color: @placeHolderColor; }
-.placeholder { color: @placeHolderColor !important; }
 /* end default form elements */
 
 

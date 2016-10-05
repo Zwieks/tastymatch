@@ -11,18 +11,28 @@
         > a {
             display: inline-block;
         }
+
+        ul {
+            .transition();
+            position: absolute;
+            margin: 0;
+        }
     }
 
+    // The second level menu extends to the bottom
     .level-2 {
-        .transition();
-        position: absolute;
         left: 0;
         top: 100%;
         z-index: 10;
-        margin: 0;
-    }
 
-    .level-2-item > a {
-        display: block;
+        a {
+            display: block;
+        }
+
+        // Third level menu's and further extend to the right
+        ul {
+            left: 100%;
+            top: 0;
+        }
     }
 }
