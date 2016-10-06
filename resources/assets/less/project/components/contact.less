@@ -5,6 +5,10 @@
 .contact-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
+
+	@media @bp-TabletS{
+		.flex-direction(column);
+	}
 }
 
 .contact-logo-wrapper{
@@ -13,6 +17,16 @@
 
 .contact-info-wrapper{
 	width: 100%/3*2;
+
+	@media @bp-TabletS{
+		width: 100%;
+	}
+}
+
+.contact-info-title{
+	@media @bp-MobileL{
+		text-align: center;
+	}
 }
 
 .contact-items-wrapper{
@@ -20,6 +34,10 @@
 	.justify-content(flex-start);
 
 	margin-bottom: @spacing;
+
+	@media @bp-MobileL{
+		.flex-wrap(wrap);
+	}	
 }
 
 .contact-text-wrapper{
@@ -27,15 +45,32 @@
 	p{
 		width: 100%;
 		display: block;
+
+		@media @bp-MobileL{
+    		text-align: center;
+		}
 	}
 }
 
 .contact-items{
+	width: 100%/3;
+	margin-right: @spacing*4;
 
-	margin-right: @spacing*6;
+	@media @bp-MobileL{
+		margin-right: 0;
+		width: 100%;
+		text-align: center;
+	}	
 
 	&:last-child{
+		.flex-grow(1);
 		margin-right: 0;
+	}
+
+	dl{
+		@media @bp-MobileL{
+    		display: inline-block;
+		}	
 	}
 
 	h3,
