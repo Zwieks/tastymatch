@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Http\Controllers\Controller;
+use App\GlobalInfo;
 
 class ContactController extends Controller
 {
@@ -14,8 +15,8 @@ class ContactController extends Controller
 	 */
 	public function index()
 	{
-		$globalinfo = DB::select('select `kvk`,`email` from global_info');
+		$ContactInfo = GlobalInfo::GetContactInfo();
 
-		return view('auth.contact', ['globalinfo' => $globalinfo]);
+		return view('auth.contact', ['ContactInfo' => $ContactInfo]);
 	}
 }

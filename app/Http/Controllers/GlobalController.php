@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Http\Controllers\Controller;
+use App\GlobalInfo;
 
 class GlobalController extends Controller
 {
@@ -12,10 +13,10 @@ class GlobalController extends Controller
      *
      * @return Response
      */
-    public function index()
-    {
-        $users = DB::select('select * from users where id = ?', [1]);
-
-        return view('pages.homepage.home', ['users' => $users]);
-    }
+//    public function index()
+//    {
+//        $users = DB::select('select * from users where id = ?', [1]);
+//
+//        return view('pages.homepage.home', ['users' => $users]);
+//    }
 }
