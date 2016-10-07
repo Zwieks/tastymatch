@@ -20,7 +20,7 @@
     @include('pages.registrationpage.view')
 @stop
 
-{{-- Include Right Page --}}
+{{-- Include Right Sidebar --}}
 @section('right')
     @include('sidebars.right.registration')
 @stop
