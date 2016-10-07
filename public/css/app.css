@@ -2120,8 +2120,11 @@ html[lang='en'] .comp-login .social-login:before {
   content: 'or';
 }
 .page-content {
-  padding-top: 4.8rem;
+  padding-top: 3.6rem;
   background: #fff;
+}
+.has-bgimage .page-content {
+  margin-top: -2.4rem;
 }
 @media screen and (max-width: 896px) {
   .page-middle {

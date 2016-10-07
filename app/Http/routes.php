@@ -41,6 +41,11 @@ Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);
 // Contact
 Route::get('/contact', 'ContactController@index');
 
+// About
+Route::get('/about', 'AboutController@index');
+// Dutch
+Route::get('/overons', 'AboutController@index');
+
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 Route::auth();

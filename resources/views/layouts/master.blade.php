@@ -15,7 +15,7 @@
         <title>@yield('title')</title>
     </head>
 
-    <body @if (Request::path() === '/') itemscope itemtype="http://schema.org/WebSite"@endif class="component-@yield('type') preload">
+    <body @if (Request::path() === '/') itemscope itemtype="http://schema.org/WebSite"@endif class="component-@yield('type')@hasSection('heroimage')has-bgimage @endif preload">
        <!--  heading for document outline  -->
         <h2 class="hide-from-layout">@yield('title')</h2>
 

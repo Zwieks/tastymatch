@@ -15,12 +15,6 @@ class GlobalInfo extends Model
 	 */
 	protected $table = 'global_info';
 
-	/**
-	 * The attributes that are mass assignable.
-	 *
-	 * @var array
-	 */
-
 	public static function GetContactInfo() {
 		$contactinfo = DB::table('global_info')->select('kvk', 'email')->first();
 

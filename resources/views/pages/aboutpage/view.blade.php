@@ -1,0 +1,2 @@
+<!-- {{$debugpath}} -->
+@include('articles.about')

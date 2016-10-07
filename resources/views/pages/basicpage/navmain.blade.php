@@ -9,7 +9,7 @@
 			<meta itemprop="position" content="1">
 		</li>
 
-		<li class="level-1-item {{(current_page(Lang::get('menus.about'))) ? 'active' : current_page()}}">
+		<li class="level-1-item {{(current_page(Lang::get('menus.about-url'))) ? 'active' : current_page()}}">
 			<a href="{{ Lang::get('menus.about-url') }}" itemprop="url" data-icon="c">
 				<span itemprop="name">{{ Lang::get('menus.about') }}</span>
 			</a>
