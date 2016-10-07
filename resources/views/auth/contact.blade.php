@@ -10,7 +10,7 @@
 {{-- Metadata content --}}
 @section('description', 'contact')
 
-{{-- Include Hero Image --}}
+{{-- Metadata content --}}
 @section('heroimage')
     @include('heroimage.contact')
 @stop
