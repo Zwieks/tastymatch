@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
-        $posts = Blog::with('Author')-> orderBy('id', 'DESC')->get();
+        $posts = Blog::with('Author')-> orderBy('id', 'DESC')->paginate(10);
         return view('auth.blog')->with('blog',$posts);
     }
 
