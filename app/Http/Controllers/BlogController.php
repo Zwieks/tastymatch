@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Blog;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -15,8 +17,8 @@ class BlogController extends Controller
      */
     public function index()
     {
-        //
-        return view('auth.blog');
+        $posts = Blog::with('Author')-> orderBy('id', 'DESC')->get();
+        return view('auth.blog')->with('blog',$posts);
     }
 
     /**
@@ -81,6 +83,17 @@ class BlogController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function admin($id)
     {
         //
     }
