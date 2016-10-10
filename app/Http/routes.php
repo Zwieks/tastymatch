@@ -54,3 +54,6 @@ Route::get('/home', 'HomeController@index');
 
 // API
 Route::get('/getRequestKvkDetails', 'ApiController@showDetails');
+
+// Blogs
+Route::resource('blog', 'BlogController');

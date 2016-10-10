@@ -15,7 +15,7 @@ return [
     'about-url' 	=> '/about',  
 
     'blog' 			=> 'Blog',
-    'blog-url' 		=> '/blog',   
+    'blog-url' 		=> '/blog',
 
     'register' 		=> 'Register',
     'register-url' 	=> '/register',

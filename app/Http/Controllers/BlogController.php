@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class BlogsController extends Controller
+class BlogController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,6 +16,7 @@ class BlogsController extends Controller
     public function index()
     {
         //
+        return view('auth.blog');
     }
 
     /**

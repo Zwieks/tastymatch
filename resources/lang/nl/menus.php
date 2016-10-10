@@ -15,7 +15,7 @@ return [
     'about-url' 	=> '/overons',  
 
     'blog' 			=> 'Blog',
-    'blog-url' 		=> '/blog',   
+    'blog-url' 		=> '/blog',
 
     'register' 		=> 'Inschrijven',
     'register-url' 	=> '/inschrijven',
