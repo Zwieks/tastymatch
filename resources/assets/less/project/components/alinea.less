@@ -1,3 +1,11 @@
+.article-content-container{
+	padding:0 @spacing/2;
+
+	@media @bp-TabletM{
+		padding:0;
+	}
+}
+
 .comp-alinea {
 	&.intro {
 		&,
@@ -8,6 +16,7 @@
 
 	h2 {
 		font-size: @baseFontSize;
+		font-weight: bold;
 		margin: 0;
 	}
 

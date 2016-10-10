@@ -12,7 +12,19 @@
 }
 
 .contact-logo-wrapper{
+	.displayflex();
+	.justify-content(flex-end);
+	.align-items(center);
 	width: 100%/3;
+	padding:@spacing*2;
+
+	img{
+		width: @spacing*7;
+	}
+
+	@media @bp-TabletS{
+		display: none;
+	}
 }
 
 .contact-info-wrapper{

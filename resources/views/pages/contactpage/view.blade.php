@@ -2,7 +2,7 @@
 
 <div class="contact-wrapper">
 	<div class="contact-logo-wrapper">
-
+		 <img src="{{ asset('img/logosingle.svg') }}" alt="Logo {{ $globals->title }}">
 	</div>
 
 	<section class="contact-info-wrapper">

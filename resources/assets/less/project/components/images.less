@@ -1,4 +1,30 @@
 // Default image styling
+.image-wrapper{
+	position: relative;
+	margin-bottom: @spacing;
+
+
+	&.image-1-4{
+		padding-top:25%;
+		overflow: hidden;
+	}
+
+
+	&.image-1-5{
+		padding-top:calc(100%/5);
+		overflow: hidden;
+
+		@media @bp-MobileM{
+			padding-top:calc(100%/3);
+		}
+	}
+
+	img{
+		.center;
+		width: 100%;
+	}
+}
+
 .image-caption {
 	font-size: @smallFontSize;
 }
