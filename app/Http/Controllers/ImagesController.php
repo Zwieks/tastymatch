@@ -2,24 +2,22 @@
 
 namespace App\Http\Controllers;
 
-use App\Blog;
+use App\Images;
 
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 
-class BlogController extends Controller
+class ImagesController extends Controller
 {
-    /**
+   /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $posts = Blog::with('Author','images')-> orderBy('id', 'DESC')->paginate(10);
-
-        return view('auth.blog')->with('blog',$posts);
+    	//
     }
 
     /**

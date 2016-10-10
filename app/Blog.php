@@ -16,4 +16,9 @@ class Blog extends Model {
 
     	return $this->belongsTo('App\User');
 	}
+
+	public function Images(){
+
+    	return $this->hasMany('App\Images');
+	}
 }
