@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
 
 <div class="blog-wrapper">
-asdf
+{{$blog}}
 </div>
