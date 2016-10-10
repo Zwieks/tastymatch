@@ -1,0 +1,2 @@
+<!-- {{$debugpath}} -->
+test

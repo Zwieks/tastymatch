@@ -10,11 +10,9 @@
 {{-- Metadata content --}}
 @section('description', Lang::get('aboutpage.description'))
 
-{{-- Hero image content --}}
+{{-- Include Hero Image --}}
 @section('heroimagetitle', Lang::get('hero.page-about-title'))
 @section('heroimagetext', Lang::get('hero.page-about-text'))
-
-{{-- Include Hero Image --}}
 @section('heroimage')
     @include('heroimage.about')
 @stop
