@@ -17,6 +17,7 @@ class BlogController extends Controller
      */
     public function index()
     {
+
         $posts = Blog::with('Author','images')-> orderBy('id', 'DESC')->paginate(10);
 
         return view('auth.blog')->with('blog',$posts);
@@ -29,6 +30,14 @@ class BlogController extends Controller
      */
     public function single($slug)
     {
+        // We will just be quick here and fetch the post
+        // using the Post model.
+        $post = Blog::find($id);
+
+        // Next, we will fire off an event and pass along
+        // the post as its payload
+        Blog::fire('posts.view', $post);
+
         $posts = Blog::with('Author','images')->where('slug', '=', $slug)->first();
 
         return view('auth.blogdetail')->with('blog',$posts);
