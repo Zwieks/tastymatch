@@ -2,22 +2,25 @@
 
 namespace App\Events;
 
+use App\Blog;
 use App\Events\Event;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class SomeEvent extends Event
+class ViewCounter extends Event
 {
     use SerializesModels;
 
+    public $post;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Blog $post)
     {
-        //
+        //Add the $post results as object views to the existing object
+        $this->views = $post;
     }
 
     /**

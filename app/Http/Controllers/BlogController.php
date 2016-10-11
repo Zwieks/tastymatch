@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use Event;
+
+use App\Events\ViewCounter;
+
 use App\Blog;
 
 use Illuminate\Http\Request;
@@ -28,15 +32,22 @@ class BlogController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function single($slug)
+    public function single(Request $request, $slug)
     {
-        // We will just be quick here and fetch the post
-        // using the Post model.
-        $post = Blog::find($id);
+        //Check if the blog is already been viewed by the user
+        if (!$request->session()->has('viewed.blog'.$slug)) {
 
-        // Next, we will fire off an event and pass along
-        // the post as its payload
-        Blog::fire('posts.view', $post);
+            //Set the Session
+            $request->session()->put('viewed.blog'.$slug, true);
+
+            // We will just be quick here and fetch the post
+            // using the Post model.
+            $post = Blog::where('slug', $slug)->first();
+
+            // Next, we will fire off an event and pass along
+            // the post as its payload
+            Event::fire(new ViewCounter($post));
+        }
 
         $posts = Blog::with('Author','images')->where('slug', '=', $slug)->first();
 
