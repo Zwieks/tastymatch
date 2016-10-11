@@ -1,7 +1,5 @@
 <?php
-
 namespace App;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Blog extends Model {
@@ -13,12 +11,10 @@ class Blog extends Model {
 	public $timestamps = true;
 
 	public function Author(){
-
     	return $this->belongsTo('App\User');
 	}
 
 	public function Images(){
-
     	return $this->hasMany('App\Images');
 	}
 }
