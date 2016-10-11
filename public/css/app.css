@@ -2815,6 +2815,10 @@ html .cookie-explanation button.request-cookies:before,
   position: relative;
   margin-bottom: 2.4rem;
 }
+.image-wrapper.image-2-3 {
+  padding-top: calc(66.66666667%);
+  overflow: hidden;
+}
 .image-wrapper.image-1-4 {
   padding-top: 25%;
   overflow: hidden;
@@ -3427,6 +3431,34 @@ form ol {
 }
 .contact-items dd {
   margin-left: 0px;
+}
+.blog-preview .blog-item-link {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+}
+.blog-preview .blog-preview-title {
+  margin-bottom: 0;
+}
+.blog-preview .image-wrapper {
+  min-width: 33.33333333%;
+  margin: 0 2.4rem 2.4rem 0;
+}
+.blog-preview .image-wrapper.image-2-3 {
+  padding-top: 20%;
+  overflow: hidden;
+}
+.blog-preview .readmore {
+  margin-bottom: 0;
+}
+.blog-preview h3 {
+  margin-bottom: 0;
+  color: #E3262E;
+}
+.blog-preview p {
+  color: #464447;
+  margin-bottom: 1.2rem;
 }
 .page-hero-image {
   background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);

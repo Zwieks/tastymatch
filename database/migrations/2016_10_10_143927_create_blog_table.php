@@ -17,7 +17,9 @@ class CreateBlogTable extends Migration
             $table->integer('language_id');
             $table->string('title');
             $table->text('content');
+            $table->integer('views');
             $table->integer('author_id');
+            $table->string('slug');
             $table->timestamps();
         });
     }

@@ -23,6 +23,19 @@ class BlogController extends Controller
     }
 
     /**
+     * Shows a single post.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function single($slug)
+    {
+        $posts = Blog::with('Author','images')->where('slug', '=', $slug)->first();
+
+        return view('auth.blogdetail')->with('blog',$posts);
+    }
+
+
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response

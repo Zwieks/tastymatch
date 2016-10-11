@@ -57,5 +57,6 @@ Route::get('/getRequestKvkDetails', 'ApiController@showDetails');
 
 // Blog
 Route::get('blog', array('as' => 'index', 'uses' => 'BlogController@Index'));
+Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@Single']) -> where('slug', '[\w\d\-\_]+');
 Route::get('blog/admin', array('as' => 'admin_area', 'uses' => 'BlogController@Admin'));
 Route::post('blog/add', array('as' => 'add_new_post', 'uses' => 'BlogController@Update'));
