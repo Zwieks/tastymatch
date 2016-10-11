@@ -1,5 +1,4 @@
 <!-- {{$debugpath}} -->
-
 <div class="blog-wrapper">
 	
 	@foreach($blog as $post)
