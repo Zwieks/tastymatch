@@ -51,6 +51,9 @@ class BlogController extends Controller
 
         $posts = Blog::with('Author','images','comments')->where('slug', '=', $slug)->first();
 
+        //Chop up the content text
+        $posts->content = explode("<br><br>", $posts->content);
+
         return view('auth.blogdetail')->with('blog',$posts);
     }
 

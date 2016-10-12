@@ -1,5 +1,4 @@
 <!-- {{$debugpath}} -->
-
 <div class="blog-wrapper">
     <article>
         <figure class="image-wrapper image-2-3">
@@ -9,7 +8,7 @@
         <div class="text">
             <h2>{{$blog->title}}</h2>
             <p><small>{{ Lang::get('blogpage.meta-postedby') }} <b>{{$blog->Author->name}}</b> {{ Lang::get('blogpage.meta-time') }} <b>{{date('F d, Y', strtotime($blog->created_at))}}</b></small></p>
-            <p>{{$blog->content}}</p>
+            <p>{{$blog->content[0]}}</p>
         </div>
     </article>
 
