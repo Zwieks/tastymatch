@@ -3437,6 +3437,11 @@ form ol {
   display: -ms-flexbox;
   display: -ms-flex;
   display: flex;
+  color: #333;
+}
+.blog-preview .blog-item-link:hover .blog-preview-title,
+.blog-preview .blog-item-link:focus .blog-preview-title {
+  color: #E3262E;
 }
 .blog-preview .blog-preview-title {
   margin-bottom: 0;
@@ -3469,6 +3474,10 @@ form ol {
   display: -ms-flex;
   display: flex;
   color: #333;
+}
+.most-populair-blogs-item .blog-item-link:hover .most-populair-blogs-title,
+.most-populair-blogs-item .blog-item-link:focus .most-populair-blogs-title {
+  color: #E3262E;
 }
 .most-populair-blogs-item .image-wrapper {
   min-width: 20%;

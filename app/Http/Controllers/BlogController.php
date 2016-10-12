@@ -49,7 +49,7 @@ class BlogController extends Controller
             Event::fire(new ViewCounter($post));
         }
 
-        $posts = Blog::with('Author','images')->where('slug', '=', $slug)->first();
+        $posts = Blog::with('Author','images','comments')->where('slug', '=', $slug)->first();
 
         return view('auth.blogdetail')->with('blog',$posts);
     }

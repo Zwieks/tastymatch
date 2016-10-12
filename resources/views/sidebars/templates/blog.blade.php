@@ -12,7 +12,7 @@
 	                </figure>
 	                <div class="text">
 						<h3 class="most-populair-blogs-title">{{$post->title}}</h3>
-						<p class="date"><small>{{ Lang::get('blogpage.meta-postedby') }} <b>{{$post->Author->name}}</b> {{ Lang::get('blogpage.meta-time') }} <b>{{$post->created_at}}</b></small></p>
+						<p class="date"><small>{{ Lang::get('blogpage.meta-postedby') }} <b>{{$post->Author->name}}</b> {{ Lang::get('blogpage.meta-time') }} <b>{{date('F d, Y', strtotime($post->created_at))}}</b></small></p>
 	                </div>
                 </a>
 			</li>

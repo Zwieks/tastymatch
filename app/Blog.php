@@ -17,4 +17,8 @@ class Blog extends Model {
 	public function Images(){
     	return $this->hasMany('App\Images');
 	}
+
+	public function Comments(){
+		return $this->hasMany('App\Comments');
+	}
 }
