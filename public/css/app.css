@@ -2823,6 +2823,10 @@ html .cookie-explanation button.request-cookies:before,
   padding-top: 25%;
   overflow: hidden;
 }
+.image-wrapper.image-1-2 {
+  padding-top: 50%;
+  overflow: hidden;
+}
 .image-wrapper.image-1-5 {
   padding-top: calc(20%);
   overflow: hidden;
@@ -3502,6 +3506,15 @@ form ol {
 }
 .most-populair-blogs-item .date {
   margin-bottom: 0;
+}
+.single-blog-wrapper .single-blog-title {
+  margin-bottom: 1.2rem;
+}
+.single-blog-wrapper .image-wrapper {
+  margin: 0 9.6rem 2.4rem;
+}
+.single-blog-wrapper .image-wrapper.image-1-2 {
+  padding-top: 30%;
 }
 .page-hero-image {
   background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
