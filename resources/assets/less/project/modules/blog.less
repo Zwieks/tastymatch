@@ -44,13 +44,29 @@
 	}
 
 	.image-wrapper {
-		min-width: 100%/3;
-		margin: 0 @spacing @spacing 0;
+		min-width: 100%/5;
+		margin:0 @spacing/2 @spacing/2 0;
 
 		&.image-2-3{
 			padding-top:20%;
 			overflow: hidden;
 		}
+
+		img{
+			.centerX;
+			top: 0;
+			width: auto;
+			height: 100%;
+			max-width: none;
+		}
+	}
+
+	.most-populair-blogs-title{
+		margin-bottom:@spacing/4;
+	}
+
+	.date{
+		margin-bottom:0;
 	}
 }
 // END: Blog overview blocks

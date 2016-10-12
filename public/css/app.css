@@ -3471,12 +3471,27 @@ form ol {
   color: #333;
 }
 .most-populair-blogs-item .image-wrapper {
-  min-width: 33.33333333%;
-  margin: 0 2.4rem 2.4rem 0;
+  min-width: 20%;
+  margin: 0 1.2rem 1.2rem 0;
 }
 .most-populair-blogs-item .image-wrapper.image-2-3 {
   padding-top: 20%;
   overflow: hidden;
+}
+.most-populair-blogs-item .image-wrapper img {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: auto;
+  height: 100%;
+  max-width: none;
+}
+.most-populair-blogs-item .most-populair-blogs-title {
+  margin-bottom: 0.6rem;
+}
+.most-populair-blogs-item .date {
+  margin-bottom: 0;
 }
 .page-hero-image {
   background-image: -o-linear-gradient(90deg, rgba(0, 0, 0, 0.7), transparent);
