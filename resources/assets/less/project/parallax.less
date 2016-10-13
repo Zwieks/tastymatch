@@ -1,0 +1,56 @@
+@media all and (min-width: 1281px) {
+	.inviewelement {
+		.transition(0.5s);
+		opacity: 0;
+
+		&.inview {
+			opacity: 1;
+		}
+
+		&.slideintop {
+			.translateY(100px);
+
+			&.inview {
+				.translateY(0px);
+			}
+		}
+
+		&.slideinleft {
+			.translateX(-100px);
+
+			&.inview {
+				.translateX(0px);
+			}
+		}
+
+		&.slideinright {
+			.translateX(100px);
+
+			&.inview {
+				.translateX(0px);
+			}
+		}
+	}
+
+	/* Uitzonderingen */
+	.newsitem:nth-child(even),
+	.product:nth-child(even) {
+		.inviewelement {
+			&.slideinleft {
+				.translateX(100px);
+
+				&.inview {
+					.translateX(0px);
+				}
+			}
+
+			&.slideinright {
+				.translateX(-100px);
+
+				&.inview {
+					.translateX(0px);
+				}
+			}
+		}
+	}
+}
