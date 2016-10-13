@@ -31,26 +31,4 @@
 			}
 		}
 	}
-
-	/* Uitzonderingen */
-	.newsitem:nth-child(even),
-	.product:nth-child(even) {
-		.inviewelement {
-			&.slideinleft {
-				.translateX(100px);
-
-				&.inview {
-					.translateX(0px);
-				}
-			}
-
-			&.slideinright {
-				.translateX(-100px);
-
-				&.inview {
-					.translateX(0px);
-				}
-			}
-		}
-	}
 }
