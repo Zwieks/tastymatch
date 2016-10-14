@@ -18,4 +18,9 @@ class UserController extends Controller
 
         return view('pages.homepage.home', ['users' => $users]);
     }
+
+    public function roles()
+    {
+        return $this->belongsToMany('App\Role');
+    }
 }

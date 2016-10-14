@@ -2852,6 +2852,18 @@ html .cookie-explanation button.request-cookies:before,
 .comp-imageuitlijning.align-rechts {
   width: 33.33333333%;
 }
+figcaption {
+  margin: 0;
+  display: inline-block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  padding: 0.8rem;
+  background: #fff;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-right: 1.2rem;
+}
 .comp-quote p,
 .comp-alinea blockquote p {
   color: #464447;
@@ -3460,23 +3472,6 @@ form ol {
     transform: translateX(100px);
   }
   .inviewelement.slideinright.inview {
-    transform: translateX(0px);
-  }
-  /* Uitzonderingen */
-  .newsitem:nth-child(even) .inviewelement.slideinleft,
-  .product:nth-child(even) .inviewelement.slideinleft {
-    transform: translateX(100px);
-  }
-  .newsitem:nth-child(even) .inviewelement.slideinleft.inview,
-  .product:nth-child(even) .inviewelement.slideinleft.inview {
-    transform: translateX(0px);
-  }
-  .newsitem:nth-child(even) .inviewelement.slideinright,
-  .product:nth-child(even) .inviewelement.slideinright {
-    transform: translateX(-100px);
-  }
-  .newsitem:nth-child(even) .inviewelement.slideinright.inview,
-  .product:nth-child(even) .inviewelement.slideinright.inview {
     transform: translateX(0px);
   }
 }

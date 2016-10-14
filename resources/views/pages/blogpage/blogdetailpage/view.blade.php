@@ -13,6 +13,9 @@
         @if(isset($blog->images[0]))
             <figure class="image-wrapper image-1-2">
                 <img class="image" src="{{ asset('img/blog/'.$blog->images[0]->file)}}" alt="Logo {{ $globals->title }}">
+                @if(isset($blog->images[0]->caption))
+                    <figcaption>{{$blog->images[0]->caption}}</figcaption>
+                @endif
             </figure>
         @endif
 
@@ -25,9 +28,14 @@
         @if(isset($blog->images[1]))
             <figure class="image-wrapper image-1-2">
                 <img class="image" src="{{ asset('img/blog/'.$blog->images[0]->file)}}" alt="Logo {{ $globals->title }}">
+                @if(isset($blog->images[1]->caption))
+                    <figcaption>{{$blog->images[1]->caption}}</figcaption>
+                @endif
             </figure>
         @endif
     </article>
+
+    {{$blog->Author->password}}
 
     @if(isset($blog->comments[0]))
         <div class="comments-wrapper">
