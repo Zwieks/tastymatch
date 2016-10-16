@@ -16,7 +16,7 @@ class UserController extends Controller
     {
         $users = DB::select('select * from users where id = ?', [1]);
 
-        return view('pages.homepage.home', ['users' => $users]);
+        return view('auth.home', ['users' => $users]);
     }
 
     public function roles()

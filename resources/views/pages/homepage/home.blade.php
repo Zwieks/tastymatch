@@ -1,20 +1,54 @@
-<!-- {{$debugpath}} -->
-@extends('layouts.master')
-@section('type', 'homepage')
-@section('title', Lang::get('basicpage.title'))
-@section('description', Lang::get('basicpage.description'))
-
-@section('menu-item-name', 'home')
-@section('content')	
-
-@if(Auth::check())
-	@include('pages.homepage.entertainer-home')
-@else
+<div class="home-wrapper">
 	<p>NOT loggedin</p>
-@endif
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>	
 
-@stop
+	<section class='component parallax-wrapper inviewelement slideinleft'>
+		<p>element1</p>
+	</section>	
 
-@section('script')
+	<section class='component parallax-wrapper inviewelement slideinright'>
+		<p>element1</p>
+	</section>	
 
-@stop
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>			
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideinleft'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideinright'>
+		<p>element1</p>
+	</section>	
+
+	<section class='component parallax-wrapper inviewelement slideintop'>
+		<p>element1</p>
+
+		<div  style="background:green; min-height:19rem;" class="parallax-wrapper inviewelement slideintop">
+
+		</div>	
+	</section>			
+</div>	

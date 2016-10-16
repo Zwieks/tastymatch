@@ -3448,7 +3448,7 @@ form ol {
 .contact-items dd {
   margin-left: 0px;
 }
-@media all and (min-width: 1281px) {
+@media all and (min-width: 481px) {
   .inviewelement {
     transition: 0.5s;
     opacity: 0;
@@ -3474,6 +3474,12 @@ form ol {
   .inviewelement.slideinright.inview {
     transform: translateX(0px);
   }
+}
+.parallax-wrapper {
+  display: block;
+  min-height: 30rem;
+  margin-bottom: 2.4rem;
+  background: #E3262E;
 }
 @media screen and (max-width: 896px) {
   .blog-wrapper {

@@ -16,9 +16,10 @@ jQuery(document).ready(function($) {
 	inviewelements = $(".inviewelement");
 
 	function inviewinit () {
-		console.log('test');
 		inviewelements.each(function(){
+					console.log('test');
 			if ($(this).inView() && !$(this).hasClass('inview')) {
+						console.log('ja');
 				$(this).addClass('inview');
 			}
 		});
