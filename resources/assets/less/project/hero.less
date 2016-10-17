@@ -145,6 +145,11 @@
 	position: relative;
 	margin-top: @spacing;
 
+	@media @bp-MobileM{
+		.flex-direction(column);
+		width: calc(100% ~'-' @spacing);
+	}
+
 	a{
 		margin-bottom:0;
 
@@ -156,6 +161,15 @@
 			&:hover,
 			&:focus{
 				color:@white;
+			}
+		}
+
+		@media @bp-MobileM{
+			width: 100%;
+
+			&:first-child{
+				margin-right:0;
+				margin-bottom:@spacing;
 			}
 		}
 	}

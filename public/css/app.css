@@ -3809,17 +3809,34 @@ form ol {
   position: relative;
   margin-top: 2.4rem;
 }
-.hero-button-wrapper button {
+@media screen and (max-width: 480px) {
+  .hero-button-wrapper {
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: calc(100% - 2.4rem);
+  }
+}
+.hero-button-wrapper a {
   margin-bottom: 0;
 }
-.hero-button-wrapper button:first-child {
+.hero-button-wrapper a:first-child {
   margin-right: 2.4rem;
   background: #E3262E;
   border-color: #E3262E;
 }
-.hero-button-wrapper button:first-child:hover,
-.hero-button-wrapper button:first-child:focus {
+.hero-button-wrapper a:first-child:hover,
+.hero-button-wrapper a:first-child:focus {
   color: #fff;
+}
+@media screen and (max-width: 480px) {
+  .hero-button-wrapper a {
+    width: 100%;
+  }
+  .hero-button-wrapper a:first-child {
+    margin-right: 0;
+    margin-bottom: 2.4rem;
+  }
 }
 .component-home .page-content {
   margin-top: 0;
@@ -3829,6 +3846,22 @@ form ol {
 }
 .component-home .page-hero-image img {
   top: 33.33333333%;
+}
+@media screen and (max-width: 640px) {
+  .component-home .page-hero-image {
+    padding-top: 50%;
+  }
+  .component-home .page-hero-image img {
+    top: 50%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .component-home .page-hero-image {
+    padding-top: 100%;
+  }
+  .component-home .page-hero-image img {
+    top: 100%;
+  }
 }
 
 /*# sourceMappingURL=app.css.map */
