@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
 <div class="hero-button-wrapper">
-    <button class="btn ghost-btn">@yield('heroimagebuttonregister')</button>
-    <button class="btn ghost-btn">@yield('heroimagebuttonlogin')</button>
+    <a href="{{ Lang::get('menus.register-url') }}" class="btn ghost-btn">@yield('heroimagebuttonregister')</a>
+    <a href="{{ Lang::get('menus.login-url') }}" class="btn ghost-btn">@yield('heroimagebuttonlogin')</a>
 </div>
