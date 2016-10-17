@@ -62,15 +62,6 @@
 	}
 
 	.site-info-wrapper{
-		.displayflex;
-		.flex-direction(column);
-		.align-items(center);
-		.justify-content(center);
-
-		width: 100%;
-		position: absolute;
-		bottom:0;
-		top:0;
 		color:@white;
 		text-align: center;
 
@@ -108,6 +99,7 @@
 
 		.site-info-text{
 			font-size:@mediumHeadingSize;
+			margin-bottom:0;
 
 			@media @bp-TabletL{
 				font-size: @mediumSmallHeadingSize;
@@ -125,10 +117,46 @@
 	}
 }
 
+.hero-content-wrapper{
+	.displayflex();
+	.align-items(center);
+	.justify-content(center);
+	.flex-direction(column);
+
+	position: absolute;
+	bottom: 0;
+	top: 0;
+	width: 100%;
+}
+
 .image-overlay{
 	background-color: @primColor;
 
 	img{
 		opacity: 0.2;
+	}
+}
+
+.hero-button-wrapper{
+	.displayflex();
+	.justify-content(center);
+	.align-items(center);
+
+	position: relative;
+	margin-top: @spacing;
+
+	button{
+		margin-bottom:0;
+
+		&:first-child{
+			margin-right:@spacing;
+			background: @primColor;
+			border-color:@primColor;
+
+			&:hover,
+			&:focus{
+				color:@white;
+			}
+		}
 	}
 }

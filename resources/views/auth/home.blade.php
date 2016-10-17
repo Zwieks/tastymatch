@@ -11,6 +11,10 @@
 @section('description', 'Homepage')
 
 {{-- Metadata heroimage --}}
+@section('heroimagetitle', Lang::get('hero.page-home-title'))
+@section('heroimagetext', Lang::get('hero.page-home-text'))
+@section('heroimagebuttonregister', Lang::get('hero.page-home-button-register'))
+@section('heroimagebuttonlogin', Lang::get('hero.page-home-button-login'))
 @section('heroimage')
     @include('heroimage.home')
 @stop

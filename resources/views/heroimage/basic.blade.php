@@ -16,8 +16,13 @@
         <img src="{{ $path }}" alt="{{ $alt }}">
     </picture>
 
-    @hasSection('heroalinea')
-        @yield('heroalinea')
-    @endif
+    <div class="hero-content-wrapper">
+        @hasSection('heroalinea')
+            @yield('heroalinea')
+        @endif
 
+        @hasSection('herobuttons')
+            @yield('herobuttons')
+        @endif
+    </div>
 </div>

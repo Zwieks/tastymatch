@@ -7,3 +7,7 @@
 @section('heroalinea')
    @include('heroimage.herotext')
 @stop
+
+@section('herobuttons')
+   @include('heroimage.herobuttons')
+@stop

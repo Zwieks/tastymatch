@@ -5,10 +5,6 @@
 	@endif
 
 	<article class="inner">
-		@if ($type != 'homepage')
-			<!-- {render style='breadcrumb'} -->
-		@endif
-
 		<div class="page-content page-overview">
 			@hasSection('content')
 				<div class="page-middle">
