@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use DB;
 
 class User extends Authenticatable
 {
@@ -12,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'lastname', 'gender', 'birthday', 'tradename', 'streetnumber', 'zip', 'city', 'type'
+        'name', 'email', 'password', 'lastname', 'gender', 'birthday', 'tradename', 'streetnumber', 'zip', 'city', 'type', 'role_id'
     ];
 
     /**
@@ -23,4 +24,16 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function roles()
+    {
+        return $this->hasOne('App\Role');
+    }
+
+    public static function GetUserInfo() {
+        $users = DB::table('users')->first();
+
+        return $users;
+    }
+
 }

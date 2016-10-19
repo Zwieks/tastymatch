@@ -1,4 +1,5 @@
 <div class="home-wrapper">
+
 	<p>NOT loggedin</p>
 	<section class='component parallax-wrapper inviewelement slideintop'>
 		<p>element1</p>

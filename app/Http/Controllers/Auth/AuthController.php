@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Auth;
 use Socialite;
 use Validator;
 use App\User;
+use App\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -113,6 +114,9 @@ class AuthController extends Controller
         //check KVK inputs
         $data = $this->checkkvk($data);
 
+        //Set role id
+        $data['role_id'] = 1;
+
         return User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
@@ -125,6 +129,7 @@ class AuthController extends Controller
             'zip' => $data['zip'],
             'city' => $data['city'],
             'type' => $data['type'],
+            'role_id' => 1,
         ]);
     }
 

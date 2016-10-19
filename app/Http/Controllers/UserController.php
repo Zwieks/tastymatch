@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use DB;
 use App\Http\Controllers\Controller;
+use App\User;
 
 class UserController extends Controller
 {
@@ -17,10 +18,8 @@ class UserController extends Controller
         $users = DB::select('select * from users where id = ?', [1]);
 
         return view('auth.home', ['users' => $users]);
-    }
 
-    public function roles()
-    {
-        return $this->belongsToMany('App\Role');
+        //$users = User::with('roles')->get();
+        //return view('auth.home')->with('users',$users);
     }
 }

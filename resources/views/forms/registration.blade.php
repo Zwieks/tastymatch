@@ -177,7 +177,7 @@
             <li class="{{ $errors->has('confirm') ? ' has-error' : '' }}">
                 <ul class="multiple-wrapper">
                     <li class="form-input-checkbox">
-                        <input class="checkbox" type="checkbox" value="{{ old('confirm') }}" name="confirm" id="confirmation">
+                        <input class="checkbox" type="checkbox" value="1" name="confirm" id="confirmation">
                         <label for="confirmation">{{ Lang::get('forms.confirmation') }} <a href="{{ Lang::get('menus.provision-url') }}">{{ Lang::get('menus.provision') }}</a></label>
                     </li>
                 </ul>
