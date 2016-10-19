@@ -13,12 +13,12 @@
                 <label class="multiple-title">{{ Lang::get('forms.registertype') }}</label>
                 <ul class="multiple-wrapper">
                     <li class="form-input-radio">
-                        <input class="radio typechange" type="radio" value="consumer" name="type" id="typeconsumer" checked="checked" {{ old('type')=="consumer" ? 'checked='.'"'.'checked'.'"' : '' }}>
+                        <input class="radio typechange" type="radio" value=1 name="type" id="typeconsumer" checked="checked" {{ old('type')==1 ? 'checked='.'"'.'checked'.'"' : '' }}>
                         <label for="typeconsumer">{{ Lang::get('forms.consumer') }}</label>
                     </li>
 
                     <li class="form-input-radio">
-                        <input class="radio typechange" type="radio" value="commercial" name="type" id="typecommercial" {{ old('type')=="commercial" ? 'checked='.'"'.'checked'.'"' : '' }}>
+                        <input class="radio typechange" type="radio" value=2 name="type" id="typecommercial" {{ old('type')==2 ? 'checked='.'"'.'checked'.'"' : '' }}>
                         <label for="typecommercial">{{ Lang::get('forms.commercial') }}</label>
                     </li>
                 </ul>

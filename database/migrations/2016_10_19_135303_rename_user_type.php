@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddUserType extends Migration
+class RenameUserType extends Migration
 {
     /**
      * Run the migrations.
@@ -12,9 +12,9 @@ class AddUserType extends Migration
      */
     public function up()
     {
-        Schema::table('users', function(Blueprint $table)
+        Schema::table('users', function( $table)
         {
-            $table->integer('type_id');
+            $table->renameColumn('type', 'type_id');
         });
     }
 
@@ -27,7 +27,7 @@ class AddUserType extends Migration
     {
         Schema::table('users', function(Blueprint $table)
         {
-            $table->dropColumn('type');
+            $table->dropColumn('role');
         });
     }
 }

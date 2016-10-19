@@ -6,7 +6,8 @@ namespace App\Http\Controllers\Auth;
 use Socialite;
 use Validator;
 use App\User;
-use App\Role;
+use App\Type_User;
+use App\Role_User;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -67,7 +68,7 @@ class AuthController extends Controller
             'zip' => 'max:10',
             'city' => 'max:100',
             'confirm' => 'required|filled',
-            'type' => 'required|max:25',
+            'type' => 'required|numeric',
         ]);
     }
 
@@ -117,7 +118,8 @@ class AuthController extends Controller
         //Set role id
         $data['role_id'] = 1;
 
-        return User::create([
+        //Insert new user in DB
+         $user = User::create([
             'name' => $data['name'],
             'lastname' => $data['lastname'],
             'gender' => $data['gender'],
@@ -128,9 +130,27 @@ class AuthController extends Controller
             'streetnumber' => $data['streetnumber'],
             'zip' => $data['zip'],
             'city' => $data['city'],
-            'type' => $data['type'],
+        ]);
+
+        //Get current user id
+        $id = $user->id;
+
+        //Get current user type
+        $type = $data['type'];
+
+        //Insert new user in role_user table
+        Role_User::create([
+            'user_id' =>  $id,
             'role_id' => 1,
         ]);
+
+        //Insert new user in type_user table
+        Type_User::create([
+            'user_id' =>  $id,
+            'type_id' => $type,
+        ]);
+
+        return $user;
     }
 
 
