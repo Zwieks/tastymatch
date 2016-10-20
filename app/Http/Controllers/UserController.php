@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use Auth;
 
 class UserController extends Controller
 {
@@ -15,11 +16,10 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = DB::select('select * from users where id = ?', [1]);
+        //$users = DB::select('select * from users where id = ?', [1]);
+        //return view('auth.home', ['users' => $users]);
 
-        return view('auth.home', ['users' => $users]);
-
-        //$users = User::with('roles')->get();
-        //return view('auth.home')->with('users',$users);
+        $users = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();;
+        return view('auth.home')->with('users',$users);
     }
 }
