@@ -16,10 +16,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //$users = DB::select('select * from users where id = ?', [1]);
-        //return view('auth.home', ['users' => $users]);
-
-        $users = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();;
-        return view('auth.home')->with('users',$users);
+        //Check if the user is logged in
+        if(Auth::user() == true){
+            $user = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();
+            return view('auth.home')->with('user',$user);
+        }    
+        else{
+            return view('auth.home');
+        }    
     }
 }

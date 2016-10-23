@@ -1,6 +1,6 @@
 @if(Auth::check())
 	@include('pages.homepage.entertainer-home')
-	{{$users}}
+	{{$user}}
 @else
 	@include('pages.homepage.home')
 @endif
