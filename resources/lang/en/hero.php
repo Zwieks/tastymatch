@@ -14,4 +14,5 @@ return [
 	'page-home-text'            => 'Online platform for events and entertainers',
 	'page-home-button-register' => 'Join Us',
 	'page-home-button-login'    => 'Log-in',
+	'page-home-search'			=> 'Zoeken',
 ];

@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'search' => 'Zoeken',
 	'email' => 'E-Mail',
     'password' => 'Wachtwoord ',
     'forgotpw' => 'Wachtwoord vergeten?',
@@ -28,11 +29,13 @@ return [
 	'genderfemale' => 'Vrouw',
 	'gendermale' => 'Man',
 	'legendregister' => 'Registreer je vandaag!',
+    'legendsearch' => 'Begin met zoeken!',
 	'headercontact' => 'Contactpersoon',
 	'headerlogin' => 'Login gegevens',
 	'commercialdetails' => 'Zakelijke gegevens',
 	'headerbusinessdetails' => 'Bedrijfsgegevens',
 	'headerregistrationtype' => 'Wil je een zakelijk of prive account?',
+    'headersearch' => 'Begin met zoeken',    
     'chamberofcommerce' => 'KVK',
     'valueaddedtax' => 'BTW',
     'iban' => 'IBAN',

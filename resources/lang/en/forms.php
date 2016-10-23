@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'search' => 'Search',
 	'email' => 'E-Mail',
     'password' => 'Password',
     'forgotpw' => 'Forgot your password?',
@@ -28,11 +29,13 @@ return [
 	'genderfemale' => 'Female',
 	'gendermale' => 'Male',
 	'legendregister' => 'Join our community today!',
+    'legendsearch' => 'Start searching!',
 	'headercontact' => 'Contact',
 	'headerlogin' => 'Login details',
 	'commercialdetails' => 'Business details',
 	'headerbusinessdetails' => 'Business details',
 	'headerregistrationtype' => 'Do you want a commercial or consumer account?',
+    'headersearch' => 'Start searching',  
     'chamberofcommerce' => 'CC',
     'valueaddedtax' => 'VAT',
     'iban' => 'IBAN',

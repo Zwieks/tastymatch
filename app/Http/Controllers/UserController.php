@@ -19,7 +19,7 @@ class UserController extends Controller
         //Check if the user is logged in
         if(Auth::user() == true){
             $user = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();
-            return view('auth.home')->with('user',$user);
+            return view('auth.home-loggedin')->with('user',$user);
         }    
         else{
             return view('auth.home');

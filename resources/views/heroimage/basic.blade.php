@@ -21,6 +21,10 @@
             @yield('heroalinea')
         @endif
 
+        @hasSection('herosearch')
+            @yield('herosearch')
+        @endif
+
         @hasSection('herobuttons')
             @yield('herobuttons')
         @endif

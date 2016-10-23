@@ -2,4 +2,5 @@
 
 return [
 	'register' => 'Free registration',
+	'search' => 'Search',
 ];

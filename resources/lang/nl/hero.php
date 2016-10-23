@@ -14,4 +14,5 @@ return [
 	'page-home-text'            => 'Het online platform voor evenementen en entertainers',
 	'page-home-button-register' => 'Inschrijven',
 	'page-home-button-login'    => 'Inloggen',
+	'page-home-search'			=> 'Zoeken',
 ];
