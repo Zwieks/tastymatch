@@ -2,6 +2,7 @@
 
 return [
     'search' => 'Zoeken',
+	'searchplaceholder' => 'Zoek foodstands, entertainers, en meer',
 	'email' => 'E-Mail',
     'password' => 'Wachtwoord ',
     'forgotpw' => 'Wachtwoord vergeten?',

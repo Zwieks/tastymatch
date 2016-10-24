@@ -1,15 +1,45 @@
 // Search form (in header.tpl)
+.search{
+    .displayflex;
+    .align-items(center);
+}
+
+.ajax-search-wrapper{
+    position: absolute;
+    top: 100%;
+    right:0;
+    width: 50%;
+}
+
+.ajax-search-item{
+    background: @white;
+    padding:@spacing/2;
+}
+
+#search-bar{
+    width: @spacing*13;
+}
+
 .page-searchbox {
     .displayflex;
+    .align-items(center);
+    .justify-content(center);
     margin-left: @spacing;
-    max-width: calc(320px ~'-' @spacing*2);
+    max-width: none;
+    border:1px solid @borderColor;
 
     // Search input field
     input {
+        border:none;
     }
 
     // Search submit button
     button {
+        background: transparent;
+
+        &:before{
+            color:@textColor;
+        }
     }
 }
 

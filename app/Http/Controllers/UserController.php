@@ -20,9 +20,9 @@ class UserController extends Controller
         if(Auth::user() == true){
             $user = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();
             return view('auth.home-loggedin')->with('user',$user);
-        }    
+        }
         else{
             return view('auth.home');
-        }    
+        }
     }
 }

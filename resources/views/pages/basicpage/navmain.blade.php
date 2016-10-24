@@ -2,28 +2,18 @@
 <nav class="page-mainmenu" id="js-mainmenu" itemscope itemtype="http://schema.org/SiteNavigationElement">
 	<h2 class="hide-from-layout nocontent">{{ Lang::get('basicpage.mainnavtitle') }}</h2>
 	<ul class="level-1">
-		<li class="home level-1-item {{(current_page('/')) ? 'active' : current_page()}}">
-			<a href="/" itemprop="url" data-icon="o">
-				<span itemprop="name">{{ Lang::get('menus.home') }}</span>
-			</a>
-			<meta itemprop="position" content="1">
-		</li>
-
-		<li class="level-1-item {{(current_page(Lang::get('menus.about-url'))) ? 'active' : current_page()}}">
-			<a href="{{ Lang::get('menus.about-url') }}" itemprop="url" data-icon="c">
-				<span itemprop="name">{{ Lang::get('menus.about') }}</span>
-			</a>
-			<meta itemprop="position" content="2">
-		</li>	
-
-		<li class="level-1-item {{(current_page(Lang::get('menus.contact'))) ? 'active' : current_page()}}">
-			<a href="{{ Lang::get('menus.contact-url') }}" itemprop="url" data-icon="e">
-				<span itemprop="name">{{ Lang::get('menus.contact') }}</span>
-			</a>
-			<meta itemprop="position" content="2">
-		</li>	
-
 		@if(Auth::check())
+			<li class="level1item search">
+				<form class="page-searchbox" id="js-page-searchbox" method="get" action="{{url('/search')}}" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+					{{ csrf_field() }}
+					<meta itemprop="target" content="">
+					<input  class="form-control" id="search-bar" type="search" name="q" value="{{ old('q') }}" placeholder="{{ Lang::get('forms.searchplaceholder') }}" itemprop="query-input">
+					<button id="js-search-trigger" type="submit" data-icon="y"></button>
+				</form>
+
+				<ul class="ajax-search-wrapper" id="js-ajax-search-results"></ul>
+			</li>
+
 	        <li class="level-1-item {{(current_page(Lang::get('menus.home'))) ? 'active' : current_page()}}">
 				<a href="{{ url('/logout') }}" itemprop="url" data-icon="m">
 					<span itemprop="name">{{ Lang::get('menus.logout') }}</span>
@@ -31,6 +21,27 @@
 				<meta itemprop="position" content="2">
 			</li>
 		@else
+			<li class="home level-1-item {{(current_page('/')) ? 'active' : current_page()}}">
+				<a href="/" itemprop="url" data-icon="o">
+					<span itemprop="name">{{ Lang::get('menus.home') }}</span>
+				</a>
+				<meta itemprop="position" content="1">
+			</li>
+
+			<li class="level-1-item {{(current_page(Lang::get('menus.about-url'))) ? 'active' : current_page()}}">
+				<a href="{{ Lang::get('menus.about-url') }}" itemprop="url" data-icon="c">
+					<span itemprop="name">{{ Lang::get('menus.about') }}</span>
+				</a>
+				<meta itemprop="position" content="2">
+			</li>
+
+			<li class="level-1-item {{(current_page(Lang::get('menus.contact'))) ? 'active' : current_page()}}">
+				<a href="{{ Lang::get('menus.contact-url') }}" itemprop="url" data-icon="e">
+					<span itemprop="name">{{ Lang::get('menus.contact') }}</span>
+				</a>
+				<meta itemprop="position" content="2">
+			</li>
+
 			<li class="level-1-item {{(current_page(Lang::get('menus.register'))) ? 'active' : current_page( Lang::get('menus.contact'))}}">
 				<a href="{{ Lang::get('menus.register-url') }}" itemprop="url" data-icon="a">
 					<span itemprop="name">{{ Lang::get('menus.register') }}</span>

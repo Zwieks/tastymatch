@@ -4,6 +4,6 @@
    {{--*/ $path = URL::asset('img/backgrounds/mainbg.png') /*--}}
 @stop
 
-@section('herosearch')
-   @include('forms.search')
-@stop
+{{--@section('herosearch')--}}
+   {{--@include('forms.search')--}}
+{{--@stop--}}

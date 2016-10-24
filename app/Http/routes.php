@@ -55,6 +55,9 @@ Route::get('/home', 'HomeController@index');
 // API
 Route::get('/getRequestKvkDetails', 'ApiController@showDetails');
 
+// AJAX
+Route::post('/ajax/search', 'AjaxController@getSearch');
+
 // Blog
 Route::get('blog', array('as' => 'index', 'uses' => 'BlogController@Index'));
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@Single']) -> where('slug', '[\w\d\-\_]+');

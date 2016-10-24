@@ -14,3 +14,4 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.acties.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.forms.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.parallax.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery.search.js') }}"></script>

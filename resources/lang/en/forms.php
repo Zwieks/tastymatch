@@ -2,6 +2,7 @@
 
 return [
     'search' => 'Search',
+	'searchplaceholder' => 'Search foodstands, entertainers, and more',
 	'email' => 'E-Mail',
     'password' => 'Password',
     'forgotpw' => 'Forgot your password?',

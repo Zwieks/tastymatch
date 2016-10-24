@@ -1364,16 +1364,16 @@ textarea {
   vertical-align: top;
 }
 ::-webkit-input-placeholder {
-  color: #464447;
+  color: #d8d8d8;
 }
 ::-moz-placeholder {
-  color: #464447;
+  color: #d8d8d8;
 }
 :-moz-placeholder {
-  color: #464447;
+  color: #d8d8d8;
 }
 :-ms-input-placeholder {
-  color: #464447;
+  color: #d8d8d8;
 }
 /* end default form elements */
 /* submit buttons */
@@ -3005,13 +3005,54 @@ figcaption {
     width: 100%;
   }
 }
+.search {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.ajax-search-wrapper {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 50%;
+}
+.ajax-search-item {
+  background: #fff;
+  padding: 1.2rem;
+}
+#search-bar {
+  width: 31.2rem;
+}
 .page-searchbox {
   display: -moz-flex;
   display: -ms-flexbox;
   display: -ms-flex;
   display: flex;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
   margin-left: 2.4rem;
-  max-width: calc(320px - 4.8rem);
+  max-width: none;
+  border: 1px solid #e5e5e5;
+}
+.page-searchbox input {
+  border: none;
+}
+.page-searchbox button {
+  background: transparent;
+}
+.page-searchbox button:before {
+  color: #333;
 }
 .search-result-url {
   color: #464447;
@@ -3276,7 +3317,7 @@ form ol {
   text-overflow: ellipsis;
   white-space: nowrap;
   width: auto;
-  color: #464447;
+  color: #d8d8d8;
   position: absolute;
   top: 0.6rem;
   left: 0;
