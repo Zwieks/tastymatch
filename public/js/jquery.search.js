@@ -20,7 +20,7 @@ function ajaxSearch($search_input) {
 		success: function (data) {
 			if(data.success == true) {
 				//Put the results in de container
-				$('#js-ajax-search-results').html(data.html);
+				$('#js-ajax-search-results .mCSB_container').html(data.html);
 			}
 		}
 	});

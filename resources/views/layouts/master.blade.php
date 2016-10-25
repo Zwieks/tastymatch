@@ -10,6 +10,7 @@
 
         <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" >
         <link rel="stylesheet" href="{{ URL::asset('css/fontstyle.css') }}" >
+        <link rel="stylesheet" href="{{ URL::asset('css/CustomScrollbar.css') }}" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>
         
         <title>@yield('title')</title>

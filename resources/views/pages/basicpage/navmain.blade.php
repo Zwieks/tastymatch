@@ -11,7 +11,7 @@
 					<button id="js-search-trigger" type="submit" data-icon="y"></button>
 				</form>
 
-				<ul class="ajax-search-wrapper" id="js-ajax-search-results"></ul>
+				<ul class="ajax-search-wrapper mCustomScrollbar" id="js-ajax-search-results"></ul>
 			</li>
 
 	        <li class="level-1-item {{(current_page(Lang::get('menus.home'))) ? 'active' : current_page()}}">

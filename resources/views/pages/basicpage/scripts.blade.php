@@ -15,3 +15,4 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.forms.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.parallax.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.search.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/jquery.CustomScrollbar.js') }}"></script>

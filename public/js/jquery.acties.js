@@ -10,7 +10,6 @@ var tiny_header_scroll_offset = 200,
 setHeader(tiny_header_scroll_offset, tiny_header_min_screen_width);
 
 jQuery(document).ready(function($){
-	// Custom project Javascript goes here
 
 });
 
@@ -19,6 +18,12 @@ jQuery(window).on('load', function(){
 	// Remove class when Javascript is loaded
 	jQuery('body').removeClass('preload');
 
+	// Load the Custom Scrollbars
+	if($('#js-ajax-search-results').length) {
+		$("#js-ajax-search-results").mCustomScrollbar({
+			theme:"light-3"
+		});
+	}
 
 	// Init Kirra and Google Analytics tracker
 	jQuery(window).analyticsTracker();
