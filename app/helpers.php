@@ -10,4 +10,19 @@
 
 		return strstr(request()->path(), strtolower($uri));
 	}
+
+	//Get the user county location based on IP
+	function getUserCountry()
+	{
+		//Get the user IP
+		$ip = $_SERVER['REMOTE_ADDR'];
+
+		//Get the user location object
+		$location = geoip()->getLocation($ip);
+
+		//Get only the country name
+		$county = $location->country;
+
+		return $county;
+	}
 ?>
