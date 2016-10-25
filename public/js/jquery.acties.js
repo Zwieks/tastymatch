@@ -16,10 +16,16 @@ jQuery(document).ready(function($){
 
 
 	$doc.on('click', function(e){
-		var $search_box = $('#js-page-searchbox, #js-ajax-search-results');
+		var $search_box = $('#js-page-searchbox, #js-ajax-search-results'),
+			$search_bar = $('#search-bar');
 		// Close when clicked outside search container
-		if( !$search_box.is(e.target) && $search_box.has(e.target).length === 0)
+		if( !$search_box.is(e.target) && $search_box.has(e.target).length === 0){
 			$('html').removeClass('open-search');
+		}
+		// Show search when there is a click on the searchbar
+		if( $search_bar.is(e.target)){
+			$('html').addClass('open-search');
+		}
 	}).on('keyup', function(e){
 		// Close with escape button
 		if(e.keyCode === 27)
