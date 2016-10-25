@@ -4,12 +4,7 @@
 	<ul class="level-1">
 		@if(Auth::check())
 			<li class="level1item search">
-				<form class="page-searchbox" id="js-page-searchbox" method="get" action="{{url('/search')}}" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
-					{{ csrf_field() }}
-					<meta itemprop="target" content="">
-					<input  class="form-control" id="search-bar" type="search" name="q" value="{{ old('q') }}" placeholder="{{ Lang::get('forms.searchplaceholder') }}" itemprop="query-input">
-					<button id="js-search-trigger" type="submit" data-icon="y"></button>
-				</form>
+				@include('forms.search')
 
 				<ul class="ajax-search-wrapper mCustomScrollbar" id="js-ajax-search-results"></ul>
 			</li>

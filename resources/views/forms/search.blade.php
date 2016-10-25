@@ -1,30 +1,7 @@
 <!-- {{$debugpath}} -->
-test
-<form name="general-search" class="formsearch webbeheer-formulier" role="form" method="POST" action="{{ url('/search') }}">
-    <fieldset>
-        <legend>{{ Lang::get('forms.legendsearch')  }}</legend>
-        <ul class="velden">
-            {{ csrf_field() }}
-
-            <li class="form-input-heading">
-                <h2>{{ Lang::get('forms.headersearch') }}</h2>
-            </li>
-
-            <li class="{{ $errors->has('search') ? ' has-error' : '' }}">
-                <label for="search" class="animating-label">{{ Lang::get('forms.search') }}</label>
-
-                <input id="search" type="text" class="form-control" name="search" value="{{ old('search') }}">
-
-                @if ($errors->has('search'))
-                    <span class="help-block">
-                        <strong>{{ $errors->first('search') }}</strong>
-                    </span>
-                @endif
-            </li>
-
-            <div class="buttons">
-                <button type="submit" class="btn">{{ Lang::get('buttons.search') }}</button>
-            </div>
-        </ul>    
-    </fieldset> 
+<form class="page-searchbox" id="js-page-searchbox" method="get" action="{{url('/search')}}" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+    <meta name="csrf-token" content="{{ csrf_token() }}" />
+    <meta itemprop="target" content=""/>
+    <input  class="form-control" id="search-bar" type="search" name="q" value="{{ old('q') }}" placeholder="{{ Lang::get('forms.searchplaceholder') }}" itemprop="query-input">
+    <button id="js-search-trigger" type="submit" data-icon="y"></button>
 </form>

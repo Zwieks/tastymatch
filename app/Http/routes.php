@@ -46,6 +46,11 @@ Route::get('/about', 'AboutController@index');
 // Dutch
 Route::get('/overons', 'AboutController@index');
 
+// Zoeken
+Route::get('/search', ['as' => 'index', 'uses' => 'SearchController@index']);
+// Dutch
+Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
+
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 Route::auth();
