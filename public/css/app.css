@@ -3016,11 +3016,14 @@ figcaption {
   align-items: center;
 }
 .ajax-search-wrapper {
+  transition: 0.15s ease-out;
+  opacity: 0;
+  visibility: hidden;
   position: absolute;
   top: 100%;
   right: 0;
   width: 50%;
-  height: 15vh;
+  max-height: 15vh;
   overflow-y: auto;
 }
 .ajax-search-wrapper ::-webkit-scrollbar {
@@ -3038,6 +3041,13 @@ figcaption {
   background: #282a2b;
   padding: 1.2rem;
   color: #fff;
+}
+.open-search .page-mainmenu {
+  overflow: hidden;
+}
+.open-search .ajax-search-wrapper {
+  opacity: 1;
+  visibility: visible;
 }
 #search-bar {
   width: 31.2rem;

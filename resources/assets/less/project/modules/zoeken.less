@@ -5,11 +5,14 @@
 }
 
 .ajax-search-wrapper{
+    .transition();
+    opacity: 0;
+    visibility: hidden;
     position: absolute;
     top: 100%;
     right:0;
     width: 50%;
-    height: 15vh;
+    max-height: 15vh;
     overflow-y: auto;
 
     ::-webkit-scrollbar {
@@ -31,6 +34,17 @@
     background: @darkGrey;
     padding:@spacing/2;
     color:@white;
+}
+
+.open-search {
+    .page-mainmenu {
+        overflow: hidden;
+    }
+
+    .ajax-search-wrapper{
+        opacity: 1;
+        visibility: visible;
+    }
 }
 
 #search-bar{

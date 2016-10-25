@@ -20,6 +20,7 @@ function ajaxSearch($search_input) {
 		success: function (data) {
 			if(data.success == true) {
 				//Put the results in de container
+				$('html').addClass('open-search');
 				$('#js-ajax-search-results .mCSB_container').html(data.html);
 			}
 		}
