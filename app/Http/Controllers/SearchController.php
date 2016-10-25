@@ -17,9 +17,6 @@ class SearchController extends Controller
      */
     public function index(Request $request)
     {
-        //Get the search string
-        $input = '';
-
         //Get user country
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 
