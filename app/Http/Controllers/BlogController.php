@@ -8,6 +8,8 @@ use App\Events\ViewCounter;
 
 use App\Blog;
 
+use App\Sessions;
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,7 +40,7 @@ class BlogController extends Controller
         if (!$request->session()->has('viewed.blog'.$slug)) {
 
             //Set the Session
-            $request->session()->put('viewed.blog'.$slug, true);
+            Sessions::setSingleBlogSession($request, $slug);
 
             // We will just be quick here and fetch the post
             // using the Post model.
