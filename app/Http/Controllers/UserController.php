@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use DB;
 use App\Http\Controllers\Controller;
 use App\User;
+use App\Foodstandtype;
 use Auth;
 
 class UserController extends Controller
@@ -18,7 +19,10 @@ class UserController extends Controller
     {
         //Check if the user is logged in
         if(Auth::user() == true){
-            $user = User::with('roles','types')->where('id', '=', Auth::user()->id)->first();
+            $foodstand_categories = Foodstandtype::all();
+
+            $user = User::with('roles','types', 'foodstands')->where('id', '=', Auth::user()->id)->first();
+
             return view('auth.home-loggedin')->with('user',$user);
         }
         else{

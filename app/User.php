@@ -30,6 +30,11 @@ class User extends Authenticatable
      return $this->belongsToMany('App\Role');
     }
 
+    public function foodstands()
+    {
+        return $this->belongsToMany('App\Foodstand');
+    }
+
     public function types()
     {
         return $this->belongsToMany('App\Type');
