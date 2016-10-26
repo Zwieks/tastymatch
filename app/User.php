@@ -41,7 +41,7 @@ class User extends Authenticatable
     }
 
     public static function GetUserInfo() {
-        $users = DB::table('users')->first();
+        $users = DB::table('users')->all();
 
         return $users;
     }

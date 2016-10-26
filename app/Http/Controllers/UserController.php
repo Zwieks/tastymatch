@@ -19,9 +19,9 @@ class UserController extends Controller
     {
         //Check if the user is logged in
         if(Auth::user() == true){
-            $foodstand_categories = Foodstandtype::all();
+            //$foodstand_categories = Foodstandtype::all();
 
-            $user = User::with('roles','types', 'foodstands')->where('id', '=', Auth::user()->id)->first();
+            $user = User::with('roles','types','foodstands')->where('id', '=', Auth::user()->id)->first();
 
             return view('auth.home-loggedin')->with('user',$user);
         }
