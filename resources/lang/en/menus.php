@@ -29,6 +29,9 @@ return [
     'cookies'       => 'Cookies',
     'cookies-url'   => '/cookies',   
 
+    'search'        => 'Search',
+    'search-url'    => '/search', 
+
     'facebook'      => 'Facebook',
     'facebook-url'  => '/login/facebook', 
 
