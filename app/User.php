@@ -30,14 +30,19 @@ class User extends Authenticatable
      return $this->belongsToMany('App\Role');
     }
 
+    public function types()
+    {
+        return $this->belongsToMany('App\Type');
+    }
+
     public function foodstands()
     {
         return $this->belongsToMany('App\Foodstand');
     }
 
-    public function types()
+    public function entertainers()
     {
-        return $this->belongsToMany('App\Type');
+        return $this->belongsToMany('App\entertainer');
     }
 
     public static function GetUserInfo() {

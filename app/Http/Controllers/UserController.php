@@ -25,7 +25,7 @@ class UserController extends Controller
 
             //Check if the blog is already been viewed by the user
             if (!$request->session()->has('user.global')) {
-                $user = User::with('roles','types','foodstands')->where('id', '=', Auth::user()->id)->first();
+                $user = User::with('roles','types','foodstands', 'entertainers')->where('id', '=', Auth::user()->id)->first();
 
                 //Set User Data Session
                 Sessions::setGlobalUserSession($request, $user);
