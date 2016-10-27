@@ -1,39 +1,39 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
-| Application Routes
+| Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
+| This file is where you may define all of the routes that are handled
+| by your application. Just tell Laravel the URIs it should respond
+| to using a Closure or controller method. Build something great!
 |
 */
-
 // // Authentication Login routes...
-Route::get('/login', 'Auth\AuthController@getLogin');
-Route::post('/login', 'Auth\AuthController@postLogin');
+Auth::routes();
+
+Route::get('/login', 'Auth\LoginController@showLoginForm');
+Route::post('/login', 'Auth\LoginController@login');
 // Dutch
-Route::get('/inloggen', 'Auth\AuthController@getLogin');
-Route::post('/inloggen', 'Auth\AuthController@postLogin');
+Route::get('/inloggen', 'Auth\LoginController@showLoginForm');
+Route::post('/inloggen', 'Auth\LoginController@login');
 // Facebook
-Route::get('/login/facebook', 'Auth\AuthController@redirectToProvider');
-Route::get('/login/facebook/callback', 'Auth\AuthController@handleProviderCallback');
-Route::get('/inloggen/facebook', 'Auth\AuthController@redirectToProvider');
-Route::get('/inloggen/facebook/callback', 'Auth\AuthController@handleProviderCallback');
+Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+Route::get('/inloggen/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('/inloggen/facebook/callback', 'Auth\LoginController@handleProviderCallback');
 
 // // Logout routes...
-Route::get('/logout', 'Auth\AuthController@getLogout');
+Route::get('/logout', 'Auth\LoginController@logout');
 //Dutch
-Route::get('/uitloggen', 'Auth\AuthController@getLogout');
+Route::get('/uitloggen', 'Auth\LoginController@logout');
 
 // // Registration routes...
-Route::get('/register', 'Auth\AuthController@getRegister');
-Route::post('/register', 'Auth\AuthController@postRegister');
+$this->get('/register', 'Auth\RegisterController@showRegistrationForm');
+$this->post('/register', 'Auth\RegisterController@register');
 // Dutch
-Route::get('/inschrijven', 'Auth\AuthController@getRegister');
-Route::post('/inschrijven', 'Auth\AuthController@postRegister');
+$this->get('/inschrijven', 'Auth\RegisterController@showRegistrationForm');
+$this->post('/inschrijven', 'Auth\RegisterController@register');
 
 // Homepage
 Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);
