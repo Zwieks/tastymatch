@@ -42,7 +42,12 @@ class User extends Authenticatable
 
     public function entertainers()
     {
-        return $this->belongsToMany('App\entertainer');
+        return $this->belongsToMany('App\Entertainer');
+    }
+
+    public function events()
+    {
+        return $this->belongsToMany('App\Event');
     }
 
     public static function GetUserInfo() {

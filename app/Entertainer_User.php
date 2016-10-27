@@ -22,11 +22,11 @@ class Entertainer_User extends Model
 		return $this->hasOne('App\User');
 	}
 
-	public function Foodstand(){
+	public function Entertainer(){
 		return $this->hasOne('App\Entertainer');
 	}
 
-	public function FoodstandType(){
+	public function EntertainerType(){
 		return $this->hasOne('App\EntertainerType');
 	}
 }
