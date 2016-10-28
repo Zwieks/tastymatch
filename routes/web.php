@@ -37,6 +37,7 @@ $this->post('/inschrijven', 'Auth\RegisterController@register');
 
 // Homepage
 Route::get('/', ['uses' => 'UserController@index', 'as' => 'users']);
+Route::get('/home', ['uses' => 'UserController@index', 'as' => 'users']);
 
 // Contact
 Route::get('/contact', 'ContactController@index');
@@ -54,8 +55,6 @@ Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 Route::auth();
-
-Route::get('/home', 'HomeController@index');
 
 // API
 Route::get('/getRequestKvkDetails', 'ApiController@showDetails');

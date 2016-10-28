@@ -20,6 +20,7 @@ class UserController extends Controller
     public function index(Request $request)
     {
         //Check if the user is logged in
+
         if(Auth::user() == true){
             //$foodstand_categories = Foodstandtype::all();
 
