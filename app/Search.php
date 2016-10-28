@@ -12,7 +12,7 @@ class Search extends Model
 
 		// First we define the error message we are going to show if no keywords
 		// existed or if no results found.
-		$error = ['error' => 'No results found, please try with different keywords.'];
+		$error =  json_encode(['name' => 'No results found, please try with different keywords.']);
 
 		// Making sure the user entered a keyword.
 		if($request->has('q')) {

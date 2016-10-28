@@ -1,5 +1,7 @@
 <!-- {{$debugpath}} -->
 
 <div class="search-wrapper">
-{{$results}}
+    @if($results != '')
+        {{$results}}
+    @endif
 </div>
