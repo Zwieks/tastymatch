@@ -4,10 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Search;
-use App\Foodstand;
-use DB;
 
 class AjaxController extends Controller
 {
@@ -18,15 +15,11 @@ class AjaxController extends Controller
      */
     public function getSearch(Request $request)
     {
-
         if($this->checkAjaxRequest($request) == true){
-            //Put the input values in the variable
-            $input = $request->search_input;
+            //Perform the search
+            $results = Search::getSearchResults($request);
 
-            //Get the search results
-            //$results =  Search::getSearchResults($input);
-            $results = Foodstand::search($input)->get();
-
+            //Return the view
             $returnHTML = view('ajax.search')->with('results', $results)->render();
             return response()->json(array('success' => true, 'html'=>$returnHTML));
         }

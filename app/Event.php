@@ -13,6 +13,7 @@ class Event extends Model
 	 * The users that belong to the role.
 	 */
 
+
 	public function users()
 	{
 		return $this->belongsToMany('App\Event_User');

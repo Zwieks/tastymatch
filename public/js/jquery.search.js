@@ -9,7 +9,7 @@ function ajaxSearch($search_input) {
 
 	var token = $('meta[name="csrf-token"]').attr('content'),
 	url = '/ajax/search',
-	data = {search_input: $search_input};
+	data = {q: $search_input};
 
 	$.ajax({
 		type: 'POST',

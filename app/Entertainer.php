@@ -13,6 +13,7 @@ class Entertainer extends Model
 	 * The users that belong to the entertainer.
 	 */
 
+
 	public function users()
 	{
 		return $this->belongsToMany('App\Entertainer_User');

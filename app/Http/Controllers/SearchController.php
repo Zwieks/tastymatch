@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
 use App\Search;
 use DB;
 
@@ -20,11 +19,8 @@ class SearchController extends Controller
         //Get user country
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 
-        //Get the search string
-        $input = $request->q;
-
         //Get the search results
-        $results =  Search::getSearchResults($input);
+        $results =  Search::getSearchResults($request);
 
         return view('auth.search')->with('results', $results);
     }
