@@ -25,7 +25,6 @@ class AjaxController extends Controller
 
             //Get the search results
             //$results =  Search::getSearchResults($input);
-
             $results = Foodstand::search($input)->get();
 
             $returnHTML = view('ajax.search')->with('results', $results)->render();
