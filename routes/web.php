@@ -10,6 +10,7 @@
 |
 */
 // // Authentication Login routes...
+Route::auth();
 Auth::routes();
 
 Route::get('/login', 'Auth\LoginController@showLoginForm');
@@ -54,7 +55,6 @@ Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
 
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
-Route::auth();
 
 // API
 Route::get('/getRequestKvkDetails', 'ApiController@showDetails');

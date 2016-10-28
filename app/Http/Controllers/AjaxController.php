@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Search;
+use App\Foodstand;
 use DB;
 
 class AjaxController extends Controller
@@ -23,8 +24,9 @@ class AjaxController extends Controller
             $input = $request->search_input;
 
             //Get the search results
-            $results =  Search::getSearchResults($input);
+            //$results =  Search::getSearchResults($input);
 
+            $results = Foodstand::search($input)->get();
 
             $returnHTML = view('ajax.search')->with('results', $results)->render();
             return response()->json(array('success' => true, 'html'=>$returnHTML));

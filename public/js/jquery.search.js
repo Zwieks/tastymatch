@@ -8,7 +8,7 @@ jQuery('#search-bar').on('keyup', function(e){
 function ajaxSearch($search_input) {
 
 	var token = $('meta[name="csrf-token"]').attr('content'),
-	url = 'ajax/search',
+	url = '/ajax/search',
 	data = {search_input: $search_input};
 
 	$.ajax({

@@ -10,7 +10,9 @@
         "laravel/socialite": "^2.0",
         "laravelcollective/html": "^5.2",
         "doctrine/dbal": "^2.5",
-        "torann/geoip": "^1.0"
+        "torann/geoip": "^1.0",
+        "laravel/scout": "^1.1",
+        "algolia/algoliasearch-client-php": "^1.11"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
