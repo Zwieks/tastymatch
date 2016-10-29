@@ -15,8 +15,23 @@ class CreateGlobalInfoTable extends Migration
     {
         Schema::create('global_info', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('title');
+            $table->string('subtitle');
+            $table->text('description');
+            $table->string('facebook');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('adress');
+            $table->string('postcode');
+            $table->string('city');
+            $table->string('country');
+            $table->string('kvk');
+            $table->string('url_nl');
+            $table->string('url_en');
+            $table->string('logo');
+            $table->string('adress');                        
             $table->timestamps();
-        });
+        });   
     }
 
     /**
