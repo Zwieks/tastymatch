@@ -26,7 +26,7 @@ class ApiController extends Controller
     //    return response()->json($data); // This will dump and die
     // }
 
-    public function showDetails(Request $request){
+    public function getKvkDetails(Request $request){
         $data = $request->all(); // This will get all the request data.
 
         //Check if the value is empty
@@ -44,11 +44,15 @@ class ApiController extends Controller
         //Check if business already exist
         $get_token = $this->CheckBusinessName($data['value']);
 
-        if($get_token == false){
-            return response()->json($json_output);
+        //Decode version of the json return
+        $json_decode = json_decode($json_output);
+
+        if($get_token == false && $json_decode->totalItemCount != 0){
+            //Return the view
+            $returnHTML = view('ajax.kvk')->with('results', reset($json_decode->_embedded->rechtspersoon))->render();
+            return response()->json(array('success' => true, 'html'=>$returnHTML));
         }else{
-            $json_output = false;
-            return response()->json($json_output);
+            return response()->json(array('success' => false));
         }
     }
 

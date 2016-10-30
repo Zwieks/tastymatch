@@ -57,7 +57,7 @@ Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 
 // API
-Route::get('/getRequestKvkDetails', 'ApiController@showDetails');
+Route::get('/getRequestKvkDetails', 'ApiController@getKvkDetails');
 
 // AJAX
 Route::post('/ajax/search', 'AjaxController@getSearch');
