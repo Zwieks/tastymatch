@@ -1,7 +1,36 @@
 .page-submenu {
 	// Custom submenu styling here
+	.submenu-title{
+		font-size:@smallHeadingSize;
+		margin-bottom:0;
+	}
+
 	.submenu-item{
 		padding:@spacing/4;
+		color:@textColor;
+		position: relative;
+		padding-left: @spacing;
+
+		&:before{
+			.centerY;
+			left:0;
+		}
+
+		&:hover,
+		&:focus{
+			color:@primColor;
+		}
+	}
+
+	li{
+		border-bottom: 1px solid rgba(0,0,0,0.06);
+		&:last-child{
+			border-bottom: none;
+		}
+	}
+
+	.active{
+		color:@primColor;
 		background:@lightGrey;
 	}
 
