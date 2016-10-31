@@ -3,6 +3,8 @@
 return [
 	'home' 			=> 'Home',
 
+	'submenu-title' => 'Main navigation',
+
     'login'			=> 'Login',
     'login-url' 	=> '/login',
 
@@ -37,4 +39,7 @@ return [
 
     'provision'     => 'User provision',
     'provision-url' => '/userprovision',
+
+	'profile'     => 'Profile',
+	'profile-url' => '/profile',
 ];

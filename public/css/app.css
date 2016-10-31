@@ -1217,6 +1217,9 @@ html .cookie-explanation button.request-cookies,
   font-variant: normal !important;
   text-transform: none !important;
 }
+.page-submenu a {
+  display: block;
+}
 /* DEFAULT COMPONENT STYLING (do not edit the files below) */
 /* default form elements */
 [type=text],
@@ -2126,6 +2129,10 @@ html[lang='en'] .comp-login .social-login:before {
 .has-bgimage .page-content {
   margin-top: -2.4rem;
 }
+.logedin .page-left,
+.logedin .page-right {
+  width: 25%;
+}
 @media screen and (max-width: 896px) {
   .page-middle {
     -ms-flex-order: 1;
@@ -2775,6 +2782,15 @@ html .cookie-explanation button.request-cookies:before,
   display: inline-block;
   line-height: inherit;
   font-size: 14px;
+}
+.page-submenu .submenu-item {
+  padding: 0.6rem;
+  background: #f8f8f8;
+}
+@media screen and (max-width: 640px) {
+  .page-submenu {
+    display: none;
+  }
 }
 /* PROJECT SPECIFIC COMPONENTS */
 .article-content-container {

@@ -3,6 +3,8 @@
 return [
 	'home' 			=> 'Home',
 
+	'submenu-title' => 'Hoofdmenu',
+
     'login'			=> 'Inloggen',
     'login-url' 	=> '/inloggen',
 
@@ -36,5 +38,8 @@ return [
     'facebook-url'  => '/inloggen/facebook',    
 
     'provision'     => 'Gebruikersbepalingen',
-    'provision-url' => '/gebruikersbepalingen',  
+    'provision-url' => '/gebruikersbepalingen',
+
+	'profile'     => 'Profiel',
+	'profile-url' => '/profiel',
 ];
