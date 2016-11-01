@@ -10,9 +10,26 @@
 }
 
 .logedin{
-	.page-left,
+	.page-wrapper{
+		.displayflex;
+	}
+
+	.page-content{
+		height:100%;
+	}
+
+	.page-right,
+	.page-left{
+		margin-top: -@spacing*1.5;
+	}
+
+	.page-left{
+		width: 12%;
+		background: @lightBlue;
+	}
+
 	.page-right{
-		width: 25%;
+		width: 20%;
 	}
 }
 

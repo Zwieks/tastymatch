@@ -1,24 +1,24 @@
 .page-submenu {
 	// Custom submenu styling here
-	.submenu-title{
-		font-size:@smallHeadingSize;
-		margin-bottom:0;
-	}
+	padding-top:@spacing;
 
 	.submenu-item{
-		padding:@spacing/4;
-		color:@textColor;
+		padding:@spacing/2 0;
+		color:@white;
 		position: relative;
-		padding-left: @spacing;
+		font-size:@XSmallHeadingSize;
+		text-align: center;
 
 		&:before{
-			.centerY;
-			left:0;
+			display: block;
+			width: 100%;
+			font-size: 40px;
+			padding-bottom:4px;
 		}
 
 		&:hover,
 		&:focus{
-			color:@primColor;
+			background:rgba(0,0,0,0.08);
 		}
 	}
 

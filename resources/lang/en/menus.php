@@ -5,6 +5,10 @@ return [
 
 	'submenu-title' => 'Main navigation',
 
+	'submenu-create' => 'What would you like to create?',
+
+	'userproducts-title' => 'Product overview:',
+
     'login'			=> 'Login',
     'login-url' 	=> '/login',
 
@@ -42,4 +46,13 @@ return [
 
 	'profile'     => 'Profile',
 	'profile-url' => '/profile',
+
+	'createfoodstand' => 'Foodstand',
+	'createfoodstand-url' => '/foodstand-registration',
+
+	'createentertainer' => 'Entertainer',
+	'createentertainer-url' => '/entertainer-registration',
+
+	'createevent' => 'Event',
+	'createevent-url' => '/event-registration',
 ];

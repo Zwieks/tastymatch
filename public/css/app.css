@@ -2116,6 +2116,13 @@ div.input-error p:before {
 .compblock:last-child {
   border-bottom: 0;
 }
+.sidebar-title {
+  color: #fff;
+  font-size: 1.4rem;
+  margin-bottom: 0;
+  text-align: center;
+  padding-bottom: 0.6rem;
+}
 html[lang='nl'] .comp-login .social-login:before {
   content: 'of';
 }
@@ -2129,9 +2136,25 @@ html[lang='en'] .comp-login .social-login:before {
 .has-bgimage .page-content {
   margin-top: -2.4rem;
 }
-.logedin .page-left,
+.logedin .page-wrapper {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+}
+.logedin .page-content {
+  height: 100%;
+}
+.logedin .page-right,
+.logedin .page-left {
+  margin-top: -3.6rem;
+}
+.logedin .page-left {
+  width: 12%;
+  background: #2e87b3;
+}
 .logedin .page-right {
-  width: 25%;
+  width: 20%;
 }
 @media screen and (max-width: 896px) {
   .page-middle {
@@ -2783,25 +2806,25 @@ html .cookie-explanation button.request-cookies:before,
   line-height: inherit;
   font-size: 14px;
 }
-.page-submenu .submenu-title {
-  font-size: 1.8rem;
-  margin-bottom: 0;
+.page-submenu {
+  padding-top: 2.4rem;
 }
 .page-submenu .submenu-item {
-  padding: 0.6rem;
-  color: #333;
+  padding: 1.2rem 0;
+  color: #fff;
   position: relative;
-  padding-left: 2.4rem;
+  font-size: 1.3rem;
+  text-align: center;
 }
 .page-submenu .submenu-item:before {
-  transform: translateY(-50%);
-  position: absolute;
-  top: 50%;
-  left: 0;
+  display: block;
+  width: 100%;
+  font-size: 40px;
+  padding-bottom: 4px;
 }
 .page-submenu .submenu-item:hover,
 .page-submenu .submenu-item:focus {
-  color: #E3262E;
+  background: rgba(0, 0, 0, 0.08);
 }
 .page-submenu li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
@@ -2817,6 +2840,27 @@ html .cookie-explanation button.request-cookies:before,
   .page-submenu {
     display: none;
   }
+}
+.userproducts-item {
+  position: relative;
+  color: #fff;
+  padding-left: 2.4rem;
+  padding-bottom: 1.2rem;
+  font-size: 1.2rem;
+  display: block;
+  width: 100%;
+}
+.userproducts-item:hover,
+.userproducts-item:focus {
+  color: #fff;
+  text-decoration: underline;
+}
+.userproducts-item:before {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  top: 8px;
 }
 /* PROJECT SPECIFIC COMPONENTS */
 .article-content-container {
