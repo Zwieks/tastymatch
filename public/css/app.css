@@ -2829,9 +2829,6 @@ html .cookie-explanation button.request-cookies:before,
 .page-submenu li {
   border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
-.page-submenu li:last-child {
-  border-bottom: none;
-}
 .page-submenu .active {
   color: #E3262E;
   background: #f8f8f8;
