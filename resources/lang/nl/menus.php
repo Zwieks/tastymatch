@@ -7,7 +7,7 @@ return [
 
 	'submenu-create' => 'Wat wil je aanmaken?',
 
-	'userproducts-title' => 'Productoverzicht:',
+	'userproducts-title' => 'Mijn producten:',
 
     'login'			=> 'Inloggen',
     'login-url' 	=> '/inloggen',

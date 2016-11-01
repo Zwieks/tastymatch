@@ -7,7 +7,7 @@ return [
 
 	'submenu-create' => 'What would you like to create?',
 
-	'userproducts-title' => 'Product overview:',
+	'userproducts-title' => 'My products',
 
     'login'			=> 'Login',
     'login-url' 	=> '/login',
