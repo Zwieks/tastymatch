@@ -9,6 +9,12 @@ return [
 
 	'userproducts-title' => 'My products',
 
+    'userfoodstands-title' => 'My foodstands:',
+
+    'userentertainers-title' => 'My entertainers:',
+
+    'userevents-title' => 'My events:',
+
     'login'			=> 'Login',
     'login-url' 	=> '/login',
 
