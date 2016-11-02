@@ -1,3 +1,3 @@
 <!-- {{$debugpath}} -->
 @include('sidebars.templates.submenu')
-@include('sidebars.templates.userproducts')
+{{--@include('sidebars.templates.userproducts')--}}

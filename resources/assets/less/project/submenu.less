@@ -1,10 +1,8 @@
 .page-submenu {
 	// Custom submenu styling here
-	padding-top:@spacing;
-
 	.submenu-item{
 		padding:@spacing/2 0;
-		color:@white;
+		color:@grey;
 		position: relative;
 		font-size:@XSmallHeadingSize;
 		text-align: center;
@@ -18,12 +16,16 @@
 
 		&:hover,
 		&:focus{
-			background:rgba(0,0,0,0.08);
+			color:@primColor;
 		}
 	}
 
 	li{
 		border-bottom: 1px solid rgba(255,255,255,0.1);
+
+		&:last-child{
+			border-bottom:none;
+		}
 	}
 
 	.active{
@@ -38,5 +40,5 @@
 }
 
 .submenu-items{
-	margin-bottom: @spacing*1.5;
+	margin-bottom: @spacing/2;
 }

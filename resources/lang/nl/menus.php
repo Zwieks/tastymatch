@@ -7,6 +7,8 @@ return [
 
 	'submenu-create' => 'Wat wil je aanmaken?',
 
+	'submenu-items' => 'Handige links',
+
 	'userproducts-title' => 'Mijn producten:',
 
     'userfoodstands-title' => 'Mijn foodstands:',
@@ -53,12 +55,18 @@ return [
 	'profile'     => 'Profiel',
 	'profile-url' => '/profiel',
 
+	'settings'         => 'Instellingen',
+	'settings-url'     => '/instellingen',
+
+	'agenda'         => 'Mijn agenda',
+	'agenda-url'     => '/agenda',
+
 	'createfoodstand' => 'Foodstand',
-	'createfoodstand-url' => '/foodstand-registration',
+	'createfoodstand-url' => '/registratie/foodstand',
 
 	'createentertainer' => 'Entertainer',
-	'createentertainer-url' => '/entertainer-registration',
+	'createentertainer-url' => '/registratie/entertainer',
 
 	'createevent' => 'Evenement',
-	'createevent-url' => '/event-registration',
+	'createevent-url' => '/registratie/evenement',
 ];

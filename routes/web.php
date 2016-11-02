@@ -67,3 +67,12 @@ Route::get('blog', array('as' => 'index', 'uses' => 'BlogController@Index'));
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@Single']) -> where('slug', '[\w\d\-\_]+');
 Route::get('blog/admin', array('as' => 'admin_area', 'uses' => 'BlogController@Admin'));
 Route::post('blog/add', array('as' => 'add_new_post', 'uses' => 'BlogController@Update'));
+
+// FOODSTANDS
+Route::post('/foodstands/{slug}', ['as' => 'blog.single', 'uses' => 'FoodstandsController@Single']) -> where('slug', '[\w\d\-\_]+');
+
+// ENTERTAINERS
+Route::post('/entertainers/{slug}', ['as' => 'blog.single', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
+
+// EVENTS
+Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');

@@ -25,6 +25,15 @@ class Sessions extends Model
         return true;
     }
 
+	//When the user has been on the Blog detailpage the session will be set to affoid multple view counts in the database
+	//Session is set in the Blog Controller
+	public static function setSingleFoodstandSession(Request $request, $slug){
+		//Set the Session
+		$request->session()->put('viewed.foodstands'.$slug, true);
+
+		return true;
+	}
+
     //Destroys all current stored sessions
     public static function destroyAllSessions(Request $request){
     	//Set the Session

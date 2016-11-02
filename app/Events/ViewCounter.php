@@ -3,7 +3,9 @@
 namespace App\Events;
 
 use App\Blog;
-use App\Events\Event;
+use App\Foodstand;
+use App\Event;
+
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
@@ -17,7 +19,7 @@ class ViewCounter extends Event
      *
      * @return void
      */
-    public function __construct(Blog $post)
+    public function __construct($post)
     {
         //Add the $post results as object views to the existing object
         $this->views = $post;
