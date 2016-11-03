@@ -16,4 +16,3 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.parallax.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.search.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.CustomScrollbar.js') }}"></script>
-<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places"></script>

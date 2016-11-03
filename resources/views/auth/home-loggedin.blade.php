@@ -34,5 +34,5 @@
 
 {{-- Include Scripts --}}
 @section('script')
-
+    @include('scripts.googlemaps-init')
 @stop
