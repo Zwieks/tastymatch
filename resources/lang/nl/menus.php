@@ -7,7 +7,7 @@ return [
 
 	'submenu-create' => 'Wat wil je aanmaken?',
 
-	'submenu-items' => 'Handige links',
+	'submenu-items' => 'Menu',
 
 	'userproducts-title' => 'Mijn producten:',
 

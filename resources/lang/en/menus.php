@@ -7,7 +7,7 @@ return [
 
 	'submenu-create' => 'What would you like to create?',
 
-	'submenu-items' => 'Quick links',
+	'submenu-items' => 'Menu',
 
 	'userproducts-title' => 'My products',
 

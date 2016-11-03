@@ -2149,11 +2149,11 @@ html[lang='en'] .comp-login .social-login:before {
 }
 .logedin .page-right,
 .logedin .page-left {
+  background: #f8f8f8;
   margin-top: -3.6rem;
 }
 .logedin .page-left {
   width: 15.6rem;
-  background: #f8f8f8;
   padding: 0;
   margin-left: 1.2rem;
   margin-right: 1.2rem;
@@ -2821,7 +2821,7 @@ html .cookie-explanation button.request-cookies:before,
 .page-submenu .submenu-item:before {
   display: block;
   width: 100%;
-  font-size: 40px;
+  font-size: 30px;
   padding-bottom: 4px;
 }
 .page-submenu .submenu-item:hover,
