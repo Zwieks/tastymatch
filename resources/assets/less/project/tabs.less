@@ -1,0 +1,39 @@
+.navigation-tabs{
+	.displayflex;
+	.justify-content(flex-start);
+	margin-bottom: @spacing;
+
+	li{
+		padding-right:@spacing;
+
+		&:last-child{
+			padding-right: 0;
+		}
+	}
+}
+
+.navigation-tab{
+	text-transform: uppercase;
+	font-size: @XSmallHeadingSize;
+	color: @lighterBlack;
+
+	&:hover,
+	&:focus{
+		color:@primColor;
+	}
+
+	&.active{
+		color:@primColor;
+		position: relative;
+
+		&:after{
+			.center;
+			content:'';
+			bottom:0;
+			width: 100%;
+			height:3px;
+			background: @primColor;
+			margin-top:16px;
+		}
+	}
+}	

@@ -9,13 +9,13 @@ return [
 
 	'submenu-items' => 'Menu',
 
-	'userproducts-title' => 'Mijn producten:',
+	'userproducts-title' => 'Mijn producten',
 
-    'userfoodstands-title' => 'Mijn foodstands:',
+    'userfoodstands-title' => 'Foodstands',
 
-    'userentertainers-title' => 'Mijn entertainers:',
+    'userentertainers-title' => 'Entertainers',
 
-    'userevents-title' => 'Mijn evenementen:',
+    'userevents-title' => 'Evenementen',
 
     'login'			=> 'Inloggen',
     'login-url' 	=> '/inloggen',
