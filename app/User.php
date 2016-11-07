@@ -50,6 +50,11 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Event');
     }
 
+    public function agenda()
+    {
+        return $this->belongsToMany('App\Agenda');
+    }
+
     public static function GetUserInfo() {
         $users = DB::table('users')->all();
 
