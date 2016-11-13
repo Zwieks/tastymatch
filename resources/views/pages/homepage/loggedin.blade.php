@@ -14,4 +14,4 @@
 @hasSection('script')
     @yield('script')
 @endif
-{{$user}}
+{{$locations}}
