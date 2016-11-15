@@ -41,7 +41,7 @@ function set_locations(db_locations){
     var locations = [];
 
     for (var i = 0; i < db_locations.length; i++) { 
-       locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, i]);
+       locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, db_locations[i].file]);
     }
 
     console.log(locations);
@@ -51,7 +51,7 @@ function set_locations(db_locations){
 
 function add_markers(map,locations){
     var infowindow = new google.maps.InfoWindow({});
-    var marker, i;
+    var marker, i, contentString;
 
     for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
@@ -59,9 +59,16 @@ function add_markers(map,locations){
             map: map
         });
 
-        google.maps.event.addListener(marker, 'click', (function (marker, i) {
+        google.maps.event.addListener(marker, 'click', (function (marker, i, contentString) {
+            contentString = '<div class="infowindow-wrapper">'+
+              '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
+              '<div class="text-wrapper">'+
+              '<h3 class="firstHeading">'+locations[i][0]+'</h1>'+
+              '</div>'+
+              '</div>';
+
             return function () {
-                infowindow.setContent(locations[i][0]);
+                infowindow.setContent(contentString);
                 infowindow.open(map, marker);
             }
         })(marker, i));

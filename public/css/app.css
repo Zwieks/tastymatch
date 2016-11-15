@@ -2220,7 +2220,7 @@ html[lang='en'] .comp-login .social-login:before {
   width: 15.6rem;
   padding: 0;
   margin-left: 1.2rem;
-  margin-right: 1.2rem;
+  margin-right: 0;
 }
 .logedin .page-right {
   width: 20%;
@@ -3321,6 +3321,27 @@ html .cookie-explanation {
 }
 .google-maps-large {
   height: 56.25%;
+}
+.infowindow-wrapper {
+  display: -webkit-box;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  flex-wrap: wrap;
+}
+.infowindow-wrapper .text-wrapper {
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+}
+.infowindow-wrapper .image-wrapper {
+  width: 50%;
+  padding-right: 1.2rem;
+  margin-bottom: 0;
+}
+.infowindow-wrapper .image-wrapper img {
+  position: relative;
 }
 /*
  *  Basis custom form styling
