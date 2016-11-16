@@ -13,6 +13,7 @@ class Foodstand extends Model
 	 * The users that belong to the role.
 	 */
 
+	protected $table = 'foodstands';
 
 	public function users()
 	{

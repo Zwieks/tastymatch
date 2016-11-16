@@ -13,6 +13,7 @@ class Entertainer extends Model
 	 * The users that belong to the entertainer.
 	 */
 
+	protected $table = 'entertainers';
 
 	public function users()
 	{

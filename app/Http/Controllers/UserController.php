@@ -10,6 +10,7 @@ use App\User;
 use App\Sessions;
 use App\Foodstandtype;
 use App\GoogleMaps;
+use App\globalinfo;
 use Auth;
 
 class UserController extends Controller
@@ -40,8 +41,11 @@ class UserController extends Controller
             //Get the user information
             $user = $request->session()->get('user.global');
 
+            //Get the product type information
+            $info = globalinfo::getProductOverviewInfo($type=null);
+
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations'));
+            return view('auth.home-loggedin', compact('user','locations','info'));
         }
         else{
             return view('auth.home');

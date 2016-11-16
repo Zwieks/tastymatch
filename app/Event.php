@@ -12,7 +12,7 @@ class Event extends Model
 	/**
 	 * The users that belong to the role.
 	 */
-
+	protected $table = 'events';
 
 	public function users()
 	{
