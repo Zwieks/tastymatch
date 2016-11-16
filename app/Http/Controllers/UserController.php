@@ -44,8 +44,10 @@ class UserController extends Controller
             //Get the product type information
             $info = globalinfo::getProductOverviewInfo($type=null);
 
+            $most_viewed = $info->sortByDesc('views');
+
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations','info'));
+            return view('auth.home-loggedin', compact('user','locations','most_viewed'));
         }
         else{
             return view('auth.home');

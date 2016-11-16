@@ -14,4 +14,4 @@
 @hasSection('script')
     @yield('script')
 @endif
-{{$info}}
+{{$most_viewed}}
