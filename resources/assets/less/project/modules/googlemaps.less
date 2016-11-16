@@ -10,18 +10,16 @@
 .infowindow-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
+	width: 100%;
 
 	.text-wrapper{
-		.flex-grow(1);
+		width: 50%;
+		padding: 0 @spacing/2;
 	}
 
 	.image-wrapper{
 		width: 50%;
-		padding-right:@spacing/2;
 		margin-bottom: 0;
-
-		img{
-			position: relative;
-		}
+		position: relative;
 	}
 }
