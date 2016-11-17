@@ -14,4 +14,20 @@
 @hasSection('script')
     @yield('script')
 @endif
+
+{{--Render the most viewed items--}}
+<div class="typesoverview-wrapper">
+	@foreach($most_viewed as $item)
+		<a href="/" class="typesoverview-item">
+			<section>
+				<figure class="image-wrapper">
+					<img class="image" src="/img/uploads/{{ $item->images->first()['file'] }}" alt="{{ $item->name }}"/>
+				</figure>
+				<h2>{{ $item->name }}</h2>
+				<p>{{ $item->description }}</p>
+				<span class="views">{{ $item->views }}</span>
+			</section>
+		</a>
+	@endforeach
+</div>
 {{$most_viewed}}
