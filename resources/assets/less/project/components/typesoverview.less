@@ -9,4 +9,40 @@
 	width: 100%/3;
 	padding:@spacing/2;
 	color:@textColor;
+
+	.image-wrapper{
+		padding-top: 100%/3*2;
+		margin: -@spacing/4 -@spacing/4 @spacing/2;
+	}
+}
+
+.typesoverview-item-wrapper{
+	.displayflex;
+	.flex-direction(column);
+	background: @lightGrey;
+	padding:@spacing/4;
+	height: 100%;
+}
+
+.typesoverview-text-wrapper{
+	.displayflex;
+	.flex-direction(column);
+	.justify-content(space-between);
+	.flex-grow(1);
+}
+
+.typesoverview-title{
+	font-size: @smallerHeadingSize;
+	font-weight: bold;
+	margin-bottom: @spacing/2;
+}
+
+.typesoverview-text{
+	font-size: @XSmallHeadingSize;
+	margin-bottom: @spacing/2;
+}
+
+.typesoverview-views{
+	font-size: @smallestHeadingSize;
+	text-transform: uppercase;
 }

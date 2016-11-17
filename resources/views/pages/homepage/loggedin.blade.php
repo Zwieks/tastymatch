@@ -19,13 +19,15 @@
 <div class="typesoverview-wrapper">
 	@foreach($most_viewed as $item)
 		<a href="/" class="typesoverview-item">
-			<section>
+			<section class="typesoverview-item-wrapper">
 				<figure class="image-wrapper">
 					<img class="image" src="/img/uploads/{{ $item->images->first()['file'] }}" alt="{{ $item->name }}"/>
 				</figure>
-				<h2>{{ $item->name }}</h2>
-				<p>{{ $item->description }}</p>
-				<span class="views">{{ $item->views }}</span>
+				<div class="typesoverview-text-wrapper">
+					<h2 class="typesoverview-title">{{ $item->name }}</h2>
+					<p class="typesoverview-text">{{ str_limit($item->description, 100) }}</p>
+					<span class="typesoverview-views">{{ $item->views }} keer bekeken</span>
+				</div>	
 			</section>
 		</a>
 	@endforeach
