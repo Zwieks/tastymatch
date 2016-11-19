@@ -34,6 +34,24 @@ class Sessions extends Model
 		return true;
 	}
 
+    //When the user has been on the Event detailpage the session will be set to affoid multple view counts in the database
+    //Session is set in the Event Controller
+    public static function setSingleEventSession(Request $request, $slug){
+        //Set the Session
+        $request->session()->put('viewed.events'.$slug, true);
+
+        return true;
+    }
+
+    //When the user has been on the Entertainer detailpage the session will be set to affoid multple view counts in the database
+    //Session is set in the Entertainer Controller
+    public static function setSingleEntertainersSession(Request $request, $slug){
+        //Set the Session
+        $request->session()->put('viewed.entertainers'.$slug, true);
+
+        return true;
+    }
+
     //Destroys all current stored sessions
     public static function destroyAllSessions(Request $request){
     	//Set the Session

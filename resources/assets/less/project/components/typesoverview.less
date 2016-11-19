@@ -1,7 +1,11 @@
 .typesoverview-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
-	margin:0 -@spacing/2;
+	margin:0 -@spacing/2 @spacing;
+
+	&:last-child{
+		margin-bottom: 0;
+	}
 }
 
 .typesoverview-maintitle{

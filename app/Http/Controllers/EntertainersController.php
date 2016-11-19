@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Event;
+
 use Illuminate\Http\Request;
+
+use App\Events\ViewCounter;
+
+use App\Sessions;
+
+use App\Entertainer;
 
 class EntertainersController extends Controller
 {
@@ -14,6 +22,29 @@ class EntertainersController extends Controller
     public function index()
     {
         //
+    }
+
+    /**
+     * Shows a single entertainer.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function single(Request $request, $slug)
+    {
+        //Check if the entertainer is already been viewed by the user
+        if (!$request->session()->has('viewed.entertainer'.$slug)) {
+
+            //Set the Session
+            Sessions::setSingleEntertainerSession($request, $slug);
+
+            // We will just be quick here and fetch the post
+            // using the Post model.
+            $post = Entertainer::where('slug', $slug)->first();
+
+            // Next, we will fire off an event and pass along
+            // the post as its payload
+            Event::fire(new ViewCounter($post));
+        }
     }
 
     /**

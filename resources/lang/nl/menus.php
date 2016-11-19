@@ -11,11 +11,11 @@ return [
 
 	'userproducts-title' => 'Mijn producten',
 
-    'userfoodstands-title' => 'Foodstands',
+    'userfoodstands-title' => 'Mijn foodstands',
 
-    'userentertainers-title' => 'Entertainers',
+    'userentertainers-title' => 'Mijn entertainers',
 
-    'userevents-title' => 'Evenementen',
+    'userevents-title' => 'Mijn evenementen',
 
     'login'			=> 'Inloggen',
     'login-url' 	=> '/inloggen',

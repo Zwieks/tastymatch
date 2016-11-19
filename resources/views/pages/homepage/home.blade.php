@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 <div class="home-wrapper">
 
 	<p>NOT loggedin</p>

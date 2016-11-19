@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 @if(Auth::check())
 	@include('pages.homepage.loggedin')
 @else

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
+use App\Images;
 use App\Sessions;
 use App\Foodstandtype;
 use App\GoogleMaps;
@@ -31,6 +32,9 @@ class UserController extends Controller
             if (!$request->session()->has('user.global')) {
                 $user = User::with('roles','types','foodstands', 'entertainers', 'events','agenda')->where('id', '=', Auth::user()->id)->first();
 
+                //Get the product images
+                $user = Images::getAllUserProductImages($user);
+
                 //Set User Data Session
                 Sessions::setGlobalUserSession($request, $user);
             }
@@ -46,8 +50,10 @@ class UserController extends Controller
 
             $most_viewed = $info->sortByDesc('views');
 
+            $latest = $info->sortByDesc('created_at');
+
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations','most_viewed'));
+            return view('auth.home-loggedin', compact('user','locations','most_viewed','latest'));
         }
         else{
             return view('auth.home');

@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Event;
+
 use Illuminate\Http\Request;
+
+use App\Events\ViewCounter;
+
+use App\Sessions;
 
 use App\Foodstand;
 
@@ -19,13 +25,13 @@ class FoodstandsController extends Controller
     }
 
     /**
-     * Shows a single post.
+     * Shows a single foodstand.
      *
      * @return \Illuminate\Http\Response
      */
     public function single(Request $request, $slug)
     {
-        //Check if the blog is already been viewed by the user
+        //Check if the foodstand is already been viewed by the user
         if (!$request->session()->has('viewed.foodstand'.$slug)) {
 
             //Set the Session
@@ -39,10 +45,6 @@ class FoodstandsController extends Controller
             // the post as its payload
             Event::fire(new ViewCounter($post));
         }
-
-        $posts = Blog::with('Author','images','comments')->where('slug', '=', $slug)->first();
-
-        return view('auth.foodstanddetail')->with('foodstand',$posts);
     }
 
     /**

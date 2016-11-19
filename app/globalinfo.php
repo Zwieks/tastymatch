@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use App\Event;
+use App\Images;
 
 class GlobalInfo extends Model
 {
@@ -39,12 +40,8 @@ class GlobalInfo extends Model
 			$info = entertainer::get();
 		}
 
-		//Get the comma separated image string from the database and get the images from the images table put this all in a new array
-		foreach ($info as $item) {
-			$ids = GlobalInfo::explodeString($item['images_id']);
-
-			$item['images'] = images::whereIn('id', $ids)->get();
-		}
+		//Get the product images
+		$info = images::getProductImages($info);
 
 		//Return the new object
 		return $info;

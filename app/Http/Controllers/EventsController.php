@@ -2,7 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use Event;
+
 use Illuminate\Http\Request;
+
+use App\Events\ViewCounter;
+
+use App\Sessions;
+
+use App\Event;
 
 class EventsController extends Controller
 {
@@ -15,6 +23,30 @@ class EventsController extends Controller
     {
         //
     }
+
+    /**
+     * Shows a single event.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function single(Request $request, $slug)
+    {
+        //Check if the event is already been viewed by the user
+        if (!$request->session()->has('viewed.event'.$slug)) {
+
+            //Set the Session
+            Sessions::setSingleEventSession($request, $slug);
+
+            // We will just be quick here and fetch the post
+            // using the Post event.
+            $post = Event::where('slug', $slug)->first();
+
+            // Next, we will fire off an event and pass along
+            // the post as its payload
+            Event::fire(new ViewCounter($post));
+        }
+    }
+
 
     /**
      * Show the form for creating a new resource.
