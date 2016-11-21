@@ -2923,8 +2923,7 @@ html .cookie-explanation button.request-cookies:before,
 .userproducts-item {
   position: relative;
   color: #464447;
-  padding-left: 2.4rem;
-  padding-bottom: 0.8rem;
+  padding: 0;
   font-size: 1.2rem;
   display: block;
   width: 100%;
@@ -2932,7 +2931,6 @@ html .cookie-explanation button.request-cookies:before,
 .userproducts-item:hover,
 .userproducts-item:focus {
   color: #E3262E;
-  text-decoration: underline;
 }
 .userproducts-item:before {
   -webkit-transform: translateY(-50%);
@@ -2946,12 +2944,16 @@ html .cookie-explanation button.request-cookies:before,
   margin-bottom: 1.37142857rem;
   padding: 0 1.2rem;
 }
+.userproducts-items .image-wrapper {
+  margin-bottom: 0;
+}
 .page-userproducts {
   margin-right: -1.2rem;
   margin-left: -1.2rem;
 }
-.page-userproducts h2 {
-  text-align: left;
+.page-userproducts h2,
+.page-userproducts h3 {
+  text-align: center;
 }
 .page-userproducts p {
   font-size: 1.2rem;

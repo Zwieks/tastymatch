@@ -7,8 +7,12 @@
                 <ul class="userproducts-items">
                     @foreach($user->foodstands as $foodstand)
                         <li>
-                            <img src='/img/uploads/{{ $foodstand->images->first()['file'] }}'/>
-                            <a class="userproducts-item" href="/" data-icon="G"> {{$foodstand->name}}</a>
+                            <a class="userproducts-item" href="/foodstand/{{ $foodstand->slug }}">
+                                <figure class="image-wrapper image-2-3">
+                                    <img class="image" src='/img/uploads/{{ $foodstand->images->first()['file'] }}'/>
+                                </figure>  
+                                <h3>{{ $foodstand->name }}</h3>  
+                           </a>
                         </li>
                     @endforeach  
                 </ul>
@@ -21,8 +25,12 @@
                 <ul class="userproducts-items">
                     @foreach($user->entertainers as $entertainer)
                         <li>
-                            <img src='/img/uploads/{{ $entertainer->images->first()['file'] }}'/>
-                            <a class="userproducts-item" href="/" data-icon="a"> {{$entertainer->name}}</a>
+                            <a class="userproducts-item" href="/entertainer/{{ $entertainer->slug }}">
+                                <figure class="image-wrapper image-2-3">
+                                    <img class="image" src='/img/uploads/{{ $entertainer->images->first()['file'] }}'/>
+                                </figure>
+                                <h3>{{ $entertainer->name }}</h3> 
+                            </a>
                         </li>
                     @endforeach  
                 </ul>
@@ -35,8 +43,12 @@
                 <ul class="userproducts-items">
                     @foreach($user->events as $event)
                         <li>
-                            <img src='/img/uploads/{{ $event->images->first()['file'] }}'/>
-                            <a class="userproducts-item" href="/" data-icon="z"> {{$event->name}}</a>
+                            <a class="userproducts-item" href="/event/{{ $event->slug }}">
+                                <figure class="image-wrapper image-2-3">
+                                    <img class="image" src='/img/uploads/{{ $event->images->first()['file'] }}'/>
+                                </figure>
+                                <h3>{{ $event->name }}</h3>  
+                            </a>
                         </li>
                     @endforeach  
                 </ul>

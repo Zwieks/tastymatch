@@ -1,8 +1,7 @@
 .userproducts-item{
 	position: relative;
 	color:@grey;
-	padding-left:@spacing;
-	padding-bottom:@spacing/3;
+	padding:0;
 	font-size:@smallestHeadingSize;
 	display: block;
 	width: 100%;
@@ -10,7 +9,6 @@
 	&:hover,
 	&:focus{
 		color:@primColor;
-		text-decoration: underline;
 	}
 
 	&:before{
@@ -23,6 +21,11 @@
 .userproducts-items{
 	margin-bottom: @spacing/1.75;
 	padding:0 @spacing/2;
+
+
+	.image-wrapper{
+		margin-bottom: 0;
+	}
 }
 
 .page-userproducts{
@@ -30,8 +33,9 @@
 	margin-left: -@spacing/2;
 	
 
-	h2{
-		text-align: left;
+	h2,
+	h3{
+		text-align: center;
 	}
 
 	p{
