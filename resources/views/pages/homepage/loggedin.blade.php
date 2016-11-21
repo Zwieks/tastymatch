@@ -1,6 +1,6 @@
 <!-- {{$debugpath}} -->
 {{--Render the navigation tabs --}}
-<ul class='navigation-tabs'>
+<!-- <ul class='navigation-tabs'>
 	<li>
 		<a class="navigation-tab active" href="/">{{ Lang::get('menus.userevents-title') }}</a>
 	</li>
@@ -12,7 +12,9 @@
 	<li>
 		<a class="navigation-tab" href="/">{{ Lang::get('menus.userentertainers-title') }}</a>
 	</li>
-</ul>
+</ul> -->
+{{--Render GoogleMaps --}}
+@include('pages.homepage.templates.create-product')
 
 {{--Render GoogleMaps --}}
 @include('includes.googlemaps.googlemap')

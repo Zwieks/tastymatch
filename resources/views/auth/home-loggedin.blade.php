@@ -18,9 +18,9 @@
 {{--@stop--}}
 
 {{-- Include Left Sidebar --}}
-@section('left')
+{{-- @section('left')
     @include('sidebars.left.homelogin')
-@stop
+@stop --}}
 
 {{-- Include Content --}}
 @section('content')
@@ -28,9 +28,9 @@
 @stop
 
 {{-- Include Right Sidebar --}}
-@section('right')
+{{-- @section('right')
     @include('sidebars.right.homelogin')
-@stop
+@stop --}}
 
 {{-- Include Scripts --}}
 @section('script')
