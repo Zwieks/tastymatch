@@ -14,10 +14,10 @@
 	</li>
 </ul> -->
 {{--Render GoogleMaps --}}
-@include('pages.homepage.templates.create-product')
-
-{{--Render GoogleMaps --}}
 @include('includes.googlemaps.googlemap')
+
+{{--Render Create products --}}
+@include('pages.homepage.templates.create-product')
 
 {{--Render the most viewed items--}}
 @include('pages.homepage.templates.overview', ['object' => $most_viewed, 'title' => lang::get('overviewitems.mostviewed-events-title')])

@@ -28,7 +28,8 @@ function initMap() {
     });
 
     var map = new google.maps.Map(document.getElementById('google-maps'), {
-        zoom: 8,
+        zoom: 9,
+        scrollwheel: false,
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
