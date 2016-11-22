@@ -45,15 +45,20 @@ class UserController extends Controller
             //Get the user information
             $user = $request->session()->get('user.global');
 
-            //Get the product type information
-            $info = globalinfo::getProductOverviewInfo($type=null);
+            //Get most viewed events
+            $most_viewed_events = globalinfo::getProductOverviewInfo('events', 'most-viewed');
 
-            $most_viewed = $info->sortByDesc('views');
+            //Get most viewed foodstands
+            $most_viewed_foodstands = globalinfo::getProductOverviewInfo('foodstands', 'most-viewed');
 
-            $latest = $info->sortByDesc('created_at');
+            //Get most viewed entertainers
+            $most_viewed_entertainers = globalinfo::getProductOverviewInfo('entertainers', 'most-viewed');
+
+            //Get latest events
+            $latest_events = globalinfo::getProductOverviewInfo('events', 'latest');
 
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations','most_viewed','latest'));
+            return view('auth.home-loggedin', compact('user','locations','most_viewed_events','most_viewed_foodstands','most_viewed_entertainers','latest_events'));
         }
         else{
             return view('auth.home');

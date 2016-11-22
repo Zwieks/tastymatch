@@ -9,6 +9,12 @@ return [
 
 	'submenu-items' => 'Menu',
 
+    'product-event' => 'Events',
+
+    'product-foodstand' => 'Foodstands',
+
+    'product-entertainer' => 'Entertainers',
+
 	'userproducts-title' => 'My products',
 
     'userfoodstands-title' => 'My foodstands',

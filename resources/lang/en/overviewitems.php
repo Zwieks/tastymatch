@@ -2,9 +2,9 @@
 
 return [
 
-    'mostviewed-events-title' => 'Most viewed events',
-    'mostviewed-entertainers-title' => 'Most viewed entertainers',
-    'mostviewed-foodstands-title' => 'Most viewed foodstands',
+    'mostviewed-events-title' => 'Populair events',
+    'mostviewed-entertainers-title' => 'Populair entertainers',
+    'mostviewed-foodstands-title' => 'Populair foodstands',
 
     'latest-events-title' => 'Latest evenementen',
     'latest-entertainers-title' => 'Latest entertainers',

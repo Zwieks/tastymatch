@@ -9,11 +9,41 @@
 				<ul class="ajax-search-wrapper mCustomScrollbar" id="js-ajax-search-results"></ul>
 			</li>
 
-	        <li class="level-1-item {{(current_page(Lang::get('menus.home'))) ? 'active' : current_page()}}">
-				<a href="{{ url('/logout') }}" itemprop="url" data-icon="m">
-					<span itemprop="name">{{ Lang::get('menus.logout') }}</span>
+
+			<li class="level-1-item subnav {{(current_page(Lang::get('menus.submenu-items'))) ? 'active' : current_page()}}">
+				<a href="{{ url('/submenu-items') }}" itemprop="url" data-icon="E">
+					<span itemprop="name">{{ Lang::get('menus.submenu-items') }}</span>
 				</a>
 				<meta itemprop="position" content="2">
+				<ul class="level-2">
+					<li class="level-2-item {{(current_page(Lang::get('menus.agenda-url'))) ? 'active' : current_page()}}">
+						<a href="{{ Lang::get('menus.agenda-url') }}" itemprop="url" data-icon="H">
+							<span itemprop="name">{{ Lang::get('menus.agenda') }}</span>
+						</a>
+						<meta itemprop="position" content="2">
+					</li>
+
+					<li class="level-2-item {{(current_page(Lang::get('menus.settings-url'))) ? 'active' : current_page()}}">
+						<a href="{{ Lang::get('menus.settings-url') }}" itemprop="url" data-icon="F">
+							<span itemprop="name">{{ Lang::get('menus.settings') }}</span>
+						</a>
+						<meta itemprop="position" content="2">
+					</li>
+
+					<li class="level-2-item {{(current_page(Lang::get('menus.profile-url'))) ? 'active' : current_page()}}">
+						<a href="{{ Lang::get('menus.profile-url') }}" itemprop="url" data-icon="a">
+							<span itemprop="name">{{ Lang::get('menus.profile') }}</span>
+						</a>
+						<meta itemprop="position" content="2">
+					</li>
+
+			        <li class="level-2-item {{(current_page(Lang::get('menus.home'))) ? 'active' : current_page()}}">
+						<a href="{{ url('/logout') }}" itemprop="url" data-icon="m">
+							<span itemprop="name">{{ Lang::get('menus.logout') }}</span>
+						</a>
+						<meta itemprop="position" content="2">
+					</li>
+				</ul>	
 			</li>
 		@else
 			<li class="home level-1-item {{(current_page('/')) ? 'active' : current_page()}}">

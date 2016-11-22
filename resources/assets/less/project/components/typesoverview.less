@@ -1,10 +1,26 @@
 .typesoverview-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
-	margin:0 -@spacing/2 @spacing;
+	margin:0 -@spacing/2;
+	z-index: 0;
+	position: relative;
+	padding-top: @spacing;
+	padding-bottom: 0;
 
 	&:last-child{
 		margin-bottom: 0;
+		padding-bottom: @spacing;
+	}
+
+	&:after{
+		.fullscreen-center;
+		position: absolute;
+		content:'';
+		background: transparent;
+		height:100%;
+		z-index: -1;
+		top:0;
+		padding: @spacing 0;
 	}
 }
 
@@ -12,8 +28,6 @@
 	width: 100%;
 	margin-bottom: 0;
 	padding: 0 @spacing/2;
-	font-size: @MediumSmallHeadingSize;
-	font-weight: bold;
 }
 
 .typesoverview-item{

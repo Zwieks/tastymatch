@@ -109,12 +109,21 @@
     position: relative;
     background: @white;
     display: block;
-    width: 90%;
+    width: auto;
+    max-width: 90%;
     padding:@spacing @spacing/2;
     border-left: 15px solid @primColor;
 
-    .form-input-checkbox{
+    .form-input-checkbox,
+    .form-label{
     	margin-bottom: 0;
+    	display: inline-block;
+    	width: auto;
+    }
+
+    .form-label{
+    	padding-right: @spacing/2;
+    	font-weight: 800;
     }
 
     .velden{

@@ -29,7 +29,7 @@ class GlobalInfo extends Model
 	 *
 	 * @var object
 	 */
-	public static function getProductOverviewInfo($type){
+	public static function getProductOverviewInfo($type, $sort){
 		//Check the content you want to obtain
 		//Events, Foodstands or Entertainers
 		if($type == null || $type == 'events'){
@@ -44,7 +44,11 @@ class GlobalInfo extends Model
 		$info = images::getProductImages($info);
 
 		//Return the new object
-		return $info;
+		if($sort == 'most-viewed'){
+			return $info->sortByDesc('views');
+		}else if($sort == 'latest'){
+			return $info->sortByDesc('created_at');
+		}
 	}
 
 	/**

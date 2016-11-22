@@ -2,7 +2,7 @@
 <div class="typesoverview-wrapper">
 	<h2 class="typesoverview-maintitle">{{ $title }}</h2>
 	@foreach($object as $item)
-		@if($loop->iteration <= 6)
+		@if($loop->iteration <= 3)
 			<a href="/" class="typesoverview-item">
 				<section class="typesoverview-item-wrapper">
 					<figure class="image-wrapper">
