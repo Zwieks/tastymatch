@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddImageIdAgendasTable extends Migration
+class AddKeywordsToEventsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddImageIdAgendasTable extends Migration
      */
     public function up()
     {
-        Schema::table('agendas', function (Blueprint $table) {
-            $table->string('images_id');
+        Schema::table('events', function (Blueprint $table) {
+            $table->string('keywords');
         });
     }
 
@@ -25,8 +25,8 @@ class AddImageIdAgendasTable extends Migration
      */
     public function down()
     {
-        Schema::table('agendas', function (Blueprint $table) {
-             $table->dropColumn('images_id');
+        Schema::table('events', function (Blueprint $table) {
+            $table->dropColumn('keywords');
         });
     }
 }

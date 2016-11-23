@@ -32,3 +32,4 @@
 @include('pages.homepage.templates.overview', ['object' => $latest_events, 'title' => lang::get('overviewitems.latest-events-title')])
 
 {{--{{ $user }}--}}
+{{ $locations }}

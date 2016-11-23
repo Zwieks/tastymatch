@@ -54,8 +54,7 @@ class Search extends Model
 			// Using the Laravel Scout syntax to search the products table EVENT.
 			$posts_event = Event::
 			select('name', 'id')
-				->where('name', 'LIKE', '%' . $term . '%')
-				->orWhere('description', 'LIKE', '%' . $term . '%')
+				->whereRaw("FIND_IN_SET('".$term."',keywords)")
 				->take(5)->get();
 			$posts_event = json_decode($posts_event);
 

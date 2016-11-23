@@ -42,7 +42,7 @@ function set_locations(db_locations){
     var locations = [];
 
     for (var i = 0; i < db_locations.length; i++) { 
-       locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, db_locations[i].file]);
+       locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, db_locations[i]['images'][0].file]);
     }
 
     console.log(locations);
@@ -64,7 +64,7 @@ function add_markers(map,locations){
             contentString = '<div class="infowindow-wrapper">'+
               '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
               '<div class="text-wrapper">'+
-              '<h3 class="firstHeading">'+locations[i][0]+'</h1>'+
+              '<h3 class="firstHeading">'+locations[i][0]+'</h3>'+
               '</div>'+
               '</div>';
 

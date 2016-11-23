@@ -41,7 +41,7 @@ class UserController extends Controller
 
             //Get the Google Maps locations from foodstands, entertainers and events
             $locations = GoogleMaps::getAllAgedaItemLocations($request);
-    
+
             //Get the user information
             $user = $request->session()->get('user.global');
 
