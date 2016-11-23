@@ -14,13 +14,26 @@ class SearchController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
-    {
+    public function index(Request $request){
+
         //Get user country
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 
         //Get the search results
         $results =  Search::getSearchResults($request);
+
+        return view('auth.search')->with('results', $results);
+    }
+
+    /**
+     * Display a autocomplete list.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function autocomplete(Request $request){
+
+        //Get the search results
+        $results =  Search::getAutoCompleteResults($request);
 
         return view('auth.search')->with('results', $results);
     }

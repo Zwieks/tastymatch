@@ -1,0 +1,22 @@
+/* default form elements */
+[type=text],
+[type=email],
+[type=tel],
+[type=password],
+[type=number],
+[type=search],
+[type=date],
+[type=datetime],
+[type=datetime-local],
+[type=month],
+[type=time],
+[type=week],
+[type=url],
+textarea,
+select,
+button {
+	&:focus {
+		outline: 0;
+		border-color: @borderColor;
+	}
+}

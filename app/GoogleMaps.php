@@ -21,5 +21,5 @@ class GoogleMaps extends Model
             ->get();
 
         return $locations;   		
-	}	
+	}
 }

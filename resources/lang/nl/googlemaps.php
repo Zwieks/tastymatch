@@ -5,4 +5,5 @@ return [
 	'maptitle-foodstands' => 'Bekijk waar de foodstands vandaag staan',
 	'maptitle-entertainers' => 'Bekijk waar de entertainers vandaag zijn',
 	'filter-show' => 'Toon',
+	'filter-map-label' => 'Zoek op de kaart',
 ];

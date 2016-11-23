@@ -26,6 +26,24 @@ class AjaxController extends Controller
     }
 
     /**
+     * AUTOCOMPLETE
+     * Get the search results from the AJAX request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getAutoComplete(Request $request)
+    {
+        if($this->checkAjaxRequest($request) == true){
+            //Perform the search
+            $results = Search::getAutoCompleteResults($request);
+
+            //Return the view
+            $returnHTML = view('ajax.search')->with('results', $results)->render();
+            return response()->json(array('success' => true, 'html'=>$returnHTML));
+        }
+    }
+
+    /**
      * Checks if the request is indeed AJAX
      *
      * @return true or false

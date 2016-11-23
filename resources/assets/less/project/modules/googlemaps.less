@@ -102,6 +102,29 @@
 	.justify-content(center);
 	margin-top: -@spacing*2;
 	margin-bottom: @spacing*2;
+
+	fieldset{
+		margin-bottom: @spacing*1.3;
+
+		&:last-child{
+			margin-bottom:0;
+		}
+	}
+
+	.form-input-textfield{
+		margin-bottom: 0;
+		width: 100%;
+		position: relative;
+
+		input{
+			padding-right:@spacing*1.5;
+		}
+
+		span{
+			.centerY;
+			right:@spacing/2;
+		}
+	}
 }
 
 .google-maps-filter{
@@ -131,4 +154,11 @@
 	    	margin-bottom: 0;
 	    }
     }
+
+	.ajax-autocomplete-wrapper{
+		top:calc(100% ~'-' @spacing);
+		width: auto;
+		right: @spacing/2;
+		left: @spacing/2;
+	}
 }
