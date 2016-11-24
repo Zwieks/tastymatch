@@ -16,7 +16,6 @@ class GoogleMapsController extends Controller
     public function getAllMarkerLocations(Request $request)
     {
         $locations = GoogleMaps::getAllAgedaItemLocations($request);
-
         return $locations;
     }
 

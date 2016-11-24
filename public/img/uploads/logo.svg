@@ -7,12 +7,11 @@
 	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
 	 x="0px" y="0px" width="182px" height="55px" viewBox="8.5 4 182 55" enable-background="new 8.5 4 182 55" xml:space="preserve">
 
-<style>
-	@font-face {
-	    font-family: "Open Sans";
-	    src: url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600');
-	}
-</style>
+<defs>
+  <style type="text/css">
+    @import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600');
+ </style>
+</defs>
 
 <rect fill="#FFFFFF" width="197.75" height="63.75"/>
 <circle fill="#E3262E" cx="35.539" cy="31.999" r="25.071"/>

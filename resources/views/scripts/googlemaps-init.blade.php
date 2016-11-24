@@ -6,10 +6,9 @@
 
 function initMap() {
     //All the database locations
+
     var db_locations = {!! $locations !!};
-
-    var locations = set_locations(db_locations);
-
+console.log(db_locations);
     //User country
     var country = "{!! strtolower(urlencode(str_replace(' ', '_', getUserCountry()))) !!}";
 
@@ -33,19 +32,39 @@ function initMap() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    add_markers(map,locations);
+    //Check if there are Events
+    if( db_locations.events.length != 0 && db_locations.constructor === Object){
+        var locations = set_locations(db_locations.events);
+        add_markers(map,locations);
+    }
+
+    //Check if there are Foodstands
+    if( db_locations.foodstands.length != 0 && db_locations.constructor === Object){
+        var locations = set_locations(db_locations.foodstands);
+        add_markers(map,locations);
+    }
+
+    //Check if there are Entertainers
+    if( db_locations.entertainers.length != 0 && db_locations.constructor === Object){
+        var locations = set_locations(db_locations.entertainers);
+        add_markers(map,locations);
+    }
 }
 
 function set_locations(db_locations){
     var objectCount = Object.keys(db_locations).length;
-
     var locations = [];
 
-    for (var i = 0; i < db_locations.length; i++) { 
-       locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, db_locations[i]['images'][0].file]);
-    }
+    for (var i = 0; i < db_locations.length; i++) {
 
-    console.log(locations);
+        if (db_locations[i]['images'].length == 0){
+            db_locations[i]['images'][0] = {
+                file: 'logo.svg'
+            }
+        }
+
+        locations.push([db_locations[i].description, db_locations[i].lat, db_locations[i].long, db_locations[i]['images'][0].file]);
+    }
 
     return locations;
 }
