@@ -19,13 +19,13 @@ function initMap() {
     var iconBase = '/img/googlemaps/markers/';
     var icons = {
         events: {
-            icon: iconBase + 'events.png'
+            icon: iconBase + 'events-50.png'
         },
         foodstands: {
-            icon: iconBase + 'foodstands.png'
+            icon: iconBase + 'foodstands-50.png'
         },
         entertainers: {
-            icon: iconBase + 'entertainers.png'
+            icon: iconBase + 'entertainers-50.png'
         }
     };
 
@@ -49,19 +49,19 @@ function initMap() {
     //Check if there are Events
     if( db_locations.events.length != 0 && db_locations.constructor === Object){
         var locations = set_locations(db_locations.events);
-        add_markers(map,locations);
+        add_markers(map,locations,icons.events.icon);
     }
 
     //Check if there are Foodstands
     if( db_locations.foodstands.length != 0 && db_locations.constructor === Object){
         var locations = set_locations(db_locations.foodstands);
-        add_markers(map,locations);
+        add_markers(map,locations,icons.foodstands.icon);
     }
 
     //Check if there are Entertainers
     if( db_locations.entertainers.length != 0 && db_locations.constructor === Object){
         var locations = set_locations(db_locations.entertainers);
-        add_markers(map,locations);
+        add_markers(map,locations,icons.entertainers.icon);
     }
 }
 
@@ -83,13 +83,19 @@ function set_locations(db_locations){
     return locations;
 }
 
-function add_markers(map,locations){
+function add_markers(map,locations,icon){
     var infowindow = new google.maps.InfoWindow({});
     var marker, i, contentString;
+
+    var image = {
+        url: icon,
+        scaledSize : new google.maps.Size(30, 30)
+    };
 
     for (i = 0; i < locations.length; i++) {
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
+            icon: image,
             map: map
         });
 
