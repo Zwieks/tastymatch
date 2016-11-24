@@ -8,12 +8,26 @@ function initMap() {
     //All the database locations
 
     var db_locations = {!! $locations !!};
-console.log(db_locations);
+
     //User country
     var country = "{!! strtolower(urlencode(str_replace(' ', '_', getUserCountry()))) !!}";
 
     //User city
     var city = {!! json_encode($user['city']) !!};
+
+    //Custom markers
+    var iconBase = '/img/googlemaps/markers/';
+    var icons = {
+        events: {
+            icon: iconBase + 'events.png'
+        },
+        foodstands: {
+            icon: iconBase + 'foodstands.png'
+        },
+        entertainers: {
+            icon: iconBase + 'entertainers.png'
+        }
+    };
 
     //Set to use to center map based on user info
     geocoder = new google.maps.Geocoder();
