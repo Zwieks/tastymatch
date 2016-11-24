@@ -28,7 +28,7 @@ class CreateGlobalInfoTable extends Migration
             $table->string('kvk');
             $table->string('url_nl');
             $table->string('url_en');
-            $table->string('logo');
+            $table->string('logo');                       
             $table->timestamps();
         });   
     }
