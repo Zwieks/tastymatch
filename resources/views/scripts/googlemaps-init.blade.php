@@ -4,6 +4,9 @@
     // parameter when you first load the API. For example:
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
+//Markers
+var markers = [];
+
 function initMap() {
     //All the database locations
 
@@ -66,7 +69,6 @@ function initMap() {
 }
 
 function set_locations(db_locations){
-    var objectCount = Object.keys(db_locations).length;
     var locations = [];
 
     for (var i = 0; i < db_locations.length; i++) {
@@ -99,6 +101,8 @@ function add_markers(map,locations,icon){
             map: map
         });
 
+        markers.push(marker);
+
         google.maps.event.addListener(marker, 'click', (function (marker, i, contentString) {
             contentString = '<div class="infowindow-wrapper">'+
               '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
@@ -113,5 +117,17 @@ function add_markers(map,locations,icon){
             }
         })(marker, i));
     }
+}
+
+// Sets the map on all markers in the array.
+function setMapOnAll(map) {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(map);
+    }
+}
+
+// Removes the markers from the map, but keeps them in the array.
+function clearMarkers() {
+    setMapOnAll(null);
 }
 </script>
