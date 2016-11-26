@@ -45,7 +45,7 @@ jQuery(window).on('load', function(){
 		});
 	}
 
-	// Init Kirra and Google Analytics tracker
+	// Init Google Analytics tracker
 	jQuery(window).analyticsTracker();
 
 }).on('resize scroll', function(){

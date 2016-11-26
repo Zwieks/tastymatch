@@ -5,9 +5,9 @@ jQuery('#search-bar').on('keyup', function(e){
 });
 
 //Autocomplete GoogleMaps AJAX request and normal handling
-jQuery('#js-filter-input').on('keyup', function(e){
-	ajaxAutocomplete($(this).val());
-});
+// jQuery('#js-filter-input').on('keyup', function(e){
+// 	ajaxAutocomplete($(this).val());
+// });
 
 //Search using Ajax
 function ajaxSearch($search_input) {

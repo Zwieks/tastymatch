@@ -14,7 +14,7 @@
 			setTimeout(function() {
 				var $parents = $field.parents('li');
 				$field.val() ? $parents.addClass('has-value') : $parents.removeClass('has-value');
-			}, 0); // Timeout so this is executed after the Kirra forms Javascript
+			}, 0); // Timeout so this is executed
 		}
 
 		// These children are also specified in /css/projects/components/form-animating-label.less
