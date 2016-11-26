@@ -4,10 +4,16 @@
     // parameter when you first load the API. For example:
     // <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_API_KEY&libraries=places">
 
-//Markers
+//Maps Variables
 var markers = [];
 var db_locations = {!! $locations !!};
 var locations_object = db_locations;
+var geocoder;
+var map;
+var infowindow;
+
+//animation
+var animation;
 
 //User country
 var country = "{!! strtolower(urlencode(str_replace(' ', '_', getUserCountry()))) !!}";
@@ -29,13 +35,12 @@ var icons = {
     }
 };
 
-var geocoder;
-var map;
-var infowindow;
-
 function initMap() {
     //Set to use to center map based on user info
     geocoder = new google.maps.Geocoder();
+
+    //Set animation
+    animation = false;
 
     //Center the map based on user city and country
     geocoder.geocode( {'address' : country+','+city}, function(results, status) {
@@ -50,13 +55,13 @@ function initMap() {
         mapTypeId: google.maps.MapTypeId.ROADMAP
     });
 
-    createMap(map);
+    createMap(map,animation);
 }
 
-function createMap(map){
+function createMap(map,animation){
     for (var key in locations_object) {
         var locations = set_locations(locations_object[key]);
-        add_markers(map,locations,icons[key].icon);
+        add_markers(map,locations,icons[key].icon,animation);
     }
 }
 
@@ -83,9 +88,15 @@ function set_locations(object){
     return locations;
 }
 
-function add_markers(map,locations,icon){
+function add_markers(map,locations,icon,animation){
     infowindow = new google.maps.InfoWindow({});
     var marker, i, contentString;
+
+    if(animation == true){
+        var animation_type = google.maps.Animation.DROP;
+    }else{
+        var animation_type = null;
+    }
 
     var image = {
         url: icon,
@@ -96,7 +107,7 @@ function add_markers(map,locations,icon){
         marker = new google.maps.Marker({
             position: new google.maps.LatLng(locations[i][1], locations[i][2]),
             icon: image,
-            animation: google.maps.Animation.DROP,
+            animation: animation_type,
             map: map
         });
 
@@ -139,6 +150,7 @@ function deleteMarkers() {
 // Markers filtering magic
 function filterObject(){
     locations_object = {};
+    animation = true;
     var string = document.getElementById('js-filter-input').value;    
     var i = 0;
 
@@ -147,15 +159,27 @@ function filterObject(){
         var obj = db_locations[key];
         var detail_object = [];
         for (var prop in obj) {    
-            if(obj[prop]['name'].toUpperCase().includes(string.toUpperCase())){ 
+
+            var str = string.toUpperCase();
+            var split_str = obj[prop]['keywords'].toUpperCase().split(",");
+            var in_keywords = false;
+
+            if (split_str.indexOf(str).length != 0 && split_str.indexOf(str) !== -1) {
+                in_keywords = true;
+            }
+
+            if(obj[prop]['name'].toUpperCase().includes(str) || in_keywords == true){ 
                 detail_object.push(obj[prop]);
                 locations_object[key] = detail_object;
             }      
         }
     }
 
+    //Remove all the markers
     deleteMarkers();
-    createMap(map);
+
+    //Add the new markers on the map
+    createMap(map,animation);
 }
 
 window.onload = function (map) { 
@@ -169,6 +193,8 @@ window.onload = function (map) {
 
     //Filter on key up
     document.getElementById('js-filter-input').onkeyup=function(){
+
+        //Filter the object based on the user input
         filterObject();   
     };
 }

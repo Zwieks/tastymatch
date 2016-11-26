@@ -24,9 +24,7 @@ class GoogleMaps extends Model
 
 	//Get all the EVENT locations based on the user AGENDA
 	public static function getAllEventLocations(){
-		$locations = DB::table('agendas')
-			->where('type_id', 1)
-			->get();
+		$locations = DB::table('events')->get();
 
 		//Get the images
 		$locations = images::getMapsImages($locations);
