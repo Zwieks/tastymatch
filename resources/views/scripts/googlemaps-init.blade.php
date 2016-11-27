@@ -10,6 +10,9 @@
     var map;
     var infowindow;
 
+    //Matching words for autocomplete
+    var matching_words = {};
+
     //animation
     var animation;
 
@@ -153,10 +156,10 @@
         locations_object = {};
         animation = true;
         checkedValues = [];
+        matching_words = {};
         var inputElements = document.getElementsByClassName('form-input-checkbox');
         var string = document.getElementById('js-filter-input').value;    
         var i = 0;
-        var matching_words = {};
 
         //Get the checkbox filters
         for(var count=0; count < inputElements.length; ++count){
@@ -185,16 +188,23 @@
                     for(var count=0; count < split_str_keywords.length; ++count){
                         if (split_str_keywords[count].toUpperCase().search(str) !== -1) {
                             in_keywords = true;
-                            matching_array_keywords.push(split_str_keywords[count]);
-                            matching_words['keywords'] = matching_array_keywords;
+
+                            //Put the matching keyword in the array    
+                            if(split_str_keywords[count] != ''){
+                                matching_array_keywords.push(split_str_keywords[count]);
+                                matching_words['keywords'] = matching_array_keywords;
+                            }
                         }    
                     }
 
                     if(obj[prop]['name'].toUpperCase().includes(str)){
                         in_name = true;
-                        matching_array_name.push(obj[prop]['name']);
 
-                        matching_words[key] = matching_array_name;
+                        //Put the matching name in the array
+                        if(obj[prop]['name'] != ''){
+                            matching_array_name.push(obj[prop]);
+                            matching_words[key] = matching_array_name;
+                        }    
                     }
 
                     if(in_name == true || in_keywords == true){ 
@@ -206,7 +216,7 @@
         }
 
         //Show autocomplete list
-        createAutoComplete(matching_words);
+        createAutoComplete();
 
         //Remove all the markers
         deleteMarkers();
@@ -216,13 +226,42 @@
     }
 
     //Create the autocomplete list
-    function createAutoComplete(matching_words){
-        console.log(matching_words);
-    }
+    function createAutoComplete(){
+        var container = $('<div class="autocomplete-wrapper" />');
+        var section = '';
+        var title = '';
+        var ul = '';
+        var li = '';
 
-    // function findMatchingWords(){
-    //     db_locations
-    // }
+        $.each( matching_words, function( key, value ) {
+            section = $('<section class="autocomplete-content" />');
+            title = $('<h3>'+key+'</h3>');
+            ul = $('<ul class="autocomplete-items" />');
+            section.append(title);
+
+            //Loop through the objects
+            $.each( value.slice(0,3), function( key, value ) {
+                //Check if the value is a keyword or an object, when the value is undefined is is a keyword
+                if(typeof value['name'] != 'undefined'){
+                    li = $('<li class="autocomplete-item">'+value['name']+'</li>');
+                }else{
+                     li = $('<li class="autocomplete-item">'+value+'</li>');
+                }   
+
+                //Put the item in the list
+                ul.append(li);
+            });  
+
+            section.append(ul);
+
+            //Put the HTML in the container
+            container.append(section);
+        });
+
+        $('html').addClass('open-autocomplete');
+        $('#js-autocomplete-results .mCSB_container').append(container);
+
+    }
 
     window.onload = function (map) { 
         //Prevent submitting form on hitting ENTER
@@ -246,5 +285,12 @@
             //Filter the object based on the user input
             filterObject();   
         });
+
+        if($('#js-autocomplete-results').length) {
+            $("#js-autocomplete-results").mCustomScrollbar({
+                theme:"light-3"
+            });
+        }
+
     }
 </script>

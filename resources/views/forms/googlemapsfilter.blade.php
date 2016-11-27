@@ -31,6 +31,6 @@
 				<span data-icon="y"></span>
 			</li>
 		</ul>
-		<ul class="autocomplete-wrapper mCustomScrollbar" id="js-autocomplete-results"></ul>
+		<ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
 	</fieldset>
 </form>

@@ -5,7 +5,7 @@
 }
 
 .ajax-search-wrapper,
-.ajax-autocomplet-wrapper{
+.autocomplete{
     .transition();
     opacity: 0;
     visibility: hidden;
@@ -31,6 +31,11 @@
     }
 }
 
+.autocomplete{
+    width: 100%;
+    z-index: 2;
+}
+
 .ajax-search-item{
     background: @darkGrey;
     padding:@spacing/2;
@@ -42,8 +47,14 @@
         overflow: hidden;
     }
 
-    .ajax-search-wrapper,
-    .ajax-autocomplete-wrapper{
+    .ajax-search-wrapper{
+        opacity: 1;
+        visibility: visible;
+    }
+}
+
+.open-autocomplete{
+     .autocomplete{
         opacity: 1;
         visibility: visible;
     }

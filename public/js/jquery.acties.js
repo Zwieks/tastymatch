@@ -17,19 +17,35 @@ jQuery(document).ready(function($){
 
 	$doc.on('click', function(e){
 		var $search_box = $('#js-page-searchbox, #js-ajax-search-results'),
-			$search_bar = $('#search-bar');
+			$search_bar = $('#search-bar'),
+			$autocomplete = $('#js-googemap-filter, #js-autocomplete-results'),
+			$autocomplete_bar = $('#js-filter-input');
+
 		// Close when clicked outside search container
 		if( !$search_box.is(e.target) && $search_box.has(e.target).length === 0){
 			$('html').removeClass('open-search');
 		}
+
+		// Close when clicked outside autocomplete container
+		if( !$autocomplete.is(e.target) && $autocomplete.has(e.target).length === 0){
+			$('html').removeClass('open-autocomplete');
+		}
+
 		// Show search when there is a click on the searchbar
 		if( $search_bar.is(e.target)){
 			$('html').addClass('open-search');
 		}
+
+		// Show search when there is a click on the autocomplete bar
+		if( $autocomplete_bar.is(e.target)){
+			$('html').addClass('open-autocomplete');
+		}
+
 	}).on('keyup', function(e){
 		// Close with escape button
-		if(e.keyCode === 27)
-			$('html').removeClass('open-search');
+		if(e.keyCode === 27){
+			$('html').removeClass('open-search, open-autocomplete');
+		}
 	});
 });
 
