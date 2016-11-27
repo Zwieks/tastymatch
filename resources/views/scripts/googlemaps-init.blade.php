@@ -9,6 +9,7 @@
     var geocoder;
     var map;
     var infowindow;
+    var string;
 
     //Matching words for autocomplete
     var matching_words = {};
@@ -157,8 +158,8 @@
         animation = true;
         checkedValues = [];
         matching_words = {};
+        string = $.trim(document.getElementById('js-filter-input').value);    
         var inputElements = document.getElementsByClassName('form-input-checkbox');
-        var string = document.getElementById('js-filter-input').value;    
         var i = 0;
 
         //Get the checkbox filters
@@ -258,8 +259,13 @@
             container.append(section);
         });
 
-        $('html').addClass('open-autocomplete');
-        $('#js-autocomplete-results .mCSB_container').append(container);
+        if(string == ''){
+            $('html').removeClass('open-autocomplete');
+        }else{
+            $('html').addClass('open-autocomplete');
+            $('#js-autocomplete-results .mCSB_container').html(container);    
+        }
+
 
     }
 
@@ -274,14 +280,12 @@
 
         //Using jQuery to handle the inputfield on key-up
         $( "#js-filter-input" ).keyup(function() {
-
             //Filter the object based on the user input
             filterObject();   
         });
 
         //Using jQuery to handle the checkbox filter
         $('.checkboxfilter').change(function() {
-
             //Filter the object based on the user input
             filterObject();   
         });
