@@ -8,18 +8,18 @@
 			</li>	
 
 	        <li class="form-input-checkbox">
-	            <input class="checkbox" type="checkbox" value="1" name="filter_type" id="filter-1" checked>
-	            <label for="filter-1">{{ Lang::get('products.product-events') }}</label>
+	            <input class="checkbox checkboxfilter" type="checkbox" value="events" name="filter_type" id="filter-0" checked>
+	            <label for="filter-0">{{ Lang::get('products.product-events') }}</label>
 	        </li>
 
 	        <li class="form-input-checkbox">
-	            <input class="checkbox" type="checkbox" value="1" name="filter_type" id="filter-2" checked>
-	            <label for="filter-2">{{ Lang::get('products.product-foodstands') }}</label>
+	            <input class="checkbox checkboxfilter" type="checkbox" value="foodstands" name="filter_type" id="filter-1" checked>
+	            <label for="filter-1">{{ Lang::get('products.product-foodstands') }}</label>
 	        </li>
 
 	       	<li class="form-input-checkbox">
-	            <input class="checkbox" type="checkbox" value="1" name="filter_type" id="filter-3" checked>
-	            <label for="filter-3">{{ Lang::get('products.product-entertainers') }}</label>
+	            <input class="checkbox checkboxfilter" type="checkbox" value="entertainers" name="filter_type" id="filter-2" checked>
+	            <label for="filter-2">{{ Lang::get('products.product-entertainers') }}</label>
 	        </li>
 		</ul>	
 	</fieldset>
@@ -31,6 +31,6 @@
 				<span data-icon="y"></span>
 			</li>
 		</ul>
-		<ul class="ajax-autocomplete-wrapper mCustomScrollbar" id="js-ajax-autocomplete-results"></ul>
+		<ul class="autocomplete-wrapper mCustomScrollbar" id="js-autocomplete-results"></ul>
 	</fieldset>
 </form>

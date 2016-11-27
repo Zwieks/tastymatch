@@ -26,7 +26,7 @@ class AddKeywordsToFoodstandsTable extends Migration
     public function down()
     {
         Schema::table('foodstands', function (Blueprint $table) {
-            //
+            $table->dropColumn('keywords');
         });
     }
 }

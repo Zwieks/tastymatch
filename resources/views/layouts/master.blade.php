@@ -31,8 +31,6 @@
         </div>   
 
         <div class="page-mobile-nav-container">
-            <!-- The 'for' of the labels correspondents with the 'id' of the input below the body-tag -->
-            <!-- Responsive navigation is handles with Less in the inav.less files -->
             <label class="nav-toggle" id="js-nav-toggle" for="js-nav-trigger"><span class="wrapper"><span></span></span><strong>{_ 'Menu'}</strong></label>
             <div class="nav-wrapper" id="js-nav-wrapper"></div>
             <div class="nav-closer" id="js-nav-closer"></div>
@@ -40,8 +38,8 @@
 
         <!-- JAVASCRIPT -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
-<!--         {render style='add-to-bottom'}
-        {render style='google-analytics'} -->
+        {{--render style='add-to-bottom'--}}
+       {{--render style='google-analytics'--}}
         @include('pages.basicpage.scripts')
         @yield('page-scripts')
     </body>
