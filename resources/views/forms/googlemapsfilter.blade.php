@@ -26,7 +26,7 @@
 	<fieldset>
 		<ul class="velden">
 			<li class="form-input-textfield">
-				<input class='text' type="text" name="filter_keywords" id="js-filter-input" itemprop="query-input">
+				<input class='text' type="text" name="filter_keywords" id="js-filter-input" autocomplete="off" itemprop="query-input">
 				<label for="js-filter-input">{{ Lang::get('googlemaps.filter-map-label') }}</label>
 				<span data-icon="y"></span>
 			</li>

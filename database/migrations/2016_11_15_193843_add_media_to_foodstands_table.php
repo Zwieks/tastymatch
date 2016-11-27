@@ -14,8 +14,8 @@ class AddMediaToFoodstandsTable extends Migration
     public function up()
     {
         Schema::table('foodstands', function (Blueprint $table) {
-            $table->integer('images_id');
-            $table->integer('videos_id');
+            $table->string('images_id');
+            $table->string('videos_id');
         });
     }
 

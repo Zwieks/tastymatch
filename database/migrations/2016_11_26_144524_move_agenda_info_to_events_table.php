@@ -17,8 +17,8 @@ class MoveAgendaInfoToEventsTable extends Migration
             $table->string('location');
             $table->decimal('long', 10, 7);
             $table->decimal('lat', 10, 7);
-            $table->dateTime('time_start');
-            $table->dateTime('time_end');
+            $table->dateTime('time_start')->nullable();
+            $table->dateTime('time_end')->nullable();
             $table->string('keywords');
         });
     }
