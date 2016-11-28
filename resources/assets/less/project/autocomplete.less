@@ -5,19 +5,18 @@
     // width: 50%;
     // max-height: 15vh;
     // overflow-y: auto;
-    background: @white;
-    padding:0 @spacing/2 @spacing/2;
+    background: @darkGreyTrans;
+    padding:@spacing/2 @spacing/2 @spacing/2 0;
 }
 
 .autocomplete{
 	.box-shadow();
 
-	margin-top: -@spacing/4;
-
 	h3{
 		margin-bottom: @spacing/4;
 		text-transform: uppercase;
     	font-size: @smallestHeadingSize;
+		color:@white;
 	}
 }
 
@@ -39,12 +38,13 @@
 
 	overflow: hidden;
 	margin-bottom: @spacing/4;
-	background: @lightGrey;
+	background: @autoCompleteItemColor;
+	min-height: @spacing*2;
 	cursor:pointer;
 
 	&:hover,
 	&:focus{
-		color:@primColor;
+		background:@autoCompleteItemHoverColor;
 	}
 
 	&:last-child{
@@ -66,5 +66,6 @@
 	.autocomplete-name{
 		margin-bottom: 0;
 		font-size: @XSmallHeadingSize;
+		color:@white;
 	}
 }

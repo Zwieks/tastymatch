@@ -6,4 +6,5 @@ return [
 	'maptitle-entertainers' => 'See where the entertainers are today',
 	'filter-show' => 'Show',
 	'filter-map-label' => 'Find on map',
+	'filter-keywords-title' => 'Events seeking for',
 ];

@@ -237,9 +237,19 @@
         var img = '';
         var div = '';
 
-        $.each( matching_words, function( key, value ) {
+        $.each( matching_words, function( type, value ) {
             section = $('<section class="autocomplete-content" />');
-            title = $('<h3>'+key+'</h3>');
+            if(type == 'events'){
+                var title = '{!! Lang::get('products.product-events') !!}';
+            }else if(type == 'foodstands'){
+                var title = '{!! Lang::get('products.product-foodstands') !!}';
+            }else if(type == 'entertainers'){
+                var title = '{!! Lang::get('products.product-entertainers') !!}';
+            }else{
+                var title = '{!! Lang::get('googlemaps.filter-keywords-title') !!}';
+            }
+
+            title = $('<h3>'+title+'</h3>');
             ul = $('<ul class="autocomplete-items" />');
             section.append(title);
 
@@ -248,23 +258,25 @@
                 //Check if the value is a keyword or an object, when the value is undefined is is a keyword
                 li = $('<li class="autocomplete-item" />');
                 div = $('<div class="autocomplete-text" />');
-                figure = $('<figure class="image-wrapper image-2-3" />');
-
-                img = $('<img class="image" src="/img/uploads/'+value['images'][0].file+'">');
 
                 if(typeof value['name'] != 'undefined'){
                     h4 = $('<h4 class="autocomplete-name">'+value['name']+'</h4>');
                 }else{
                      h4 = $('<h4 class="autocomplete-name">'+value+'</h4>');
-                }   
-                //Add the image to the image wrapper
-                figure.append(img);
+                }
+
+                //Check if there is an image or not, keywords dont have any.
+                if(type != 'keywords'){
+                    //Add the image to the image wrapper
+                    figure = $('<figure class="image-wrapper image-2-3" />');
+                    img = $('<img class="image" src="/img/uploads/'+value['images'][0].file+'">');
+                    figure.append(img);
+                    //Add the image wrapper
+                    li.append(figure);
+                }
 
                 //Add the header to the text wrapper
                 div.append(h4);
-
-                //Add the image wrapper
-                li.append(figure);
 
                 //Add the text wrapper
                 li.append(div);
@@ -284,7 +296,7 @@
             $('html').removeClass('open-autocomplete');
         }else{
             $('html').addClass('open-autocomplete');
-            $('#js-autocomplete-results .mCSB_container').html(container);    
+            $('#js-autocomplete-results .mCSB_container').html(container);
         }
     }
 
@@ -307,6 +319,15 @@
         $('.checkboxfilter').change(function() {
             //Filter the object based on the user input
             filterObject();   
+        });
+
+        //When filter is open handle the type onclick
+        $(document).on("click",".autocomplete-item",function() {
+            //Get the keyword or name and replace it in the input field
+            $('#js-filter-input').val($(this).find('.autocomplete-name').text()).trigger("change");
+
+            //Filter the object based on the user input
+            filterObject();
         });
 
         if($('#js-autocomplete-results').length) {
