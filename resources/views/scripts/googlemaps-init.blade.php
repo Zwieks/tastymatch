@@ -293,7 +293,6 @@
 
         //Check if the search string in empty
         if(string == ''){
-            alert('leeg');
             $('html').removeClass('open-autocomplete');
         }else{
             $('html').addClass('open-autocomplete');
