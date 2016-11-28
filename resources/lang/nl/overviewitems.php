@@ -1,6 +1,7 @@
 <?php
 
 return [
+	'user-items-title' => 'Mijn aangemaakte items',
 
     'mostviewed-events-title' => 'Populaire evenementen',
     'mostviewed-entertainers-title' => 'Populaire entertainers',

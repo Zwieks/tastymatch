@@ -19,6 +19,12 @@ class Images extends Model
 			$ids = GlobalInfo::explodeString($item['images_id']);
 
 			$item['images'] = images::whereIn('id', $ids)->get();
+
+			//Check if the image array is empty, ifso put our placeholder in the object
+			if(empty($item['images'][0])){
+				$object = (object) ['file' => 'logo.svg', 'caption' => 'TastyMatch logo', 'description' => ''];
+				$item['images'][0] = $object;
+			}
 		}
 
 		return $object;

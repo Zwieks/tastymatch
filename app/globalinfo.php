@@ -24,6 +24,22 @@ class GlobalInfo extends Model
 	}
 
 	/**
+	 * Merge the user items into one json object
+	 *
+	 * @var object
+	 */
+	public static function MergeUserProducts($user){
+
+		//Decode the user json
+		$array = json_decode($user);
+
+		//Merge the EVENTS, FOODSTANDS and ENTERTAINERS arrays and create a new json object
+		$object = array_merge($array->events, $array->foodstands, $array->entertainers);
+
+		return $object;
+	}
+
+	/**
 	 * Get the global information based on product type 
 	 * Used on overviewpages
 	 *

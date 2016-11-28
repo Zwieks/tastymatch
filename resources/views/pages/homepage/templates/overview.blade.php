@@ -2,11 +2,11 @@
 <div class="typesoverview-wrapper">
 	<h2 class="typesoverview-maintitle">{{ $title }}</h2>
 	@foreach($object as $item)
-		@if($loop->iteration <= 3)
+		@if($loop->iteration <= 9)
 			<a href="/" class="typesoverview-item">
 				<section class="typesoverview-item-wrapper">
 					<figure class="image-wrapper">
-						<img class="image" src="/img/uploads/{{ $item->images->first()['file'] }}" alt="{{ $item->name }}"/>
+						<img class="image" src="/img/uploads/{{ reset($item->images)->file }}" alt="{{ $item->name }}"/>
 					</figure>
 					<div class="typesoverview-text-wrapper">
 						<h3 class="typesoverview-title">{{ $item->name }}</h3>

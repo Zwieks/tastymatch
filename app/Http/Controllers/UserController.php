@@ -45,20 +45,25 @@ class UserController extends Controller
             //Get the user information
             $user = $request->session()->get('user.global');
 
-            //Get most viewed events
-            $most_viewed_events = globalinfo::getProductOverviewInfo('events', 'most-viewed');
+            //Get the user items
+            $user_items = globalinfo::MergeUserProducts($user);
 
-            //Get most viewed foodstands
-            $most_viewed_foodstands = globalinfo::getProductOverviewInfo('foodstands', 'most-viewed');
+            // //Get most viewed events
+            // $most_viewed_events = globalinfo::getProductOverviewInfo('events', 'most-viewed');
 
-            //Get most viewed entertainers
-            $most_viewed_entertainers = globalinfo::getProductOverviewInfo('entertainers', 'most-viewed');
+            // //Get most viewed foodstands
+            // $most_viewed_foodstands = globalinfo::getProductOverviewInfo('foodstands', 'most-viewed');
 
-            //Get latest events
-            $latest_events = globalinfo::getProductOverviewInfo('events', 'latest');
+            // //Get most viewed entertainers
+            // $most_viewed_entertainers = globalinfo::getProductOverviewInfo('entertainers', 'most-viewed');
+
+            // //Get latest events
+            // $latest_events = globalinfo::getProductOverviewInfo('events', 'latest');
+
+            // //Get the u
 
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations','most_viewed_events','most_viewed_foodstands','most_viewed_entertainers','latest_events'));
+            return view('auth.home-loggedin', compact('user','locations','user_items'));
         }
         else{
             return view('auth.home');
