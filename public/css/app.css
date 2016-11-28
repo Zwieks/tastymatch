@@ -3502,6 +3502,9 @@ html .cookie-explanation {
   display: inline-block;
   width: auto;
 }
+.google-maps-filter .form-input-checkbox label {
+  cursor: pointer;
+}
 .google-maps-filter .form-label {
   padding-right: 1.2rem;
   font-weight: 800;

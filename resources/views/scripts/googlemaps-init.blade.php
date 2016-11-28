@@ -155,7 +155,6 @@
     // Markers filtering magic
     function filterObject(){
         locations_object = {};
-        animation = true;
         checkedValues = [];
         matching_words = {};
         string = $.trim(document.getElementById('js-filter-input').value);    
@@ -312,12 +311,14 @@
         //Using jQuery to handle the inputfield on key-up
         $( "#js-filter-input" ).keyup(function() {
             //Filter the object based on the user input
+            animation = false;
             filterObject();   
         });
 
         //Using jQuery to handle the checkbox filter
         $('.checkboxfilter').change(function() {
             //Filter the object based on the user input
+            animation = false;
             filterObject();   
         });
 
@@ -327,6 +328,7 @@
             $('#js-filter-input').val($(this).find('.autocomplete-name').text()).trigger("change");
 
             //Filter the object based on the user input
+            animation = true;
             filterObject();
         });
 
