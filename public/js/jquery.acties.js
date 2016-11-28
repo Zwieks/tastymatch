@@ -33,12 +33,16 @@ jQuery(document).ready(function($){
 
 		// Show search when there is a click on the searchbar
 		if( $search_bar.is(e.target)){
-			$('html').addClass('open-search');
+			if($search_bar.val() != '') {
+				$('html').addClass('open-search');
+			}
 		}
 
 		// Show search when there is a click on the autocomplete bar
 		if( $autocomplete_bar.is(e.target)){
-			$('html').addClass('open-autocomplete');
+			if($autocomplete_bar.val() != ''){
+				$('html').addClass('open-autocomplete');
+			}
 		}
 
 	}).on('keyup', function(e){
