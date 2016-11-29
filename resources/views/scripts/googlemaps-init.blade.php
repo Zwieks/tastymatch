@@ -66,7 +66,7 @@
     function createMap(map,animation){
         for (var key in locations_object) {
             var locations = set_locations(locations_object[key]);
-            add_markers(map,locations,icons[key].icon,animation);
+            add_markers(key,map,locations,icons[key].icon,animation);
         }
     }
 
@@ -86,16 +86,20 @@
                 object[i].lat, 
                 object[i].long, 
                 object[i]['images'][0].file, 
-                object[i].name
+                object[i].name,
+                object[i].slug
             ]);
         }
 
         return locations;
     }
 
-    function add_markers(map,locations,icon,animation){
+    function add_markers(key,map,locations,icon,animation){
         infowindow = new google.maps.InfoWindow({});
         var marker, i, contentString;
+
+        //Get the first URL part
+        var url = getEventUrl(key).toLowerCase();
 
         if(animation == true){
             var animation_type = google.maps.Animation.DROP;
@@ -122,7 +126,8 @@
                 contentString = '<div class="infowindow-wrapper">'+
                   '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
                   '<div class="text-wrapper">'+
-                  '<h3 class="firstHeading">'+locations[i][0]+'</h3>'+
+                  '<h3 class="firstHeading">'+locations[i][4]+'</h3>'+
+                  '<p>'+locations[i][0].substring(0,100)+'... <a href="'+url+'/'+locations[i][5]+'" target="_blank">{!! Lang::get('commons.more-info') !!}</a>'+'</p>'+
                   '</div>'+
                   '</div>';
 
@@ -225,6 +230,34 @@
         createMap(map,animation);
     }
 
+    function getEventUrl(key){
+        if(key == 'events'){
+            var title = '{!! Lang::get('products.product-event') !!}';
+        }else if(key == 'foodstands'){
+            var title = '{!! Lang::get('products.product-foodstand') !!}';
+        }else if(key == 'entertainers'){
+            var title = '{!! Lang::get('products.product-entertainer') !!}';
+        }else{
+            var title = '{!! Lang::get('googlemaps.filter-keywords-title') !!}';
+        }
+
+        return title;
+    }
+
+    function getEventTitle(type){
+        if(type == 'events'){
+            var title = '{!! Lang::get('products.product-events') !!}';
+        }else if(type == 'foodstands'){
+            var title = '{!! Lang::get('products.product-foodstands') !!}';
+        }else if(type == 'entertainers'){
+            var title = '{!! Lang::get('products.product-entertainers') !!}';
+        }else{
+            var title = '{!! Lang::get('googlemaps.filter-keywords-title') !!}';
+        }
+
+        return title;
+    }
+
     //Create the autocomplete list
     function createAutoComplete(){
         var container = $('<div class="autocomplete-wrapper" />');
@@ -238,15 +271,8 @@
 
         $.each( matching_words, function( type, value ) {
             section = $('<section class="autocomplete-content" />');
-            if(type == 'events'){
-                var title = '{!! Lang::get('products.product-events') !!}';
-            }else if(type == 'foodstands'){
-                var title = '{!! Lang::get('products.product-foodstands') !!}';
-            }else if(type == 'entertainers'){
-                var title = '{!! Lang::get('products.product-entertainers') !!}';
-            }else{
-                var title = '{!! Lang::get('googlemaps.filter-keywords-title') !!}';
-            }
+
+            var title = getEventTitle(type);
 
             title = $('<h3>'+title+'</h3>');
             ul = $('<ul class="autocomplete-items" />');

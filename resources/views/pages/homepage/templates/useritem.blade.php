@@ -2,7 +2,7 @@
 <div class="user-items-overview-wrapper">
 	<h2 class="user-items-maintitle">{{ $title }}</h2>
 	@foreach($object as $item)
-		<a href="/{{ $item->slug }}" class="user-item-wrapper">
+		<a href="/{{ $item->url }}/{{ $item->slug }}" class="user-item-wrapper">
 
 			<div class="user-item-image-wrapper">
 				<figure class="image-wrapper image-3-5">
@@ -21,7 +21,7 @@
 						<dt>Bekeken:</dt>
 						<dd>{{ $item->views }} keer</dd>
 						<dt>URL:</dt>
-						<dd>{{ URL::to('/')}}/{{ $item->slug  }}</dd>
+						<dd>{{ URL::to('/')}}/{{ $item->url }}/{{ $item->slug  }}</dd>
 						<dt>Aangemaakt op:</dt>
 						<dd>{{ Carbon\Carbon::parse($item->created_at)->format('d F Y') }}</dd>
 					</dl>

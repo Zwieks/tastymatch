@@ -33,6 +33,20 @@ class GlobalInfo extends Model
 		//Decode the user json
 		$array = json_decode($user);
 
+		//Get the sub URL
+		foreach ($array->events as $value) {
+			$value->url = strtolower(trans('products.product-event'));
+		}
+
+		foreach ($array->foodstands as $value) {
+			$value->url = strtolower(trans('products.product-foodstand'));
+		}
+
+		foreach ($array->entertainers as $value) {
+			$value->url = strtolower(trans('products.product-entertainer'));
+		}
+
+
 		//Merge the EVENTS, FOODSTANDS and ENTERTAINERS arrays and create a new json object
 		$object = array_merge($array->events, $array->foodstands, $array->entertainers);
 

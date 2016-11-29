@@ -15,14 +15,30 @@
 	width: 100%;
 
 	.text-wrapper{
-		width: 50%;
-		padding: 0 @spacing/2;
+		width: @spacing*10;
+		padding: 0;
 	}
 
 	.image-wrapper{
 		width: @spacing*4;
 		margin-bottom: 0;
+		margin-right: @spacing/2;
 		position: relative;
+	}
+
+	p{
+		margin-bottom: 0;
+	}
+
+	a{
+		&:hover,
+		&:focus{
+			text-decoration: underline;
+		}
+	}
+
+	.firstHeading{
+		margin-bottom: @spacing/4;
 	}
 }
 
