@@ -4051,6 +4051,9 @@ form ol {
   text-transform: uppercase;
   font-size: 1.6rem;
 }
+.user-item-text p {
+  margin-bottom: 0;
+}
 .user-item-info {
   width: 33.33333333%;
   border-left: 1px solid #e5e5e5;
