@@ -12,9 +12,9 @@
 						<h3 class="typesoverview-title">{{ $item->name }}</h3>
 						<p class="typesoverview-text">{{ str_limit($item->description, 100) }}</p>
 						<span class="typesoverview-views">{{ $item->views }} keer bekeken</span>
-					</div>	
+					</div>
 				</section>
 			</a>
-		@endif	
+		@endif
 	@endforeach
 </div>

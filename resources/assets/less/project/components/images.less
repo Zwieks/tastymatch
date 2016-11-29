@@ -3,6 +3,12 @@
 	position: relative;
 	margin-bottom: @spacing;
 
+	&.image-1-3{
+		padding-top:calc(100%/3);
+		overflow: hidden;
+	}
+
+
 	&.image-2-3{
 		padding-top:calc(100%/3*2);
 		overflow: hidden;
@@ -10,6 +16,11 @@
 
 	&.image-1-4{
 		padding-top:25%;
+		overflow: hidden;
+	}
+
+	&.image-3-4{
+		padding-top:75%;
 		overflow: hidden;
 	}
 
@@ -25,6 +36,11 @@
 		@media @bp-MobileM{
 			padding-top:calc(100%/3);
 		}
+	}
+
+	&.image-3-5{
+		padding-top:100/5*3%;
+		overflow: hidden;
 	}
 
 	img{

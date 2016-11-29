@@ -20,7 +20,7 @@
 @include('pages.homepage.templates.create-product')
 
 {{--Render the user items--}}
-@include('pages.homepage.templates.overview', ['object' => $user_items, 'title' => lang::get('overviewitems.user-items-title')])
+@include('pages.homepage.templates.useritem', ['object' => $user_items, 'title' => lang::get('overviewitems.user-items-title')])
 
 {{--{{ $user }}--}}
 {{--$user--}}
