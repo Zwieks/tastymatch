@@ -1,0 +1,76 @@
+/* owl carousel */
+.owl-carousel {
+	display: none;
+	width: 100%;
+	-webkit-tap-highlight-color: transparent;
+	position: relative;
+	z-index: 1;
+	margin-bottom: @spacing;
+
+	img {
+		transform-style: preserve-3d;
+	}
+
+	.owl-prev,
+	.owl-next,
+	.owl-dot {
+		.user-select(none);
+		cursor: pointer;
+		cursor: hand;
+	}
+}
+
+.owl-loaded {
+	display: block;
+}
+
+.owl-loading {
+	opacity: 0;
+	display: block;
+}
+
+.owl-hidden {
+	opacity: 0;
+}
+
+.owl-text-select-on .owl-item {
+	.user-select(auto);
+}
+
+.owl-stage {
+	.cf;
+	position: relative;
+	-ms-touch-action: pan-Y;
+	white-space: nowrap;
+}
+
+.owl-stage-outer {
+	position: relative;
+	overflow: hidden;
+	-webkit-transform: translate3d(0px, 0px, 0px);
+}
+
+.owl-refresh .owl-item {
+	display: none;
+}
+
+.owl-item {
+	.backface-visibility(hidden);
+	.user-select(none);
+	position: relative;
+	min-height: 1px;
+	display: inline-block;
+	white-space: normal;
+	-webkit-tap-highlight-color: transparent;
+	-webkit-touch-callout: none;
+	vertical-align: top;
+}
+
+.owl-grab {
+	cursor: move;
+	cursor: -webkit-grab;
+	cursor: -o-grab;
+	cursor: -ms-grab;
+	cursor: grab;
+}
+/* end owl carousel */

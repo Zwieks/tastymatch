@@ -1,0 +1,119 @@
+// Footer timeline
+#js-agenda-scroller{
+	padding-top: @spacing*2;
+
+	&:after{
+		.translateX(-50%);
+		content: '';
+		display: block;
+		width: 100vw;
+		background: @lightGrey;
+		position: absolute;
+		left: 50%;
+		top: 0;
+		height: 100%;
+		z-index: -1;
+	}
+}
+
+.page-agendaslider {
+	position: relative;
+
+	h2 {
+		margin-bottom: @spacing;
+		white-space: nowrap;
+	}
+
+	// border
+	&:before {
+		.translateX(-50%);
+		content: '';
+		display: block;
+		width: 100vw;
+		height: 4px;
+		background: @timelineColor;
+		position: absolute;
+		top: @spacing*6.7;
+		left: 50%;
+		z-index: 2;
+	}
+
+	.timeline-scroller {
+		margin: 0 -@spacing;
+		width: calc(100% ~'+' @spacing*2);
+	}
+
+	.timeline-item {
+		padding: 0 @spacing 0 @spacing*3; // Some space for the icon
+		position: relative;
+		width: @siteWidth/2.5;
+
+		// Icon
+		&:before {
+			.backface-visibility(hidden);
+			content: '';
+			background: url(../img/marker-agenda.svg) no-repeat top;
+			background-size: cover;
+			width: @spacing*2; // SVG Ratio
+			height: @spacing*2.5; // SVG Ratio
+			color: #fff;
+			text-align: center;
+			line-height: 48px;
+			font-size: 21px;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+
+		h3 {
+			.truncate;
+			color: @primColor;
+		}
+
+		.date {
+			margin-bottom: @spacing*2;
+		}
+
+		&.last-item:before {
+			display: none;
+		}
+	}
+}
+
+.slider-prev,
+.slider-next {
+	cursor: pointer;
+	position: relative;
+	top: @spacing/4;
+
+	&:after {
+		float: none;
+		display: inline-block;
+	}
+}
+
+.slider-prev {
+	.scaleX(-1);
+	margin-left: @spacing/2;
+}
+
+.slider-next {
+	margin-left: -@spacing/4;
+}
+
+.touch-device h2 span,
+.hide-controls span {
+	display: none;
+}
+
+// On touch devices, make the timeline swipeable
+.touch-device {
+	.timeline-left,
+	.timeline-right {
+		display: none;
+	}
+
+	.bolphoto .bolphoto-description {
+		bottom: @spacing;
+	}
+}
