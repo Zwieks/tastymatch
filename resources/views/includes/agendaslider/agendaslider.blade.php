@@ -1,7 +1,7 @@
 <!-- {{$debugpath}} -->
 <section class="page-agendaslider" id="agendaslider">
     <h2>
-        Aankomende agenda items
+        Persoonlijke agenda items
         <span class="slider-prev heading-btn" id="js-timeline-prev" data-icon="T"></span>
         <span class="slider-next heading-btn" id="js-timeline-next" data-icon="S"></span>
     </h2>

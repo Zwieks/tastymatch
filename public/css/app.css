@@ -2333,6 +2333,35 @@ html .cookie-explanation button.request-cookies:before,
 .call-to-action {
   padding: 1.2rem 2.4rem;
 }
+.heading-btn {
+  border-radius: 35px;
+  transition: 0.15s ease-out;
+  position: relative;
+  border: 2px solid #E3262E;
+  width: 2.4rem;
+  height: 2.4rem;
+  display: inline-block;
+  color: #E3262E;
+  overflow: hidden;
+  background: #fff;
+}
+.heading-btn:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 11px!important;
+}
+.heading-btn:first-child {
+  margin-right: 0.8rem;
+}
+.heading-btn:hover,
+.heading-btn:focus {
+  color: #fff;
+  background: #E3262E;
+}
 .readmore {
   transition: 0.15s ease-out;
   font-weight: bold;
@@ -4013,7 +4042,7 @@ form ol {
 .user-items-overview-wrapper {
   display: block;
   width: 100%;
-  margin-bottom: 2.4rem;
+  margin-bottom: 6rem;
 }
 .user-item-image-wrapper {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
@@ -4049,7 +4078,7 @@ form ol {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
   width: 66.66666667%;
   margin: 1.2rem 0;
-  border-top: 15px solid #E3262E;
+  border-top: 15px solid #2b8a66;
 }
 .user-item-text,
 .user-item-info {
@@ -4242,6 +4271,7 @@ form ol {
 }
 #js-agenda-scroller {
   padding-top: 4.8rem;
+  padding-bottom: 2.4rem;
 }
 #js-agenda-scroller:after {
   transform: translateX(-50%);
@@ -4323,7 +4353,6 @@ form ol {
   display: inline-block;
 }
 .slider-prev {
-  transform: scaleX(-1);
   margin-left: 1.2rem;
 }
 .slider-next {
@@ -4685,8 +4714,9 @@ form ol {
 .product-wrapper {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
   display: block;
-  background: #f8f8f8;
+  background: #fff;
   padding: 3.6rem;
+  border-top: 15px solid #5d62ca;
 }
 .autocomplete-wrapper {
   background: rgba(40, 42, 43, 0.95);

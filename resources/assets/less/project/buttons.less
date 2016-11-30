@@ -39,6 +39,36 @@ a {
     padding: @spacing/2 @spacing;
 }
 
+//Slider navigation buttons
+.heading-btn{
+    .border-radius(35px);
+    .transition();
+    position: relative;
+    border:2px solid @primColor;
+    width:@spacing;
+    height:@spacing;
+    display: inline-block;
+    color:@primColor;
+    overflow: hidden;
+    background: @white;
+
+    &:before{
+        .center;
+        font-size:11px!important;
+    }
+
+    &:first-child{
+        margin-right:@spacing/3;
+    }
+
+
+    &:hover,
+    &:focus {
+        color:@white;
+        background: @primColor;
+    }
+}
+
 // Small button
 .readmore {
     .transition();
