@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Images;
+use App\Agenda;
 use App\Sessions;
 use App\Foodstandtype;
 use App\GoogleMaps;
@@ -35,6 +36,9 @@ class UserController extends Controller
                 //Get the product images
                 $user = Images::getAllUserProductImages($user);
 
+                //Get the product images
+                $user = Agenda::getAllUserAgendaDetails($user);
+
                 //Set User Data Session
                 Sessions::setGlobalUserSession($request, $user);
             }
@@ -47,20 +51,6 @@ class UserController extends Controller
 
             //Get the user items
             $user_items = globalinfo::MergeUserProducts($user);
-
-            // //Get most viewed events
-            // $most_viewed_events = globalinfo::getProductOverviewInfo('events', 'most-viewed');
-
-            // //Get most viewed foodstands
-            // $most_viewed_foodstands = globalinfo::getProductOverviewInfo('foodstands', 'most-viewed');
-
-            // //Get most viewed entertainers
-            // $most_viewed_entertainers = globalinfo::getProductOverviewInfo('entertainers', 'most-viewed');
-
-            // //Get latest events
-            // $latest_events = globalinfo::getProductOverviewInfo('events', 'latest');
-
-            // //Get the u
 
             //return the view with the user session data
             return view('auth.home-loggedin', compact('user','locations','user_items'));

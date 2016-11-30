@@ -8,14 +8,15 @@
 
     <div id="js-agenda-scroller">
         @foreach($user->agenda as $item )
+
             <article class="timeline-item">
                 <div class="timeline-item-wrapper">
                     <header>
-                        <h3>{{ $item->name }}</h3>
-                        <p class="date">{{ $item->created_at }}</p>
+                        <h3>{{ $item->info->name }}</h3>
+                        <p class="date">{{ $item->info->time_start }}</p>
                     </header>
 
-                   <p>{{ $item->description }}</p>
+                   <p>{{ $item->info->description }}</p>
                 </div>
             </article>
         @endforeach
