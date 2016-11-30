@@ -4068,6 +4068,10 @@ form ol {
 .user-item-wrapper .image-wrapper {
   margin-bottom: 0;
 }
+.user-item-wrapper:hover,
+.user-item-wrapper:focus {
+  color: #333;
+}
 .user-item-detail-wrapper {
   display: -moz-flex;
   display: -ms-flexbox;
@@ -4287,6 +4291,7 @@ form ol {
 }
 .page-agendaslider {
   position: relative;
+  cursor: e-resize;
 }
 .page-agendaslider h2 {
   margin-bottom: 2.4rem;
@@ -4355,8 +4360,14 @@ form ol {
 .slider-prev {
   margin-left: 1.2rem;
 }
+.slider-prev:before {
+  left: 9px;
+}
 .slider-next {
   margin-left: -0.6rem;
+}
+.slider-next:before {
+  right: 0;
 }
 .touch-device h2 span,
 .hide-controls span {

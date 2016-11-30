@@ -19,6 +19,7 @@
 
 .page-agendaslider {
 	position: relative;
+	cursor:e-resize;
 
 	h2 {
 		margin-bottom: @spacing;
@@ -95,10 +96,18 @@
 
 .slider-prev {
 	margin-left: @spacing/2;
+
+	&:before{
+		left:9px;
+	}
 }
 
 .slider-next {
 	margin-left: -@spacing/4;
+
+	&:before{
+		right:0;
+	}
 }
 
 .touch-device h2 span,
