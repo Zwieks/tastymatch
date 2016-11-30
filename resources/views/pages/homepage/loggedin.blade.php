@@ -8,6 +8,9 @@
 {{--Render the user items--}}
 @include('pages.homepage.templates.useritem', ['object' => $user_items, 'title' => lang::get('overviewitems.user-items-title')])
 
-{{--Render GoogleMaps --}}
-@include('includes.agendaslider.agendaslider')
+{{--Render Agenda items --}}
+
+@if(!empty($user->agenda) && count($user->agenda) > 0)
+    @include('includes.agendaslider.agendaslider')
+@endif
 {{--{{ $user }}--}}
