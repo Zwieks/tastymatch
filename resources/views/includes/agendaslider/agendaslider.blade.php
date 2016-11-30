@@ -13,7 +13,7 @@
                 <div class="timeline-item-wrapper">
                     <header>
                         <h3>{{ $item->info->name }}</h3>
-                        <p class="date">{{ $item->info->time_start }}</p>
+                        <p class="date">{{ Carbon\Carbon::parse($item->info->time_start)->format('d M Y') }} @if($item->info->time_start != $item->info->time_end &&  $item->info->time_end != null) - {{ Carbon\Carbon::parse($item->info->time_end)->format('d M Y') }}@endif</p>
                     </header>
 
                    <p>{{ $item->info->description }}</p>
