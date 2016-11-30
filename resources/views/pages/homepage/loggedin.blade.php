@@ -9,7 +9,6 @@
 @include('pages.homepage.templates.useritem', ['object' => $user_items, 'title' => lang::get('overviewitems.user-items-title')])
 
 {{--Render Agenda items --}}
-
 @if(!empty($user->agenda) && count($user->agenda) > 0)
     @include('includes.agendaslider.agendaslider')
 @endif
