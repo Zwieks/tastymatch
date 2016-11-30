@@ -33,6 +33,7 @@
 @stop --}}
 
 {{-- Include Scripts --}}
-@section('script')
+@section('page-scripts')
     @include('scripts.googlemaps-init')
+    @include('scripts.owlslider-init')
 @stop

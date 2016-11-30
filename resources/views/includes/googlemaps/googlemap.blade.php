@@ -22,7 +22,3 @@
 <div class="google-maps-filter-wrapper">
 	@include('forms.googlemapsfilter')
 </div>
-
-@hasSection('script')
-    @yield('script')
-@endif

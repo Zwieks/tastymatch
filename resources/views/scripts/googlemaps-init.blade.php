@@ -120,14 +120,20 @@
                 map: map
             });
 
-            markers.push(marker);
+            //Count the description string and truncate when it is to long
+            if(locations[i][0].length < 100){
+                var description = locations[i][0];
+            }else{
+                var description = locations[i][0].substring(0,100)+'...';
+            }
 
+            markers.push(marker);
             google.maps.event.addListener(marker, 'click', (function (marker, i, contentString) {
                 contentString = '<div class="infowindow-wrapper">'+
                   '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
                   '<div class="text-wrapper">'+
                   '<h3 class="firstHeading">'+locations[i][4]+'</h3>'+
-                  '<p>'+locations[i][0].substring(0,100)+'... <a href="'+url+'/'+locations[i][5]+'" target="_blank">{!! Lang::get('commons.more-info') !!}</a>'+'</p>'+
+                  '<p>'+description+' <a href="'+url+'/'+locations[i][5]+'" target="_blank">{!! Lang::get('commons.more-info') !!}</a>'+'</p>'+
                   '</div>'+
                   '</div>';
 
