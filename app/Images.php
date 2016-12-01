@@ -30,7 +30,7 @@ class Images extends Model
 		return $object;
 	}
 
-	public static function getMapsImages($object){
+	public static function getAllImages($object){
 		//Get the comma separated image string from the database and get the images from the images table put this all in a new array
 		foreach ($object as $item) {
 			$ids = GlobalInfo::explodeString($item->images_id);

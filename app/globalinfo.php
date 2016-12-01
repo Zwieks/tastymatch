@@ -23,15 +23,10 @@ class GlobalInfo extends Model
 		return $contactinfo;
 	}
 
-	/**
-	 * Merge the user items into one json object
-	 *
-	 * @var object
-	 */
-	public static function MergeUserProducts($user){
 
+	public static function GetCorrespondingUrl($all_items){
 		//Decode the user json
-		$array = json_decode($user);
+		$array = json_decode($all_items);
 
 		//Get the sub URL
 		foreach ($array->events as $value) {
@@ -46,6 +41,17 @@ class GlobalInfo extends Model
 			$value->url = strtolower(trans('products.product-entertainer'));
 		}
 
+		return json_encode($array);
+	}
+
+	/**
+	 * Merge the user items into one json object
+	 *
+	 * @var object
+	 */
+	public static function MergeUserProducts($user){
+
+		$array = json_decode(globalinfo::GetCorrespondingUrl($user));
 
 		//Merge the EVENTS, FOODSTANDS and ENTERTAINERS arrays and create a new json object
 		$object = array_merge($array->events, $array->foodstands, $array->entertainers);
@@ -98,6 +104,9 @@ class GlobalInfo extends Model
 	 */
 	public static function GetMostPopulairItems($all_items)
 	{
+
+		$all_items = globalinfo::GetCorrespondingUrl($all_items);
+
 		$all_items =  json_decode($all_items);
 		$builder = [];
 

@@ -362,6 +362,9 @@
             //Filter the object based on the user input
             animation = true;
             filterObject();
+
+            //Scroll to top of the map
+            $('html, body').animate({scrollTop : 0},400);
         });
 
         if($('#js-autocomplete-results').length) {

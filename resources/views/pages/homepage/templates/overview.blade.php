@@ -3,7 +3,7 @@
 	<h2 class="typesoverview-maintitle">{{ $title }}</h2>
 	@foreach(json_decode($object) as $item)
 		@if($loop->iteration <= 4)
-			<a href="/" class="typesoverview-item">
+			<a href="/{{$item->url}}/{{$item->slug}}" class="typesoverview-item">
 				<section class="typesoverview-item-wrapper">
 					<figure class="image-wrapper">
 						<img class="image" src="/img/uploads/{{ reset($item->images)->file }}" alt="{{ $item->name }}"/>

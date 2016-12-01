@@ -1807,7 +1807,6 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
-  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -2583,6 +2582,7 @@ html .cookie-explanation button.request-cookies:before,
   position: absolute;
   top: 50%;
   left: 50%;
+  border-left: 8px solid #e3262e;
 }
 .logedin .page-searchbox {
   margin-left: 0;
@@ -3389,7 +3389,7 @@ html .cookie-explanation {
   margin-bottom: 2.4rem;
 }
 .google-maps-large {
-  height: 60rem;
+  height: 48rem;
 }
 .infowindow-wrapper {
   display: -moz-flex;
@@ -4016,7 +4016,7 @@ form ol {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
   padding: 1.2rem;
   height: 100%;
-  background: #f8f8f8;
+  background: #fff;
   border-top: 15px solid #5dadca;
 }
 .typesoverview-text-wrapper {

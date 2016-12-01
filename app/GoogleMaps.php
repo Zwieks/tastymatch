@@ -27,7 +27,7 @@ class GoogleMaps extends Model
 		$locations = DB::table('events')->get();
 
 		//Get the images
-		$locations = images::getMapsImages($locations);
+		$locations = images::getAllImages($locations);
 
 		return $locations;
 	}
@@ -37,7 +37,7 @@ class GoogleMaps extends Model
 		$locations = DB::table('foodstands')->get();
 
 		//Get the images
-		$locations = images::getMapsImages($locations);
+		$locations = images::getAllImages($locations);
 
 		return $locations;
 	}
@@ -47,7 +47,7 @@ class GoogleMaps extends Model
 		$locations = DB::table('entertainers')->get();
 
 		//Get the images
-		$locations = images::getMapsImages($locations);
+		$locations = images::getAllImages($locations);
 
 		return $locations;
 	}
