@@ -1,8 +1,8 @@
 <!-- {{$debugpath}} -->
 <div class="typesoverview-wrapper">
 	<h2 class="typesoverview-maintitle">{{ $title }}</h2>
-	@foreach($object as $item)
-		@if($loop->iteration <= 9)
+	@foreach(json_decode($object) as $item)
+		@if($loop->iteration <= 4)
 			<a href="/" class="typesoverview-item">
 				<section class="typesoverview-item-wrapper">
 					<figure class="image-wrapper">

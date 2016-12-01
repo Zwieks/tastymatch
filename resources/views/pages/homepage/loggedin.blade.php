@@ -2,6 +2,9 @@
 {{--Render GoogleMaps --}}
 @include('includes.googlemaps.googlemap')
 
+{{--Render the most viewed event items--}}
+@include('pages.homepage.templates.overview', ['object' => $most_viewed, 'title' => lang::get('overviewitems.featured-items-title')])
+
 {{--Render Create products --}}
 @include('pages.homepage.templates.create-product')
 
@@ -13,3 +16,4 @@
     @include('includes.agendaslider.agendaslider')
 @endif
 {{--{{ $user }}--}}
+{{--{{ $most_viewed }}--}}

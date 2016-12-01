@@ -1,7 +1,7 @@
 .typesoverview-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
-	margin:0 -@spacing/2;
+	margin:0 -@spacing/2 @spacing*2;
 	z-index: 0;
 	position: relative;
 	padding-top: @spacing;
@@ -32,7 +32,7 @@
 
 .typesoverview-item{
 	display: block;
-	width: 100%/3;
+	width: 100%/4;
 	padding:@spacing/2;
 	color:@textColor;
 
@@ -49,6 +49,7 @@
 	padding:@spacing/2;
 	height: 100%;
 	background: @lightGrey;
+	border-top: 15px solid @smoothBlue;
 }
 
 .typesoverview-text-wrapper{

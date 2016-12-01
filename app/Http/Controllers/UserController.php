@@ -52,8 +52,11 @@ class UserController extends Controller
             //Get the user items
             $user_items = globalinfo::MergeUserProducts($user);
 
+            //Get most populair items
+            $most_viewed = globalinfo::GetMostPopulairItems($locations);
+
             //return the view with the user session data
-            return view('auth.home-loggedin', compact('user','locations','user_items'));
+            return view('auth.home-loggedin', compact('user','locations','user_items', 'most_viewed'));
         }
         else{
             return view('auth.home');

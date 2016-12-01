@@ -91,4 +91,38 @@ class GlobalInfo extends Model
 	    return explode(',', $commaSeparatedIds);
 	}
 
+	/**
+	 * Get them most populair items by month
+	 *
+	 * @return object
+	 */
+	public static function GetMostPopulairItems($all_items)
+	{
+		$all_items =  json_decode($all_items);
+		$builder = [];
+
+		foreach($all_items as $key => $item_list){
+			foreach($item_list as $items)   {
+
+				//Check if the image array is empty, ifso put our placeholder in the object
+				if(empty($items->images)){
+					$object = (object) ['file' => 'logo.svg', 'caption' => 'TastyMatch logo', 'description' => ''];
+					$items->images[0] = $object;
+				}
+
+				$builder[] = (array)$items;
+			}
+		}
+
+		//Sort on Views
+		uasort($builder, function($a,$b) {
+			if ($a['views'] == $b['views'])
+				return 0;
+
+			return ($a['views'] > $b['views']) ? -1 : 1;
+		});
+
+		//Return the first 6 items
+		return json_encode((object)array_slice($builder, 0, 6));
+	}
 }
