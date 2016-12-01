@@ -18,6 +18,15 @@
 	width: 100%/3;
 	padding:0 @spacing/2;
 
+	@media @bp-TabletM{
+		width: 100%;
+		margin-bottom: @spacing;
+
+		&:last-child{
+			margin-bottom:0;
+		}
+	}
+
 	h2{
 		position: relative;
 		padding-left: @spacing*3;

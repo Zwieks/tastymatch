@@ -3991,6 +3991,16 @@ form ol {
   padding: 1.2rem;
   color: #333;
 }
+@media screen and (max-width: 896px) {
+  .typesoverview-item {
+    width: 50%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .typesoverview-item {
+    width: 100%;
+  }
+}
 .typesoverview-item .image-wrapper {
   padding-top: 66.66666667%;
   margin: -1.92rem 0 0 0;
@@ -4292,7 +4302,6 @@ form ol {
 }
 .page-agendaslider {
   position: relative;
-  cursor: e-resize;
 }
 .page-agendaslider h2 {
   margin-bottom: 2.4rem;
@@ -4704,6 +4713,15 @@ form ol {
   width: 33.33333333%;
   padding: 0 1.2rem;
 }
+@media screen and (max-width: 896px) {
+  .create-product-item {
+    width: 100%;
+    margin-bottom: 2.4rem;
+  }
+  .create-product-item:last-child {
+    margin-bottom: 0;
+  }
+}
 .create-product-item h2 {
   position: relative;
   padding-left: 7.2rem;
@@ -4815,8 +4833,10 @@ form ol {
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
-  cursor: pointer;
   cursor: hand;
+}
+.owl-stage-outer {
+  cursor: e-resize;
 }
 .owl-loaded {
   display: block;
