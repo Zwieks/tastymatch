@@ -10,7 +10,7 @@
 			</li>
 
 
-			<li class="level-1-item subnav {{(current_page(Lang::get('menus.submenu-items'))) ? 'active' : current_page()}}">
+			<li class="level-1-item usermenu subnav {{(current_page(Lang::get('menus.submenu-items'))) ? 'active' : current_page()}}">
 				<a href="{{ url('/submenu-items') }}" itemprop="url" data-icon="E">
 					<span itemprop="name">{{ Lang::get('menus.submenu-items') }}</span>
 				</a>

@@ -36,6 +36,41 @@
 }
 
 .nav-wrapper {
+	.search{
+		.translate(0,0);
+		position: relative;
+		top:auto;
+		left:auto;
+		border-left:0;
+	}
+
+	#search-bar,
+	#js-search-trigger{
+		width: 100%;
+	}
+
+	#js-search-trigger{
+		background: @primColor;
+
+		span{
+			display: block;
+		}
+
+		&:before{
+			color:@white;
+		}
+	}
+
+	.form-control{
+		margin-bottom: @spacing/4;
+	}
+
+	.page-searchbox{
+		.flex-wrap(wrap);
+		padding: @spacing/4;
+		border: none;
+	}
+	
 	// Default subnav icon
 	.open-subnav:before {
 		content: '▾';

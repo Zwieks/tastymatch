@@ -3,5 +3,5 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta itemprop="target" content=""/>
     <input  class="form-control" id="search-bar" type="search" name="q" autocomplete="off" value="{{ old('q') }}" placeholder="{{ Lang::get('forms.searchplaceholder') }}" itemprop="query-input">
-    <button id="js-search-trigger" type="submit" data-icon="y"></button>
+    <button id="js-search-trigger" type="submit" data-icon="y"><span>{{ Lang::get('buttons.search') }}</span></button>
 </form>

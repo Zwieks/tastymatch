@@ -2585,6 +2585,18 @@ html .cookie-explanation button.request-cookies:before,
   left: 50%;
   border-left: 8px solid #e3262e;
 }
+.logedin #js-search-trigger {
+  position: relative;
+}
+.logedin #js-search-trigger:before {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 12px;
+}
+.logedin #js-search-trigger span {
+  display: none;
+}
 .logedin .page-searchbox {
   margin-left: 0;
 }
@@ -2834,6 +2846,35 @@ html .cookie-explanation button.request-cookies:before,
 .nav-toggle.active span:before,
 .nav-toggle.active span:after {
   background: #000;
+}
+.nav-wrapper .search {
+  transform: translate(0, 0);
+  position: relative;
+  top: auto;
+  left: auto;
+  border-left: 0;
+}
+.nav-wrapper #search-bar,
+.nav-wrapper #js-search-trigger {
+  width: 100%;
+}
+.nav-wrapper #js-search-trigger {
+  background: #E3262E;
+}
+.nav-wrapper #js-search-trigger span {
+  display: block;
+}
+.nav-wrapper #js-search-trigger:before {
+  color: #fff;
+}
+.nav-wrapper .form-control {
+  margin-bottom: 0.6rem;
+}
+.nav-wrapper .page-searchbox {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.6rem;
+  border: none;
 }
 .nav-wrapper .open-subnav:before {
   content: '▾';
