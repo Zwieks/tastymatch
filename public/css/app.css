@@ -1807,6 +1807,7 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
+  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -3391,6 +3392,11 @@ html .cookie-explanation {
 .google-maps-large {
   height: 48rem;
 }
+@media screen and (max-width: 480px) {
+  .google-maps-large {
+    height: 36rem;
+  }
+}
 .infowindow-wrapper {
   display: -moz-flex;
   display: -ms-flexbox;
@@ -3446,6 +3452,12 @@ html .cookie-explanation {
   padding: 2.4rem;
   z-index: 2;
 }
+@media screen and (max-width: 896px) {
+  .google-maps-intro {
+    width: 100%;
+    border-top: 15px solid #E3262E;
+  }
+}
 .google-maps-intro h2 {
   text-transform: uppercase;
   color: #E3262E;
@@ -3469,11 +3481,37 @@ html .cookie-explanation {
   border-top: 15px solid #E3262E;
   margin-bottom: 0;
 }
+@media screen and (max-width: 896px) {
+  .google-maps-legenda {
+    -webkit-flex-grow: 0;
+    -moz-flex-grow: 0;
+    -ms-flex-grow: 0;
+    -ms-flex-positive: 0;
+    flex-grow: 0;
+    border-top: 0;
+    width: 90%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .google-maps-legenda {
+    width: 100%;
+  }
+}
 .google-maps-legenda li {
   position: relative;
   width: 33.33333333%;
   border-right: 1px solid #e5e5e5;
   padding: 9.6rem 4.8rem;
+}
+@media screen and (max-width: 896px) {
+  .google-maps-legenda li {
+    padding: 6rem 4.8rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .google-maps-legenda li {
+    padding: 6rem 3.6rem;
+  }
 }
 .google-maps-legenda li:last-child {
   border-right: none;
@@ -3492,11 +3530,21 @@ html .cookie-explanation {
   padding: 0 1.2rem;
   font-size: 1.4rem;
 }
+@media screen and (max-width: 480px) {
+  .google-maps-legenda span {
+    font-size: 1rem;
+  }
+}
 .google-maps-legenda span:before {
   display: block;
   font-size: 36px;
   color: #333;
   margin-bottom: 1.2rem;
+}
+@media screen and (max-width: 480px) {
+  .google-maps-legenda span:before {
+    font-size: 24px;
+  }
 }
 .google-maps-intro,
 .google-maps-legenda {
@@ -3520,6 +3568,11 @@ html .cookie-explanation {
 }
 .google-maps-filter-wrapper fieldset {
   margin-bottom: 3.12rem;
+}
+@media screen and (max-width: 480px) {
+  .google-maps-filter-wrapper fieldset {
+    margin-bottom: 1.2rem;
+  }
 }
 .google-maps-filter-wrapper fieldset:last-child {
   margin-bottom: 0;
@@ -3548,6 +3601,11 @@ html .cookie-explanation {
   padding: 2.4rem 1.2rem;
   border-left: 15px solid #E3262E;
 }
+@media screen and (max-width: 768px) {
+  .google-maps-filter {
+    max-width: 100%;
+  }
+}
 .google-maps-filter .form-input-checkbox,
 .google-maps-filter .form-label {
   margin-bottom: 0;
@@ -3557,9 +3615,32 @@ html .cookie-explanation {
 .google-maps-filter .form-input-checkbox label {
   cursor: pointer;
 }
+@media screen and (max-width: 768px) {
+  .google-maps-filter .form-input-checkbox label {
+    padding-right: 2.4rem;
+    width: auto;
+    font-size: 1.2rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .google-maps-filter .form-input-checkbox label {
+    font-size: 1.4rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .google-maps-filter .form-input-checkbox {
+    width: 100%;
+    margin-bottom: 0.6rem;
+  }
+}
 .google-maps-filter .form-label {
   padding-right: 1.2rem;
   font-weight: 800;
+}
+@media screen and (max-width: 768px) {
+  .google-maps-filter .form-label {
+    width: 100%;
+  }
 }
 .google-maps-filter .velden label {
   margin-bottom: 0;
@@ -4001,6 +4082,10 @@ form ol {
     width: 100%;
   }
 }
+.typesoverview-item:hover,
+.typesoverview-item:focus {
+  color: #333;
+}
 .typesoverview-item .image-wrapper {
   padding-top: 66.66666667%;
   margin: -1.92rem 0 0 0;
@@ -4060,6 +4145,15 @@ form ol {
   width: 33.33333333%;
   padding: 1.2rem;
 }
+@media screen and (max-width: 896px) {
+  .user-item-image-wrapper {
+    width: 100%;
+    margin-bottom: -3.6rem;
+    z-index: 10;
+    background: #fff;
+    border-top: 15px solid #2b8a66;
+  }
+}
 .user-item-wrapper {
   display: -moz-flex;
   display: -ms-flexbox;
@@ -4076,8 +4170,19 @@ form ol {
   margin-bottom: 3.6rem;
   color: #333;
 }
+@media screen and (max-width: 896px) {
+  .user-item-wrapper {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+  }
+}
 .user-item-wrapper .image-wrapper {
   margin-bottom: 0;
+}
+@media screen and (max-width: 896px) {
+  .user-item-wrapper .image-wrapper {
+    padding-top: 30%;
+  }
 }
 .user-item-wrapper:hover,
 .user-item-wrapper:focus {
@@ -4095,12 +4200,29 @@ form ol {
   margin: 1.2rem 0;
   border-top: 15px solid #2b8a66;
 }
+@media screen and (max-width: 896px) {
+  .user-item-detail-wrapper {
+    width: 90%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .user-item-detail-wrapper {
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+}
 .user-item-text,
 .user-item-info {
   padding: 2.4rem;
 }
 .user-item-text {
   width: 66.66666667%;
+}
+@media screen and (max-width: 480px) {
+  .user-item-text {
+    width: 100%;
+  }
 }
 .user-item-text h3 {
   text-transform: uppercase;
@@ -4112,6 +4234,12 @@ form ol {
 .user-item-info {
   width: 33.33333333%;
   border-left: 1px solid #e5e5e5;
+}
+@media screen and (max-width: 480px) {
+  .user-item-info {
+    width: 100%;
+    padding-top: 0;
+  }
 }
 .user-item-info dt {
   font-weight: 700;
@@ -4698,11 +4826,7 @@ form ol {
   margin: 0 -1.2rem;
 }
 .create-products-wrapper {
-  transform: translateX(-50%);
-  position: absolute;
   position: relative;
-  width: 100vw;
-  left: 50%;
   display: inline-block;
   margin-bottom: 6rem;
 }
@@ -4724,7 +4848,7 @@ form ol {
 }
 .create-product-item h2 {
   position: relative;
-  padding-left: 7.2rem;
+  padding-left: 6rem;
   color: #333;
 }
 .create-product-item h2:before {
@@ -4745,9 +4869,15 @@ form ol {
 .product-wrapper {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
   display: block;
+  height: 100%;
   background: #fff;
   padding: 3.6rem;
   border-top: 15px solid #5d62ca;
+}
+@media screen and (max-width: 1023px) {
+  .product-wrapper {
+    padding: 2.4rem;
+  }
 }
 .autocomplete-wrapper {
   background: rgba(40, 42, 43, 0.95);
@@ -4799,6 +4929,11 @@ form ol {
   width: 9.6rem;
   padding-top: 10%;
   margin-bottom: 0;
+}
+@media screen and (max-width: 388px) {
+  .autocomplete-item .image-wrapper {
+    padding-top: 20%;
+  }
 }
 .autocomplete-item .autocomplete-text {
   -webkit-flex-grow: 1;

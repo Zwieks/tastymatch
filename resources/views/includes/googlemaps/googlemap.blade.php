@@ -7,7 +7,7 @@
 	
 	<ul class="google-maps-legenda">
 		<li>
-			<span data-icon="z">Evenementen opzoek naar entertainer en foodstands</span>
+			<span data-icon="z">Evenementen</span>
 		</li>
 		<li>
 			<span data-icon="d">Foodstands</span>

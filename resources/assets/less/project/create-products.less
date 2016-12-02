@@ -5,7 +5,7 @@
 }
 
 .create-products-wrapper{
-	.fullscreen-center;
+	position: relative;
 	display: inline-block;
 	margin-bottom: @spacing*2.5;
 }
@@ -29,7 +29,7 @@
 
 	h2{
 		position: relative;
-		padding-left: @spacing*3;
+		padding-left: @spacing*2.5;
 		color:@textColor;
 
 		&:before{
@@ -53,7 +53,12 @@
 .product-wrapper{
 	.box-shadow();
 	display: block;
+	height:100%;
 	background: @white;
 	padding: @spacing*1.5;
 	border-top: 15px solid @smoothPurple;
+
+	@media @bp-TabletL{
+		padding: @spacing;
+	}
 }
