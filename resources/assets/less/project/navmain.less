@@ -5,7 +5,8 @@
             margin-left: @spacing*1.5;
         }
 
-        > a {
+        > a,
+        .mainmenu {
             .displayflex;
             .align-items(center);
             height: @headerHeight;
@@ -13,6 +14,7 @@
             color:@textColor;
             font-size: @smallerHeadingSize;
             font-weight: 600;
+            cursor: pointer;
 
             &:before{
                 .center;
@@ -32,6 +34,10 @@
             }
         }
 
+        .mainmenu-title{
+            margin-left: @spacing;
+        }
+
         // active menu item
         &.active > a {
             color:@primColor;
@@ -49,7 +55,8 @@
     }
 
     // arrow to show subnav
-    .subnav > a:after {
+    .subnav > a:after,
+    .subnav > .mainmenu:after {
         content: '▾';
         padding-left: @spacing/4;
     }
@@ -99,13 +106,28 @@
         .flex-grow(1);
     }
 
+    .mobilemenu{
+         display: none;
+
+        @media @bp-TabletL{
+            display: block;
+        }
+    }
+
+    .usermenu{
+        @media @bp-TabletL{
+            display: none;
+        }
+    }
+
     .level-1{
         .justify-content(flex-end);
         position: relative;
     }
 
     .level-1-item{
-        a{
+        a,
+        .mainmenu{
             &:after{
                 font-size: 21px;
             }
