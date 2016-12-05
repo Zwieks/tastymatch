@@ -13,4 +13,8 @@ return [
     'latest-foodstands-title' => 'Nieuw aangemelde foodstands',
 
 	'featured-items-title' => 'Uitgelichte items',
+
+	'keywords-title-evenementen' => 'Op zoek naar:',
+	'keywords-title-foodstands' => 'Zoekcriteria:',
+	'keywords-title-entertainers' => 'Zoekcriteria:',
 ];

@@ -13,4 +13,8 @@ return [
     'latest-foodstands-title' => 'Latest foodstands',
 
 	'featured-items-title' => 'Featured items',
+
+	'keywords-title-events' => 'Searching for:',
+	'keywords-title-foodstands' => 'Search criteria:',
+	'keywords-title-entertainers' => 'Search criteria:',
 ];

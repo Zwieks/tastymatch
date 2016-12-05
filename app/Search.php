@@ -51,13 +51,13 @@ class Search extends Model
 			$posts[trans('products.product-entertainers')] = $posts_entertainer;
 
 			//Check if keyword is in comma seperated string
-			$posts[trans('products.product-event-keywords')] = (array) search::getMatchedKeywords('events',$posts[trans('products.product-events')],$request->get('q'));
+			$posts[trans('products.product-event-keywords')] = (array) search::getMatchedKeywords(strtolower(trans('products.product-event')),$posts[trans('products.product-events')],$request->get('q'));
 
 			//Check if keyword is in comma seperated string
-			$posts[trans('products.product-entertainer-keywords')] = (array) search::getMatchedKeywords('entertainers',$posts[trans('products.product-entertainers')],$request->get('q'));
+			$posts[trans('products.product-entertainer-keywords')] = (array) search::getMatchedKeywords(strtolower(trans('products.product-entertainer')),$posts[trans('products.product-entertainers')],$request->get('q'));
 
 			//Check if keyword is in comma seperated string
-			$posts[trans('products.product-foodstand-keywords')] = (array) search::getMatchedKeywords('foodstands',$posts[trans('products.product-foodstands')],$request->get('q'));
+			$posts[trans('products.product-foodstand-keywords')] = (array) search::getMatchedKeywords(strtolower(trans('products.product-foodstand')),$posts[trans('products.product-foodstands')],$request->get('q'));
 
 			// If there are results return them alphabetically, if none, return the error message.
 			ksort($posts);

@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
-<div class="typesoverview-wrapper">
+<div class="typesoverview-wrapper {{strtolower(str_replace(' ', '-', $title))}}">
 	<h2 class="typesoverview-maintitle">{{ $title }}</h2>
 	@foreach(json_decode($object) as $item)
 		@if($loop->iteration <= 4)
@@ -34,6 +34,17 @@
 							<span class="typesoverview-views">{{ $item->views }} keer bekeken</span>
 						@endif
 					</div>
+
+					@if(isset($item->keywords) && !empty($item->keywords))
+						<div class="typesoverview-keywords">
+							<h3 class="typesoverview-title">{{Lang::get('overviewitems.keywords-title-'.strtolower($title))}}</h3>
+							<ul class="keyword-items">
+								@foreach(explode(',', $item->keywords) as $keyword)
+									<li class="keyword-item">{{ $keyword }}</li>
+								@endforeach	
+							</ul>	
+						</div>	
+					@endif	
 				</section>
 
 			@if(isset($item->url) && isset($item->slug))

@@ -4,7 +4,6 @@
 	}
 
 	.typesoverview-item-wrapper{
-		.flex-wrap(wrap);
 		.flex-direction(inherit);
 	}
 
@@ -15,10 +14,21 @@
 			padding-top:0;
 			width: @spacing*5;
 			margin:0 @spacing/2 0 0;
+
+			@media @bp-MobileL{
+				padding-top: 50%;
+				width: 100%;
+				margin-bottom: @spacing/2;
+				margin-right: 0;
+			}	
 		}
 
 		.typesoverview-text-wrapper{
 			width: auto;
 		}
 	}
+
+	.typesoverview-keywords{
+		display: block;
+	}	
 }
