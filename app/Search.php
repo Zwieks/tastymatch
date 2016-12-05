@@ -8,12 +8,31 @@ use App\Images;
 
 class Search extends Model
 {
+	//This function will be called on all the search in the header of the site
+	public static function onPageSearch(Request $request){
+		$posts = Search::getSearchResults($request);
+
+		//Set the missing object items and unset empty elements
+		if(!empty($posts)){
+			$posts = Search::specializeObject($request, $posts);
+		}
+
+		return $posts;
+	}
+
+	//This function will be called on the search result page
+	public static function onSearchResult(Request $request){
+		$posts = json_encode(Search::getSearchResults($request));
+
+		return $posts;
+	}
+
     //Default search
 	public static function getSearchResults(Request $request){
 		// Making sure the user entered a keyword.
 		if($request->has('q')) {
 
-			// Using the Laravel Scout syntax to search the products table EVENT.
+			//Using the Laravel Scout syntax to search the products table EVENT.
 			$posts_event = Event::search($request->get('q'))->get();
 			$posts_event = json_decode($posts_event);
 			$posts_event = images::getAllImages($posts_event);
@@ -22,7 +41,7 @@ class Search extends Model
 			//Check if keyword is in comma seperated string
 			$posts[trans('products.product-event-keywords')] = (array) search::getTheMatchedkeywords('events',$posts[trans('products.product-events')],$request->get('q'));
 
-			// Using the Laravel Scout syntax to search the products table FOODSTAND.
+			//Using the Laravel Scout syntax to search the products table FOODSTAND.
 			$posts_foodstand = Foodstand::search($request->get('q'))->get();
 			$posts_foodstand = json_decode($posts_foodstand);
 			$posts_foodstand = images::getAllImages($posts_foodstand);
@@ -40,43 +59,47 @@ class Search extends Model
 			//Check if keyword is in comma seperated string
 			$posts[trans('products.product-entertainer-keywords')] = (array) search::getTheMatchedkeywords('entertainers',$posts[trans('products.product-entertainers')],$request->get('q'));
 
-			//Set the missing object items and unset empty elements
-			foreach ($posts as $key => $post) {
-				//Remove object when empty
-				if(empty($posts[$key]) || empty((array) $posts[$key])){
-					unset($posts[$key]);	
-				}else{
-					foreach ($post as $index => $value) {
-						//Set the proper URL
-						if(!isset($value->url)){
-							if(strtolower($key) == 'events' || strtolower($key)=='evenementen'){
-								$slug = strtolower(trans('products.product-event'));
-							}elseif(strtolower($key) == 'foodstands'){
-								$slug = strtolower(trans('products.product-foodstand'));
-							}elseif(strtolower($key) == 'entertainers'){
-								$slug = strtolower(trans('products.product-entertainer'));
-							}
+			// If there are results return them, if none, return the error message.
+			return $posts;
+		}
+	}
 
-							//Set the URL
-							$value->url = $slug.'/';
+	public static function specializeObject(Request $request,$posts){
+		foreach ($posts as $key => $post) {
+			//Remove object when empty
+			if(empty($posts[$key]) || empty((array) $posts[$key])){
+				unset($posts[$key]);
+			}else{
+				foreach ($post as $index => $value) {
+					//Set the proper URL
+					if(!isset($value->url)){
+						if(strtolower($key) == 'events' || strtolower($key)=='evenementen'){
+							$slug = strtolower(trans('products.product-event'));
+						}elseif(strtolower($key) == 'foodstands'){
+							$slug = strtolower(trans('products.product-foodstand'));
+						}elseif(strtolower($key) == 'entertainers'){
+							$slug = strtolower(trans('products.product-entertainer'));
 						}
 
-						//If the search input is not in the name remove it from the list
-						if(isset($value->name)){
-							$pos = stripos($value->name, $request->get('q'));
-							if($pos === false){
-								unset($posts[$key]);
-							}
-							
+						//Set the URL
+						$value->url = $slug.'/';
+					}
+
+					//If the search input is not in the name remove it from the list
+					if(isset($value->name)){
+						$pos = stripos($value->name, $request->get('q'));
+						if($pos === false){
+							unset($posts[$key]);
 						}
+
 					}
 				}
 			}
-
-			// If there are results return them, if none, return the error message.
-			return json_encode($posts);
 		}
+
+		return json_encode($posts);
 	}
+
 
 	public static function getTheMatchedkeywords($type,$items,$findme){
 		$found_array = [];

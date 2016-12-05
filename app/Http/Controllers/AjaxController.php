@@ -17,7 +17,7 @@ class AjaxController extends Controller
     {
         if($this->checkAjaxRequest($request) == true){
             //Perform the search
-            $results = Search::getSearchResults($request);
+            $results = Search::onPageSearch($request);
 
             //Return the view
             $returnHTML = view('ajax.search')->with('results', json_decode($results))->render();

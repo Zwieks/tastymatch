@@ -20,7 +20,7 @@ class SearchController extends Controller
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 
         //Get the search results
-        $results =  Search::getSearchResults($request);
+        $results =  Search::onSearchResult($request);
 
         return view('auth.search')->with('results', $results);
     }
