@@ -2879,6 +2879,9 @@ html .cookie-explanation button.request-cookies:before,
   left: auto;
   border-left: 0;
 }
+.nav-wrapper .ajax-search-wrapper {
+  display: none;
+}
 .nav-wrapper #search-bar,
 .nav-wrapper #js-search-trigger {
   width: 100%;
@@ -3335,6 +3338,7 @@ button:focus {
 }
 .ajax-search-wrapper {
   min-height: 100vh;
+  width: 100%;
 }
 .autocomplete {
   width: 100%;
@@ -3342,7 +3346,7 @@ button:focus {
   max-height: 50vh;
 }
 .ajax-search-item {
-  background: #282a2b;
+  background: rgba(40, 42, 43, 0.95);
   padding: 1.2rem;
   color: #fff;
 }
@@ -3407,6 +3411,27 @@ button:focus {
 }
 .highlighted {
   background: rgba(255, 255, 0, 0.5);
+}
+.search-intro {
+  margin-top: 2.4rem;
+  margin-bottom: 1.2rem;
+  position: relative;
+  padding: 4.8rem 0;
+  z-index: 1;
+}
+.search-intro:after {
+  transform: translateX(-50%);
+  position: absolute;
+  left: 50%;
+  content: '';
+  width: 100vw;
+  height: 100%;
+  top: 0;
+  z-index: -1;
+  background: #f8f8f8;
+}
+.search-intro p {
+  margin-bottom: 0;
 }
 html div#cookie-bar {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
@@ -4331,6 +4356,27 @@ form ol {
 }
 .user-item-info dd:last-child {
   margin-bottom: 0;
+}
+.component-search .typesoverview-wrapper {
+  margin-bottom: 0.6rem;
+}
+.component-search .typesoverview-item-wrapper {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -moz-flex-direction: inherit;
+  -ms-flex-direction: inherit;
+  flex-direction: inherit;
+}
+.component-search .typesoverview-item {
+  width: 100%;
+}
+.component-search .typesoverview-item .image-wrapper {
+  padding-top: 0;
+  width: 12rem;
+  margin: 0 1.2rem 0 0;
+}
+.component-search .typesoverview-item .typesoverview-text-wrapper {
+  width: auto;
 }
 @media screen and (max-width: 896px) {
   .blog-wrapper {

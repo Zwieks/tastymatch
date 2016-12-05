@@ -61,7 +61,7 @@ Route::get('/getRequestKvkDetails', 'ApiController@getKvkDetails');
 
 // AJAX
 Route::post('/ajax/search', 'AjaxController@getSearch');
-Route::post('/ajax/autocomplete', 'AjaxController@getAutoComplete');
+
 // Blog
 Route::get('blog', array('as' => 'index', 'uses' => 'BlogController@Index'));
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@Single']) -> where('slug', '[\w\d\-\_]+');

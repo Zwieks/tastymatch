@@ -20,22 +20,12 @@ class SearchController extends Controller
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 
         //Get the search results
-        $results =  Search::onSearchResult($request);
+        $results =  json_decode(Search::onSearchResult($request));
 
-        return view('auth.search')->with('results', $results);
-    }
+        //The search input
+        $search = $request->get('q');
 
-    /**
-     * Display a autocomplete list.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function autocomplete(Request $request){
-
-        //Get the search results
-        $results =  Search::getAutoCompleteResults($request);
-
-        return view('auth.search')->with('results', $results);
+        return view('auth.search', compact('results','search'));
     }
 
     /**

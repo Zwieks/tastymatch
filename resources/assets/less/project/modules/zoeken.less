@@ -32,6 +32,7 @@
 
 .ajax-search-wrapper{
     min-height: 100vh;
+    width: 100%;
 }
 
 .autocomplete{
@@ -41,7 +42,7 @@
 }
 
 .ajax-search-item{
-    background: @darkGrey;
+    background: @darkGreyTrans;
     padding:@spacing/2;
     color:@white;
 
@@ -122,4 +123,26 @@
 // Marked text (on search results page)
 .highlighted {
     background: fadein(yellow, -50%);
+}
+
+.search-intro{
+    margin-top: @spacing;
+    margin-bottom: @spacing/2;
+    position: relative;
+    padding: @spacing*2 0;
+    z-index: 1;
+
+    &:after{
+        .centerX;
+        content:'';
+        width: 100vw;
+        height: 100%;
+        top:0;
+        z-index:-1;
+        background: @lightGrey;
+    }
+
+    p{
+        margin-bottom:0;
+    }
 }
