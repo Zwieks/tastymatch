@@ -2643,6 +2643,7 @@ html .cookie-explanation button.request-cookies:before,
   -ms-flex-grow: 1;
   -webkit-box-flex: 1;
   flex-grow: 1;
+  overflow: visible;
 }
 .logedin .mobilemenu {
   display: none;
@@ -3414,6 +3415,9 @@ button:focus {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
 }
+.ajax-search-wrapper {
+  min-height: 100vh;
+}
 .autocomplete {
   width: 100%;
   z-index: 2;
@@ -3425,11 +3429,12 @@ button:focus {
   color: #fff;
 }
 .open-search .page-mainmenu {
-  overflow: hidden;
+  overflow: visible;
 }
 .open-search .ajax-search-wrapper {
   opacity: 1;
   visibility: visible;
+  width: 100%;
 }
 .open-autocomplete .autocomplete {
   opacity: 1;
@@ -5042,10 +5047,12 @@ form ol {
   background: rgba(40, 42, 43, 0.95);
   padding: 1.2rem 1.2rem 1.2rem 0;
 }
-.autocomplete {
+.autocomplete,
+.ajax-search-item {
   box-shadow: 0 0.6rem 1.2rem rgba(0, 0, 0, 0.125);
 }
-.autocomplete h3 {
+.autocomplete h3,
+.ajax-search-item h3 {
   margin-bottom: 0.6rem;
   text-transform: uppercase;
   font-size: 1.2rem;
@@ -5105,6 +5112,9 @@ form ol {
   margin-bottom: 0;
   font-size: 1.3rem;
   color: #fff;
+}
+.ajax-search-item .autocomplete-item:last-child {
+  margin-bottom: 0.6rem;
 }
 /* owl carousel */
 .owl-carousel {

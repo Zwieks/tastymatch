@@ -9,7 +9,8 @@
     padding:@spacing/2 @spacing/2 @spacing/2 0;
 }
 
-.autocomplete{
+.autocomplete,
+.ajax-search-item{
 	.box-shadow();
 
 	h3{
@@ -73,3 +74,11 @@
 		color:@white;
 	}
 }
+
+.ajax-search-item{
+	.autocomplete-item{
+	&:last-child{
+		margin-bottom: @spacing/4;
+	}
+	}	
+}		

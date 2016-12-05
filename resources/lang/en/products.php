@@ -12,4 +12,10 @@ return [
 	'product-foodstand' => 'Foodstand',
 
 	'product-entertainer' => 'Entertainer',
+
+	'product-event-keywords' => 'Event keywords',
+
+	'product-foodstand-keywords' => 'Foodstand keywords',
+
+	'product-entertainer-keywords' => 'Entertainer keywords',	
 ];	

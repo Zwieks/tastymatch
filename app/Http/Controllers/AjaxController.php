@@ -20,7 +20,7 @@ class AjaxController extends Controller
             $results = Search::getSearchResults($request);
 
             //Return the view
-            $returnHTML = view('ajax.search')->with('results', $results)->render();
+            $returnHTML = view('ajax.search')->with('results', json_decode($results))->render();
             return response()->json(array('success' => true, 'html'=>$returnHTML));
         }
     }
