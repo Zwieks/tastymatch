@@ -8,9 +8,11 @@
             <p>{{ Lang::get('search.page-subtitle-part1') }}<strong> "{{ $search }}"</strong>. {{ Lang::get('search.page-subtitle-part2') }}</p>
         </section>
 
-        <div class="formfilter-wrapper">
-            @include('forms.searchfilter')
-        </div>
+        @if(!Request::get('type'))
+            <div class="formfilter-wrapper">
+                @include('forms.searchfilter')
+            </div>
+        @endif    
 
         {{--Render the most viewed event items--}}
         @foreach($results as $key => $result)

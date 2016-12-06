@@ -145,7 +145,7 @@ class Search extends Model
 						$new_found_array->name = $keyword;
 						$new_found_array->keyword = true;
 						$new_found_array->url = strtolower(trans('menus.search'));
-						$new_found_array->slug = '?q='.$findme.'&type='.$type.'&keywords=on';
+						$new_found_array->slug = '?q='.$keyword.'&type='.$type.'&keywords=on';
 
 						$found_array[] = $new_found_array;
 						$count++;
