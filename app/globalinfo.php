@@ -17,6 +17,12 @@ class GlobalInfo extends Model
 	 */
 	protected $table = 'global_info';
 
+	public static function GetAllItems() {
+		$allInfo = DB::table('global_info')->get();
+
+		return $allInfo;
+	}
+
 	public static function GetContactInfo() {
 		$contactinfo = DB::table('global_info')->select('kvk', 'email')->first();
 

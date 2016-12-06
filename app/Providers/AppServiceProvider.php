@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use DB;
+use App\globalinfo;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -25,7 +26,8 @@ class AppServiceProvider extends ServiceProvider
             /* Browser Locale */
             $locale = App()->getLocale();
             /* Get the global site information */
-            $globals = DB::select('select * from global_info');
+            $globals = globalinfo::GetAllItems();
+
             $globals = $globals[0];
             /* Set debug path */
             $debugpath = 'resources/views/'.str_replace('.', '/', $view->getName()).'.blade.php';
