@@ -23,25 +23,32 @@ class GlobalInfo extends Model
 		return $contactinfo;
 	}
 
-
+	//Set the corresponding URL
 	public static function GetCorrespondingUrl($all_items){
-		//Decode the user json
-		$array = json_decode($all_items);
+		foreach($all_items as $key => $object){
+			if(strtolower($key) == 'events' || strtolower($key)=='evenementen'){
+				$slug = strtolower(trans('products.product-event'));
 
-		//Get the sub URL
-		foreach ($array->events as $value) {
-			$value->url = strtolower(trans('products.product-event'));
+				foreach ($object as $value) {
+					$value->url = $slug;
+				}
+
+			}elseif(strtolower($key) == 'foodstands'){
+				$slug = strtolower(trans('products.product-foodstand'));
+
+				foreach ($object as $value) {
+					$value->url = $slug;
+				}
+			}elseif(strtolower($key) == 'entertainers'){
+				$slug = strtolower(trans('products.product-entertainer'));
+
+				foreach ($object as $value) {
+					$value->url = $slug;
+				}
+			}
 		}
 
-		foreach ($array->foodstands as $value) {
-			$value->url = strtolower(trans('products.product-foodstand'));
-		}
-
-		foreach ($array->entertainers as $value) {
-			$value->url = strtolower(trans('products.product-entertainer'));
-		}
-
-		return json_encode($array);
+		return $all_items;
 	}
 
 	/**
@@ -50,11 +57,31 @@ class GlobalInfo extends Model
 	 * @var object
 	 */
 	public static function MergeUserProducts($user){
+		$array = json_decode($user);
 
-		$array = json_decode(globalinfo::GetCorrespondingUrl($user));
+		$object = [];
 
-		//Merge the EVENTS, FOODSTANDS and ENTERTAINERS arrays and create a new json object
-		$object = array_merge($array->events, $array->foodstands, $array->entertainers);
+		foreach($array as $key => $items){
+			if($key == 'events' || $key == 'foodstands' || $key == 'entertainers'){
+				$object[$key] = $items;
+			}
+		}
+
+		$object = globalinfo::GetCorrespondingUrl($object);
+
+		foreach($object as $key => $items){
+			if(!empty($items)) {
+				if ($key == 'events' || $key == 'foodstands' || $key == 'entertainers') {
+					foreach ($items as $item) {
+						if(!empty($items)) {
+							$object[$key] = $item;
+						}
+					}
+				}
+			}else{
+				unset($object[$key]);
+			}
+		}
 
 		return $object;
 	}
@@ -105,9 +132,7 @@ class GlobalInfo extends Model
 	public static function GetMostPopulairItems($all_items)
 	{
 
-		$all_items = globalinfo::GetCorrespondingUrl($all_items);
-
-		$all_items =  json_decode($all_items);
+		$all_items = globalinfo::GetCorrespondingUrl(json_decode($all_items));
 		$builder = [];
 
 		foreach($all_items as $key => $item_list){

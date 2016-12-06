@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Images;
+use App\globalinfo;
 
 class Search extends Model
 {
@@ -61,6 +62,8 @@ class Search extends Model
 
 			// If there are results return them alphabetically, if none, return the error message.
 			ksort($posts);
+
+			$posts = globalinfo::GetCorrespondingUrl($posts);
 			return $posts;
 		}
 	}
@@ -72,19 +75,6 @@ class Search extends Model
 				unset($posts[$key]);
 			}else{
 				foreach ($post as $index => $value) {
-					//Set the proper URL
-					if(!isset($value->url)){
-						if(strtolower($key) == 'events' || strtolower($key)=='evenementen'){
-							$slug = strtolower(trans('products.product-event'));
-						}elseif(strtolower($key) == 'foodstands'){
-							$slug = strtolower(trans('products.product-foodstand'));
-						}elseif(strtolower($key) == 'entertainers'){
-							$slug = strtolower(trans('products.product-entertainer'));
-						}
-
-						//Set the URL
-						$value->url = $slug.'/';
-					}
 
 					//If the search input is not in the name remove it from the list
 					if(isset($value->name)){
