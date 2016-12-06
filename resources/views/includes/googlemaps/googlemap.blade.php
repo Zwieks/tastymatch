@@ -7,18 +7,18 @@
 	
 	<ul class="google-maps-legenda">
 		<li>
-			<span data-icon="z">Evenementen</span>
+			<span data-icon="z">{{ Lang::get('products.product-events') }}</span>
 		</li>
 		<li>
-			<span data-icon="d">Foodstands</span>
+			<span data-icon="d">{{ Lang::get('products.product-foodstands') }}</span>
 		</li>
 		<li>
-			<span data-icon="L">Entertainers</span>
+			<span data-icon="L">{{ Lang::get('products.product-entertainers') }}</span>
 		</li>
 	</ul>	
 </div>
 <div id="google-maps" class="google-maps-large"></div>
 
-<div class="google-maps-filter-wrapper">
+<div class="formfilter-wrapper">
 	@include('forms.googlemapsfilter')
 </div>

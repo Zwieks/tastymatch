@@ -16,6 +16,6 @@
 @stop
 
 {{-- Include Scripts --}}
-@section('script')
-
+@section('page-scripts')
+    @include('scripts.filtersearch')
 @stop

@@ -8,6 +8,10 @@
             <p>{{ Lang::get('search.page-subtitle-part1') }}<strong> "{{ $search }}"</strong>. {{ Lang::get('search.page-subtitle-part2') }}</p>
         </section>
 
+        <div class="formfilter-wrapper">
+            @include('forms.searchfilter')
+        </div>
+
         {{--Render the most viewed event items--}}
         @foreach($results as $key => $result)
             @if(!empty($result) && !isset($result->keyword) && !strpos($key, 'keywords'))

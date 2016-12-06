@@ -13,8 +13,6 @@ var tiny_header_scroll_offset = 200,
 setHeader(tiny_header_scroll_offset, tiny_header_min_screen_width);
 
 jQuery(document).ready(function($){
-
-
 	$doc.on('click', function(e){
 		var $search_box = $('#js-page-searchbox, #js-ajax-search-results'),
 			$search_bar = $('#search-bar'),

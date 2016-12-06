@@ -1,4 +1,4 @@
-<form method="get" id="js-googemap-filter" class="google-maps-filter webbeheer-formulier" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+<form method="get" id="js-googemap-filter" class="form-filter webbeheer-formulier" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<meta itemprop="target" content=""/>
 	<fieldset>

@@ -1,15 +1,22 @@
 .typesoverview-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
+	.transition();
 	margin:0 -@spacing/2 @spacing*2;
 	z-index: 0;
 	position: relative;
 	padding-top: @spacing;
 	padding-bottom: 0;
+	opacity:1;
+	visibility: visible;
 
 	&:last-child{
 		margin-bottom: 0;
 		padding-bottom: @spacing;
+	}
+
+	&.hide{
+		display: none;
 	}
 
 	&:after{
@@ -134,7 +141,6 @@
 		border-left:1px solid @borderColor;
 	    left: 0;
 	    top: -@spacing/2;
-	    botton: -@spacing/2;
 	    bottom: -@spacing/2;
 
 	   	@media @bp-MobileL{
@@ -149,8 +155,13 @@
 	}
 
 	.keyword-item{
-		width: 50%;
+		width: auto;
 		font-size: @smallestHeadingSize;
+		background: #adadad;
+		color: white;
+		padding:@spacing/5 @spacing/4;
+		margin-right: @spacing/3;
+		font-weight: bold;
 
 		@media @bp-MobileL{
 			width: auto;

@@ -348,7 +348,7 @@
         });
 
         //Using jQuery to handle the checkbox filter
-        $('.checkboxfilter').change(function() {
+        $('#js-googemap-filter .checkboxfilter').change(function() {
             //Filter the object based on the user input
             animation = false;
             filterObject();   
