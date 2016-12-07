@@ -24,6 +24,6 @@
 @stop
 
 {{-- Include Scripts --}}
-@section('script')
+@section('page-scripts')
     @include('scripts.tinymce-init')
 @stop
