@@ -29,7 +29,7 @@ class UserController extends Controller
         if(Auth::user() == true){
             //$foodstand_categories = Foodstandtype::all();
 
-            //Check if the blog is already been viewed by the user
+            //Check if the user is already loggedin and the session has been set
             if (!$request->session()->has('user.global')) {
                 $user = User::with('roles','types','foodstands', 'entertainers', 'events','agenda')->where('id', '=', Auth::user()->id)->first();
 

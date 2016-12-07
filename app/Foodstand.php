@@ -22,7 +22,22 @@ class Foodstand extends Model
 		return $this->belongsToMany('App\Foodstand_User');
 	}
 
-	//Get all the EVENTS
+	/**
+	 * Get the user foodstands based on the session
+	 */
+	public static function getUserFoodstands($user){
+
+		//Check if the users does have foodstands else return an empty array
+		if(isset($user->foodstands)){
+			$foodstands = $user->foodstands;
+		}else{
+			$foodstands = [];
+		}
+
+		return $foodstands;
+	}
+
+	//Get all the FOODSTANDS form ALL USERS
 	public static function getAll(){
 		$foodstands = DB::table('foodstands')->get();
 

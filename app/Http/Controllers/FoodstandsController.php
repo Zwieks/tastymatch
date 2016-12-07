@@ -15,13 +15,18 @@ use App\Foodstand;
 class FoodstandsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Get all the user foodstands
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //Get the user information
+        $user = $request->session()->get('user.global');
+
+        $foodstands = Foodstand::getUserFoodstands($user);
+        //return the view with the user session data
+        return view('auth.foodstand', compact('foodstands'));
     }
 
     /**
