@@ -26,4 +26,5 @@
 {{-- Include Scripts --}}
 @section('page-scripts')
     @include('scripts.tinymce-init')
+    @include('scripts.fileupload')
 @stop

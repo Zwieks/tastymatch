@@ -48,11 +48,6 @@ Route::get('/about', 'AboutController@index');
 // Dutch
 Route::get('/overons', 'AboutController@index');
 
-// Zoeken
-Route::get('/search', ['as' => 'index', 'uses' => 'SearchController@index']);
-// Dutch
-Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
-
 // Cookies
 Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 
@@ -77,3 +72,15 @@ Route::post('/entertainers/{slug}', ['as' => 'blog.single', 'uses' => 'Entertain
 
 // EVENTS
 Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
+
+//USER ACCESS ONLY
+Route::group(['middleware' => 'auth'], function()
+{
+	// Upload image
+	Route::post('admin/upload', ['as' => 'user.upload', 'uses' => 'ImageController@upload']);
+
+	// Zoeken
+	Route::get('/search', ['as' => 'index', 'uses' => 'SearchController@index']);
+	// Dutch
+	Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
+});
