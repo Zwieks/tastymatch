@@ -77,7 +77,7 @@ Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsControlle
 Route::group(['middleware' => 'auth'], function()
 {
 	// Upload image
-	Route::post('admin/upload', ['as' => 'user.upload', 'uses' => 'ImageController@upload']);
+	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImageController@upload']);
 
 	// Zoeken
 	Route::get('/search', ['as' => 'index', 'uses' => 'SearchController@index']);

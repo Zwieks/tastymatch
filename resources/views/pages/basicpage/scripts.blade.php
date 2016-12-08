@@ -18,3 +18,4 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.CustomScrollbar.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/jquery.owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/tinymce.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/dropzone.js') }}"></script>

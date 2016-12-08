@@ -3,7 +3,10 @@
     function initTinyMce(){
         tinymce.init({
             selector:'#content01',
-            menubar:false
+            menubar:false,
+            file_browser_callback: function(field_name, url, type, win) {
+                win.document.getElementById(field_name).value = 'my browser value';
+            }
         });
     }
 
