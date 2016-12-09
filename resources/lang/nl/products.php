@@ -19,4 +19,4 @@ return [
 	'product-foodstand-keywords' => 'Foodstand keywords',
 
 	'product-entertainer-keywords' => 'Entertainer keywords',
-];	
+];
