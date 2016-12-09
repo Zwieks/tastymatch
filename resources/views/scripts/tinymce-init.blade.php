@@ -2,15 +2,16 @@
 
     function initTinyMce(){
         tinymce.init({
-            selector:'#content01',
+            selector:'.content',
             menubar:false,
-            file_browser_callback: function(field_name, url, type, win) {
-                win.document.getElementById(field_name).value = 'my browser value';
-            }
+            inline: true
         });
     }
 
     $(document).ready(function(e) {
+        //Init Tiny MCE
+        initTinyMce();
+
         // Close when clicked outside search container
         $(document).on('click', function(e){
 
@@ -18,18 +19,13 @@
 
             // Close when clicked outside search container
             if( !$edit_box.is(e.target) && $edit_box.has(e.target).length === 0){
-                $('#content01').removeClass('text-editor').attr('contenteditable','false');
-
-                //Remove Tiny MCE functionality
-                tinymce.remove();
+                $('.content').removeClass('text-editor');
             }
         });
 
-        $(document).on('click', '#content01', function(e) {
+        $(document).on('click', '.content', function(e) {
             if(!$(this).hasClass('text-editor')){
-                $(this).addClass('text-editor').attr('contenteditable','true');
-                //Init Tiny MCE
-                initTinyMce();
+                $(this).addClass('text-editor');
             }
         });
     });

@@ -28,6 +28,22 @@
 	margin-bottom: @spacing/4;
 }
 
+.editable-wrapper{
+	.displayflex;
+
+	.details{
+		margin-left:@spacing;
+		margin-top:-@spacing*3;
+		z-index:10;
+		width: 100%/3;
+	}
+
+	.intro{
+		.flex-grow(1);
+		width: 100%/3*2;
+	}
+}
+
 html[lang='nl']{
 	.comp-login{
 		.social-login{

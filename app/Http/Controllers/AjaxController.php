@@ -25,6 +25,20 @@ class AjaxController extends Controller
         }
     }
 
+
+    /**
+     * Get the search results from the AJAX request
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function uploadImage(Request $request)
+    {
+        if($this->checkAjaxRequest($request) == true){
+            //Perform the upload
+            return true;
+        }
+    }
+
     /**
      * AUTOCOMPLETE
      * Get the search results from the AJAX request

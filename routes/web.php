@@ -54,9 +54,6 @@ Route::get('/cookies', ['uses' => 'UserController@index', 'as' => 'users']);
 // API
 Route::get('/getRequestKvkDetails', 'ApiController@getKvkDetails');
 
-// AJAX
-Route::post('/ajax/search', 'AjaxController@getSearch');
-
 // Blog
 Route::get('blog', array('as' => 'index', 'uses' => 'BlogController@Index'));
 Route::get('blog/{slug}', ['as' => 'blog.single', 'uses' => 'BlogController@Single']) -> where('slug', '[\w\d\-\_]+');
@@ -77,10 +74,14 @@ Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsControlle
 Route::group(['middleware' => 'auth'], function()
 {
 	// Upload image
-	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImageController@upload']);
+	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImagesController@upload']);
 
 	// Zoeken
 	Route::get('/search', ['as' => 'index', 'uses' => 'SearchController@index']);
 	// Dutch
 	Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
+
+	// AJAX
+	Route::post('/ajax/search', 'AjaxController@getSearch');
+	Route::post('/ajax/upload', 'AjaxController@UploadImage');
 });

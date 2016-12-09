@@ -96,4 +96,9 @@ class ImagesController extends Controller
     {
         //
     }
+
+    public function upload(Request $request)
+    {
+        return false;
+    }
 }
