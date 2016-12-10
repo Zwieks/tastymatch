@@ -2,12 +2,56 @@
 
     function initTinyMce(){
         tinymce.init({
-            selector:'.content',
+            selector:'#js-editable-intro',
             menubar:false,
-            inline: true
+            inline: true,
+            plugins: "textcolor colorpicker",
+            toolbar: [
+                'undo redo forecolor'
+            ]
+        });
+
+        tinymce.init({
+            selector: '#js-editable-contact',
+            menubar:false,
+            inline: true,
+            plugins: "textcolor colorpicker",
+            toolbar: [
+                'undo redo forecolor'
+            ]
+        });
+
+        tinymce.init({
+            selector: '#js-editable-menu',
+            menubar:false,
+            inline: true,
+            plugins: "textcolor colorpicker",
+            toolbar: [
+                'undo redo forecolor'
+            ]
+        });
+
+        tinymce.init({
+            selector: '.js-editable-video',
+            menubar:false,
+            inline: true,
+            plugins: " media",
+            toolbar: [
+                'undo redo media'
+            ]
+        });
+
+        tinymce.init({
+            selector: '.js-editable-media',
+            menubar:false,
+            inline: true,
+            plugins: "textcolor colorpicker",
+            toolbar: [
+                'undo redo forecolor'
+            ]
         });
     }
-
+   
     $(document).ready(function(e) {
         //Init Tiny MCE
         initTinyMce();

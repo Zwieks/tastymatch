@@ -1,0 +1,174 @@
+.editable-wrapper{
+	.displayflex;
+	.align-items(flex-start);
+	margin-bottom: @spacing*3;
+
+	&:last-child{
+		margin-bottom: 0;
+	}
+
+	.details-wrapper{
+		width: 100%/3;
+		margin-left:@spacing;
+		margin-top:-@spacing*3;
+		z-index:10;
+	}
+
+	.details{
+		margin-bottom: @spacing;		
+
+		.product-wrapper{
+			border-top:none;
+		}
+
+		&:last-child{
+			margin-bottom: 0;
+		}
+
+		&:first-child{
+			.product-wrapper{
+				border-top:15px solid @smoothPurple;
+			}
+		}
+
+		h2{
+			font-weight: 600;
+    		text-transform: uppercase;
+    		font-size: @smallHeadingSize;
+    		margin-bottom: @spacing/2;
+		}
+	}
+
+	.intro{
+		.flex-grow(1);
+		width: 100%/3*2;
+	}
+
+	.media{
+		.flex-grow(1);
+		width: 100%/3;
+		margin-right: @spacing;
+
+		&:last-child{
+			margin-right: 0;
+		}
+
+		.product-wrapper{
+			border-top:15px solid @smoothGreen;
+		}
+
+		.dropzone{
+			position: relative;
+			width: 100%;
+			height:@spacing*10;
+			margin-bottom: @spacing;
+		}
+	}
+
+	.add_media{
+		cursor:pointer;
+		opacity: 0.6;
+
+		&:before{
+			font-size: 31px;
+		}
+
+		&:hover,
+		&:focus{
+			opacity:1;
+		}
+	}
+}
+
+.editable-default{
+	color:rgba(0,0,0,0.4);
+	position: relative;
+	cursor: pointer;
+	border:2px dashed rgba(0,0,0,0);
+
+	&:last-child{
+		margin-bottom: 0;
+	}
+
+	&:hover,
+	&:focus{
+		border:2px dashed rgba(0,0,0,0.4);
+	}
+
+	&:after{
+		.centerY;
+	    top: -12px;
+	    right: -5px;
+		content:'X';
+		font-family: @iconFont;
+		color:rgba(0,0,0,1);
+		font-size: 20px;
+	}
+}
+
+.editable{
+
+	li{
+		display: block;
+		width: 100%;
+
+		p{
+			margin:0;
+		}
+	}
+}
+
+.mce-edit-focus{
+	.default{
+		color:@textColor;
+		cursor: auto;
+	}
+}
+
+.editable-media-wrapper{
+	.displayflex;
+	.flex-wrap(wrap);
+	.justify-content(space-between);
+
+	margin-bottom: @spacing;
+
+	.editable-default,
+	.dropzone{
+		width: calc(50% ~'-' @spacing/2)!important;
+		padding:0 @spacing/2;
+		height: @spacing*10;
+   		margin-bottom: 0;
+   		background: @lightGrey;
+   		border:2px dashed rgba(0,0,0,0.4);
+   		position: relative;
+
+   		&:before{
+   			.center;
+   			font-size: 30px;
+   			opacity: 1;
+   			color:@textColor;
+   		}
+	}
+
+	.dropzone{
+		.translateX(0);
+		left:0;
+	}
+
+	.dz-started{
+		width: 100%!important;
+		padding:0;
+	}
+
+	&.hasimage{
+		.editable-default{
+			display: none;
+		}
+	}
+
+	&.hasvideo{
+		.dropzone{
+			display: none;
+		}
+	}
+}

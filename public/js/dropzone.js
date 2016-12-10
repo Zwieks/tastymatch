@@ -246,11 +246,13 @@
 			},
 			paste: noop,
 			reset: function() {
+				$(this.element).parent().removeClass("hasimage")
 				return this.element.classList.remove("dz-started");
 			},
 			addedfile: function(file) {
 				var node, removeFileEvent, removeLink, _i, _j, _k, _len, _len1, _len2, _ref, _ref1, _ref2, _results;
 				if (this.element === this.previewsContainer) {
+					$(this.element).parent().addClass('hasimage');
 					this.element.classList.add("dz-started");
 				}
 				if (this.previewsContainer) {
