@@ -49,6 +49,96 @@ jQuery(document).ready(function($){
 			$('html').removeClass('open-search, open-autocomplete');
 		}
 	});
+
+	//Add media item to template
+	$('#js_add_mediaitem').on('click', function(){
+		addMediaItem();
+	});	
+
+
+	//Search using Ajax
+	function addMediaItem() {
+
+        var formData = {
+            count: ($('#js-editable-wrapper .editable-wrapper').children().length)+1,
+        };
+		var token = $('meta[name="csrf-token"]').attr('content'),
+			url = '/ajax/addMediaItem',
+			count = 'test';
+
+		$.ajax({
+			type: 'POST',
+			url: url,
+			headers: {'X-CSRF-TOKEN': token},
+			data: formData,
+			success: function (data) {
+				if(data.success == true) {
+					//Put the results in de container
+					$('#js-editable-wrapper .editable-wrapper').append(data.html);
+				}
+			}
+		})
+		.done(function(data) {
+			var drop_id = '#DropzoneElementId'+data.id,
+			mce_id = '#tinyMceElementId'+data.id,
+			mce_video_id = '#tinyMceVideoElementId'+data.id;
+	        var myDropzoneThethird = new Dropzone(
+	            	drop_id, //id of drop zone element 2
+	            {
+	                paramName: 'photos',
+	                url: '/ajax/upload',
+	                dictDefaultMessage: "",
+	                dictRemoveFile: "",
+	                clickable: true,
+	                enqueueForUpload: true,
+	                maxFilesize: 1,
+	                maxFiles: 1,
+	                uploadMultiple: false,
+	                addRemoveLinks: true,
+	                parallelUploads: 1,
+	                thumbnailWidth: 1680,
+	                thumbnailHeight: 1040,
+	                init: function() {
+	                    this.on("maxfilesexceeded", function(file) {
+	                        this.removeAllFiles();
+	                        this.addFile(file);
+	                    });
+	                }
+	            }
+	        );
+
+	        tinymce.init({
+	        	setup:function(ed) {
+	                ed.on('NodeChange', function(e){
+	                    if(ed.getContent() != ''){
+	                        $('#'+ed.id).parent().addClass('hasvideo');
+	                    }else{
+	                        if($('#'+ed.id).parent().hasClass('hasvideo')){
+	                            $('#'+ed.id).parent().removeClass('hasvideo');
+	                        }    
+	                    }    
+	                });
+	            }, 
+	            selector: mce_video_id,
+	            menubar:false,
+	            inline: true,
+	            plugins: " media",
+	            toolbar: [
+	                'undo redo media'
+	            ]
+	        });
+
+	        tinymce.init({
+	            selector: mce_id,
+	            menubar:false,
+	            inline: true,
+	            plugins: "textcolor colorpicker",
+	            toolbar: [
+	                'undo redo forecolor'
+	            ]
+	        });
+		});
+	}
 });
 
 jQuery(window).on('load', function(){

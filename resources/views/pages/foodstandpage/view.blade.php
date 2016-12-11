@@ -45,36 +45,9 @@
     </div>    
 </div>
 
-<div class="editable-wrapper">
-    <div class="media">
-        <div class="product-wrapper">
-
-            <div class="editable-media-wrapper">
-                <form method="get" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementId2" data-icon='Q'>
-                    <meta name="csrf-token" content="{{ csrf_token() }}" />
-                </form>
-                <p class="js-editable-video content editable editable-default" data-icon='0'></p>
-            </div>  
-
-            <p class="js-editable-media content editable editable-default">Plaat hier eventueel je tekst. Wanneer deze niet wordt ingevuld zal deze tekstbox niet getoond worden op de pagina.</p>
-        </div>
+<div id="js-editable-wrapper">
+    <div class="editable-wrapper">
+        @include('layouts.templates.mediaitem')
     </div>
-
-    <div class="media">
-        <div class="product-wrapper">
-
-            <div class="editable-media-wrapper">
-                <form method="get" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementId2" data-icon='Q'>
-                    <meta name="csrf-token" content="{{ csrf_token() }}" />
-                </form>
-                <p class="js-editable-video content editable editable-default" data-icon='0'></p>
-            </div>  
-
-            <p class="js-editable-media content editable editable-default">Plaat hier eventueel je tekst. Wanneer deze niet wordt ingevuld zal deze tekstbox niet getoond worden op de pagina.</p>
-        </div>
-    </div>
-
-    <div class="add_media" data-icon="Z" title="Voeg een nieuw mediablok toe">
-
-    </div>
+    <div id="js_add_mediaitem" class="add_media" data-icon="Z" title="Voeg een nieuw mediablok toe"></div>
 </div>

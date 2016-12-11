@@ -71,6 +71,21 @@ class AjaxController extends Controller
     }
 
     /**
+     * Add a default Media item template. Commomn use in the user detail page
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function AddMediaItem(Request $request){
+        if($this->checkAjaxRequest($request) == true){
+            //Return the view
+            $data = $request->all();
+
+            $returnHTML = view('layouts.templates.mediaitem')->with('data', $data['count'])->render();
+            return response()->json(array('success' => true, 'html'=>$returnHTML, 'id'=>$data['count']));
+        }
+    }
+
+    /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response

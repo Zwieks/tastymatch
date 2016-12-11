@@ -5804,5 +5804,17 @@ form ol {
 .editable-media-wrapper.hasvideo .dropzone {
   display: none;
 }
+.editable-media-wrapper.hasvideo .js-editable-video {
+  width: 100%!important;
+}
+.mce-object-iframe {
+  margin: 0 -1.2rem !important;
+  width: calc(100% + 2.4rem);
+  height: 100%;
+}
+.mce-object-iframe iframe {
+  height: 100%;
+  width: 100%;
+}
 
 /*# sourceMappingURL=app.css.map */

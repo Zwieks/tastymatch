@@ -1,14 +1,10 @@
 <script type="text/javascript">
 
-    function initTinyMce(){
+    $.fn.initTinyMce = function initTinyMce(){
         tinymce.init({
             selector:'#js-editable-intro',
             menubar:false,
-            inline: true,
-            plugins: "textcolor colorpicker",
-            toolbar: [
-                'undo redo forecolor'
-            ]
+            inline: true
         });
 
         tinymce.init({
@@ -32,6 +28,18 @@
         });
 
         tinymce.init({
+            setup:function(ed) {
+                ed.on('NodeChange', function(e){
+                    if(ed.getContent() != ''){
+                        $('#'+ed.id).parent().addClass('hasvideo');
+                    }else{
+                        if($('#'+ed.id).parent().hasClass('hasvideo')){
+                            $('#'+ed.id).parent().removeClass('hasvideo');
+                        }    
+                    }    
+                });
+            },    
+
             selector: '.js-editable-video',
             menubar:false,
             inline: true,
@@ -54,7 +62,9 @@
    
     $(document).ready(function(e) {
         //Init Tiny MCE
-        initTinyMce();
+        $.fn.initTinyMce();
+
+
 
         // Close when clicked outside search container
         $(document).on('click', function(e){
