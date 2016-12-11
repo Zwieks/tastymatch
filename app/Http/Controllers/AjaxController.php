@@ -80,7 +80,7 @@ class AjaxController extends Controller
             //Return the view
             $data = $request->all();
 
-            $returnHTML = view('layouts.templates.mediaitem')->with('data', $data['count'])->render();
+            $returnHTML = view('layouts.templates.empty-mediaitem')->with('data', $data['count'])->render();
             return response()->json(array('success' => true, 'html'=>$returnHTML, 'id'=>$data['count']));
         }
     }
