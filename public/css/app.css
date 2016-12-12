@@ -1809,6 +1809,7 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
+  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -5653,6 +5654,17 @@ form ol {
   align-items: flex-start;
   margin-bottom: 7.2rem;
 }
+.editable-wrapper.mediaitems-wrapper {
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -moz-align-items: stretch;
+  -ms-align-items: stretch;
+  -ms-flex-align: stretch;
+  align-items: stretch;
+  margin-left: -1.2rem;
+  margin-right: -1.2rem;
+  margin-bottom: 4.8rem;
+}
 .editable-wrapper:last-child {
   margin-bottom: 0;
 }
@@ -5689,16 +5701,17 @@ form ol {
   width: 66.66666667%;
 }
 .editable-wrapper .media {
+  width: 33.33333333%;
+  padding-right: 1.2rem;
+  padding-left: 1.2rem;
+  margin-bottom: 2.4rem;
+}
+.editable-wrapper .media:last-child {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  width: 33.33333333%;
-  margin-right: 2.4rem;
-}
-.editable-wrapper .media:last-child {
-  margin-right: 0;
 }
 .editable-wrapper .media .product-wrapper {
   border-top: 15px solid #2b8a66;
@@ -5798,8 +5811,14 @@ form ol {
   width: 100%!important;
   padding: 0;
 }
+.editable-media-wrapper.hasimage {
+  margin-bottom: 0;
+}
 .editable-media-wrapper.hasimage .editable-default {
   display: none;
+}
+.editable-media-wrapper.hasimage .dz-started {
+  margin-top: 0;
 }
 .editable-media-wrapper.hasvideo .dropzone {
   display: none;

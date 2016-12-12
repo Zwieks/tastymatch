@@ -46,7 +46,7 @@
 </div>
 
 <div id="js-editable-wrapper">
-    <div class="editable-wrapper">
+    <div class="editable-wrapper mediaitems-wrapper">
         @include('layouts.templates.empty-mediaitem')
     </div>
     <div id="js_add_mediaitem" class="add_media" data-icon="Z" title="Voeg een nieuw mediablok toe"></div>
