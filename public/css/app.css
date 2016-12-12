@@ -5715,6 +5715,7 @@ form ol {
 }
 .editable-wrapper .media .product-wrapper {
   border-top: 15px solid #2b8a66;
+  padding: 1.2rem;
 }
 .editable-wrapper .media .dropzone {
   position: relative;
@@ -5825,6 +5826,9 @@ form ol {
 }
 .editable-media-wrapper.hasvideo .js-editable-video {
   width: 100%!important;
+}
+.editable-media-wrapper.hasvideo .editable-default:after {
+  opacity: 0;
 }
 .mce-object-iframe {
   margin: 0 -1.2rem !important;
