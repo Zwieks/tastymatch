@@ -5758,6 +5758,9 @@ form ol {
   color: #000000;
   font-size: 20px;
 }
+.editable-default.js-editable-video:after {
+  content: '';
+}
 .editable li {
   display: block;
   width: 100%;
