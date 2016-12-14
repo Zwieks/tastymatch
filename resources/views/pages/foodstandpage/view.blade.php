@@ -6,6 +6,7 @@
 </div>
 
 <div class="editable-wrapper">
+    <span class="btn sticky js-save-template">Opslaan</span>
     <div class="intro">
         <div id="js-editable-intro" class="content editable product-wrapper">
             <p class="editable-default">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacus justo, cursus in mattis in, feugiat eu mauris. Phasellus quis porttitor metus. Vestibulum sed risus at lectus finibus vulputate ut eget velit. In sit amet tortor lacinia, vehicula magna ut, sagittis odio. Cras tellus urna, consequat ac porta eu, elementum eget arcu. Phasellus condimentum ante a sodales hendrerit. Sed mattis neque ac venenatis faucibus. Fusce fringilla cursus convallis. Donec et hendrerit ligula. Cras blandit ex ut augue ultrices ultrices. Praesent nisi sem, bibendum at lectus vitae, sollicitudin ultricies orci.</p>
@@ -18,16 +19,16 @@
                 <h2>Neem contact met ons op</h2>
                 <ul class="editable-default">
                    <li>
-                      <p class="contact-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacus justo, cursus in mattis in, feugiat eu mauris. Phasellus quis porttitor metus.</p>  
-                   </li>   
+                      <p class="contact-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacus justo, cursus in mattis in, feugiat eu mauris. Phasellus quis porttitor metus.</p>
+                   </li>
 
                    <li>
-                       <p data-icon="V">345345345</p>  
-                   </li>     
+                       <p data-icon="V">345345345</p>
+                   </li>
 
                      <li>
-                       <p data-icon="e">ronaldzwiers@hotmail.com</p>  
-                   </li>  
+                       <p data-icon="e">ronaldzwiers@hotmail.com</p>
+                   </li>
                 </ul>
             </div>
         </div>
@@ -37,12 +38,12 @@
                 <h2>Menu</h2>
                 <ul class="editable-default">
                    <li>
-                       <p>Vul hier je menu items in</p>  
-                   </li>     
+                       <p>Vul hier je menu items in</p>
+                   </li>
                 </ul>
             </div>
         </div>
-    </div>    
+    </div>
 </div>
 
 <div id="js-editable-wrapper">

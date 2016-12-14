@@ -2384,6 +2384,12 @@ html .cookie-explanation button.request-cookies:before,
   color: #fff;
   background: #E3262E;
 }
+.sticky {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  z-index: 99;
+}
 .readmore {
   transition: 0.15s ease-out;
   font-weight: bold;

@@ -2,6 +2,12 @@
 
     $.fn.initTinyMce = function initTinyMce(){
         tinymce.init({
+            setup:function(ed) {
+                ed.on('ProgressState', function(e) {
+                    console.log('ProgressState event', e);
+                });
+            },
+
             selector:'#js-editable-intro',
             menubar:false,
             inline: true
@@ -38,6 +44,10 @@
                         }    
                     }    
                 });
+
+                ed.on('ProgressState', function(e) {
+                   console.log('ProgressState event', e);
+                });
             },    
 
             selector: '.js-editable-video',
@@ -59,12 +69,22 @@
             ]
         });
     }
-   
+
+    function TinyMceSave(id) {
+        //Use get without #
+        var id = tinymce.get(id),
+            userid = {!! Session::get('user.global.id') !!},
+            content = id.getContent();
+
+        // Do you ajax call here, window.setTimeout fakes ajax call
+        window.setTimeout(function() {
+            alert(content);
+        }, 1000);
+    }
+
     $(document).ready(function(e) {
         //Init Tiny MCE
         $.fn.initTinyMce();
-
-
 
         // Close when clicked outside search container
         $(document).on('click', function(e){
@@ -80,6 +100,15 @@
         $(document).on('click', '.content', function(e) {
             if(!$(this).hasClass('text-editor')){
                 $(this).addClass('text-editor');
+            }
+        });
+
+        //Save all the template content
+        $('.js-save-template').on('click', function(e){
+            //Loop through all the initialized editors
+            for (var i = 0; i < tinymce.editors.length; i++)
+            {
+                TinyMceSave(tinymce.editors[i].id);
             }
         });
     });
