@@ -117,7 +117,10 @@ jQuery(document).ready(function($){
 	                            $('#'+ed.id).parent().removeClass('hasvideo');
 	                        }    
 	                    }    
-	                });
+	                }),
+                	ed.on('change', function(e) {
+                    	$('#'+ed.id).addClass('changed-content');
+                	});
 	            }, 
 	            selector: mce_video_id,
 	            menubar:false,
@@ -129,6 +132,14 @@ jQuery(document).ready(function($){
 	        });
 
 	        tinymce.init({
+	        	setup:function(ed) {
+	                ed.on('ProgressState', function(e) {
+	                    console.log('ProgressState event', e);
+	                }),
+	                ed.on('change', function(e) {
+	                    $('#'+ed.id).addClass('changed-content');
+	                });
+	            },
 	            selector: mce_id,
 	            menubar:false,
 	            inline: true,

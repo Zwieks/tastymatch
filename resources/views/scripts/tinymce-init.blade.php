@@ -5,6 +5,9 @@
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
+                }),
+                ed.on('change', function(e) {
+                    $('#'+ed.id).addClass('changed-content');
                 });
             },
 
@@ -14,6 +17,14 @@
         });
 
         tinymce.init({
+            setup:function(ed) {
+                ed.on('ProgressState', function(e) {
+                    console.log('ProgressState event', e);
+                }),
+                ed.on('change', function(e) {
+                    $('#'+ed.id).addClass('changed-content');
+                });
+            },
             selector: '#js-editable-contact',
             menubar:false,
             inline: true,
@@ -24,6 +35,14 @@
         });
 
         tinymce.init({
+            setup:function(ed) {
+                ed.on('ProgressState', function(e) {
+                    console.log('ProgressState event', e);
+                }),
+                ed.on('change', function(e) {
+                    $('#'+ed.id).addClass('changed-content');
+                });
+            },
             selector: '#js-editable-menu',
             menubar:false,
             inline: true,
@@ -47,6 +66,9 @@
 
                 ed.on('ProgressState', function(e) {
                    console.log('ProgressState event', e);
+                }),
+                ed.on('change', function(e) {
+                   $('#'+ed.id).addClass('changed-content');
                 });
             },    
 
@@ -60,6 +82,14 @@
         });
 
         tinymce.init({
+            setup:function(ed) {
+                ed.on('ProgressState', function(e) {
+                    console.log('ProgressState event', e);
+                }),
+                ed.on('change', function(e) {
+                    $('#'+ed.id).addClass('changed-content');
+                });
+            },
             selector: '.js-editable-media',
             menubar:false,
             inline: true,
@@ -72,14 +102,16 @@
 
     function TinyMceSave(id) {
         //Use get without #
-        var id = tinymce.get(id),
-            userid = {!! Session::get('user.global.id') !!},
-            content = id.getContent();
+        if($('#'+id).hasClass('changed-content')){
+            var id = tinymce.get(id),
+                userid = {!! Session::get('user.global.id') !!},
+                content = id.getContent();
 
-        // Do you ajax call here, window.setTimeout fakes ajax call
-        window.setTimeout(function() {
-            alert(content);
-        }, 1000);
+            // Do you ajax call here, window.setTimeout fakes ajax call
+            window.setTimeout(function() {
+                alert(content);
+            }, 1000);
+        };    
     }
 
     $(document).ready(function(e) {
