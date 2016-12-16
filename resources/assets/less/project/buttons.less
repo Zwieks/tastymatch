@@ -71,10 +71,31 @@ a {
 
 // Save template
 .sticky{
-    position: fixed;
-    right:0;
-    top:50%;
-    z-index: 99;
+    margin-bottom: 0;
+    background: transparent;
+    position: relative;
+    color:@textColor;
+    padding: @spacing/4 @spacing/2 @spacing/4 @spacing*1.3;
+
+    &:before{
+        .centerY;
+        left:12px;
+    }
+
+    &:hover,
+    &:focus{
+        color:@primColor;
+    }
+}
+
+.save{
+    background: @smoothGreen;
+    color: @white;
+
+    &:hover,
+    &:focus{
+        color:#000;
+    }
 }
 
 // Small button

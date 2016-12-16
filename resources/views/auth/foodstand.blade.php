@@ -28,3 +28,8 @@
     @include('scripts.tinymce-init')
     @include('scripts.dropzone-init')
 @stop
+
+{{-- Include Controls --}}
+@section('sticky-content')
+    @include('sidebars.sticky.templatecontrols')
+@stop

@@ -1,0 +1,22 @@
+.sticky-controls-wrapper{
+	.box-shadow();
+	position: fixed;
+	top: @headerHeight;
+	right: 0;
+	height: auto;
+	width: auto;
+	background: rgba(255, 255, 255, 0.8);
+
+	.btn-wrapper{
+		span{
+			display: block;
+			border-bottom: 1px solid @borderColor;
+			padding: @spacing/3 @spacing*1.5 @spacing/3 @spacing*2;
+			font-size: @XSmallHeadingSize;
+
+			&:last-child{
+				border-bottom:none;
+			}
+		}
+	}
+}

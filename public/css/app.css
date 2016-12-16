@@ -2385,10 +2385,29 @@ html .cookie-explanation button.request-cookies:before,
   background: #E3262E;
 }
 .sticky {
-  position: fixed;
-  right: 0;
+  margin-bottom: 0;
+  background: transparent;
+  position: relative;
+  color: #333;
+  padding: 0.6rem 1.2rem 0.6rem 3.12rem;
+}
+.sticky:before {
+  transform: translateY(-50%);
+  position: absolute;
   top: 50%;
-  z-index: 99;
+  left: 12px;
+}
+.sticky:hover,
+.sticky:focus {
+  color: #E3262E;
+}
+.save {
+  background: #2b8a66;
+  color: #fff;
+}
+.save:hover,
+.save:focus {
+  color: #000;
 }
 .readmore {
   transition: 0.15s ease-out;
@@ -5218,6 +5237,25 @@ form ol {
 .ajax-search-item .autocomplete-item:last-child {
   margin-bottom: 0.6rem;
 }
+.sticky-controls-wrapper {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  position: fixed;
+  top: 9rem;
+  right: 0;
+  height: auto;
+  width: auto;
+  background: rgba(255, 255, 255, 0.8);
+}
+.sticky-controls-wrapper .btn-wrapper span {
+  display: block;
+  border-bottom: 1px solid #e5e5e5;
+  padding: 0.8rem 3.6rem 0.8rem 4.8rem;
+  font-size: 1.3rem;
+}
+.sticky-controls-wrapper .btn-wrapper span:last-child {
+  border-bottom: none;
+}
+/* Third party */
 /* owl carousel */
 .owl-carousel {
   display: none;

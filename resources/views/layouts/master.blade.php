@@ -28,7 +28,11 @@
         <div class="page-website-wrapper">
             @include('pages.basicpage.wrapper')
             @include('includes.footer')
-        </div>   
+        </div>
+
+        @hasSection('sticky-content')
+            @yield('sticky-content')
+        @endif
 
         <div class="page-mobile-nav-container">
             <label class="nav-toggle" id="js-nav-toggle" for="js-nav-trigger"><span class="wrapper"><span></span></span><strong>{_ 'Menu'}</strong></label>
