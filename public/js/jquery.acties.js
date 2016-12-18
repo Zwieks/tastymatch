@@ -55,8 +55,18 @@ jQuery(document).ready(function($){
 		addMediaItem();
 	});	
 
+	//Remove media item from template
+	$(document).on('click','.js-remove-mediaitem',function(){
+		removeMediaItem($(this));
+	});	
 
-	//Search using Ajax
+
+	function removeMediaItem(object){
+		object.parent().fadeOut( 0, function() {
+		    object.parent().remove();
+		});
+	}
+
 	function addMediaItem() {
 
         var formData = {

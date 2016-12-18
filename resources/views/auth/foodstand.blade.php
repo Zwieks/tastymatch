@@ -27,6 +27,7 @@
 @section('page-scripts')
     @include('scripts.tinymce-init')
     @include('scripts.dropzone-init')
+    @include('scripts.googlemaps-single-init')
 @stop
 
 {{-- Include Controls --}}

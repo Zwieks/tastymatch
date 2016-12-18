@@ -1809,7 +1809,6 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
-  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -5687,7 +5686,8 @@ form ol {
 .dz-started .dz-message {
   display: none!important;
 }
-.editable-wrapper {
+.editable-wrapper,
+.add-media-item-wrapper {
   display: -moz-flex;
   display: -ms-flexbox;
   display: -ms-flex;
@@ -5698,7 +5698,8 @@ form ol {
   align-items: flex-start;
   margin-bottom: 7.2rem;
 }
-.editable-wrapper.mediaitems-wrapper {
+.editable-wrapper.mediaitems-wrapper,
+.add-media-item-wrapper.mediaitems-wrapper {
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
   -moz-align-items: stretch;
@@ -5709,34 +5710,42 @@ form ol {
   margin-right: -1.2rem;
   margin-bottom: 4.8rem;
 }
-.editable-wrapper:last-child {
+.editable-wrapper:last-child,
+.add-media-item-wrapper:last-child {
   margin-bottom: 0;
 }
-.editable-wrapper .details-wrapper {
+.editable-wrapper .details-wrapper,
+.add-media-item-wrapper .details-wrapper {
   width: 33.33333333%;
   margin-left: 2.4rem;
   margin-top: -7.2rem;
   z-index: 10;
 }
-.editable-wrapper .details {
+.editable-wrapper .details,
+.add-media-item-wrapper .details {
   margin-bottom: 2.4rem;
 }
-.editable-wrapper .details .product-wrapper {
+.editable-wrapper .details .product-wrapper,
+.add-media-item-wrapper .details .product-wrapper {
   border-top: none;
 }
-.editable-wrapper .details:last-child {
+.editable-wrapper .details:last-child,
+.add-media-item-wrapper .details:last-child {
   margin-bottom: 0;
 }
-.editable-wrapper .details:first-child .product-wrapper {
+.editable-wrapper .details:first-child .product-wrapper,
+.add-media-item-wrapper .details:first-child .product-wrapper {
   border-top: 15px solid #5d62ca;
 }
-.editable-wrapper .details h2 {
+.editable-wrapper .details h2,
+.add-media-item-wrapper .details h2 {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1.8rem;
   margin-bottom: 1.2rem;
 }
-.editable-wrapper .intro {
+.editable-wrapper .intro,
+.add-media-item-wrapper .intro {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
@@ -5744,39 +5753,104 @@ form ol {
   flex-grow: 1;
   width: 66.66666667%;
 }
-.editable-wrapper .media {
+.editable-wrapper .remove-media-item,
+.add-media-item-wrapper .remove-media-item {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  background: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  width: 4.8rem;
+  height: 4.8rem;
+  right: 1.2rem;
+  top: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+.editable-wrapper .remove-media-item:before,
+.add-media-item-wrapper .remove-media-item:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 24px;
+  color: #E3262E;
+}
+.editable-wrapper .media,
+.add-media-item-wrapper .media {
   width: 33.33333333%;
   padding-right: 1.2rem;
   padding-left: 1.2rem;
   margin-bottom: 2.4rem;
+  position: relative;
 }
-.editable-wrapper .media:last-child {
+.editable-wrapper .media:last-child,
+.add-media-item-wrapper .media:last-child {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
-.editable-wrapper .media .product-wrapper {
+.editable-wrapper .media .product-wrapper,
+.add-media-item-wrapper .media .product-wrapper {
   border-top: 15px solid #2b8a66;
   padding: 1.2rem;
 }
-.editable-wrapper .media .dropzone {
+.editable-wrapper .media .dropzone,
+.add-media-item-wrapper .media .dropzone {
   position: relative;
   width: 100%;
   height: 24rem;
   margin-bottom: 2.4rem;
 }
-.editable-wrapper .add_media {
-  cursor: pointer;
-  opacity: 0.6;
+.add-media-item {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-left: -1.2rem;
+  margin-right: -1.2rem;
+  width: 100%;
 }
-.editable-wrapper .add_media:before {
+.add-media-item .media {
+  width: 100%;
+  padding: 0 1.2rem;
+}
+.add-media-item .media:last-child {
+  -webkit-flex-grow: inherit;
+  -moz-flex-grow: inherit;
+  -ms-flex-grow: inherit;
+  -ms-flex-positive: inherit;
+  flex-grow: inherit;
+}
+.add-media-item .media .product-wrapper {
+  position: relative;
+  opacity: 0.6;
+  min-height: 19.2rem;
+  cursor: pointer;
+}
+.add-media-item .media .product-wrapper:hover,
+.add-media-item .media .product-wrapper:focus {
+  opacity: 1;
+}
+.add-media-item .media .product-wrapper:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
   font-size: 31px;
 }
-.editable-wrapper .add_media:hover,
-.editable-wrapper .add_media:focus {
-  opacity: 1;
+.add-media-item .add-media-outline {
+  border: 2px dashed rgba(0, 0, 0, 0.4);
+  height: 100%;
+}
+.add-media-item-wrapper {
+  width: 20%;
 }
 .editable-default {
   color: rgba(0, 0, 0, 0.4);

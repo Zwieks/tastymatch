@@ -1,5 +1,9 @@
 <!-- {{$debugpath}} -->
 <div class="media">
+@if(isset($data) && $data != 0)
+	<div class="js-remove-mediaitem remove-media-item" data-icon="U" title="Verwijder media item"></div>
+@endif
+
     <div class="product-wrapper">
 
         <div class="editable-media-wrapper">
