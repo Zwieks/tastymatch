@@ -50,6 +50,26 @@ jQuery(document).ready(function($){
 		}
 	});
 
+	//Save all the custom template content
+	$('.js-save-template').on('click', function(e){
+
+		//Contains all the TinyMce changes
+		var tinmce_components = [];
+
+		//Get the TINYMCE and put the changed components in the object
+		for (var i = 0; i < tinymce.editors.length; i++)
+		{
+			//Get the content of the changed TINYMCE component
+			var content = TinyMceSave(tinymce.editors[i].id);
+
+			if(typeof content != 'undefined'){
+				tinmce_components[content.componentId] = content;
+			}
+		}
+
+		console.log(tinmce_components);
+	});
+
 	//Add media item to template
 	$('#js_add_mediaitem').on('click', function(){
 		addMediaItem();

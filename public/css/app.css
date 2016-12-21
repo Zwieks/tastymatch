@@ -1809,6 +1809,7 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
+  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -5722,23 +5723,33 @@ form ol {
   z-index: 10;
 }
 .editable-wrapper .details,
-.add-media-item-wrapper .details {
+.add-media-item-wrapper .details,
+.editable-wrapper .menu,
+.add-media-item-wrapper .menu {
   margin-bottom: 2.4rem;
 }
 .editable-wrapper .details .product-wrapper,
-.add-media-item-wrapper .details .product-wrapper {
+.add-media-item-wrapper .details .product-wrapper,
+.editable-wrapper .menu .product-wrapper,
+.add-media-item-wrapper .menu .product-wrapper {
   border-top: none;
 }
 .editable-wrapper .details:last-child,
-.add-media-item-wrapper .details:last-child {
+.add-media-item-wrapper .details:last-child,
+.editable-wrapper .menu:last-child,
+.add-media-item-wrapper .menu:last-child {
   margin-bottom: 0;
 }
 .editable-wrapper .details:first-child .product-wrapper,
-.add-media-item-wrapper .details:first-child .product-wrapper {
+.add-media-item-wrapper .details:first-child .product-wrapper,
+.editable-wrapper .menu:first-child .product-wrapper,
+.add-media-item-wrapper .menu:first-child .product-wrapper {
   border-top: 15px solid #5d62ca;
 }
 .editable-wrapper .details h2,
-.add-media-item-wrapper .details h2 {
+.add-media-item-wrapper .details h2,
+.editable-wrapper .menu h2,
+.add-media-item-wrapper .menu h2 {
   font-weight: 600;
   text-transform: uppercase;
   font-size: 1.8rem;

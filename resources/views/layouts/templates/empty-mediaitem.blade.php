@@ -1,11 +1,10 @@
 <!-- {{$debugpath}} -->
-<div class="media">
+<div id="@if(isset($data)){{'component-media-'}}{{$data}}@else{{'component-media'}}@endif" class="media">
 @if(isset($data) && $data != 0)
 	<div class="js-remove-mediaitem remove-media-item" data-icon="U" title="Verwijder media item"></div>
 @endif
 
     <div class="product-wrapper">
-
         <div class="editable-media-wrapper">
             <form method="get" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone dropzoneMedia" id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId0'}}@endif" data-icon='Q'>
                 <meta name="csrf-token" content="{{ csrf_token() }}" />

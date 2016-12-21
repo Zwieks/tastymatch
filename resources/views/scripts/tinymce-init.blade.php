@@ -103,15 +103,23 @@
     function TinyMceSave(id) {
         //Use get without #
         if($('#'+id).hasClass('changed-content')){
-            var id = tinymce.get(id),
+
+            id = tinymce.get(id),
+                componentid = $('#'+id.id).parent().attr('id'),
                 userid = {!! Session::get('user.global.id') !!},
                 content = id.getContent();
 
             // Do you ajax call here, window.setTimeout fakes ajax call
-            window.setTimeout(function() {
-                alert(content);
-            }, 1000);
-        };    
+            if(typeof content != "undefined"){
+                var myObject = new Object();
+                myObject.componentId = componentid;
+                myObject.selector = id.id;
+                myObject.userid = userid;
+                myObject.content = content;
+
+                return myObject;
+            }
+        };
     }
 
     $(document).ready(function(e) {
@@ -132,15 +140,6 @@
         $(document).on('click', '.content', function(e) {
             if(!$(this).hasClass('text-editor')){
                 $(this).addClass('text-editor');
-            }
-        });
-
-        //Save all the template content
-        $('.js-save-template').on('click', function(e){
-            //Loop through all the initialized editors
-            for (var i = 0; i < tinymce.editors.length; i++)
-            {
-                TinyMceSave(tinymce.editors[i].id);
             }
         });
     });
