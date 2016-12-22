@@ -104,8 +104,19 @@
         //Use get without #
         if($('#'+id).hasClass('changed-content')){
 
-            id = tinymce.get(id),
-                componentid = $('#'+id.id).parent().attr('id'),
+            //Get component ID
+            id = tinymce.get(id);
+
+            if(typeof $('#'+id.id).parent().attr('id') != "undefined"){
+                var object_componentid = $('#'+id.id).parent().attr('id');
+            }else if(typeof $('#'+id.id).parent().parent().attr('id') != "undefined"){
+                var object_componentid = $('#'+id.id).parent().parent().attr('id');
+            }else{
+                console.log('No components found.');
+                return false;
+            }
+
+                componentid = object_componentid,
                 userid = {!! Session::get('user.global.id') !!},
                 content = id.getContent();
 
