@@ -112,8 +112,7 @@
             }else if(typeof $('#'+id.id).parent().parent().attr('id') != "undefined"){
                 var object_componentid = $('#'+id.id).parent().parent().attr('id');
             }else{
-                console.log('No components found.');
-                return false;
+                return 'No components found';
             }
 
                 componentid = object_componentid,
