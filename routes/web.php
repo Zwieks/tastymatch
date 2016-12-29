@@ -83,6 +83,10 @@ Route::group(['middleware' => 'auth'], function()
 
 	// AJAX
 	Route::post('/ajax/search', 'AjaxController@getSearch');
-	Route::post('/ajax/upload', 'AjaxController@UploadImage');
+	Route::post('/ajax/upload', function(){
+		request()->file('photos')->store('uploads/' . auth()->id());
+
+		return back();
+	});
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
 });

@@ -1,6 +1,7 @@
 <!-- {{$debugpath}} -->
 <div id="component-headerimage" class="dropzone-wrapper">
-    <form method="get" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementId">
+    <form method="POST" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementIdHeader" enctype="multipart/form-data">
+        <input type="hidden" name="_token" value="{{csrf_token()}}">
         <meta name="csrf-token" content="{{ csrf_token() }}" />
     </form>
 </div>

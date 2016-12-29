@@ -6,8 +6,8 @@
 
     <div class="product-wrapper">
         <div class="editable-media-wrapper">
-            <form method="get" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone dropzoneMedia" id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId0'}}@endif" data-icon='Q'>
-                <meta name="csrf-token" content="{{ csrf_token() }}" />
+            <form id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId'}}@endif" method="POST" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone dropzoneMedia" id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId0'}}@endif" data-icon='Q' enctype="multipart/form-data">
+                <input type="hidden" name="_token" value="{{csrf_token()}}">
             </form>
             <p id="@if(isset($data)){{'tinyMceVideoElementId'}}{{$data}}@else{{'tinyMceVideoElementId0'}}@endif" class="js-editable-video content editable editable-default" data-icon='0'></p>
         </div>  

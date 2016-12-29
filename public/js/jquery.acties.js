@@ -50,7 +50,7 @@ jQuery(document).ready(function($){
 		}
 	});
 
-	//Save all the custom template content
+	//SAVE ALL THE CUSTOM TEMPLATE CONTENT
 	$('.js-save-template').on('click', function(e){
 
 		//Contains all the TinyMce changes
@@ -67,6 +67,16 @@ jQuery(document).ready(function($){
 			}
 		}
 
+		//Contains all the TinyMce changes
+		var dropzone_components = [];
+
+		//Get the DROPZONE files en put them in the object
+		//console.log($.fn.myDropzoneTheFirst.getQueuedFiles());
+		for (var i = 0; i < dropZoneObjects.length; i++){
+			dropZoneObjects[i].file.processQueue();
+		}
+
+		console.log(dropZoneObjects);
 		console.log(tinmce_components);
 	});
 
@@ -109,18 +119,19 @@ jQuery(document).ready(function($){
 			}
 		})
 		.done(function(data) {
-			var drop_id = '#DropzoneElementId'+data.id,
+			var drop_id = 'DropzoneElementId'+data.id,
 			mce_id = '#tinyMceElementId'+data.id,
 			mce_video_id = '#tinyMceVideoElementId'+data.id;
-	        var myDropzoneThethird = new Dropzone(
-	            	drop_id, //id of drop zone element 2
+	    	$.fn.myDropzoneThethird = new Dropzone(
+	            	'#'+drop_id, //id of drop zone element 2
 	            {
+	            	renameFilename: "{!! str_random(15) !!}",
 	                paramName: 'photos',
 	                url: '/ajax/upload',
 	                dictDefaultMessage: "",
 	                dictRemoveFile: "",
 	                clickable: true,
-	                enqueueForUpload: true,
+	                autoProcessQueue: false,
 	                maxFilesize: 1,
 	                maxFiles: 1,
 	                uploadMultiple: false,
@@ -128,10 +139,24 @@ jQuery(document).ready(function($){
 	                parallelUploads: 1,
 	                thumbnailWidth: 1680,
 	                thumbnailHeight: 1040,
+	                acceptedFiles: '.jpg, .png, .gif',  
 	                init: function() {
 	                    this.on("maxfilesexceeded", function(file) {
 	                        this.removeAllFiles();
 	                        this.addFile(file);
+	                    });
+
+	                    this.on("addedfile", function(file) { 
+	                        var id = file.previewTemplate.previousSibling.parentElement.id;
+	                        dropZoneObjects.push({ 
+	                            id:id, 
+	                            name:file.name,
+	                            file:$.fn.myDropzoneThethird
+	                        });
+	                    });
+
+	                    this.on("removedfile", function(file) { 
+	                        removeItem(file.name);
 	                    });
 	                }
 	            }
