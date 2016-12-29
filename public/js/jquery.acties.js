@@ -67,13 +67,9 @@ jQuery(document).ready(function($){
 			}
 		}
 
-		//Contains all the TinyMce changes
-		var dropzone_components = [];
-
 		//Get the DROPZONE files en put them in the object
-		//console.log($.fn.myDropzoneTheFirst.getQueuedFiles());
 		for (var i = 0; i < dropZoneObjects.length; i++){
-			dropZoneObjects[i].file.processQueue();
+			var image_object = dropZoneObjects[i].file.processQueue();
 		}
 
 		console.log(dropZoneObjects);
@@ -125,7 +121,6 @@ jQuery(document).ready(function($){
 	    	$.fn.myDropzoneThethird = new Dropzone(
 	            	'#'+drop_id, //id of drop zone element 2
 	            {
-	            	renameFilename: "{!! str_random(15) !!}",
 	                paramName: 'photos',
 	                url: '/ajax/upload',
 	                dictDefaultMessage: "",
@@ -141,6 +136,8 @@ jQuery(document).ready(function($){
 	                thumbnailHeight: 1040,
 	                acceptedFiles: '.jpg, .png, .gif',  
 	                init: function() {
+	                	var count;
+
 	                    this.on("maxfilesexceeded", function(file) {
 	                        this.removeAllFiles();
 	                        this.addFile(file);
@@ -148,11 +145,18 @@ jQuery(document).ready(function($){
 
 	                    this.on("addedfile", function(file) { 
 	                        var id = file.previewTemplate.previousSibling.parentElement.id;
+	                        count = dropZoneObjects.length;
+
 	                        dropZoneObjects.push({ 
+	                        	num:count,
 	                            id:id, 
 	                            name:file.name,
 	                            file:$.fn.myDropzoneThethird
 	                        });
+	                    });
+
+	                    this.on("success", function(file, response){
+	                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
 	                    });
 
 	                    this.on("removedfile", function(file) { 

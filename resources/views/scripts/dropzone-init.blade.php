@@ -17,7 +17,6 @@
         $.fn.myDropzoneTheFirst = new Dropzone(
             '#'+drop_id, //id of drop zone element 2
             {
-                renameFilename: "{!! str_random(15) !!}",
                 paramName: 'photos',
                 url: '/ajax/upload',
                 dictDefaultMessage: "{!! Lang::get('dropzone.header-image-text') !!}",
@@ -33,6 +32,8 @@
                 thumbnailHeight: 1040,
                 acceptedFiles: '.jpg, .png, .gif',                
                 init: function() {
+                    var count;
+
                     this.on("maxfilesexceeded", function(file) {
                         this.removeAllFiles();
                         this.addFile(file);
@@ -40,11 +41,18 @@
 
                     this.on("addedfile", function(file) { 
                         var id = file.previewTemplate.previousSibling.parentElement.id;
-                        dropZoneObjects.push({ 
+                        count = dropZoneObjects.length;
+
+                        dropZoneObjects.push({
+                            num:count,
                             id:id, 
                             name:file.name,
                             file:$.fn.myDropzoneTheFirst
                         });
+                    });
+
+                    this.on("success", function(file, response){
+                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
                     });
 
                     this.on("removedfile", function(file) { 
@@ -58,7 +66,6 @@
         $.fn.myDropzoneTheSecond = new Dropzone(
             '#'+drop_id, //id of drop zone element 2
             {
-                renameFilename: "{!! str_random(15) !!}",
                 paramName: 'photos',
                 url: '/ajax/upload',
                 dictDefaultMessage: "",
@@ -74,6 +81,8 @@
                 thumbnailHeight: 1040,
                 acceptedFiles: '.jpg, .png, .gif',
                 init: function() {
+                    var count;
+
                     this.on("maxfilesexceeded", function(file) {
                         this.removeAllFiles();
                         this.addFile(file);
@@ -81,15 +90,21 @@
 
                     this.on("addedfile", function(file) {
                         var id = file.previewTemplate.previousSibling.parentElement.id;
+                        count = dropZoneObjects.length;
+
                         dropZoneObjects.push({ 
+                            num:count,
                             id:id, 
                             name:file.name,
                             file:$.fn.myDropzoneTheSecond
                         });
                     });
 
+                    this.on("success", function(file, response){
+                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
+                    });
+
                     this.on("removedfile", function(file) { 
-                        console.log(file.name);
                         removeItem(file.name);
                     });
                 }
