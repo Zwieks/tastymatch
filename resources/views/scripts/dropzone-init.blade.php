@@ -1,6 +1,7 @@
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
-    var dropZoneObjects = [];
+    var dropZoneObjects = [],
+    componentWrapper = [];
 
     //Remove item from upload list in array
     function removeItem(name){
@@ -9,6 +10,18 @@
                dropZoneObjects.splice(dropZoneObjects[i-1], 1);
             }
         }   
+    }
+
+
+    function objectLength(obj) {
+        var result = 0;
+        for(var prop in obj) {
+            if (obj.hasOwnProperty(prop)) {
+            // or Object.prototype.hasOwnProperty.call(obj, prop)
+              result++;
+            }
+        }
+      return result;
     }
 
     $(document).ready(function($) {
@@ -33,6 +46,7 @@
                 acceptedFiles: '.jpg, .png, .gif',                
                 init: function() {
                     var count;
+                    var myObject = new Object();
 
                     this.on("maxfilesexceeded", function(file) {
                         this.removeAllFiles();
@@ -41,18 +55,19 @@
 
                     this.on("addedfile", function(file) { 
                         var id = file.previewTemplate.previousSibling.parentElement.id;
-                        count = dropZoneObjects.length;
+                        count = objectLength(dropZoneObjects);
 
-                        dropZoneObjects.push({
-                            num:count,
-                            id:id, 
-                            name:file.name,
-                            file:$.fn.myDropzoneTheFirst
-                        });
+                        myObject.num = count;
+                        myObject.id = id;
+                        myObject.name = file.name;
+                        myObject.file = $.fn.myDropzoneTheFirst;
+
+                        dropZoneObjects['component-header'] = myObject;
                     });
 
                     this.on("success", function(file, response){
-                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
+                        myObject.path = jQuery.parseJSON(response);  
+                        dropZoneObjects['component-header'] = myObject;
                     });
 
                     this.on("removedfile", function(file) { 
@@ -82,6 +97,7 @@
                 acceptedFiles: '.jpg, .png, .gif',
                 init: function() {
                     var count;
+                    var myObject = new Object();
 
                     this.on("maxfilesexceeded", function(file) {
                         this.removeAllFiles();
@@ -90,18 +106,19 @@
 
                     this.on("addedfile", function(file) {
                         var id = file.previewTemplate.previousSibling.parentElement.id;
-                        count = dropZoneObjects.length;
+                        count = objectLength(dropZoneObjects);
 
-                        dropZoneObjects.push({ 
-                            num:count,
-                            id:id, 
-                            name:file.name,
-                            file:$.fn.myDropzoneTheSecond
-                        });
+                        myObject.num = count;
+                        myObject.id = id;
+                        myObject.name = file.name;
+                        myObject.file = $.fn.myDropzoneTheSecond;
+
+                        dropZoneObjects['component-media'] = myObject;
                     });
 
                     this.on("success", function(file, response){
-                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
+                        myObject.path = jQuery.parseJSON(response);  
+                        dropZoneObjects['component-header'] = myObject;
                     });
 
                     this.on("removedfile", function(file) { 

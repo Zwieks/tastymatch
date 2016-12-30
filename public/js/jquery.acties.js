@@ -68,8 +68,8 @@ jQuery(document).ready(function($){
 		}
 
 		//Get the DROPZONE files en put them in the object
-		for (var i = 0; i < dropZoneObjects.length; i++){
-			var image_object = dropZoneObjects[i].file.processQueue();
+		for(var key in dropZoneObjects) {
+			dropZoneObjects[key].file.processQueue();
 		}
 
 		console.log(dropZoneObjects);
@@ -137,6 +137,7 @@ jQuery(document).ready(function($){
 	                acceptedFiles: '.jpg, .png, .gif',  
 	                init: function() {
 	                	var count;
+	                	var myObject = new Object();
 
 	                    this.on("maxfilesexceeded", function(file) {
 	                        this.removeAllFiles();
@@ -145,18 +146,19 @@ jQuery(document).ready(function($){
 
 	                    this.on("addedfile", function(file) { 
 	                        var id = file.previewTemplate.previousSibling.parentElement.id;
-	                        count = dropZoneObjects.length;
+	                        count = objectLength(dropZoneObjects)+1;
 
-	                        dropZoneObjects.push({ 
-	                        	num:count,
-	                            id:id, 
-	                            name:file.name,
-	                            file:$.fn.myDropzoneThethird
-	                        });
+	                        myObject.num = count;
+	                        myObject.id = id;
+	                        myObject.name = file.name;
+	                        myObject.file = $.fn.myDropzoneThethird;
+
+	                        dropZoneObjects['component-media-'+count] = myObject;
 	                    });
 
 	                    this.on("success", function(file, response){
-	                        dropZoneObjects[count].path = jQuery.parseJSON(response);  
+	                        myObject.path = jQuery.parseJSON(response);  
+	                        dropZoneObjects['component-media-'+count] = myObject;
 	                    });
 
 	                    this.on("removedfile", function(file) { 
