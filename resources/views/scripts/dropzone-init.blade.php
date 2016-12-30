@@ -67,6 +67,7 @@
 
                     this.on("success", function(file, response){
                         myObject.path = jQuery.parseJSON(response);  
+                        console.log('laal');
                         dropZoneObjects['component-header'] = myObject;
                     });
 
@@ -118,7 +119,7 @@
 
                     this.on("success", function(file, response){
                         myObject.path = jQuery.parseJSON(response);  
-                        dropZoneObjects['component-header'] = myObject;
+                        dropZoneObjects['component-media'] = myObject;
                     });
 
                     this.on("removedfile", function(file) { 

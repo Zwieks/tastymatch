@@ -69,11 +69,15 @@ jQuery(document).ready(function($){
 
 		//Get the DROPZONE files en put them in the object
 		for(var key in dropZoneObjects) {
+			// Merge object2 into object1, recursively
+			if(key in tinmce_components){
+				$.extend( true, dropZoneObjects, tinmce_components);
+			}
+
 			dropZoneObjects[key].file.processQueue();
 		}
-
+		// console.log(dropZoneObjects);
 		console.log(dropZoneObjects);
-		console.log(tinmce_components);
 	});
 
 	//Add media item to template
