@@ -69,11 +69,12 @@ jQuery(document).ready(function($){
 
 		//Get the DROPZONE files en put them in the object
 		for(var key in dropZoneObjects) {
-			// Merge object2 into object1, recursively
+			// Merge tinmce_components into dropZoneObjects, recursively
 			if(key in tinmce_components){
 				$.extend( true, dropZoneObjects, tinmce_components);
 			}
 
+			//Upload the image
 			dropZoneObjects[key].file.processQueue();
 		}
 		// console.log(dropZoneObjects);
