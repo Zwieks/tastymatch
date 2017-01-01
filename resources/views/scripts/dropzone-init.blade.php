@@ -12,6 +12,29 @@
         }   
     }
 
+    function saveMediaComponent(component){
+        var token = $('meta[name="csrf-token"]').attr('content'),
+            url = '/ajax/saveMediaComponent';
+
+        var obj_component = {
+            imagepath: component.path,
+            content: component.content
+        }
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url,
+            headers: {'X-CSRF-TOKEN': token},
+            data: obj_component,
+            success: function (data) {
+                if(data.success == true) {
+                    //Put the results in de container
+                    console.log('Component is opgeslagen');
+                }
+            }
+        });
+    }
 
     function objectLength(obj) {
         var result = 0;
@@ -67,8 +90,10 @@
 
                     this.on("success", function(file, response){
                         myObject.path = jQuery.parseJSON(response);  
-                        console.log('laal');
                         dropZoneObjects['component-header'] = myObject;
+
+                        //Save each component to database
+                        saveMediaComponent(myObject);
                     });
 
                     this.on("removedfile", function(file) { 
@@ -120,6 +145,9 @@
                     this.on("success", function(file, response){
                         myObject.path = jQuery.parseJSON(response);  
                         dropZoneObjects['component-media'] = myObject;
+
+                        //Save each component to database
+                        saveMediaComponent(myObject);
                     });
 
                     this.on("removedfile", function(file) { 

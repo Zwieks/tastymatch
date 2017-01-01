@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Search;
 
+use App\ComponentMediaItem;
+
 class AjaxController extends Controller
 {
     /**
@@ -83,6 +85,17 @@ class AjaxController extends Controller
             $returnHTML = view('layouts.templates.empty-mediaitem')->with('data', $data['count'])->render();
             return response()->json(array('success' => true, 'html'=>$returnHTML, 'id'=>$data['count']));
         }
+    }
+
+    public function SaveMediaComponent(Request $request){
+        if($this->checkAjaxRequest($request) == true){
+            //Get all the component data
+            $data = $request->all();
+            //Add the component data to the component table and get the id
+            $component_id = ComponentMediaItem::AddComponent($data);
+
+            return response()->json(array('success' => true));
+        }    
     }
 
     /**

@@ -77,8 +77,9 @@ jQuery(document).ready(function($){
 			//Upload the image
 			dropZoneObjects[key].file.processQueue();
 		}
+
 		// console.log(dropZoneObjects);
-		console.log(dropZoneObjects);
+		// console.log(dropZoneObjects);
 	});
 
 	//Add media item to template
@@ -90,7 +91,6 @@ jQuery(document).ready(function($){
 	$(document).on('click','.js-remove-mediaitem',function(){
 		removeMediaItem($(this));
 	});	
-
 
 	function removeMediaItem(object){
 		object.parent().fadeOut( 0, function() {
