@@ -23,7 +23,7 @@ class ComponentMediaItem extends Model
 		return $events;
 	}
 
-	public static function AddComponent($data){
+	public static function Add($data){
         // Validate the request...
 
         $ComponentMediaItem = new ComponentMediaItem;

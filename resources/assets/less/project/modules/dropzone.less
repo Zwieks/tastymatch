@@ -4,7 +4,7 @@
  */
 
 .dz-progress {
-	display: block;
+	display: none;
 	height: 15px;
 	border: 1px solid #aaa;
 }
@@ -28,7 +28,6 @@
 .dz-success-mark {
 	position: absolute;
 	display: none;
-	left: 30px;
 	top: 30px;
 	width: 54px;
 	height: 58px;
@@ -414,6 +413,7 @@
 
 .dz-remove{
 	.center;
+	display: none;
 	content:'';
 	width: 54px;
 	height: 58px;
@@ -428,8 +428,9 @@
 		z-index: 600;
 		font-family:@iconFont;
 		content:'U';
-		color: rgba(255,255,255,0.7);
+		color: rgba(255,255,255,1);
 		font-size: 48px;
+		text-shadow: 1px 1px 1px #797979;
 	}
 }
 
@@ -493,5 +494,11 @@
 
 	.dz-message {
 		display: none!important;
+	}
+}
+
+.dz-image-preview{
+	.dz-remove{
+		display: block;
 	}
 }

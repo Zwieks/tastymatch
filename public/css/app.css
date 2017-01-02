@@ -5343,7 +5343,7 @@ form ol {
  * Copyright (c) 2012 Matias Meno <m@tias.me>
  */
 .dz-progress {
-  display: block;
+  display: none;
   height: 15px;
   border: 1px solid #aaa;
 }
@@ -5363,7 +5363,6 @@ form ol {
 .dz-success-mark {
   position: absolute;
   display: none;
-  left: 30px;
   top: 30px;
   width: 54px;
   height: 58px;
@@ -5614,6 +5613,7 @@ form ol {
   position: absolute;
   top: 50%;
   left: 50%;
+  display: none;
   content: '';
   width: 54px;
   height: 58px;
@@ -5627,8 +5627,9 @@ form ol {
   z-index: 600;
   font-family: 'tastymatch';
   content: 'U';
-  color: rgba(255, 255, 255, 0.7);
+  color: #ffffff;
   font-size: 48px;
+  text-shadow: 1px 1px 1px #797979;
 }
 .dz-preview {
   position: relative;
@@ -5686,6 +5687,9 @@ form ol {
 }
 .dz-started .dz-message {
   display: none!important;
+}
+.dz-image-preview .dz-remove {
+  display: block;
 }
 .editable-wrapper,
 .add-media-item-wrapper {

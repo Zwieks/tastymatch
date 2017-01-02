@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Detailpage_User;
 
 class Detailpage extends Model
 {
@@ -21,5 +22,16 @@ class Detailpage extends Model
 		$detailpages = DB::table('detailpages')->get();
 
 		return $detailpages;
+	}
+
+	public static function Add($userid){
+		$Detailpage = new Detailpage;
+
+		$Detailpage->state = 'published';
+		$Detailpage->public = 1;
+
+		$Detailpage->save();
+
+		return $Detailpage->id;
 	}
 }

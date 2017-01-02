@@ -25,4 +25,13 @@ class Detailpage_User extends Model
 	public function Entertainer(){
 		return $this->hasOne('App\Detailpage');
 	}
+
+	public static function Add($userid, $detailpage_id){
+		$DetailpageUser = new Detailpage_User;
+
+		$DetailpageUser->user_id = $userid;
+		$DetailpageUser->detailpage_id = $detailpage_id;
+
+		$DetailpageUser->save();
+	}
 }

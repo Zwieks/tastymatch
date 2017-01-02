@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Detailpage_User;
 use Illuminate\Http\Request;
 
 use App\Search;
 
 use App\ComponentMediaItem;
+use App\Detailpage;
+use App\ComponentMediaitem_User;
 
 class AjaxController extends Controller
 {
@@ -89,10 +92,20 @@ class AjaxController extends Controller
 
     public function SaveMediaComponent(Request $request){
         if($this->checkAjaxRequest($request) == true){
+            $userid = $request->session()->get('user.global.id');
+
             //Get all the component data
             $data = $request->all();
+
             //Add the component data to the component table and get the id
-            $component_id = ComponentMediaItem::AddComponent($data);
+            $component_id = ComponentMediaItem::Add($data);
+
+            //Create the detailpage and put the id also in the pivot table
+            $detailpage_id = Detailpage::Add($userid);
+           Detailpage_User::Add($userid, $detailpage_id);
+
+            //Add detailpage_id and component_id to component_mediaitem_user table
+            ComponentMediaitem_User::Add($userid, $detailpage_id, $component_id);
 
             return response()->json(array('success' => true));
         }    
