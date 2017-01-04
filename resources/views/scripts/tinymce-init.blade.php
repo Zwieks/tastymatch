@@ -4,40 +4,42 @@
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
-                }),
-                ed.on('focus', function(e) {
-                    if(!$('#'+ed.id).hasClass('changed-content')){
-                        //Get component ID
-                        var id = $(this).attr('id');
-                        //Empty the textbox
-                        tinymce.get(id).setContent('');
-                        $('#'+ed.id).addClass('empty-content');
-                    }
-                }),
-
-                ed.on('blur', function(e) {
-                    //Get the placeholder text
-                    var placeholderText =  $('#'+ed.id).attr('placeholder');
-
-                    if(ed.getContent({format: 'text'}) != ''){
-                        $('#'+ed.id).removeClass('empty-content');
-                        $('#'+ed.id).addClass('changed-content');
-                        $('#'+ed.id).addClass('changed-content');
-                    }else{
-                        $('#'+ed.id).removeClass('changed-content');
-                        $('#'+ed.id).addClass('empty-content');
-                        ed.setContent('<h2 id="js-page-title" class="editable-default">'+placeholderText+'</h2>');
-                    }
-                }),
-
-                ed.on('Change', function(e) {
-                    //Get component ID
-                    if(ed.getContent({format: 'text'}) === ''){
-                        ed.setContent('<h2 id="js-page-title" class="editable-default"></h2>');
-                    }
                 });
+//                ed.on('focus', function(e) {
+//                    if(!$('#'+ed.id).hasClass('changed-content')){
+//                        //Get component ID
+//                        var id = $(this).attr('id');
+//                        //Empty the textbox
+//                        tinymce.get(id).setContent('');
+//                        tinymce.activeEditor.focus();
+//                        $('#'+ed.id).addClass('empty-content');
+//                    }
+//                }),
+//
+//                ed.on('blur', function(e) {
+//                    //Get the placeholder text
+//                    var placeholderText =  $('#'+ed.id).attr('placeholder');
+//
+//                    if(ed.getContent({format: 'text'}) != ''){
+//                        $('#'+ed.id).removeClass('empty-content');
+//                        $('#'+ed.id).addClass('changed-content');
+//                        $('#'+ed.id).addClass('changed-content');
+//                    }else{
+//                        $('#'+ed.id).removeClass('changed-content');
+//                        $('#'+ed.id).addClass('empty-content');
+//                        ed.setContent('<h2 id="js-page-title" class="editable-default">'+placeholderText+'</h2>');
+//                    }
+//                }),
+//
+//                ed.on('Change', function(e) {
+//                    //Get component ID
+//                    if(ed.getContent({format: 'text'}) === ''){
+//                        ed.setContent('<h2 id="js-page-title" class="editable-default"></h2>');
+//                    }
+//                });
             },
             selector:'#js-editable-title',
+            mode : "specific_textareas",
             menubar:false,
             inline: true
         });
