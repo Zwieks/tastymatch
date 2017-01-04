@@ -53,6 +53,10 @@ jQuery(document).ready(function($){
 	//SAVE ALL THE CUSTOM TEMPLATE CONTENT
 	$('.js-save-template').on('click', function(e){
 
+		if(tinymce.get('js-editable-intro').getContent().search("<h2>")) {
+			alert('test');
+		}
+
 		//Contains all the TinyMce changes
 		var tinmce_components = [];
 
@@ -79,7 +83,7 @@ jQuery(document).ready(function($){
 		}
 
 		// console.log(dropZoneObjects);
-		// console.log(dropZoneObjects);
+		console.log(tinmce_components);
 	});
 
 	//Add media item to template
@@ -183,10 +187,7 @@ jQuery(document).ready(function($){
 	                            $('#'+ed.id).parent().removeClass('hasvideo');
 	                        }    
 	                    }    
-	                }),
-                	ed.on('change', function(e) {
-                    	$('#'+ed.id).addClass('changed-content');
-                	});
+	                });
 	            }, 
 	            selector: mce_video_id,
 	            menubar:false,
@@ -201,9 +202,6 @@ jQuery(document).ready(function($){
 	        	setup:function(ed) {
 	                ed.on('ProgressState', function(e) {
 	                    console.log('ProgressState event', e);
-	                }),
-	                ed.on('change', function(e) {
-	                    $('#'+ed.id).addClass('changed-content');
 	                });
 	            },
 	            selector: mce_id,

@@ -5901,6 +5901,18 @@ form ol {
 .editable li p {
   margin: 0;
 }
+.intro {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+}
+.pagetitle {
+  box-shadow: none;
+  position: relative;
+  padding-bottom: 0;
+}
+#js-editable-intro {
+  box-shadow: none;
+  border-top: none;
+}
 .mce-edit-focus .default {
   color: #333;
   cursor: auto;

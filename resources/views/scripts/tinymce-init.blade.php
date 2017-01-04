@@ -1,13 +1,51 @@
 <script type="text/javascript">
-
     $.fn.initTinyMce = function initTinyMce(){
         tinymce.init({
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
                 }),
-                ed.on('change', function(e) {
-                    $('#'+ed.id).addClass('changed-content');
+                ed.on('focus', function(e) {
+                    if(!$('#'+ed.id).hasClass('changed-content')){
+                        //Get component ID
+                        var id = $(this).attr('id');
+                        //Empty the textbox
+                        tinymce.get(id).setContent('');
+                        $('#'+ed.id).addClass('empty-content');
+                    }
+                }),
+
+                ed.on('blur', function(e) {
+                    //Get the placeholder text
+                    var placeholderText =  $('#'+ed.id).attr('placeholder');
+
+                    if(ed.getContent({format: 'text'}) != ''){
+                        $('#'+ed.id).removeClass('empty-content');
+                        $('#'+ed.id).addClass('changed-content');
+                        $('#'+ed.id).addClass('changed-content');
+                    }else{
+                        $('#'+ed.id).removeClass('changed-content');
+                        $('#'+ed.id).addClass('empty-content');
+                        ed.setContent('<h2 id="js-page-title" class="editable-default">'+placeholderText+'</h2>');
+                    }
+                }),
+
+                ed.on('Change', function(e) {
+                    //Get component ID
+                    if(ed.getContent({format: 'text'}) === ''){
+                        ed.setContent('<h2 id="js-page-title" class="editable-default"></h2>');
+                    }
+                });
+            },
+            selector:'#js-editable-title',
+            menubar:false,
+            inline: true
+        });
+
+        tinymce.init({
+            setup:function(ed) {
+                ed.on('ProgressState', function(e) {
+                    console.log('ProgressState event', e);
                 });
             },
 
@@ -20,9 +58,6 @@
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
-                }),
-                ed.on('change', function(e) {
-                    $('#'+ed.id).addClass('changed-content');
                 });
             },
             selector: '#js-editable-contact',
@@ -38,9 +73,6 @@
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
-                }),
-                ed.on('change', function(e) {
-                    $('#'+ed.id).addClass('changed-content');
                 });
             },
             selector: '#js-editable-menu',
@@ -66,9 +98,6 @@
 
                 ed.on('ProgressState', function(e) {
                    console.log('ProgressState event', e);
-                }),
-                ed.on('change', function(e) {
-                   $('#'+ed.id).addClass('changed-content');
                 });
             },    
 
@@ -85,9 +114,6 @@
             setup:function(ed) {
                 ed.on('ProgressState', function(e) {
                     console.log('ProgressState event', e);
-                }),
-                ed.on('change', function(e) {
-                    $('#'+ed.id).addClass('changed-content');
                 });
             },
             selector: '.js-editable-media',
@@ -138,7 +164,6 @@
 
         // Close when clicked outside search container
         $(document).on('click', function(e){
-
             var $edit_box = $('.editable-wrapper');
 
             // Close when clicked outside search container
