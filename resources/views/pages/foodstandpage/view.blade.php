@@ -8,8 +8,16 @@
 
 <div class="editable-wrapper">
     <div class="intro">
+        {{--<div id="component-title">--}}
+            {{--<textarea  class="content editable product-wrapper pagetitle" placeholder="Vul hier de naam van je foodstand in">--}}
+                {{--<h2 id="js-page-title" class="editable-default">Vul hier de naam van je foodstand in</h2>--}}
+            {{--</textarea>--}}
+        {{--</div>--}}
+
         <div id="component-title">
-            <textarea placeholder="Vul hier de naam van je foodstand in" id="js-editable-title" class="content editable product-wrapper pagetitle editable-default"></textarea>
+            <div placeholder="Vul hier de naam van je foodstand in" id="js-editable-title" class="content editable product-wrapper pagetitle">
+                <h2 id="js-page-title" class="editable-default">Vul hier de naam van je foodstand in</h2>
+            </div>
         </div>
 
         <div id="component-intro">
