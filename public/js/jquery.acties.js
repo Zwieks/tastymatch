@@ -53,10 +53,6 @@ jQuery(document).ready(function($){
 	//SAVE ALL THE CUSTOM TEMPLATE CONTENT
 	$('.js-save-template').on('click', function(e){
 
-		if(tinymce.get('js-editable-intro').getContent().search("<h2>")) {
-			alert('test');
-		}
-
 		//Contains all the TinyMce changes
 		var tinmce_components = [];
 

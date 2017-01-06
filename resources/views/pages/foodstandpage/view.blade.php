@@ -23,7 +23,7 @@
     </div>
 
     <div class="details-wrapper">
-        <div id="component-details" class="details product-wrapper">
+        <div id="component-contact" class="details product-wrapper">
             <h2>{{ Lang::get('tinymce.detailpage-foodstand-contact-intro')  }}</h2>
 
 
