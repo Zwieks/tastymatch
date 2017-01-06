@@ -1,3 +1,4 @@
+<!-- {{$debugpath}} -->
 <form method="get" id="js-search-filter" class="form-filter webbeheer-formulier" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <meta itemprop="target" content=""/>

@@ -1,11 +1,11 @@
 <script type="text/javascript">
     var ContentCheck = {
         PLACEHOLDER_TEXT : '',
-        emptyBox : function(ed,object,placeholderText) {
+        emptyBox : function(ed,object,placeholderText,tag) {
             //Get component ID
             var id = object.attr('id');
             $('#' + ed.id).addClass('empty-content');
-            ed.setContent('<h2 id="js-page-title" class="editable-default">' + placeholderText + '</h2>');
+            ed.setContent(tag);
             $('#'+ed.id).removeClass('changed-content');
         },
 
@@ -14,51 +14,69 @@
 
             $('#'+ed.id).removeClass('empty-content');
             $('#'+ed.id).addClass('changed-content');
+        },
+
+        setupDefault : function(ed,placeholderText,tag,tag_empty){
+            ed.on('ProgressState', function(e) {
+                console.log('ProgressState event', e);
+            }),
+            ed.on('focus', function(e) {
+                if(!$('#'+ed.id).hasClass('changed-content')){
+                    //Empty the textbox
+                    var placeholderText = '';
+                    ContentCheck.emptyBox(ed,$(this),placeholderText,tag_empty);
+                }
+            }),
+            ed.on('blur', function(e) {
+                var content = ed.getContent({format: 'text'});
+
+                if($.trim(content) == '' || $.trim(content) == placeholderText){
+                    ContentCheck.emptyBox(ed,$(this),placeholderText,tag);
+                    //Loose the focus
+                    $('#'+ed.id).blur();
+                }else{
+                    ContentCheck.fillBox(ed,$(this),placeholderText);
+                }
+            });
+        },
+
+        setupVideo : function(ed,placeholderText){
+            ed.on('NodeChange', function(e){
+                if(ed.getContent() != ''){
+                    $('#'+ed.id).parent().addClass('hasvideo');
+                }else{
+                    if($('#'+ed.id).parent().hasClass('hasvideo')){
+                        $('#'+ed.id).parent().removeClass('hasvideo');
+                    }
+                }
+            });
+
+            ed.on('ProgressState', function(e) {
+                console.log('ProgressState event', e);
+            });
         }
     };
 
     $.fn.initTinyMce = function initTinyMce(){
         tinymce.init({
             setup:function(ed) {
-                ed.on('ProgressState', function(e) {
-                    console.log('ProgressState event', e);
-                });
-                ed.on('focus', function(e) {
-                    if(!$('#'+ed.id).hasClass('changed-content')){
-                        //Empty the textbox
-                        var placeholderText = '';
-                        ContentCheck.emptyBox(ed,$(this),placeholderText);
-                    }
-                }),
-                ed.on('blur', function(e) {
-                    var content = ed.getContent({format: 'text'});
-                    var placeholderText = $('#'+ed.id).attr('placeholder');
-
-                    if($.trim(content) == '' || $.trim(content) == placeholderText){
-                        ContentCheck.emptyBox(ed,$(this),placeholderText);
-                        //Loose the focus
-                        $('#'+ed.id).blur();
-                    }else{
-                        ContentCheck.fillBox(ed,$(this),placeholderText);
-                    }
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
+                tag = '<h2 id="js-page-title" class="editable-default">' + placeholderText + '</h2>',
+                tag_empty = '<h2 id="js-page-title" class="editable-default"></h2>';
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
             selector:'#js-editable-title',
             menubar:false,
-            entity_encoding: 'raw',
-            forced_root_block : "",
-            force_br_newlines : true,
-            force_p_newlines : false,
             inline: true
         });
 
         tinymce.init({
             setup:function(ed) {
-                ed.on('ProgressState', function(e) {
-                    console.log('ProgressState event', e);
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-description') !!}',
+                tag = ' <p class="editable-default">' + placeholderText + '</p>',
+                tag_empty = ' <p class="editable-default"></p>';
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
-
             selector:'#js-editable-intro',
             menubar:false,
             inline: true
@@ -66,9 +84,10 @@
 
         tinymce.init({
             setup:function(ed) {
-                ed.on('ProgressState', function(e) {
-                    console.log('ProgressState event', e);
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}',
+                tag = '<p class="editable-default">' + placeholderText + '</p>',
+                tag_empty = '<p class="contact-intro"></p>';
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
             selector: '#js-editable-contact',
             menubar:false,
@@ -81,9 +100,10 @@
 
         tinymce.init({
             setup:function(ed) {
-                ed.on('ProgressState', function(e) {
-                    console.log('ProgressState event', e);
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
+                tag = '<p>' + placeholderText + '</p>',
+                tag_empty = '<p></p>';
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
             selector: '#js-editable-menu',
             menubar:false,
@@ -96,19 +116,8 @@
 
         tinymce.init({
             setup:function(ed) {
-                ed.on('NodeChange', function(e){
-                    if(ed.getContent() != ''){
-                        $('#'+ed.id).parent().addClass('hasvideo');
-                    }else{
-                        if($('#'+ed.id).parent().hasClass('hasvideo')){
-                            $('#'+ed.id).parent().removeClass('hasvideo');
-                        }    
-                    }    
-                });
-
-                ed.on('ProgressState', function(e) {
-                   console.log('ProgressState event', e);
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}';
+                ContentCheck.setupVideo(ed,placeholderText);
             },    
 
             selector: '.js-editable-video',
@@ -122,9 +131,10 @@
 
         tinymce.init({
             setup:function(ed) {
-                ed.on('ProgressState', function(e) {
-                    console.log('ProgressState event', e);
-                });
+                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
+                tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>';
+                tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
             selector: '.js-editable-media',
             menubar:false,

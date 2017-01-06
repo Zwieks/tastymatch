@@ -8,43 +8,30 @@
 
 <div class="editable-wrapper">
     <div class="intro">
-        {{--<div id="component-title">--}}
-            {{--<textarea  class="content editable product-wrapper pagetitle" placeholder="Vul hier de naam van je foodstand in">--}}
-                {{--<h2 id="js-page-title" class="editable-default">Vul hier de naam van je foodstand in</h2>--}}
-            {{--</textarea>--}}
-        {{--</div>--}}
 
         <div id="component-title">
-            <div placeholder="Vul hier de naam van je foodstand in" id="js-editable-title" class="content editable product-wrapper pagetitle">
-                <h2 id="js-page-title" class="editable-default">Vul hier de naam van je foodstand in</h2>
+            <div id="js-editable-title" class="content editable product-wrapper pagetitle">
+                <h2 id="js-page-title" class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-title') }}</h2>
             </div>
         </div>
 
         <div id="component-intro">
             <div id="js-editable-intro" class="content editable product-wrapper">
-                <p class="editable-default">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacus justo, cursus in mattis in, feugiat eu mauris. Phasellus quis porttitor metus. Vestibulum sed risus at lectus finibus vulputate ut eget velit. In sit amet tortor lacinia, vehicula magna ut, sagittis odio. Cras tellus urna, consequat ac porta eu, elementum eget arcu. Phasellus condimentum ante a sodales hendrerit. Sed mattis neque ac venenatis faucibus. Fusce fringilla cursus convallis. Donec et hendrerit ligula. Cras blandit ex ut augue ultrices ultrices. Praesent nisi sem, bibendum at lectus vitae, sollicitudin ultricies orci.</p>
+                <p class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-description') }}</p>
             </div>
         </div>
     </div>
 
     <div class="details-wrapper">
-        <div id="component-details" class="details">
-            <div id="js-editable-contact" class="content editable product-wrapper">
-                <h2>Neem contact met ons op</h2>
-                <ul class="editable-default">
-                   <li>
-                      <p class="contact-intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam lacus justo, cursus in mattis in, feugiat eu mauris. Phasellus quis porttitor metus.</p>
-                   </li>
+        <div id="component-details" class="details product-wrapper">
+            <h2>{{ Lang::get('tinymce.detailpage-foodstand-contact-intro')  }}</h2>
 
-                   <li>
-                       <p data-icon="V">345345345</p>
-                   </li>
 
-                     <li>
-                       <p data-icon="e">ronaldzwiers@hotmail.com</p>
-                   </li>
-                </ul>
+           <div id="js-editable-contact" class="content editable">
+               <p class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-contact-description') }}</p>
             </div>
+
+            @include('forms.detailpagecontact')
         </div>
 
         <div id="component-menu" class="menu">

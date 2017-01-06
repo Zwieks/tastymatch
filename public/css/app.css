@@ -3993,6 +3993,36 @@ form ol {
   z-index: 1;
   border: none;
 }
+.detailpage-contact li {
+  width: 100%;
+  padding-left: 1.2rem;
+  margin: 0!important;
+  border: 2px solid #fff;
+}
+.detailpage-contact li:after {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  right: 0;
+  font-family: 'tastymatch';
+  content: "X";
+}
+.detailpage-contact li:before {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  left: 0;
+  font-size: 15px;
+}
+.detailpage-contact li:hover,
+.detailpage-contact li:focus {
+  border: 2px dashed rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+.detailpage-contact input {
+  border: none;
+  min-height: 2.4rem;
+}
 /* end general webbeheer form */
 /*
  *	Animating labels on focus and with value

@@ -229,6 +229,39 @@ form ol {
 	z-index:1;
 	border:none;
 }
+
+.detailpage-contact{
+	li{
+		width: 100%;
+		padding-left: @spacing/2;
+		margin:0!important;
+		border:2px solid @white;
+
+		&:after{
+			.centerY;
+			right:0;
+			font-family:@iconFont;
+			content: "X";
+		}
+
+		&:before{
+			.centerY;
+			left:0;
+			font-size: 15px;
+		}
+
+		&:hover,
+		&:focus{
+			border:2px dashed rgba(0,0,0,0.4);
+			cursor: pointer;
+		}
+	}
+
+	input{
+		border:none;
+		min-height: @spacing;
+	}
+}
 /* end general webbeheer form */
 
 
