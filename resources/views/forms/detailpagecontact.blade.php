@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
-<form class="detailpage-contact" method="POST">
+<form class="detailpage detailpage-contact" method="POST">
     <fieldset>
         <ul class="velden">
             <li class="form-input-textfield" data-icon="V">

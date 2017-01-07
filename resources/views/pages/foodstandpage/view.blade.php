@@ -7,16 +7,12 @@
 </div>
 
 <div class="editable-wrapper">
-    <div class="component-intro">
+    <div class="intro">
 
-        <div id="sub-component-title">
-            <div id="js-editable-title" class="content editable product-wrapper pagetitle">
-                <h2 id="js-page-title" class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-title') }}</h2>
-            </div>
-        </div>
+        <div id="component-intro" class="product-wrapper">
+            @include('forms.detailpagetitle')
 
-        <div id="sub-component-description">
-            <div id="js-editable-intro" class="content editable product-wrapper">
+            <div id="js-editable-intro" class="content editable">
                 <p class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-description') }}</p>
             </div>
         </div>

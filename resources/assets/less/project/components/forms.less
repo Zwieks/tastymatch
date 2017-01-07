@@ -230,7 +230,7 @@ form ol {
 	border:none;
 }
 
-.detailpage-contact{
+.detailpage{
 	li{
 		width: 100%;
 		padding-left: @spacing/2;
@@ -260,6 +260,13 @@ form ol {
 	input{
 		border:none;
 		min-height: @spacing;
+	}
+}
+
+.detailpage-title{
+	input{
+		&:extend(h2 all);
+		margin-bottom: 0;
 	}
 }
 /* end general webbeheer form */
