@@ -54,7 +54,7 @@ jQuery(document).ready(function($){
 	$('.js-save-template').on('click', function(e){
 
 		//Contains all the TinyMce changes
-		var tinmce_components = [];
+		var save_components = [];
 
 		//Get the TINYMCE and put the changed components in the object
 		for (var i = 0; i < tinymce.editors.length; i++)
@@ -63,23 +63,35 @@ jQuery(document).ready(function($){
 			var content = TinyMceSave(tinymce.editors[i].id);
 
 			if(typeof content != 'undefined'){
-				tinmce_components[content.componentId] = content;
+				save_components[content.componentId] = content;
 			}
 		}
 
 		//Get the DROPZONE files en put them in the object
 		for(var key in dropZoneObjects) {
-			// Merge tinmce_components into dropZoneObjects, recursively
-			if(key in tinmce_components){
-				$.extend( true, dropZoneObjects, tinmce_components);
+			// Merge save_components into dropZoneObjects, recursively
+			if(key in save_components){
+				$.extend( true, dropZoneObjects, save_components);
 			}
+
+			save_components = dropZoneObjects;
 
 			//Upload the image
 			dropZoneObjects[key].file.processQueue();
 		}
 
-		// console.log(dropZoneObjects);
-		console.log(tinmce_components);
+		//Save each component to database
+		for(var key in save_components) {
+			//Find the table name	
+			var arr = save_components[key].componentId.split('-');
+			//Put table name in object
+			save_components[key].table = arr[1];
+			
+
+        	//saveMediaComponent(save_components[key]);
+        }	
+
+		console.log(save_components);
 	});
 
 	//Add media item to template
@@ -91,6 +103,30 @@ jQuery(document).ready(function($){
 	$(document).on('click','.js-remove-mediaitem',function(){
 		removeMediaItem($(this));
 	});	
+
+    function saveMediaComponent(component){
+        var token = $('meta[name="csrf-token"]').attr('content'),
+            url = '/ajax/saveMediaComponent';
+
+        var obj_component = {
+            imagepath: component.path,
+            content: component.content
+        }
+
+        $.ajax({
+            type: 'POST',
+            dataType: 'json',
+            url: url,
+            headers: {'X-CSRF-TOKEN': token},
+            data: obj_component,
+            success: function (data) {
+                if(data.success == true) {
+                    //Put the results in de container
+                    console.log('Component is opgeslagen');
+                }
+            }
+        });
+    }
 
 	function removeMediaItem(object){
 		object.parent().fadeOut( 0, function() {
@@ -175,15 +211,8 @@ jQuery(document).ready(function($){
 
 	        tinymce.init({
 	        	setup:function(ed) {
-	                ed.on('NodeChange', function(e){
-	                    if(ed.getContent() != ''){
-	                        $('#'+ed.id).parent().addClass('hasvideo');
-	                    }else{
-	                        if($('#'+ed.id).parent().hasClass('hasvideo')){
-	                            $('#'+ed.id).parent().removeClass('hasvideo');
-	                        }    
-	                    }    
-	                });
+                	var placeholderText = 'asdf';
+                	ContentCheck.setupVideo(ed,placeholderText);
 	            }, 
 	            selector: mce_video_id,
 	            menubar:false,
@@ -196,9 +225,10 @@ jQuery(document).ready(function($){
 
 	        tinymce.init({
 	        	setup:function(ed) {
-	                ed.on('ProgressState', function(e) {
-	                    console.log('ProgressState event', e);
-	                });
+	                var placeholderText = 'asdfasdf',
+	                	tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>';
+	                	tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';
+	                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
 	            },
 	            selector: mce_id,
 	            menubar:false,
