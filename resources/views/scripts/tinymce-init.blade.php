@@ -153,10 +153,6 @@
             //Get component ID
             id = tinymce.get(id);
 
-            if($('#'+id.id).parent().find('form').length > 0){
-                {{--console.log({{!! Request::all() !!}});--}}
-            }
-
             if(typeof $('#'+id.id).parent().attr('id') != "undefined"){
                 var object_componentid = $('#'+id.id).parent().attr('id');
             }else if(typeof $('#'+id.id).parent().parent().attr('id') != "undefined"){
