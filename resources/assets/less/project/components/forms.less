@@ -276,6 +276,35 @@ form ol {
 		padding:0;
 	}
 }
+
+.detailpage-menu{
+	margin-bottom: @spacing/2;
+}
+
+.add-menu-wrapper{
+	.displayflex;
+	.justify-content(center);
+
+	background: @smoothPurple;
+}
+
+.add-menuitem{
+	width: auto;
+	position: relative;
+	font-size: @smallestHeadingSize;
+	color:@white;
+	padding: @spacing/4 @spacing;
+	cursor: pointer;
+
+	&:before{
+		.centerY;
+		left:0;
+	}
+}
+
+.remove-menuitem{
+	.centerY;
+	right:-18px;
+	color:@errorColor;
+}
 /* end general webbeheer form */
-
-

@@ -2,6 +2,7 @@
 
 return [
 	'detailpage-foodstand-title' => 'Enter you foodstand name here',
+	'detailpage-foodstand-menu' => 'What is on your menu?',
 	'detailpage-foodstand-description' => 'Please tell us about your food stand. What are you doing? What makes you unique? Make it a nice description!',
 	'detailpage-foodstand-contact-intro' => 'contact us',
 	'detailpage-foodstand-contact-description' => 'Additional contact text',

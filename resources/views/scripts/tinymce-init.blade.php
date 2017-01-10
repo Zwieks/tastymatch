@@ -58,17 +58,6 @@
     };
 
     $.fn.initTinyMce = function initTinyMce(){
-        tinymce.init({
-            setup:function(ed) {
-                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
-                tag = '<h2 id="js-page-title" class="editable-default">' + placeholderText + '</h2>',
-                tag_empty = '<h2 id="js-page-title" class="editable-default"></h2>';
-                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
-            },
-            selector:'#js-editable-title',
-            menubar:false,
-            inline: true
-        });
 
         tinymce.init({
             setup:function(ed) {
@@ -90,22 +79,6 @@
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
             },
             selector: '#js-editable-contact',
-            menubar:false,
-            inline: true,
-            plugins: "textcolor colorpicker",
-            toolbar: [
-                'undo redo forecolor'
-            ]
-        });
-
-        tinymce.init({
-            setup:function(ed) {
-                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
-                tag = '<p>' + placeholderText + '</p>',
-                tag_empty = '<p></p>';
-                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
-            },
-            selector: '#js-editable-menu',
             menubar:false,
             inline: true,
             plugins: "textcolor colorpicker",

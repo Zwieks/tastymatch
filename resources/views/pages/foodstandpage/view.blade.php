@@ -31,13 +31,12 @@
         </div>
 
         <div id="component-menu" class="menu">
-            <div id="js-editable-menu" class="content editable product-wrapper foodstand-menu-items">
+            <div id="js-editable-menu" class="content product-wrapper foodstand-menu-items">
                 <h2>Menu</h2>
-                <ul class="editable-default">
-                   <li>
-                       <p>Vul hier je menu items in</p>
-                   </li>
-                </ul>
+                @include('forms.detailpagemenu')
+                <div class="add-menu-wrapper">
+                    <span class="add-menuitem js-add-menuitem" data-icon="Z">menu item toevoegen</span>
+                </div>    
             </div>
         </div>
     </div>

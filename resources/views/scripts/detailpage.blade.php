@@ -158,6 +158,17 @@
             });
         }
 
+        //Add MENU ITEM
+        $('.js-add-menuitem').on('click', function(e){
+            var count = $(".detailpage-menu li").length + 1;
+            $('<li class="form-input-textfield"><input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-menu') }}" type="text" name="detailpage-menuitem-'+count+'"><div class="remove-menuitem js-remove-menuitem" data-icon="U"></div></li>').appendTo(".detailpage-menu .velden");
+        });    
+        
+        //Remove MENU ITEM
+        $(document).on('click','.js-remove-menuitem',function(){    
+            $(this).parent().remove();
+        });   
+
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $('.js-save-template').on('click', function(e){
 
@@ -234,7 +245,7 @@
         });
 
         //Check if the form has been altered
-        $("form :input").change(function() {
+        $(document).on('change','form :input',function(){    
             var $fields = $(this);
             var $emptyFields = $fields.filter(function() {
                 // remove the $.trim if whitespace is counted as filled
