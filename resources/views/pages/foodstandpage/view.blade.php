@@ -30,14 +30,12 @@
             @include('forms.detailpagecontact')
         </div>
 
-        <div id="component-menu" class="menu">
-            <div id="js-editable-menu" class="content product-wrapper foodstand-menu-items">
-                <h2>Menu</h2>
-                @include('forms.detailpagemenu')
-                <div class="add-menu-wrapper">
-                    <span class="add-menuitem js-add-menuitem" data-icon="Z">menu item toevoegen</span>
-                </div>    
-            </div>
+        <div id="component-menu" class="content product-wrapper foodstand-menu-items">
+            <h2>Menu</h2>
+            @include('forms.detailpagemenu')
+            <div class="add-menu-wrapper js-add-menuitem">
+                <span class="add-menuitem" data-icon="Z">menu item toevoegen</span>
+            </div>    
         </div>
     </div>
 </div>

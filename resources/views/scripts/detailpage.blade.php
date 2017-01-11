@@ -10,28 +10,43 @@
             removeMediaItem($(this));
         });
 
-        function saveMediaComponent(component){
+        function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
-                    url = '/ajax/saveMediaComponent';
+                url = '/ajax/saveComponents';
 
-            var obj_component = {
-                imagepath: component.path,
-                content: component.content
-            }
-
+            var newObject = objectReplaceKeyNamesToNumbers(components);
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: obj_component,
+                data: {jsonData: newObject},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
                         console.log('Component is opgeslagen');
                     }
+                },
+                error: function(data){
+                    // Error...
+                    var errors = data.responseJSON;
+
+                    console.log(errors);
                 }
             });
+        }
+
+        function objectReplaceKeyNamesToNumbers(obj) {
+            var result = [],
+            num = 0;
+            for(var prop in obj) {
+                if (obj.hasOwnProperty(prop)) {
+                    // or Object.prototype.hasOwnProperty.call(obj, prop)
+                    result[num] = obj[prop];
+                    num++;    
+                }
+            }
+            return result;
         }
 
         function objectLength(obj) {
@@ -49,6 +64,10 @@
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
             });
+        }
+
+        function capitalizeFirstLetter(string) {
+            return string.charAt(0).toUpperCase() + string.slice(1);
         }
 
         function addMediaItem() {
@@ -104,19 +123,20 @@
 
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
-                                count = objectLength(dropZoneObjects)+1;
+                                var suffix = id.match(/\d+/);
+                                count = suffix[0];
 
                                 myObject.num = count;
                                 myObject.id = id;
                                 myObject.name = file.name;
                                 myObject.file = $.fn.myDropzoneThethird;
 
-                                dropZoneObjects['component-media-'+count] = myObject;
+                                dropZoneObjects['component-mediaitems-'+count] = myObject;
                             });
 
                             this.on("success", function(file, response){
                                 myObject.path = jQuery.parseJSON(response);
-                                dropZoneObjects['component-media-'+count] = myObject;
+                                dropZoneObjects['component-mediaitems-'+count] = myObject;
                             });
 
                             this.on("removedfile", function(file) {
@@ -161,17 +181,16 @@
         //Add MENU ITEM
         $('.js-add-menuitem').on('click', function(e){
             var count = $(".detailpage-menu li").length + 1;
-            $('<li class="form-input-textfield"><input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-menu') }}" type="text" name="detailpage-menuitem-'+count+'"><div class="remove-menuitem js-remove-menuitem" data-icon="U"></div></li>').appendTo(".detailpage-menu .velden");
+            $('<li class="form-input-textfield"><input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-menu') }}" type="text" name="menuitem"><div class="remove-menuitem js-remove-menuitem" data-icon="U"></div></li>').appendTo(".detailpage-menu .velden");
         });    
         
         //Remove MENU ITEM
-        $(document).on('click','.js-remove-menuitem',function(){    
+        $(document).on('click','.js-remove-menuitem',function(){
             $(this).parent().remove();
         });   
 
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $('.js-save-template').on('click', function(e){
-
             //Contains all the TinyMce changes
             var save_components = [];
 
@@ -201,13 +220,17 @@
 
                 //Find the form
                 if($('#'+target).parent().find('form').length > 0){
-                    var dataArray = $('#'+target).parent().find('form').serializeArray(),
-                            formData = [];
-
+                    var dataArray = $('#'+target).find('form').serializeArray(),
+                        formData = [],
+                        count = 0;
 
                     $.each(dataArray, function(i, fd) {
                         if(fd.value != ""){
-                            formData[fd.name] = fd.value;
+                            var myObject = new Object();
+                                myObject[fd.name] = fd.value;
+
+                            formData[count] = myObject;
+                            count++;
                         }
                     });
 
@@ -219,12 +242,13 @@
 
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
+
                 // Merge save_components into dropZoneObjects, recursively
                 if(key in save_components){
                     $.extend( true, dropZoneObjects, save_components);
                 }
 
-                save_components = dropZoneObjects;
+                save_components[key] = dropZoneObjects[key];
 
                 //Upload the image
                 dropZoneObjects[key].file.processQueue();
@@ -232,13 +256,23 @@
 
             //Save each component to database
             for(var key in save_components) {
+
                 //Find the table name
-                var arr = save_components[key].componentId.split('-');
+                if(typeof save_components[key].componentId != 'undefined'){
+                    var arr = save_components[key].componentId.split('-');
+                }else{
+                    var arr = key.split('-');
+                }
                 //Put table name in object
-                save_components[key].table = arr[1];
+                save_components[key].table = 'component_'+arr[1];
 
+                //put the URL in the object
+                save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
+            }
 
-                //saveMediaComponent(save_components[key]);
+            if(objectLength(save_components) > 0){
+                //Save the component
+                saveMediaComponents(save_components);
             }
 
             console.log(save_components);

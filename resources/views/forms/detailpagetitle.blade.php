@@ -3,7 +3,7 @@
     <fieldset>
         <ul class="velden">
             <li class="form-input-textfield">
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-title') }}" type="text" name="detailpage-title">
+                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-title') }}" type="text" name="title">
             </li>
         </ul>
     </fieldset>

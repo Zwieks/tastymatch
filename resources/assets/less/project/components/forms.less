@@ -286,6 +286,7 @@ form ol {
 	.justify-content(center);
 
 	background: @smoothPurple;
+	cursor: pointer;
 }
 
 .add-menuitem{
@@ -294,7 +295,6 @@ form ol {
 	font-size: @smallestHeadingSize;
 	color:@white;
 	padding: @spacing/4 @spacing;
-	cursor: pointer;
 
 	&:before{
 		.centerY;
@@ -304,7 +304,11 @@ form ol {
 
 .remove-menuitem{
 	.centerY;
-	right:-18px;
+	right:-24px;
 	color:@errorColor;
+
+	&:before{
+		font-size: 18px;
+	}
 }
 /* end general webbeheer form */

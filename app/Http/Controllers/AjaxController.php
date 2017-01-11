@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Detailpage_User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 use App\Search;
 
@@ -13,6 +14,7 @@ use App\ComponentMediaitem_User;
 
 class AjaxController extends Controller
 {
+
     /**
      * Get the search results from the AJAX request
      *
@@ -90,25 +92,70 @@ class AjaxController extends Controller
         }
     }
 
-    public function SaveMediaComponent(Request $request){
+
+
+    public function SaveComponents(Request $request){
         if($this->checkAjaxRequest($request) == true){
+            //User id
             $userid = $request->session()->get('user.global.id');
+            $data = $request->all();
+
+            // var_dump($request->get('jsonData'));
+            // return false;
+
+            $this->validate($request, [
+                'jsonData.*.form.*.title' => 'bail|required|string|max:255',
+                'jsonData.*.form.*.phone' => 'numeric|max:255',
+                'jsonData.*.form.*.email' => 'email|max:255',
+                'jsonData.*.form.*.site' =>  'url|max:30',
+                'jsonData.*.form.*.twitter' => 'url|max:255',
+                'jsonData.*.form.*.facebook' => 'url|max:255',
+                'jsonData.*.form.*.linkedin' => 'url|max:255',
+                'jsonData.*.form.*.googleplus' => 'url|max:255',
+                'jsonData.*.form.*.instagram' => 'url|max:255',
+                'jsonData.*.form.*.menuitem' => 'string|max:255',
+            ]);
 
             //Get all the component data
             $data = $request->all();
+            //Create the detailpage and put the id also in the pivot table
+            $detailpage_id = Detailpage::Add($userid);
+            Detailpage_User::Add($userid, $detailpage_id);
+
+            //Save the Components by looping trough his own function
+            foreach ($data['jsonData'] as $data_items) {
+                $func = $data_items['url'];
+                $this->$func($data_items,$detailpage_id);
+            }
+
+            return response()->json(array('success' => true)); 
+        }  
+    }
+
+    public function SaveMediaitemComponent($data,$detailpage_id){
 
             //Add the component data to the component table and get the id
             $component_id = ComponentMediaItem::Add($data);
 
-            //Create the detailpage and put the id also in the pivot table
-            $detailpage_id = Detailpage::Add($userid);
-           Detailpage_User::Add($userid, $detailpage_id);
-
             //Add detailpage_id and component_id to component_mediaitem_user table
             ComponentMediaitem_User::Add($userid, $detailpage_id, $component_id);
+    }
 
-            return response()->json(array('success' => true));
-        }    
+    public function SaveHeaderimageComponent($data,$detailpage_id){
+        var_dump($data); 
+    }
+
+
+    public function SaveIntroComponent($data,$detailpage_id){
+        var_dump($data); 
+    }
+
+    public function SaveContactComponent($data,$detailpage_id){
+        var_dump($data); 
+    }
+
+    public function SaveMenuComponent($data,$detailpage_id){
+        var_dump($data); 
     }
 
     /**

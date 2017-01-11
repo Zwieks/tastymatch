@@ -61,12 +61,13 @@
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheFirst;
 
-                        dropZoneObjects['component-header'] = myObject;
+                        dropZoneObjects['component-headerimage'] = myObject;
                     });
 
                     this.on("success", function(file, response){
                         myObject.path = jQuery.parseJSON(response);  
-                        dropZoneObjects['component-header'] = myObject;
+                        myObject.file = 'uploaded'; 
+                        dropZoneObjects['component-headerimage'] = myObject;
                     });
 
                     this.on("removedfile", function(file) { 
@@ -112,12 +113,13 @@
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheSecond;
 
-                        dropZoneObjects['component-media'] = myObject;
+                        dropZoneObjects['component-mediaitems'] = myObject;
                     });
 
                     this.on("success", function(file, response){
-                        myObject.path = jQuery.parseJSON(response);  
-                        dropZoneObjects['component-media'] = myObject;
+                        myObject.path = jQuery.parseJSON(response); 
+                        myObject.file = 'uploaded';  
+                        dropZoneObjects['component-mediaitems'] = myObject;
                     });
 
                     this.on("removedfile", function(file) { 

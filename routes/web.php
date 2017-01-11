@@ -87,5 +87,6 @@ Route::group(['middleware' => 'auth'], function()
 		return json_encode(request()->file('photos')->store('uploads/' . auth()->id()));
 	});
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
-	Route::post('/ajax/saveMediaComponent', 'AjaxController@SaveMediaComponent');
+	//Save MEDIA ITEM component
+	Route::post('/ajax/saveComponents', 'AjaxController@SaveComponents');
 });
