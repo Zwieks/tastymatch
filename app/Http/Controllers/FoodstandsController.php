@@ -57,9 +57,14 @@ class FoodstandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request, $slug)
     {
-        //
+        //Get the user information
+        $user = $request->session()->get('user.global');
+echo $slug;
+        return false;
+        //return the view with the user session data
+        return view('auth.foodstand', compact('user, slug'));
     }
 
     /**

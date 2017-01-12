@@ -73,6 +73,9 @@ Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsControlle
 //USER ACCESS ONLY
 Route::group(['middleware' => 'auth'], function()
 {
+	// Create Foodstand
+	Route::get('create/foodstand/{slug}', ['as' => 'index', 'uses' => 'FoodstandsController@create']);
+
 	// Upload image
 	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImagesController@upload']);
 

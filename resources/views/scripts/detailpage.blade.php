@@ -29,9 +29,27 @@
                 },
                 error: function(data){
                     // Error...
-                    var errors = data.responseJSON;
+                    var errors = data.responseJSON,
+                       inputname;
 
-                    console.log(errors);
+                    $.each(errors, function(index, error) {
+                        var result = error[0].split(' ');
+
+                        $.each(result, function(key, item){
+                            var search = 'jsonData';
+                            if (item.indexOf(search) !== -1){
+                                var location = index.split('.');
+                                inputname = location[location.length-1];
+                                var object =  $( "input[name="+inputname+"]");
+
+                                var text = error[0].replace(item, inputname);
+
+                                object.parent().find('.input-error p').text(text);
+                                object.parent().addClass('input-error');
+                                object.parent().find('.input-error').show();
+                            }
+                        });
+                    });
                 }
             });
         }
@@ -285,6 +303,12 @@
                 // remove the $.trim if whitespace is counted as filled
                 return $.trim(this.value) === "";
             });
+
+            if($(this).parent().hasClass('input-error')){
+                $(this).removeClass('input-error');
+                $(this).parent().find('.input-error').hide();
+            }
+
             if (!$emptyFields.length) {
                 $(this).closest('.product-wrapper').addClass('changed');
             } else {

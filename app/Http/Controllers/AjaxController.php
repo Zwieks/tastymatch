@@ -8,7 +8,12 @@ use App\Http\Controllers\Controller;
 
 use App\Search;
 
+use App\ComponentHeaderImage;
+use App\ComponentIntro;
+use App\ComponentContact;
+use App\ComponentMenu;
 use App\ComponentMediaItem;
+
 use App\Detailpage;
 use App\ComponentMediaitem_User;
 
@@ -98,13 +103,10 @@ class AjaxController extends Controller
         if($this->checkAjaxRequest($request) == true){
             //User id
             $userid = $request->session()->get('user.global.id');
-            $data = $request->all();
 
-            // var_dump($request->get('jsonData'));
-            // return false;
-
+            //Validate the input, when this fails it will return a json error
             $this->validate($request, [
-                'jsonData.*.form.*.title' => 'bail|required|string|max:255',
+                'jsonData.0.form.*.title' => 'bail|required|string|max:255',
                 'jsonData.*.form.*.phone' => 'numeric|max:255',
                 'jsonData.*.form.*.email' => 'email|max:255',
                 'jsonData.*.form.*.site' =>  'url|max:30',
@@ -133,7 +135,6 @@ class AjaxController extends Controller
     }
 
     public function SaveMediaitemComponent($data,$detailpage_id){
-
             //Add the component data to the component table and get the id
             $component_id = ComponentMediaItem::Add($data);
 
@@ -142,20 +143,21 @@ class AjaxController extends Controller
     }
 
     public function SaveHeaderimageComponent($data,$detailpage_id){
-        var_dump($data); 
+        var_dump($data['table']);
     }
 
 
     public function SaveIntroComponent($data,$detailpage_id){
-        var_dump($data); 
+        //Add the component data to the component table and get the id
+        $component_id = ComponentIntro::Add($data);
     }
 
     public function SaveContactComponent($data,$detailpage_id){
-        var_dump($data); 
+        var_dump($data['table']);
     }
 
     public function SaveMenuComponent($data,$detailpage_id){
-        var_dump($data); 
+        var_dump($data['table']);
     }
 
     /**

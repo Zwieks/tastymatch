@@ -46,14 +46,13 @@
     </div>
 </div>
 <div id="js_add_mediaitem" class="add-media-item-wrapper">
-  <div class="add-media-item">
-    <div class="media">
-      <div class="product-wrapper" data-icon="Z" title="Voeg een nieuw mediablok toe">
-        <div class="add-media-outline"></div>
-      </div>
+     <div class="add-media-item">
+        <div class="media">
+            <div class="product-wrapper" data-icon="Z" title="Voeg een nieuw mediablok toe">
+                <div class="add-media-outline"></div>
+            </div>
+        </div>
     </div>
-
-  </div>
 </div>
 
 {{--Render GoogleMaps --}}

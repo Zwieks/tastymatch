@@ -1815,6 +1815,7 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
+  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -2068,6 +2069,7 @@ html .cookie-explanation button.request-cookies {
   padding-left: 1.8rem;
 }
 div.input-error {
+  display: none;
   padding-right: 2.4rem;
 }
 div.input-error p {
@@ -2079,7 +2081,6 @@ div.input-error p {
   position: relative;
   font-size: 1.3125rem;
   margin: 0 0 1.2rem;
-  white-space: nowrap;
 }
 div.input-error p:before {
   border-radius: 0;
@@ -2105,6 +2106,9 @@ div.input-error p:before {
 }
 .errors li {
   padding-left: 1.8rem;
+}
+.custom-error-input {
+  color: #f00;
 }
 /* end error reports */
 /*
@@ -4128,6 +4132,7 @@ form ol {
   right: 0.9rem;
 }
 .animating-label div.input-error {
+  display: none;
   position: absolute;
   bottom: 100%;
   right: 0;

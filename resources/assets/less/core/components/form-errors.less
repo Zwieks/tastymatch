@@ -19,6 +19,7 @@
 }
 
 div.input-error { // Has to be a div, otherwise the input-fields are also styled (same classname)
+	display: none;
 	padding-right: @spacing; // Spacing for the tooltip (if the tooltip is positioned in the top right corner)
 
 	p {
@@ -30,7 +31,6 @@ div.input-error { // Has to be a div, otherwise the input-fields are also styled
 		position: relative;
 		font-size: @smallFontSize;
 		margin: 0 0 @spacing/2;
-		white-space: nowrap;
 
 		// Triangle
 		&:before {
@@ -61,5 +61,9 @@ div.input-error { // Has to be a div, otherwise the input-fields are also styled
 	li {
 		padding-left: @spacing*0.75;
 	}
+}
+
+.custom-error-input{
+	color:@errorColor;
 }
 /* end error reports */
