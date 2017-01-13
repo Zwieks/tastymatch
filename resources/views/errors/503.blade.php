@@ -1,1 +1,1 @@
-<div class="title">Be right back.</div>
+<div class="title">Be right back 404.</div>
