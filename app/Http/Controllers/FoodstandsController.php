@@ -77,6 +77,8 @@ class FoodstandsController extends Controller
 
             //return the view with the user session data
             return view('auth.create-foodstand', compact('user','detailpage_id'));
+        }else{
+            return view('auth.error');
         }
     }
 
