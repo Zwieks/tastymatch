@@ -73,8 +73,11 @@ Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsControlle
 //USER ACCESS ONLY
 Route::group(['middleware' => 'auth'], function()
 {
+	//Create DETAILPAGE
+	Route::get('create/detailpage/{slug}', 'DetailPageController@store');
+
 	// Create Foodstand
-	Route::get('create/foodstand/{slug}', ['as' => 'index', 'uses' => 'FoodstandsController@create']);
+	Route::get('create/foodstand/{slug}', 'FoodstandsController@create')->name('CreateFoodstand');
 
 	// Upload image
 	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImagesController@upload']);
@@ -89,7 +92,9 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/ajax/upload', function(){
 		return json_encode(request()->file('photos')->store('uploads/' . auth()->id()));
 	});
+
+	//Add MEDIAITEM
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
-	//Save MEDIA ITEM component
+	//Save MEDIA components
 	Route::post('/ajax/saveComponents', 'AjaxController@SaveComponents');
 });

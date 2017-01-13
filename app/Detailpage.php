@@ -24,7 +24,20 @@ class Detailpage extends Model
 		return $detailpages;
 	}
 
-	public static function Add($userid){
+	/**
+	 * Create a detailpage for an user. Common use on buttons
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function add($userid){
+		//Create the detailpage and put the id also in the pivot table
+		$detailpage_id = Detailpage::store($userid);
+		Detailpage_User::store($userid, $detailpage_id);
+
+		return $detailpage_id;
+	}
+
+	public static function store($userid){
 		$Detailpage = new Detailpage;
 
 		$Detailpage->state = 'published';

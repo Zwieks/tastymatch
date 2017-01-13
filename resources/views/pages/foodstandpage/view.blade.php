@@ -1,4 +1,5 @@
 <!-- {{$debugpath}} -->
+{{ Form::hidden('pageid', $detailpage_id ) }}
 <div id="component-headerimage" class="dropzone-wrapper">
     <form method="POST" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementIdHeader" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{csrf_token()}}">

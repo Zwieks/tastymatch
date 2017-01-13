@@ -12,6 +12,10 @@ use App\Sessions;
 
 use App\Foodstand;
 
+use App\Detailpage;
+
+use App\Detailpage_User;
+
 class FoodstandsController extends Controller
 {
     /**
@@ -57,14 +61,23 @@ class FoodstandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request, $slug)
+    public function create(Request $request,$slug)
     {
         //Get the user information
-        $user = $request->session()->get('user.global');
-echo $slug;
-        return false;
-        //return the view with the user session data
-        return view('auth.foodstand', compact('user, slug'));
+        $user_detail = $request->session()->get('user.global');
+
+        //Check if the user can access the page
+        $record = Detailpage_User::checkUserRelation($user_detail->id,$slug);
+
+        if($record != ''){
+            $detailpage_id = $slug;
+
+            //Get the user information
+            $user = $request->session()->get('user.global');
+
+            //return the view with the user session data
+            return view('auth.create-foodstand', compact('user','detailpage_id'));
+        }
     }
 
     /**

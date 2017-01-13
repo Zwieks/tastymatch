@@ -15,7 +15,7 @@ class ComponentIntro extends Model
 		return $events;
 	}
 
-	public static function Add($data){
+	public static function store($data){
 		// Validate the request...
 
 		$ComponentIntro = new ComponentIntro;

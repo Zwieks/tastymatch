@@ -11,7 +11,7 @@
 		</section>
 
 		<section class="create-product-item">
-			<a href="/" class="product-wrapper">
+			<a href="/create/detailpage/foodstand" class="product-wrapper">
 				<h2 data-icon="d">{{ Lang::get('products.product-foodstands') }}</h2>
 				<p>Alles over onze organisatie, verantwoording, visie en keuzes.</p>
 			</a>

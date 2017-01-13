@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Detailpage_User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -14,6 +13,7 @@ use App\ComponentContact;
 use App\ComponentMenu;
 use App\ComponentMediaItem;
 
+use App\Detailpage_User;
 use App\Detailpage;
 use App\ComponentMediaitem_User;
 
@@ -97,8 +97,6 @@ class AjaxController extends Controller
         }
     }
 
-
-
     public function SaveComponents(Request $request){
         if($this->checkAjaxRequest($request) == true){
             //User id
@@ -120,9 +118,6 @@ class AjaxController extends Controller
 
             //Get all the component data
             $data = $request->all();
-            //Create the detailpage and put the id also in the pivot table
-            $detailpage_id = Detailpage::Add($userid);
-            Detailpage_User::Add($userid, $detailpage_id);
 
             //Save the Components by looping trough his own function
             foreach ($data['jsonData'] as $data_items) {
