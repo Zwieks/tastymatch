@@ -52,6 +52,10 @@
                         this.addFile(file);
                     });
 
+                    this.on('sending', function(file, xhr, formData){
+                        formData.append('name', myObject.randomname);
+                    });
+
                     this.on("addedfile", function(file) { 
                         var id = file.previewTemplate.previousSibling.parentElement.id;
                         count = objectLength(dropZoneObjects);
@@ -60,13 +64,12 @@
                         myObject.id = id;
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheFirst;
+                        myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
                         dropZoneObjects['component-headerimage'] = myObject;
                     });
 
                     this.on("success", function(file, response){
-                        myObject.path = jQuery.parseJSON(response);  
-                        myObject.file = 'uploaded'; 
                         dropZoneObjects['component-headerimage'] = myObject;
                     });
 
@@ -104,6 +107,10 @@
                         this.addFile(file);
                     });
 
+                    this.on('sending', function(file, xhr, formData){
+                        formData.append('name', myObject.randomname);
+                    });
+
                     this.on("addedfile", function(file) {
                         var id = file.previewTemplate.previousSibling.parentElement.id;
                         count = objectLength(dropZoneObjects);
@@ -112,13 +119,12 @@
                         myObject.id = id;
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheSecond;
+                        myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
                         dropZoneObjects['component-mediaitems'] = myObject;
                     });
 
                     this.on("success", function(file, response){
-                        myObject.path = jQuery.parseJSON(response); 
-                        myObject.file = 'uploaded';  
                         dropZoneObjects['component-mediaitems'] = myObject;
                     });
 

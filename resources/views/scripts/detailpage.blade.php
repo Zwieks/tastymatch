@@ -15,16 +15,23 @@
                 url = '/ajax/saveComponents';
 
             var newObject = objectReplaceKeyNamesToNumbers(components);
+
+            var userObject = new Object();
+                userObject['userid'] = {{ Session::get('user.global.id') }};
+                userObject['pageid'] = $('input[name=pageid]').val();
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: {jsonData: newObject},
+                data: {jsonData: newObject, userDetail: userObject},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
                         console.log('Component is opgeslagen');
+                    }else{
+                        console.log('Oeps..');
                     }
                 },
                 error: function(data){
@@ -60,6 +67,10 @@
             for(var prop in obj) {
                 if (obj.hasOwnProperty(prop)) {
                     // or Object.prototype.hasOwnProperty.call(obj, prop)
+                    //myObject.file = 'uploaded';
+                    if(typeof obj[prop].file != 'undefined'){
+                        obj[prop].file =  'uploaded';
+                    } 
                     result[num] = obj[prop];
                     num++;    
                 }
@@ -77,7 +88,6 @@
             }
             return result;
         }
-
         function removeMediaItem(object){
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
@@ -139,6 +149,10 @@
                                 this.addFile(file);
                             });
 
+                            this.on('sending', function(file, xhr, formData){
+                                formData.append('name', myObject.randomname);
+                            });
+
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
                                 var suffix = id.match(/\d+/);
@@ -148,6 +162,7 @@
                                 myObject.id = id;
                                 myObject.name = file.name;
                                 myObject.file = $.fn.myDropzoneThethird;
+                                myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
                             });
@@ -267,6 +282,9 @@
                 }
 
                 save_components[key] = dropZoneObjects[key];
+
+                //Set image path
+                save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;  
 
                 //Upload the image
                 dropZoneObjects[key].file.processQueue();

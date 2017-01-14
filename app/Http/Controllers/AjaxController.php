@@ -119,6 +119,16 @@ class AjaxController extends Controller
             //Get all the component data
             $data = $request->all();
 
+            //Detailpage id
+            $detailpage_id = $data['userDetail']['pageid'];
+
+            //Check if the user can access the page
+            $record = Detailpage_User::checkUserRelation($userid,$detailpage_id);
+
+            if($record == ''){
+               return response()->json(array('success' => false));
+            }
+
             //Save the Components by looping trough his own function
             foreach ($data['jsonData'] as $data_items) {
                 $func = $data_items['url'];
@@ -131,14 +141,17 @@ class AjaxController extends Controller
 
     public function SaveMediaitemComponent($data,$detailpage_id){
             //Add the component data to the component table and get the id
-            $component_id = ComponentMediaItem::Add($data);
+            $component_id = ComponentMediaItem::store($data);
 
             //Add detailpage_id and component_id to component_mediaitem_user table
             ComponentMediaitem_User::Add($userid, $detailpage_id, $component_id);
     }
 
     public function SaveHeaderimageComponent($data,$detailpage_id){
-        var_dump($data['table']);
+
+           $component_id = ComponentHeaderImage::store($data);
+
+           //Store component ID in the detailpage table
     }
 
 
