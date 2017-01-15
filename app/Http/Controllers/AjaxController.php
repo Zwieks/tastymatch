@@ -105,7 +105,7 @@ class AjaxController extends Controller
             //Validate the input, when this fails it will return a json error
             $this->validate($request, [
                 'jsonData.0.form.*.title' => 'bail|required|string|max:255',
-                'jsonData.*.form.*.phone' => 'numeric|max:255',
+                'jsonData.*.form.*.phone' => 'numeric',
                 'jsonData.*.form.*.email' => 'email|max:255',
                 'jsonData.*.form.*.site' =>  'url|max:30',
                 'jsonData.*.form.*.twitter' => 'url|max:255',
@@ -148,24 +148,59 @@ class AjaxController extends Controller
     }
 
     public function SaveHeaderimageComponent($data,$detailpage_id){
+            $component_id = Detailpage::CheckAlreadyUpdated('headerimage_id',$detailpage_id);
 
-           $component_id = ComponentHeaderImage::store($data);
+            if($component_id != 0){
+                ComponentHeaderImage::updateFields($component_id,$data);
+            }else{    
+                //Add the component data to the component table and get the id
+                $component_id = ComponentHeaderImage::store($data);            
+            }
 
-           //Store component ID in the detailpage table
+            //Store component ID in the detailpage table
+            Detailpage::storeHeaderimage($detailpage_id, $component_id);
     }
 
-
     public function SaveIntroComponent($data,$detailpage_id){
-        //Add the component data to the component table and get the id
-        $component_id = ComponentIntro::Add($data);
+        $component_id = Detailpage::CheckAlreadyUpdated('intro_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentIntro::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentIntro::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeIntro($detailpage_id, $component_id);
     }
 
     public function SaveContactComponent($data,$detailpage_id){
-        var_dump($data['table']);
+        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentContact::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentContact::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeContact($detailpage_id, $component_id);
     }
 
     public function SaveMenuComponent($data,$detailpage_id){
-        var_dump($data['table']);
+        $component_id = Detailpage::CheckAlreadyUpdated('menu_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentMenu::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentMenu::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeMenu($detailpage_id, $component_id);
     }
 
     /**

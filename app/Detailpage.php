@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Detailpage_User;
 
+use DB;
+
 class Detailpage extends Model
 {
 	protected $table = 'detailpages';
@@ -37,6 +39,38 @@ class Detailpage extends Model
 		return $detailpage_id;
 	}
 
+	static function checkAlreadyUpdated($field,$detailpage_id){
+	    $check = DB::table('detailpages')
+	    	->select($field)
+	        ->where('id', '=', $detailpage_id)
+	        ->first();
+	        
+	    return $check->$field;
+	}
+
+	public static function storeHeaderimage($detailpage_id, $component_id){
+		DB::table('detailpages')
+	    	->where('id', $detailpage_id)
+	    	->update(['headerimage_id' => $component_id]);
+	}
+
+	public static function storeIntro($detailpage_id, $component_id){
+		DB::table('detailpages')
+	    	->where('id', $detailpage_id)
+	    	->update(['intro_id' => $component_id]);
+	}
+
+	public static function storeContact($detailpage_id, $component_id){
+		DB::table('detailpages')
+	    	->where('id', $detailpage_id)
+	    	->update(['contact_id' => $component_id]);
+	}
+
+	public static function storeMenu($detailpage_id, $menu){
+		DB::table('detailpages')
+	    	->where('id', $detailpage_id)
+	    	->update(['menu_id' => $menu]);
+	}
 	public static function store($userid){
 		$Detailpage = new Detailpage;
 

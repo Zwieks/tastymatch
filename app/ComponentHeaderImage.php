@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class ComponentHeaderImage extends Model
 {
     protected $table = 'component_headerimage';
@@ -13,7 +15,7 @@ class ComponentHeaderImage extends Model
 	 */
 	public function users()
 	{
-		return $this->belongsTo('App\ComponentMediaitem_User');
+		return $this->belongsTo('App\ComponentHeaderimage_User');
 	}
 
 	//Get all the EVENTS
@@ -26,16 +28,22 @@ class ComponentHeaderImage extends Model
 	public static function store($data){
         // Validate the request...
 
-        $ComponentMediaItem = new ComponentMediaItem;
+        $ComponentHeaderImage = new ComponentHeaderImage;
 
-        if(isset($data['imagepath']) && $data['imagepath'] != '')
-        	$ComponentMediaItem->image = $data['imagepath'];
+        if(isset($data['path']) && $data['path'] != '')
+        	$ComponentHeaderImage->path = $data['path'];
 
-        if(isset($data['content']) && $data['content'] != '')
-        	$ComponentMediaItem->content = $data['content'];
+        $ComponentHeaderImage->save();
 
-        $ComponentMediaItem->save();
-
-        return $ComponentMediaItem->id;
+        return $ComponentHeaderImage->id;
 	}
+
+	public static function updateFields($component_id,$data){
+		if(!isset($data['path']))
+			$data['path'] = '';
+
+		DB::table('component_headerimage')
+	    	->where('id', $component_id)
+	    	->update(['path' => $data['path']]);
+	}	
 }

@@ -64,10 +64,10 @@ class FoodstandsController extends Controller
     public function create(Request $request,$slug)
     {
         //Get the user information
-        $user_detail = $request->session()->get('user.global');
+        $userid = $request->session()->get('user.global.id');
 
         //Check if the user can access the page
-        $record = Detailpage_User::checkUserRelation($user_detail->id,$slug);
+        $record = Detailpage_User::checkUserRelation($userid,$slug);
 
         if($record != ''){
             $detailpage_id = $slug;
