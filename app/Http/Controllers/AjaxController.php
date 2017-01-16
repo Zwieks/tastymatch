@@ -19,6 +19,9 @@ use App\ComponentMediaitem_User;
 
 class AjaxController extends Controller
 {
+    //GLOBALS
+    protected $mediaComponents = [];
+
 
     /**
      * Get the search results from the AJAX request
@@ -132,36 +135,51 @@ class AjaxController extends Controller
             //Save the Components by looping trough his own function
             foreach ($data['jsonData'] as $data_items) {
                 $func = $data_items['url'];
-                $this->$func($data_items,$detailpage_id);
+                $this->$func($request,$data_items,$detailpage_id);
             }
 
-            return response()->json(array('success' => true)); 
-        }  
+            return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents)));
+        }
     }
 
-    public function SaveMediaitemComponent($data,$detailpage_id){
+    public function SaveMediaitemsComponent(Request $request,$data,$detailpage_id){
+        $userid = $request->session()->get('user.global.id');
+        $mediaitem_id = '';
+
+        if(isset($data['mediaid'])){
+            $mediaitem_id = $data['mediaid'];
+            $component_id = ComponentMediaitem_User::CheckAlreadyUpdated('component_mediaitem_id',$detailpage_id,$userid,$mediaitem_id);
+        }
+
+
+        if(isset($component_id) && $component_id != ''){
+            ComponentMediaItem::updateFields($userid,$component_id,$data);
+        }else{
             //Add the component data to the component table and get the id
             $component_id = ComponentMediaItem::store($data);
 
+            $this->mediaComponents[] = ['componentid' => $component_id, 'elementid' => $data['elementid']];
+
             //Add detailpage_id and component_id to component_mediaitem_user table
-            ComponentMediaitem_User::Add($userid, $detailpage_id, $component_id);
+            ComponentMediaitem_User::store($userid, $detailpage_id, $component_id);
+        }
     }
 
-    public function SaveHeaderimageComponent($data,$detailpage_id){
-            $component_id = Detailpage::CheckAlreadyUpdated('headerimage_id',$detailpage_id);
+    public function SaveHeaderimageComponent(Request $request,$data,$detailpage_id){
+        $component_id = Detailpage::CheckAlreadyUpdated('headerimage_id',$detailpage_id);
 
-            if($component_id != 0){
-                ComponentHeaderImage::updateFields($component_id,$data);
-            }else{    
-                //Add the component data to the component table and get the id
-                $component_id = ComponentHeaderImage::store($data);            
-            }
+        if($component_id != 0){
+            ComponentHeaderImage::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentHeaderImage::store($data);
+        }
 
-            //Store component ID in the detailpage table
-            Detailpage::storeHeaderimage($detailpage_id, $component_id);
+        //Store component ID in the detailpage table
+        Detailpage::storeHeaderimage($detailpage_id, $component_id);
     }
 
-    public function SaveIntroComponent($data,$detailpage_id){
+    public function SaveIntroComponent(Request $request,$data,$detailpage_id){
         $component_id = Detailpage::CheckAlreadyUpdated('intro_id',$detailpage_id);
 
         if($component_id != 0){
@@ -175,7 +193,7 @@ class AjaxController extends Controller
         Detailpage::storeIntro($detailpage_id, $component_id);
     }
 
-    public function SaveContactComponent($data,$detailpage_id){
+    public function SaveContactComponent(Request $request,$data,$detailpage_id){
         $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
 
         if($component_id != 0){
@@ -189,7 +207,7 @@ class AjaxController extends Controller
         Detailpage::storeContact($detailpage_id, $component_id);
     }
 
-    public function SaveMenuComponent($data,$detailpage_id){
+    public function SaveMenuComponent(Request $request,$data,$detailpage_id){
         $component_id = Detailpage::CheckAlreadyUpdated('menu_id',$detailpage_id);
 
         if($component_id != 0){

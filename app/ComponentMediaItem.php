@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Http\Controllers\Controller;
 
+use DB;
+
 class ComponentMediaItem extends Model
 {
     protected $table = 'component_mediaitems';
@@ -22,6 +24,18 @@ class ComponentMediaItem extends Model
 		$events = DB::table('component_mediaitem')->get();
 
 		return $events;
+	}
+
+	public static function updateFields($userid,$component_id,$data){
+		if(!isset($data['path']))
+			$data['path'] = '';
+
+		if(!isset($data['content']))
+			$data['content'] = '';
+
+		DB::table('component_mediaitems')
+			->where('id', $component_id)
+			->update(['image' => $data['path'],'content' => $data['content']]);
 	}
 
 	public static function store($data){

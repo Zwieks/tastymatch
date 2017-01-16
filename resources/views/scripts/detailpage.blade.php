@@ -10,6 +10,12 @@
             removeMediaItem($(this));
         });
 
+        function setDataAtributeMediaItems(components){
+            $.each(components, function(key, item){
+                $('#'+item.elementid).attr( "media", item.componentid );
+            });
+        }
+
         function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/saveComponents';
@@ -29,6 +35,9 @@
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
+                        if(jQuery.parseJSON(data.mediaComponents).length > 0){
+                            setDataAtributeMediaItems(jQuery.parseJSON(data.mediaComponents));
+                        }
                         console.log('Component is opgeslagen');
                     }else{
                         console.log('Oeps..');
@@ -66,12 +75,12 @@
             num = 0;
             for(var prop in obj) {
                 if (obj.hasOwnProperty(prop)) {
-                    // or Object.prototype.hasOwnProperty.call(obj, prop)
-                    //myObject.file = 'uploaded';
-                    if(typeof obj[prop].file != 'undefined'){
-                        obj[prop].file =  'uploaded';
-                    } 
                     result[num] = obj[prop];
+
+                    if(typeof result[num].file != 'undefined'){
+                        result[num].file =  'uploaded';
+                    }
+
                     num++;    
                 }
             }
@@ -220,7 +229,16 @@
         //Remove MENU ITEM
         $(document).on('click','.js-remove-menuitem',function(){
             $(this).parent().remove();
-        });   
+        });
+
+        //SAVE ALL THE CUSTOM TEMPLATE CONTENT WITH THE CRTL+S
+        $(document).bind('keydown', function(e) {
+            if(e.ctrlKey && (e.which == 83)) {
+                e.preventDefault();
+                $('.js-save-template').trigger('click');
+                return false;
+            }
+        });
 
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $('.js-save-template').on('click', function(e){
@@ -245,9 +263,9 @@
                 //Check if the object already has been set
                 if(typeof save_components[key] === 'undefined') {
                     var myObject = new Object();
-                    myObject.componentId = key;
-                    myObject.selector = key;
-                    save_components[key] = myObject;
+                        myObject.componentId = key;
+                        myObject.selector = key;
+                        save_components[key] = myObject;
                 }
                 var target = save_components[key].componentId;
 
@@ -287,7 +305,8 @@
                 save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;  
 
                 //Upload the image
-                dropZoneObjects[key].file.processQueue();
+                if(dropZoneObjects[key].file != 'uploaded')
+                    dropZoneObjects[key].file.processQueue();
             }
 
             //Save each component to database
@@ -302,8 +321,15 @@
                 //Put table name in object
                 save_components[key].table = 'component_'+arr[1];
 
-                //put the URL in the object
+                //Put the URL in the object
                 save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
+
+                //Put the element id also in the object
+                save_components[key].elementid = key;
+
+                if(typeof $('#'+save_components[key].elementid).attr("media") != 'undefined' && $('#'+save_components[key].elementid).attr("media") != ''){
+                    save_components[key].mediaid = $('#'+save_components[key].elementid).attr("media");
+                }
             }
 
             if(objectLength(save_components) > 0){

@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
+
 class ComponentMediaitem_User extends Model
 {
 	/**
@@ -26,7 +28,22 @@ class ComponentMediaitem_User extends Model
 		return $this->hasOne('App\Detailpage');
 	}
 
-	public static function Add($userid, $detailpage_id, $component_id){
+	static function checkAlreadyUpdated($field,$detailpage_id,$userid,$mediaitem_id){
+		$check = DB::table('component_mediaitem_user')
+			->select($field)
+			->where('detailpage_id', '=', $detailpage_id)
+			->where('user_id', '=', $userid)
+			->where('id', '=', $mediaitem_id)
+			->first();
+
+		if(isset($check->$field) && $check->$field != ''){
+			return $check->$field;
+		}else{
+			return $check = '';
+		}
+	}
+
+	public static function store($userid, $detailpage_id, $component_id){
 		$ComponentMediaitemUser = new ComponentMediaitem_User;
 
 		$ComponentMediaitemUser->user_id = $userid;
