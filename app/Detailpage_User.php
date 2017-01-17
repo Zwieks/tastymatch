@@ -19,8 +19,39 @@ class Detailpage_User extends Model
 
 	public $timestamps = true;
 
-	public function User(){
+	public static function User(){
 		return $this->hasOne('App\User');
+	}
+
+	public static function CheckPageStatus($detailpage_id,$userid){
+
+		$check = DB::table('detailpage_user')
+			->select('id')
+			->where('detailpage_id', '=', $detailpage_id)
+			->where('user_id', '=', $userid)
+			->first();
+
+		if(isset($check->id) && $check->id != ''){
+			return $check->id;
+		}else{
+			return $check = '';
+		}
+	}
+
+	public static function CheckPageState($detailpage_id,$userid){
+
+		$check = DB::table('detailpages')
+			->join('detailpage_user', 'detailpages.id', '=', 'detailpage_user.detailpage_id')
+			->select('state')
+			->where('detailpage_id', '=', $detailpage_id)
+			->where('user_id', '=', $userid)
+			->value('state');
+
+		if(isset($check) && $check != ''){
+			return $check;
+		}else{
+			return $check = '';
+		}
 	}
 
 	/**
@@ -30,7 +61,10 @@ class Detailpage_User extends Model
 		//Check if the pivot table
 		$id = '';
 
-		$record = DB::table('detailpage_user')->where('detailpage_id', '=', $slug)->where('user_id', '=', $userid)->first();
+		$record = DB::table('detailpage_user')
+					->where('detailpage_id', '=', $slug)
+					->where('user_id', '=', $userid)
+					->first();
 
 		if(isset($record)){
 			$id = $record->id;

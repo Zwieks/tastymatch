@@ -23,14 +23,33 @@ class FoodstandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $slug)
     {
-        //Get the user information
-        $user = $request->session()->get('user.global');
 
-        $foodstands = Foodstand::getUserFoodstands($user);
-        //return the view with the user session data
-        return view('auth.foodstand', compact('foodstands'));
+        //Get the user information
+        $userid = $request->session()->get('user.global.id');
+
+        //Check if the page is already created
+        $page = Detailpage_User::CheckPageState($slug,$userid);
+
+        if(isset($page) && $page != 'new'){
+            return redirect()->route('UpdateFoodstand', ['detailpage_id' => $slug]);
+        }else{
+            //Check if the slug is related to one of the page id's of the user
+            $record = FoodstandsController::checkRelation($request,$slug);
+
+            if($record != ''){
+                $detailpage_id = $slug;
+
+                //Get the user information
+                $user = $request->session()->get('user.global');
+
+                //return the view with the user session data
+                return view('auth.create-foodstand', compact('user','detailpage_id'));
+            }else{
+                return view('auth.error');
+            }
+        }
     }
 
     /**
@@ -56,12 +75,7 @@ class FoodstandsController extends Controller
         }
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create(Request $request,$slug)
+    public function checkRelation(Request $request,$slug)
     {
         //Get the user information
         $userid = $request->session()->get('user.global.id');
@@ -69,17 +83,17 @@ class FoodstandsController extends Controller
         //Check if the user can access the page
         $record = Detailpage_User::checkUserRelation($userid,$slug);
 
-        if($record != ''){
-            $detailpage_id = $slug;
+        return $record;
+    }
 
-            //Get the user information
-            $user = $request->session()->get('user.global');
-
-            //return the view with the user session data
-            return view('auth.create-foodstand', compact('user','detailpage_id'));
-        }else{
-            return view('auth.error');
-        }
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create(Request $request,$slug)
+    {
+        //
     }
 
     /**
@@ -124,7 +138,11 @@ class FoodstandsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //Get the user information
+        $user = $request->session()->get('user.global');
+
+        //return the view with the user session data
+        return view('auth.create-foodstand', compact('user'));
     }
 
     /**

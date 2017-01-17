@@ -26,7 +26,7 @@ class ComponentMediaItem extends Model
 		return $events;
 	}
 
-	public static function updateFields($userid,$component_id,$data){
+	public static function updateFields($userid,$mediaitem_id,$data){
 		if(!isset($data['path']))
 			$data['path'] = '';
 
@@ -34,7 +34,7 @@ class ComponentMediaItem extends Model
 			$data['content'] = '';
 
 		DB::table('component_mediaitems')
-			->where('id', $component_id)
+			->where('id', $mediaitem_id)
 			->update(['image' => $data['path'],'content' => $data['content']]);
 	}
 

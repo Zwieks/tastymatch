@@ -33,7 +33,7 @@ class ComponentMediaitem_User extends Model
 			->select($field)
 			->where('detailpage_id', '=', $detailpage_id)
 			->where('user_id', '=', $userid)
-			->where('id', '=', $mediaitem_id)
+			->where('component_mediaitem_id', '=', $mediaitem_id)
 			->first();
 
 		if(isset($check->$field) && $check->$field != ''){

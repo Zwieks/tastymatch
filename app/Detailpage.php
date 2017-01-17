@@ -39,6 +39,12 @@ class Detailpage extends Model
 		return $detailpage_id;
 	}
 
+	public static function updateState($state,$detailpage_id){
+		DB::table('detailpages')
+			->where('id', $detailpage_id)
+			->update(['state' => $state]);
+	}
+
 	static function checkAlreadyUpdated($field,$detailpage_id){
 	    $check = DB::table('detailpages')
 	    	->select($field)
@@ -74,7 +80,7 @@ class Detailpage extends Model
 	public static function store($userid){
 		$Detailpage = new Detailpage;
 
-		$Detailpage->state = 'published';
+		$Detailpage->state = 'new';
 		$Detailpage->public = 1;
 
 		$Detailpage->save();

@@ -36,15 +36,11 @@ class DetailPageController extends Controller
     public function store(Request $request, $slug)
     {
         //Get the user information
-        $user_detail = $request->session()->get('user.global');
-
-        //User ID
-        $userid = $user_detail->id;
+        $userid = $request->session()->get('user.global.id');
 
         $detailpage_id = Detailpage::add($userid);
 
         //return the view with the user session data
-
         return redirect()->route('CreateFoodstand', ['detailpage_id' => $detailpage_id]);
     }
 

@@ -132,6 +132,9 @@ class AjaxController extends Controller
                return response()->json(array('success' => false));
             }
 
+            //Update the state of the detailpage
+            Detailpage::updateState('preview',$detailpage_id);
+
             //Save the Components by looping trough his own function
             foreach ($data['jsonData'] as $data_items) {
                 $func = $data_items['url'];
@@ -146,18 +149,20 @@ class AjaxController extends Controller
         $userid = $request->session()->get('user.global.id');
         $mediaitem_id = '';
 
+        //Check if the user can change the item by getting the component_media_id
         if(isset($data['mediaid'])){
             $mediaitem_id = $data['mediaid'];
-            $component_id = ComponentMediaitem_User::CheckAlreadyUpdated('component_mediaitem_id',$detailpage_id,$userid,$mediaitem_id);
+            $component_id = ComponentMediaitem_User::CheckAlreadyUpdated('id',$detailpage_id,$userid,$mediaitem_id);
         }
 
-
+        //If the check give a valid component id related to the user update the field else add a new item to the DB en pivot
         if(isset($component_id) && $component_id != ''){
-            ComponentMediaItem::updateFields($userid,$component_id,$data);
+            ComponentMediaItem::updateFields($userid,$mediaitem_id,$data);
         }else{
             //Add the component data to the component table and get the id
             $component_id = ComponentMediaItem::store($data);
 
+            //Add item data to the global variable
             $this->mediaComponents[] = ['componentid' => $component_id, 'elementid' => $data['elementid']];
 
             //Add detailpage_id and component_id to component_mediaitem_user table
