@@ -16,14 +16,42 @@ class Detailpage extends Model
 	 */
 	public function users()
 	{
-		return $this->belongsToMany('App\Detailpage_User');
+		return $this->belongsTo('App\Detailpage_User');
 	}
 
-	//Get all the EVENTS
-	public static function getAll(){
-		$detailpages = DB::table('detailpages')->get();
+	/**
+	 * Get all the CONTACT components of the detailpages
+	 */
+	public function getIntro(){
+		return $this->belongsTo('App\ComponentIntro');
+	}
 
-		return $detailpages;
+	/**
+	 * Get all the INTRO components of the detailpages
+	 */
+	public function getContact(){
+		return $this->belongsTo('App\ComponentContact');
+	}
+
+	/**
+	 * Get all the MENU components of the detailpages
+	 */
+	public function getMenu(){
+		return $this->belongsTo('App\ComponentMenu');
+	}
+
+	/**
+	 * Get all the HEADERIMAGE components of the detailpages
+	 */
+	public function getHeaderimage(){
+		return $this->belongsTo('App\ComponentHeaderimage');
+	}
+
+	/**
+	 * Get all the MEDIA ITEMS components of the detailpages
+	 */
+	public function getMediaItems(){
+		return $this->hasMany('App\ComponentMediaitem_User');
 	}
 
 	/**
@@ -39,6 +67,10 @@ class Detailpage extends Model
 		return $detailpage_id;
 	}
 
+	/**
+	 * Update the state of the detailpage
+	 * possilbe returns: new, preview, published
+	 */
 	public static function updateState($state,$detailpage_id){
 		DB::table('detailpages')
 			->where('id', $detailpage_id)
@@ -77,6 +109,10 @@ class Detailpage extends Model
 	    	->where('id', $detailpage_id)
 	    	->update(['menu_id' => $menu]);
 	}
+
+	/**
+	 * Store the new create detailpage
+	 */
 	public static function store($userid){
 		$Detailpage = new Detailpage;
 

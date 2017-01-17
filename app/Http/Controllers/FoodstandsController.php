@@ -136,13 +136,22 @@ class FoodstandsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $detailpage_id)
     {
         //Get the user information
         $user = $request->session()->get('user.global');
 
+        //Get content detailpage
+        $asdf = Detailpage::with('getContact')
+                        ->with('getIntro')
+                        ->with('getMenu')
+                        ->with('getHeaderimage')
+                        ->with('getMediaItems')
+                        ->find($detailpage_id);
+
         //return the view with the user session data
-        return view('auth.create-foodstand', compact('user'));
+        return $asdf;
+        return view('auth.update-foodstand', compact('user','detailpage_id'));
     }
 
     /**

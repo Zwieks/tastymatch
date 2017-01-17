@@ -14,7 +14,7 @@ class DetailPageController extends Controller
      */
     public function index()
     {
-        //
+        Detailpage::with('getContent')->get();
     }
 
     /**
