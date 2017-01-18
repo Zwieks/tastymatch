@@ -147,7 +147,7 @@ class FoodstandsController extends Controller
                         ->with('getMenu')
                         ->with('getHeaderimage')
                         ->with('getMediaItems')
-                        ->find($detailpage_id);
+                        ->findOrFail($detailpage_id);
 
         return view('auth.update-foodstand', compact('user','detailpage_id','page_content'));
     }

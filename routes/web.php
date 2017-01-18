@@ -93,7 +93,7 @@ Route::group(['middleware' => 'auth'], function()
 	// AJAX
 	Route::post('/ajax/search', 'AjaxController@getSearch');
 	Route::post('/ajax/upload', function(){
-		return json_encode(request()->file('photos')->storeAs('uploads/' . auth()->id(), request()->name));
+		return json_encode(request()->file('photos')->storeAs('public/uploads/' . auth()->id(), request()->name));
 	});
 
 	//Add MEDIAITEM

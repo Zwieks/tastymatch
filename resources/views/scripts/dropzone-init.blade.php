@@ -78,16 +78,10 @@
                     });
 
                     //Check there is already an image uploaded
-                    var headerImage = '{!! $page_content->get_contact !!}';
-                    @foreach($page_content['get_contact'] as $photo)
-                        {{$photo->id}}
-                    @endforeach
-                    console.log(headerImage);
-                    // if(typeof headerImage != 'undefined'){
-                    //     var mockFile = { name: "logo.png", type: 'image/png' };
-                    //     this.emit("addedfile", mockFile);
-                    //     this.createThumbnailFromUrl(mockFile, '/img/logo.png');
-                    // }
+                    var path = {!! $page_content->get_headerimage !!};
+                    console.log(path);
+
+
                 }
             }
         );
