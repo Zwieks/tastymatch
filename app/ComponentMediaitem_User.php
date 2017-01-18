@@ -24,8 +24,8 @@ class ComponentMediaitem_User extends Model
 		return $this->hasOne('App\User');
 	}
 
-	public function Event(){
-		return $this->hasOne('App\Detailpage');
+	public function mediaItem(){
+		return $this->hasOne('App\ComponentMediaitem_User');
 	}
 
 	static function checkAlreadyUpdated($field,$detailpage_id,$userid,$mediaitem_id){

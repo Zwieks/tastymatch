@@ -142,16 +142,14 @@ class FoodstandsController extends Controller
         $user = $request->session()->get('user.global');
 
         //Get content detailpage
-        $asdf = Detailpage::with('getContact')
+        $page_content = Detailpage::with('getContact')
                         ->with('getIntro')
                         ->with('getMenu')
                         ->with('getHeaderimage')
                         ->with('getMediaItems')
                         ->find($detailpage_id);
 
-        //return the view with the user session data
-        return $asdf;
-        return view('auth.update-foodstand', compact('user','detailpage_id'));
+        return view('auth.update-foodstand', compact('user','detailpage_id','page_content'));
     }
 
     /**

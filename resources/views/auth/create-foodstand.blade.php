@@ -12,7 +12,7 @@
 
 {{-- Include Content --}}
 @section('content')
-    @include('pages.foodstandpage.view')
+    @include('pages.foodstandpage.create')
 @stop
 
 {{-- Include Scripts --}}

@@ -42,7 +42,7 @@
                 parallelUploads: 1,
                 thumbnailWidth: 1680,
                 thumbnailHeight: 1040,
-                acceptedFiles: '.jpg, .png, .gif',                
+                acceptedFiles: '.jpg, .png, .gif',              
                 init: function() {
                     var count;
                     var myObject = new Object();
@@ -76,6 +76,18 @@
                     this.on("removedfile", function(file) { 
                         removeItem(file.name);
                     });
+
+                    //Check there is already an image uploaded
+                    var headerImage = '{!! $page_content->get_contact !!}';
+                    @foreach($page_content['get_contact'] as $photo)
+                        {{$photo->id}}
+                    @endforeach
+                    console.log(headerImage);
+                    // if(typeof headerImage != 'undefined'){
+                    //     var mockFile = { name: "logo.png", type: 'image/png' };
+                    //     this.emit("addedfile", mockFile);
+                    //     this.createThumbnailFromUrl(mockFile, '/img/logo.png');
+                    // }
                 }
             }
         );

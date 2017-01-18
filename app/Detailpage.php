@@ -23,35 +23,36 @@ class Detailpage extends Model
 	 * Get all the CONTACT components of the detailpages
 	 */
 	public function getIntro(){
-		return $this->belongsTo('App\ComponentIntro');
+		return $this->belongsTo('App\ComponentIntro','intro_id');
 	}
 
 	/**
 	 * Get all the INTRO components of the detailpages
 	 */
 	public function getContact(){
-		return $this->belongsTo('App\ComponentContact');
+		return $this->belongsTo('App\ComponentContact','contact_id');
 	}
 
 	/**
 	 * Get all the MENU components of the detailpages
 	 */
 	public function getMenu(){
-		return $this->belongsTo('App\ComponentMenu');
+		return $this->belongsTo('App\ComponentMenu','menu_id');
 	}
 
 	/**
 	 * Get all the HEADERIMAGE components of the detailpages
 	 */
 	public function getHeaderimage(){
-		return $this->belongsTo('App\ComponentHeaderimage');
+		return $this->belongsTo('App\ComponentHeaderimage','headerimage_id');
 	}
 
 	/**
 	 * Get all the MEDIA ITEMS components of the detailpages
 	 */
 	public function getMediaItems(){
-		return $this->hasMany('App\ComponentMediaitem_User');
+		return $this->hasMany('App\ComponentMediaitem_User')
+					->join('component_mediaitems', 'component_mediaitem_user.component_mediaitem_id', '=', 'component_mediaitems.id');
 	}
 
 	/**
