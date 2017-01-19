@@ -186,7 +186,7 @@
                             });
 
                             //Check there is already an image uploaded
-                            @if(isset($page_content))
+                            @if(isset($page_content['getHeaderimage']))
                                 var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
                             @endif
 
@@ -316,7 +316,7 @@
                 save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;  
 
                 //Upload the image
-                if(dropZoneObjects[key].file != 'uploaded')
+                if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != 'uploaded')
                     dropZoneObjects[key].file.processQueue();
             }
 

@@ -65,7 +65,10 @@
                         myObject.id = id;
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheFirst;
-                        myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
+
+                        if(typeof myObject.randomname != 'undefined'){
+                            myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
+                        }
 
                         dropZoneObjects['component-headerimage'] = myObject;
                     });
@@ -79,13 +82,14 @@
                     });
 
                     //Check there is already an image uploaded
-                    @if(isset($page_content))
+                    @if(isset($page_content['getHeaderimage']))
                         var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
                     @endif
 
                     if(typeof path != 'undefined' && path != ''){
                         var mockFile = { name: "logo.png", type: 'image/png' };
                         this.emit("addedfile", mockFile);
+                        myObject.randomname = path.split('/').pop();
                         this.createThumbnailFromUrl(mockFile, path);
                     }
                 }

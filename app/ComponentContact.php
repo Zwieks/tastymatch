@@ -28,9 +28,10 @@ class ComponentContact extends Model
     }
 
 	public static function store($data){
-        $form = ComponentContact::getFormInput($data['form']);
-
         $ComponentContact = new ComponentContact;
+
+        if(isset($data['form']))
+            $form = ComponentContact::getFormInput($data['form']);
 
         if(isset($data['content']) && $data['content'] != '')
         	$ComponentContact->content = $data['content'];

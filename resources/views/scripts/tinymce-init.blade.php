@@ -34,10 +34,11 @@
                     ContentCheck.emptyBox(ed,$(this),placeholderText,tag);
                     //Loose the focus
                     $('#'+ed.id).blur();
+                }else if($.trim(content) != ''){
+                    ed.setContent(content);
+                    ContentCheck.fillBox(ed,$(this),placeholderText);
                 }else{
-                    if(saved_content !=''){
-                        ContentCheck.setSavedContent(ed,saved_content);
-                    }
+                    ContentCheck.setSavedContent(ed,saved_content);
                     ContentCheck.fillBox(ed,$(this),placeholderText);
                 }
             });
