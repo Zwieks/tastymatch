@@ -1,6 +1,7 @@
 <script type="text/javascript">
     var ContentCheck = {
         PLACEHOLDER_TEXT : '',
+        SAVED_CONTENT : '',
         emptyBox : function(ed,object,placeholderText,tag) {
             //Get component ID
             var id = object.attr('id');
@@ -16,7 +17,7 @@
             $('#'+ed.id).addClass('changed-content');
         },
 
-        setupDefault : function(ed,placeholderText,tag,tag_empty){
+        setupDefault : function(ed,placeholderText,tag,tag_empty,saved_content){
             ed.on('ProgressState', function(e) {
                 console.log('ProgressState event', e);
             }),
@@ -29,12 +30,14 @@
             }),
             ed.on('blur', function(e) {
                 var content = ed.getContent({format: 'text'});
-
                 if($.trim(content) == '' || $.trim(content) == placeholderText){
                     ContentCheck.emptyBox(ed,$(this),placeholderText,tag);
                     //Loose the focus
                     $('#'+ed.id).blur();
                 }else{
+                    if(saved_content !=''){
+                        ContentCheck.setSavedContent(ed,saved_content);
+                    }
                     ContentCheck.fillBox(ed,$(this),placeholderText);
                 }
             });
@@ -54,29 +57,58 @@
             ed.on('ProgressState', function(e) {
                 console.log('ProgressState event', e);
             });
+        },
+
+        setSavedContent : function(ed,content){
+            if(typeof content != 'undefined') {
+                ContentCheck.fillBox(ed, $(this));
+                ed.setContent(content);
+                ContentCheck.SAVED_CONTENT = '';
+            }
         }
     };
 
     $.fn.initTinyMce = function initTinyMce(){
-
         tinymce.init({
             setup:function(ed) {
                 var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-description') !!}',
-                tag = ' <p class="editable-default">' + placeholderText + '</p>',
-                tag_empty = ' <p class="editable-default"></p>';
-                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
+                    tag = ' <p class="editable-default">' + placeholderText + '</p>',
+                    tag_empty = ' <p class="editable-default"></p>';
+
+                ContentCheck.SAVED_CONTENT = '';
+
+                @if(isset($page_content) && !is_null($page_content['getIntro']))
+                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getIntro']->content !!}';
+                @endif
+
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector:'#js-editable-intro',
             menubar:false,
-            inline: true
+            inline: true,
+            init_instance_callback : function(ed) {
+                @if(isset($page_content) && !is_null($page_content['getIntro']))
+                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getIntro']->content !!}';
+                @endif
+
+                if(ContentCheck.SAVED_CONTENT != '')
+                    ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
+            }
         });
 
         tinymce.init({
             setup:function(ed) {
                 var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}',
-                tag = '<p class="editable-default">' + placeholderText + '</p>',
-                tag_empty = '<p class="contact-intro"></p>';
-                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
+                    tag = '<p class="editable-default">' + placeholderText + '</p>',
+                    tag_empty = '<p class="contact-intro"></p>';
+
+                ContentCheck.SAVED_CONTENT = '';
+
+                @if(isset($page_content) && !is_null($page_content['getContact']))
+                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getContact']->content !!}';
+                @endif
+
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector: '#js-editable-contact',
             menubar:false,
@@ -84,30 +116,29 @@
             plugins: "textcolor colorpicker",
             toolbar: [
                 'undo redo forecolor'
-            ]
-        });
+            ],
+            init_instance_callback : function(ed) {
+                @if(isset($page_content) && !is_null($page_content['getContact']))
+                        ContentCheck.SAVED_CONTENT = '{!! $page_content['getContact']->content !!}';
+                @endif
 
-        tinymce.init({
-            setup:function(ed) {
-                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}';
-                ContentCheck.setupVideo(ed,placeholderText);
-            },    
-
-            selector: '.js-editable-video',
-            menubar:false,
-            inline: true,
-            plugins: " media",
-            toolbar: [
-                'undo redo media'
-            ]
+                if(ContentCheck.SAVED_CONTENT != '')
+                    ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
+            }
         });
 
         tinymce.init({
             setup:function(ed) {
                 var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
-                tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>';
+                tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>',
                 tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';
-                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
+
+                ContentCheck.SAVED_CONTENT = '';
+                @if(isset($page_content['getMediaItems'][0]) && !is_null($page_content['getMediaItems']))
+                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getMediaItems'][0]->content !!}';
+                @endif
+
+                ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector: '.js-editable-media',
             menubar:false,
@@ -115,7 +146,11 @@
             plugins: "textcolor colorpicker",
             toolbar: [
                 'undo redo forecolor'
-            ]
+            ],
+            init_instance_callback : function(ed) {
+                if(ContentCheck.SAVED_CONTENT != '')
+                    ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
+            }
         });
     }
 
@@ -141,10 +176,10 @@
             // Do you ajax call here, window.setTimeout fakes ajax call
             if(typeof content != "undefined"){
                 var myObject = new Object();
-                myObject.componentId = componentid;
-                myObject.selector = id.id;
-                myObject.userid = userid;
-                myObject.content = content;
+                    myObject.componentId = componentid;
+                    myObject.selector = id.id;
+                    myObject.userid = userid;
+                    myObject.content = content;
 
                 return myObject;
             }

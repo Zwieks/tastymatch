@@ -1,3 +1,4 @@
+
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
     var dropZoneObjects = [],
@@ -24,7 +25,7 @@
     }
 
     $(document).ready(function($) {
-
+        //INIT FOR HEADERIMAGE
         var drop_id = 'DropzoneElementIdHeader';
         $.fn.myDropzoneTheFirst = new Dropzone(
             '#'+drop_id, //id of drop zone element 2
@@ -78,14 +79,20 @@
                     });
 
                     //Check there is already an image uploaded
-                    var path = {!! $page_content->get_headerimage !!};
-                    console.log(path);
+                    @if(isset($page_content))
+                        var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
+                    @endif
 
-
+                    if(typeof path != 'undefined' && path != ''){
+                        var mockFile = { name: "logo.png", type: 'image/png' };
+                        this.emit("addedfile", mockFile);
+                        this.createThumbnailFromUrl(mockFile, path);
+                    }
                 }
             }
         );
 
+        //INIT FOR MEDIA ITEMS
         var drop_id = 'DropzoneElementId';
         $.fn.myDropzoneTheSecond = new Dropzone(
             '#'+drop_id, //id of drop zone element 2

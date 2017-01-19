@@ -184,6 +184,17 @@
                             this.on("removedfile", function(file) {
                                 removeItem(file.name);
                             });
+
+                            //Check there is already an image uploaded
+                            @if(isset($page_content))
+                                var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
+                            @endif
+
+                            if(typeof path != 'undefined' && path != ''){
+                                var mockFile = { name: "logo.png", type: 'image/png' };
+                                this.emit("addedfile", mockFile);
+                                this.createThumbnailFromUrl(mockFile, path);
+                            }
                         }
                     }
                 );
