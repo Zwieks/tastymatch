@@ -53,6 +53,7 @@
 
                         $.each(result, function(key, item){
                             var search = 'jsonData';
+
                             if (item.indexOf(search) !== -1){
                                 var location = index.split('.');
                                 inputname = location[location.length-1];
