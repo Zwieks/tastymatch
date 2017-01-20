@@ -1,4 +1,10 @@
 <!-- {{$debugpath}} -->
+@if(isset($count))
+    {{var_dump($count)}}
+@endif
+
+
+
 <div id="@if(isset($data)){{'component-mediaitems-'}}{{$data}}@else{{'component-mediaitems'}}@endif" class="media" media="">
 @if(isset($data) && $data != 0)
 	<div class="js-remove-mediaitem remove-media-item" data-icon="U" title="Verwijder media item"></div>

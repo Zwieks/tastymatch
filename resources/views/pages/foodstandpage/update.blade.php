@@ -43,7 +43,10 @@
 
 <div id="js-editable-wrapper">
     <div class="editable-wrapper mediaitems-wrapper">
-        @include('layouts.templates.empty-mediaitem')
+        @foreach($page_content['getMediaItems'] as $item)
+
+            @include('layouts.templates.empty-mediaitem', array('test'=> 'adsfas' ))
+        @endforeach    
     </div>
 </div>
 <div id="js_add_mediaitem" class="add-media-item-wrapper">

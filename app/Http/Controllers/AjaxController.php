@@ -104,19 +104,19 @@ class AjaxController extends Controller
         if($this->checkAjaxRequest($request) == true){
             //User id
             $userid = $request->session()->get('user.global.id');
-
+//dd($request['jsonData']);
             //Validate the input, when this fails it will return a json error
             $this->validate($request, [
-                'jsonData.0.form.*.title' => 'bail|required|string|max:255',
-                'jsonData.*.form.*.phone' => 'numeric',
-                'jsonData.*.form.*.email' => 'email|max:255',
-                'jsonData.*.form.*.site' =>  'url|max:30',
-                'jsonData.*.form.*.twitter' => 'url|max:255',
-                'jsonData.*.form.*.facebook' => 'url|max:255',
-                'jsonData.*.form.*.linkedin' => 'url|max:255',
-                'jsonData.*.form.*.googleplus' => 'url|max:255',
-                'jsonData.*.form.*.instagram' => 'url|max:255',
-                'jsonData.*.form.*.menuitem' => 'string|max:255',
+                'jsondata.0.form.1.title' => 'bail|required|string|max:255',
+                'jsondata.*.form.*.phone' => 'numeric',
+                'jsondata.*.form.*.email' => 'email|max:255',
+                'jsondata.*.form.*.site' =>  'url|max:30',
+                'jsondata.*.form.*.twitter' => 'url|max:255',
+                'jsondata.*.form.*.facebook' => 'url|max:255',
+                'jsondata.*.form.*.linkedin' => 'url|max:255',
+                'jsondata.*.form.*.googleplus' => 'url|max:255',
+                'jsondata.*.form.*.instagram' => 'url|max:255',
+                'jsondata.*.form.*.menuitem' => 'string|max:255',
             ]);
 
             //Get all the component data
@@ -136,7 +136,7 @@ class AjaxController extends Controller
             Detailpage::updateState('preview',$detailpage_id);
 
             //Save the Components by looping trough his own function
-            foreach ($data['jsonData'] as $data_items) {
+            foreach ($data['jsondata'] as $data_items) {
                 $func = $data_items['url'];
                 $this->$func($request,$data_items,$detailpage_id);
             }

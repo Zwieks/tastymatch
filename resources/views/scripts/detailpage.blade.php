@@ -21,7 +21,6 @@
                 url = '/ajax/saveComponents';
 
             var newObject = objectReplaceKeyNamesToNumbers(components);
-
             var userObject = new Object();
                 userObject['userid'] = {{ Session::get('user.global.id') }};
                 userObject['pageid'] = $('input[name=pageid]').val();
@@ -31,7 +30,7 @@
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: {jsonData: newObject, userDetail: userObject},
+                data: {jsondata: newObject, userDetail: userObject},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
@@ -52,7 +51,7 @@
                         var result = error[0].split(' ');
 
                         $.each(result, function(key, item){
-                            var search = 'jsonData';
+                            var search = 'jsondata';
 
                             if (item.indexOf(search) !== -1){
                                 var location = index.split('.');
