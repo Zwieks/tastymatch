@@ -105,9 +105,11 @@ class AjaxController extends Controller
             //User id
             $userid = $request->session()->get('user.global.id');
 
+            $data = $request->all();
+
             //Validate the input, when this fails it will return a json error
             $this->validate($request, [
-                'jsonData.0.form.*.title' => 'bail|required|string|max:255',
+                'jsonData.0.form.1.title' => 'bail|required|string|max:255',
                 'jsonData.*.form.*.phone' => 'numeric',
                 'jsonData.*.form.*.email' => 'email|max:255',
                 'jsonData.*.form.*.site' =>  'url|max:30',

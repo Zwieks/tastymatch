@@ -1,31 +1,32 @@
 <!-- {{$debugpath}} -->
-<form class="detailpage detailpage-contact" method="POST">
+
+{!! Form::open(['method' => 'post', 'class' => 'detailpage detailpage-contact changed']) !!}
     <fieldset>
         <ul class="velden">
             <li class="form-input-textfield" data-icon="V">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-phone') }}" type="text" name="phone">
+                {!! Form::text('phone',isset($page_content['getContact']->phone) ? $page_content['getContact']->phone : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-phone')])) !!}
             </li>
             <li class="form-input-textfield" data-icon="e">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-email') }}" type="text" name="email">
+                {!! Form::email('email',isset($page_content['getContact']->email) ? $page_content['getContact']->email : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-email')])) !!}
             </li>
             <li class="form-input-textfield" data-icon="3">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-site') }}" type="url" name="site">
+                {!! Form::url('site',isset($page_content['getContact']->site) ? $page_content['getContact']->site : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-site')])) !!}
             </li>
             <li class="form-input-textfield" data-icon="f">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-facebook') }}" type="url" name="facebook">
+                {!! Form::url('facebook',isset($page_content['getContact']->facebook) ? $page_content['getContact']->facebook : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-facebook')])) !!}
             </li>
             <li class="form-input-textfield" data-icon="l">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-twitter') }}" type="url" name="twitter">
+                {!! Form::url('twitter',isset($page_content['getContact']->twitter) ? $page_content['getContact']->twitter : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-twitter')])) !!}
             </li>
             <li class="form-input-textfield" data-icon="g">
                 @include('forms.inputerror')
-                <input placeholder="{{ Lang::get('tinymce.detailpage-foodstand-linkedin') }}" type="url" name="linkedin">
+                {!! Form::url('linkedin',isset($page_content['getContact']->linkedin) ? $page_content['getContact']->linkedin : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-linkedin')])) !!}
             </li>
         </ul>
     </fieldset>
-</form>
+{!! Form::close() !!}

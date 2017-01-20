@@ -26,8 +26,10 @@ class ComponentMenu extends Model
 
 		foreach ($menu as $item)
 		{
-		    $stringmenu .= $prefix . $item['menuitem'];
-		    $prefix = ',';
+			if(isset($item['menuitem'])){
+				$stringmenu .= $prefix . $item['menuitem'];
+				$prefix = ',';
+			}
 		}
 
 		$stringmenu = rtrim($stringmenu, ',');
