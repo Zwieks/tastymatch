@@ -110,7 +110,7 @@
         function addMediaItem() {
 
             var formData = {
-                count: ($('#js-editable-wrapper .editable-wrapper').children().length)+1,
+                count: ($('#js-editable-wrapper .editable-wrapper').children().length),
             };
             var token = $('meta[name="csrf-token"]').attr('content'),
                     url = '/ajax/addMediaItem',
@@ -259,6 +259,7 @@
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++)
             {
+                console.log(tinymce.editors[i].id);
                 //Get the content of the changed TINYMCE component
                 var content = TinyMceSave(tinymce.editors[i].id);
 

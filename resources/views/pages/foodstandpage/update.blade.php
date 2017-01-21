@@ -43,9 +43,9 @@
 
 <div id="js-editable-wrapper">
     <div class="editable-wrapper mediaitems-wrapper">
-        @foreach($page_content['getMediaItems'] as $item)
+        @foreach($page_content['getMediaItems'] as $key => $item)
 
-            @include('layouts.templates.empty-mediaitem', array('test'=> 'adsfas' ))
+            @include('layouts.templates.update-mediaitem', array('data'=> $key ))
         @endforeach    
     </div>
 </div>
