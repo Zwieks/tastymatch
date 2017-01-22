@@ -184,17 +184,6 @@
                             this.on("removedfile", function(file) {
                                 removeItem(file.name);
                             });
-
-                            //Check there is already an image uploaded
-                            @if(isset($page_content['getHeaderimage']))
-                                var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
-                            @endif
-
-                            if(typeof path != 'undefined' && path != ''){
-                                var mockFile = { name: "logo.png", type: 'image/png' };
-                                this.emit("addedfile", mockFile);
-                                this.createThumbnailFromUrl(mockFile, path);
-                            }
                         }
                     }
                 );
@@ -259,7 +248,6 @@
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++)
             {
-                console.log(tinymce.editors[i].id);
                 //Get the content of the changed TINYMCE component
                 var content = TinyMceSave(tinymce.editors[i].id);
 
@@ -305,7 +293,6 @@
 
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
-
                 // Merge save_components into dropZoneObjects, recursively
                 if(key in save_components){
                     $.extend( true, dropZoneObjects, save_components);
@@ -317,13 +304,13 @@
                 save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;  
 
                 //Upload the image
-                if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != 'uploaded')
+                if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != 'uploaded'){
                     dropZoneObjects[key].file.processQueue();
+                }
             }
 
             //Save each component to database
             for(var key in save_components) {
-
                 //Find the table name
                 if(typeof save_components[key].componentId != 'undefined'){
                     var arr = save_components[key].componentId.split('-');

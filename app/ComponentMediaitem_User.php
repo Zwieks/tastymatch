@@ -28,7 +28,7 @@ class ComponentMediaitem_User extends Model
 		return $this->hasOne('App\ComponentMediaitem_User');
 	}
 
-	static function checkAlreadyUpdated($field,$detailpage_id,$userid,$mediaitem_id){
+	public static function checkAlreadyUpdated($field,$detailpage_id,$userid,$mediaitem_id){
 		$check = DB::table('component_mediaitem_user')
 			->select($field)
 			->where('detailpage_id', '=', $detailpage_id)

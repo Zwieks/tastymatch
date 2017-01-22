@@ -130,7 +130,7 @@
         });
         
         @if(isset($page_content))
-                @include('scripts.tinymce.tinymce-multiple-init',compact('page_content'))
+            @include('scripts.tinymce.tinymce-multiple-init',compact('page_content'))
         @else
             @include('scripts.tinymce.tinymce-single-init')
         @endif

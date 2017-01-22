@@ -18,7 +18,7 @@
 {{-- Include Scripts --}}
 @section('page-scripts')
     @include('scripts.tinymce.tinymce-init')
-    @include('scripts.dropzone-init')
+    @include('scripts.dropzone.dropzone-init')
     @include('scripts.googlemaps-single-init')
     @include('scripts.detailpage')
 @stop

@@ -1,4 +1,3 @@
-
 <script type="text/javascript">
     Dropzone.autoDiscover = false;
     var dropZoneObjects = [],
@@ -96,60 +95,8 @@
             }
         );
 
-        //INIT FOR MEDIA ITEMS
-        var drop_id = 'DropzoneElementId';
-        $.fn.myDropzoneTheSecond = new Dropzone(
-            '#'+drop_id, //id of drop zone element 2
-            {
-                paramName: 'photos',
-                url: '/ajax/upload',
-                dictDefaultMessage: "",
-                dictRemoveFile: "",
-                clickable: true,
-                autoProcessQueue: false,
-                maxFilesize: 1,
-                maxFiles: 1,
-                uploadMultiple: false,
-                addRemoveLinks: true,
-                parallelUploads: 1,
-                thumbnailWidth: 1680,
-                thumbnailHeight: 1040,
-                acceptedFiles: '.jpg, .png, .gif',
-                init: function() {
-                    var count;
-                    var myObject = new Object();
-
-                    this.on("maxfilesexceeded", function(file) {
-                        this.removeAllFiles();
-                        this.addFile(file);
-                    });
-
-                    this.on('sending', function(file, xhr, formData){
-                        formData.append('name', myObject.randomname);
-                    });
-
-                    this.on("addedfile", function(file) {
-                        var id = file.previewTemplate.previousSibling.parentElement.id;
-                        count = objectLength(dropZoneObjects);
-
-                        myObject.num = count;
-                        myObject.id = id;
-                        myObject.name = file.name;
-                        myObject.file = $.fn.myDropzoneTheSecond;
-                        myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
-
-                        dropZoneObjects['component-mediaitems'] = myObject;
-                    });
-
-                    this.on("success", function(file, response){
-                        dropZoneObjects['component-mediaitems'] = myObject;
-                    });
-
-                    this.on("removedfile", function(file) { 
-                        removeItem(file.name);
-                    });
-                }
-            }
-        );
+        @if(isset($page_content))   
+            @include('scripts.dropzone.dropzone-multiple-init',compact('page_content'));
+        @endif
     });
 </script>
