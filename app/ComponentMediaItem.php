@@ -29,7 +29,6 @@ class ComponentMediaItem extends Model
 	public static function updateFields($userid,$mediaitem_id,$data){
 		if(!isset($data['path']))
 			$data['path'] = '';
-		var_dump($data);
 
 		if(!isset($data['content']))
 			$data['content'] = '';
