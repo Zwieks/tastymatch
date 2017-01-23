@@ -41,25 +41,31 @@
                     var id = file.previewTemplate.previousSibling.parentElement.id;
                     count = objectLength(dropZoneObjects);
 
+                    //Add the image to the delete array on change
+                    if(typeof myObject.file != 'undefined'){
+                        //Add the image to a global variable
+                        $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+myObject.name);
+                    }
+
                     myObject.num = count;
                     myObject.id = id;
                     myObject.name = file.name;
                     myObject.file = $.fn.myDropzone{!! $loop->index !!};
                     myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
-                    if(typeof component_image != 'undefined'){
-
-                    }
-
                     dropZoneObjects['component-mediaitems-'+{!! $loop->index !!}] = myObject;
                 });
 
                 this.on("success", function(file, response){
                     dropZoneObjects['component-mediaitems-'+{!! $loop->index !!}] = myObject;
+                    dropZoneObjects['component-mediaitems-'+{!! $loop->index !!}].name =  myObject.randomname;
                 });
 
                 this.on("removedfile", function(file) { 
-                    removeItem(file.name);
+                    removeItem(file);
+                    myObject.file = '';
+                    myObject.path = '';
+                    myObject.randomname = '';
                 });
 
                 //Check there is already an image uploaded

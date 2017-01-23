@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\globalinfo;
 
+use File;
+
 class Images extends Model
 {
 	protected $table = 'images';
@@ -52,5 +54,26 @@ class Images extends Model
         $user->entertainers = images::getProductImages($user->entertainers); 
 
         return $user;
+	}
+
+	/**
+	 * Delete the images from the storage folder
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function deleteFromFolder($request){
+		//Get all the component data
+		$data = $request->all();
+
+		//Loop through the array containing the url of the images that will be deleted
+		foreach ($data['jsondata'] as $image_url) {
+
+			$path = storage_path() . $image_url;
+			//Check if image exist
+			if(file_exists($path)) {
+				//Delete the image from the folder
+				File::delete($path);
+
+			}
+		}
 	}
 }

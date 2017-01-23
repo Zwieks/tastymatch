@@ -1,4 +1,8 @@
 <script type="text/javascript">
+    $.fn.Global = {
+        DELETE_IMAGES: []
+    };
+
     $(document).ready(function(e) {
         //Add media item to template
         $('#js_add_mediaitem').on('click', function(){
@@ -103,6 +107,24 @@
             });
         }
 
+        function deleteImages(){
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ajax/deleteImages',
+                headers: {'X-CSRF-TOKEN': token},
+                data: {jsondata: $.fn.Global.DELETE_IMAGES},
+                success: function () {
+                    $.fn.Global.DELETE_IMAGES = [];
+                },
+                error: function(){
+                    $.fn.Global.DELETE_IMAGES = [];
+                }
+            });
+        }
+
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
         }
@@ -177,12 +199,16 @@
                             });
 
                             this.on("success", function(file, response){
-                                myObject.path = jQuery.parseJSON(response);
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
+                                dropZoneObjects['component-mediaitems-'+count].name =  myObject.randomname;
+
                             });
 
                             this.on("removedfile", function(file) {
-                                removeItem(file.name);
+                                removeItem(file);
+                                myObject.file = '';
+                                myObject.path = '';
+                                myObject.randomname = '';
                             });
                         }
                     }
@@ -243,7 +269,8 @@
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $('.js-save-template').on('click', function(e){
             //Contains all the TinyMce changes
-            var save_components = [];
+            var save_components = [],
+                delete_components =[];
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++)
@@ -301,12 +328,25 @@
                 save_components[key] = dropZoneObjects[key];
 
                 //Set image path
-                save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;  
+                if(save_components[key].randomname != ''){
+                    save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;
+                }else{
+                    save_components[key].path = '';
+                    //Add the remove item to tell this image have to be removed
+                }
 
-                //Upload the image
-                if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != 'uploaded'){
+                //Upload the image or add the path to delete array
+                if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != '' && dropZoneObjects[key].file != 'uploaded'){
                     dropZoneObjects[key].file.processQueue();
                 }
+                else if(dropZoneObjects[key].file === ''){
+                    //Delete image file inside the folder by add the name inside the delete_image array
+                    $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
+                }
+            }
+            //Remove images if the file is empty
+            if($.fn.Global.DELETE_IMAGES.length > 0){
+                deleteImages();
             }
 
             //Save each component to database

@@ -4,9 +4,9 @@
     componentWrapper = [];
 
     //Remove item from upload list in array
-    function removeItem(name){
+    function removeItem(file){
         for (var i = 0; i < dropZoneObjects.length; i++){
-            if(dropZoneObjects[i].name == name){
+            if(dropZoneObjects[i].name == file.name){
                dropZoneObjects.splice(dropZoneObjects[i-1], 1);
             }
         }   
@@ -60,33 +60,44 @@
                         var id = file.previewTemplate.previousSibling.parentElement.id;
                         count = objectLength(dropZoneObjects);
 
+                        //Add the image to the delete array on change
+                        if(typeof myObject.file != 'undefined'){
+                            //Add the image to a global variable
+                            $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+myObject.name);
+                        }
+
                         myObject.num = count;
                         myObject.id = id;
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheFirst;
-
-                        if(typeof myObject.randomname != 'undefined'){
-                            myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
-                        }
+                        myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
                         dropZoneObjects['component-headerimage'] = myObject;
                     });
 
                     this.on("success", function(file, response){
                         dropZoneObjects['component-headerimage'] = myObject;
+                        dropZoneObjects['component-headerimage'].name =  myObject.randomname;
                     });
 
-                    this.on("removedfile", function(file) { 
-                        removeItem(file.name);
+                    this.on("removedfile", function(file) {
+                        removeItem(file);
+                        myObject.file = '';
+                        myObject.path = '';
+                        myObject.randomname = '';
                     });
 
                     //Check there is already an image uploaded
-                    @if(isset($page_content['getHeaderimage']))
-                        var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}';
+                    @if(isset($page_content['getHeaderimage']->path) && $page_content['getHeaderimage']->path != '')
+                        var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}',
+                            component_image = '{!! $page_content['getHeaderimage']->path !!}',
+                            image_name = component_image.split('/').pop(),
+                            image_ext = component_image.split('.').pop();
+                        myObject.path = component_image;
                     @endif
 
                     if(typeof path != 'undefined' && path != ''){
-                        var mockFile = { name: "logo.png", type: 'image/png' };
+                        var mockFile = { name: image_name, type: 'image/'+image_ext };
                         this.emit("addedfile", mockFile);
                         myObject.randomname = path.split('/').pop();
                         this.createThumbnailFromUrl(mockFile, path);

@@ -43,8 +43,8 @@ class ComponentMediaItem extends Model
 
         $ComponentMediaItem = new ComponentMediaItem;
 
-        if(isset($data['imagepath']) && $data['imagepath'] != '')
-        	$ComponentMediaItem->image = $data['imagepath'];
+        if(isset($data['path']) && $data['path'] != '')
+        	$ComponentMediaItem->image = $data['path'];
 
         if(isset($data['content']) && $data['content'] != '')
         	$ComponentMediaItem->content = $data['content'];

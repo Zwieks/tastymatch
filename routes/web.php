@@ -95,9 +95,10 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/ajax/upload', function(){
 		return json_encode(request()->file('photos')->storeAs('public/uploads/' . auth()->id(), request()->name));
 	});
-
 	//Add MEDIAITEM
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
 	//Save MEDIA components
 	Route::post('/ajax/saveComponents', 'AjaxController@SaveComponents');
+	//DELETE IMAGES
+	Route::post('/ajax/deleteImages', 'ImagesController@delete');
 });
