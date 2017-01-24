@@ -128,6 +128,7 @@ return [
         /*
          * Laravel Framework Service Providers...
          */
+        Illuminate\Notifications\NotificationServiceProvider::class,
         Illuminate\Auth\AuthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
@@ -211,6 +212,7 @@ return [
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
         'GeoIP' => \Torann\GeoIP\Facades\GeoIP::class,
+        'Notification' => Illuminate\Support\Facades\Notification::class,
         'Carbon' => 'Carbon\Carbon',
     ],
 

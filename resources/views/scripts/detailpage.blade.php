@@ -172,8 +172,7 @@
                 count: ($('#js-editable-wrapper .editable-wrapper').children().length),
             };
             var token = $('meta[name="csrf-token"]').attr('content'),
-                    url = '/ajax/addMediaItem',
-                    count = 'test';
+                    url = '/ajax/addMediaItem';
 
             $.ajax({
                 type: 'POST',
@@ -224,13 +223,14 @@
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
                                 var suffix = id.match(/\d+/);
+                                var random = (new Date).getTime();
                                 count = suffix[0];
 
                                 myObject.num = count;
                                 myObject.id = id;
                                 myObject.name = file.name;
                                 myObject.file = $.fn.myDropzoneThethird;
-                                myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
+                                myObject.randomname = random+'.'+file.type.split('/').pop();
 
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
                             });
@@ -376,8 +376,15 @@
                     dropZoneObjects[key].file.processQueue();
                 }
                 else if(dropZoneObjects[key].file === ''){
+                    var object_key = dropZoneObjects[key].elementid,
+                        media_id = dropZoneObjects[key].mediaid,
+                        remove_array = [];
+
+                    remove_array.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
+                    remove_array.push(object_key);
+                    remove_array.push(media_id);
                     //Delete image file inside the folder by add the name inside the delete_image array
-                    $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
+                    $.fn.Global.DELETE_IMAGES.push(remove_array);
                 }
             }
 

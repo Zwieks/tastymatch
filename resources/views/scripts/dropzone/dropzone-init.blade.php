@@ -106,8 +106,10 @@
             }
         );
 
-        @if(isset($page_content))   
+        @if(isset($page_content) )
             @include('scripts.dropzone.dropzone-multiple-init',compact('page_content'));
+        @else
+            @include('scripts.dropzone.dropzone-single-init');
         @endif
     });
 </script>

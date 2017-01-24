@@ -61,18 +61,24 @@ class Images extends Model
 	 * @return \Illuminate\Http\Response
 	 */
 	public static function deleteFromFolder($request){
+
 		//Get all the component data
 		$data = $request->all();
 
 		//Loop through the array containing the url of the images that will be deleted
-		foreach ($data['jsondata'] as $image_url) {
+		foreach ($data['jsondata'] as $image_item) {
 
-			$path = storage_path() . $image_url;
+			$path = storage_path() . $image_item[0];
+
 			//Check if image exist
 			if(file_exists($path)) {
 				//Delete the image from the folder
 				File::delete($path);
 
+				//REMOVE ITEM FROM DB
+				//$image_item[0] = element path
+				//$image_item[1] = element id
+				//$image_item[2] = media id
 			}
 		}
 	}

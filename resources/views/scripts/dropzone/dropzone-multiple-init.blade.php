@@ -43,8 +43,16 @@
 
                     //Add the image to the delete array on change
                     if(typeof myObject.file != 'undefined'){
+                        var object_key = myObject.elementid,
+                            media_id = myObject.mediaid,
+                            remove_array = [];
+
+                        remove_array.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+myObject.name);
+                        remove_array.push(object_key);
+                        remove_array.push(media_id);
+
                         //Add the image to a global variable
-                        $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+myObject.name);
+                        $.fn.Global.DELETE_IMAGES.push(remove_array);
                     }
 
                     myObject.num = count;
@@ -88,5 +96,5 @@
         }
     );
 @empty
-    <p>No users</p>
+    console.log('empty');
 @endforelse    

@@ -80,17 +80,22 @@
                 ContentCheck.SAVED_CONTENT = '';
 
                 @if(isset($page_content) && !is_null($page_content['getIntro']))
-                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getIntro']->content !!}';
+                    ContentCheck.SAVED_CONTENT = "{{ $page_content['getIntro']->content }}";
                 @endif
 
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector:'#js-editable-intro',
+            element_format : 'html',
+            entity_encoding : 'raw',
+            force_br_newlines : true,
+            force_p_newlines : false,
+            forced_root_block : '',
             menubar:false,
             inline: true,
             init_instance_callback : function(ed) {
                 @if(isset($page_content) && !is_null($page_content['getIntro']))
-                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getIntro']->content !!}';
+                    ContentCheck.SAVED_CONTENT = "{{ $page_content['getIntro']->content }}";
                 @endif
 
                 if(ContentCheck.SAVED_CONTENT != '')
@@ -100,14 +105,14 @@
 
         tinymce.init({
             setup:function(ed) {
-                var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}',
+                var placeholderText = "{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}",
                     tag = '<p class="editable-default">' + placeholderText + '</p>',
                     tag_empty = '<p class="contact-intro"></p>';
 
                 ContentCheck.SAVED_CONTENT = '';
 
                 @if(isset($page_content) && !is_null($page_content['getContact']))
-                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getContact']->content !!}';
+                    ContentCheck.SAVED_CONTENT = "{{ $page_content['getContact']->content }}";
                 @endif
 
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
@@ -121,7 +126,7 @@
             ],
             init_instance_callback : function(ed) {
                 @if(isset($page_content) && !is_null($page_content['getContact']))
-                    ContentCheck.SAVED_CONTENT = '{!! $page_content['getContact']->content !!}';
+                    ContentCheck.SAVED_CONTENT = "{{ $page_content['getContact']->content }}";
                 @endif
 
                 if(ContentCheck.SAVED_CONTENT != '')
