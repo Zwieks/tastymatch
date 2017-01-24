@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $.fn.Global = {
-        DELETE_IMAGES: []
+        DELETE_IMAGES : [],
+        DELETE_COMPONENTS : []
     };
 
     $(document).ready(function(e) {
@@ -102,8 +103,44 @@
             return result;
         }
         function removeMediaItem(object){
+            var object_key = object.parent().attr('id'),
+                remove_array = [];
+
+            //Check if the object contains an media tag. Ifso it is in the database, 
+            //then add the number to the global delete components array 
+            if(object.parent().attr('media').length > 0){
+                remove_array.push(object.parent().attr('media'));
+                remove_array.push(object_key);
+                remove_array.push(dropZoneObjects[object_key].path);
+
+                dropZoneObjects[object_key].file = '';
+                $.fn.Global.DELETE_COMPONENTS.push(remove_array);
+            }
+
+            //Remove the object from the HTML
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
+            });
+        }
+
+        function deleteComponents(){
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            var userObject = new Object();
+                userObject['pageid'] = $('input[name=pageid]').val();
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ajax/deleteComponents',
+                headers: {'X-CSRF-TOKEN': token},
+                data: {jsondata: $.fn.Global.DELETE_COMPONENTS, userDetail: userObject},
+                success: function () {
+                    $.fn.Global.DELETE_COMPONENTS = [];
+                },
+                error: function(){
+                    $.fn.Global.DELETE_COMPONENTS = [];
+                }
             });
         }
 
@@ -269,8 +306,7 @@
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $('.js-save-template').on('click', function(e){
             //Contains all the TinyMce changes
-            var save_components = [],
-                delete_components =[];
+            var save_components = [];
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++)
@@ -344,13 +380,27 @@
                     $.fn.Global.DELETE_IMAGES.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
                 }
             }
-            //Remove images if the file is empty
+
+            //Remove components if the file is empty
+            if($.fn.Global.DELETE_COMPONENTS.length > 0){
+                deleteComponents();
+            }
+
+            //Remove images
             if($.fn.Global.DELETE_IMAGES.length > 0){
                 deleteImages();
             }
 
             //Save each component to database
             for(var key in save_components) {
+
+                //Check if the key is inside the delete array
+                $.each($.fn.Global.DELETE_COMPONENTS, function(ind, item) {
+                    if(key === item[1]){
+                        save_components[key].delete = 'true';
+                    }
+                });
+
                 //Find the table name
                 if(typeof save_components[key].componentId != 'undefined'){
                     var arr = save_components[key].componentId.split('-');
@@ -371,7 +421,7 @@
                 }
             }
 
-            if(objectLength(save_components) > 0){
+            if(objectLength(save_components) > 0 && typeof save_components[key].delete === 'undefined'){
                 //Save the component
                 saveMediaComponents(save_components);
             }

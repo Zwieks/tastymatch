@@ -99,6 +99,8 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
 	//Save MEDIA components
 	Route::post('/ajax/saveComponents', 'AjaxController@SaveComponents');
+	//DELETE compontents
+	Route::post('/ajax/deleteComponents', 'DetailPageController@deleteComponents');	
 	//DELETE IMAGES
 	Route::post('/ajax/deleteImages', 'ImagesController@delete');
 });

@@ -52,4 +52,15 @@ class ComponentMediaitem_User extends Model
 
 		$ComponentMediaitemUser->save();
 	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  array $ids_to_delete
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function destroy($ids_to_delete)
+	{
+	   DB::table('component_mediaitem_user')->whereIn('id', $ids_to_delete)->delete();
+	}
 }

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Detailpage;
 
+use App\ComponentMediaItem;
+use App\ComponentMediaItem_User;
+
 class DetailPageController extends Controller
 {
     /**
@@ -42,6 +45,10 @@ class DetailPageController extends Controller
 
         //return the view with the user session data
         return redirect()->route('CreateFoodstand', ['detailpage_id' => $detailpage_id]);
+    }
+
+    public function deleteComponents(Request $request){
+        ComponentMediaItem::deleteComponent($request);  
     }
 
     /**
