@@ -148,6 +148,7 @@ class AjaxController extends Controller
         $userid = $request->session()->get('user.global.id');
         $mediaitem_id = '';
         if(!isset($data['delete'])){
+
             //Check if the user can change the item by getting the component_media_id
             if(isset($data['mediaid'])){
                 $mediaitem_id = $data['mediaid'];

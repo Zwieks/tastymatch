@@ -171,16 +171,15 @@
         }
 
         function addDefaultMediaObject(save_components){
-            console.log('addDefaultMediaObject');
-            console.log(save_components);
-            key = 'component-mediaitems-0';
+            var key = 'component-mediaitems-0';
+
             save_components[key] = new Object();
 
             save_components[key].elementid = key;
             save_components[key].file = '';
 
             if(typeof save_components[key].content === 'undefined' && key != 'component-headerimage')
-                save_components[key].content = '283';
+            save_components[key].content = '';
 
             save_components[key].num = 0;
             save_components[key].name = '';
@@ -366,12 +365,9 @@
 
                 if(typeof content != 'undefined'){
                     save_components[content.componentId] = content;
-                    console.log('haha');
-                    console.log(save_components[content.componentId]);
                 }
             }
-                                    console.log('haha2');
-                    console.log(save_components);
+
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
                 var key = $(this).closest('.product-wrapper').attr('id');
@@ -406,12 +402,8 @@
                     }
                 }
             });
-                console.log('www');
-                console.log(save_components);
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
-                console.log('aaa');
-                console.log(dropZoneObjects[key]);
                 // Merge save_components into dropZoneObjects, recursively
                 if(key in save_components){
                     $.extend( true, dropZoneObjects, save_components);
@@ -464,7 +456,6 @@
                 media_id;
 
             if(typeof save_components['component-mediaitems-0'] === 'undefined'){
-                console.log('hier');
                 addDefaultMediaObject(save_components);       
             }    
 
@@ -472,8 +463,12 @@
                 if(total_media_blocks > 1){
                     index_key = $(this).attr('id');
                     media_id = $(this).attr('media');
+                }else if(total_media_blocks == 1){
+                    var index_key = $(this).attr('id'),
+                        media_id = $(this).attr('media');
+                    setObjectItems(save_components, index_key);
                 }else{
-                    addDefaultMediaObject(save_components);   
+                    addDefaultMediaObject(save_components);
                 }    
 
                 if(total_media_blocks > 1){
@@ -494,7 +489,6 @@
                             remove_array.push(index_key);
 
                             $.fn.Global.DELETE_COMPONENTS.push(remove_array);
-                            console.log($.fn.Global.DELETE_COMPONENTS);
                     }
                 }    
             });
