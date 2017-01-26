@@ -105,7 +105,11 @@
         function removeMediaItem(object){
             var object_key = object.parent().attr('id'),
                 remove_array = [],
+                text_element = $('#'+object_key).find('.js-editable-media ').attr('id');
                 video_element = $('#'+object_key).find('.js-editable-video').attr('id');
+
+            //Remove the text
+            tinymce.remove('#'+text_element);
 
             //Remove the video
             tinymce.remove('#'+video_element);
@@ -365,8 +369,10 @@
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++)
             {
+                
                 //Get the content of the changed TINYMCE component
                 var content = TinyMceSave(tinymce.editors[i].id);
+                console.log(tinymce.editors[i].id);
 
                 if(typeof content != 'undefined'){
                     save_components[content.componentId] = content;

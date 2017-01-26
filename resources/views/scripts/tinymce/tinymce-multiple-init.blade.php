@@ -46,5 +46,12 @@ tinymce.init({
     plugins: " media",
     toolbar: [
         'undo redo media'
-    ]
+    ],
+    init_instance_callback : function(ed) {
+    var content = {!! $page_content['getMediaItems'] !!};
+
+        console.log('jaja2');
+        console.log(content);
+        content.video = 'asdf';
+    }    
 });

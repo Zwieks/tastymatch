@@ -40,5 +40,8 @@ tinymce.init({
     plugins: " media",
     toolbar: [
         'undo redo media'
-    ]
+    ],
+    init_instance_callback : function(ed) {
+console.log('jaja');
+    }    
 });
