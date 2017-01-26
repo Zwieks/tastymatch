@@ -84,6 +84,7 @@
                         removeItem(file);
                         myObject.file = '';
                         myObject.path = '';
+                        myObject.name = '';
                         myObject.randomname = '';
                     });
 

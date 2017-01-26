@@ -81,18 +81,24 @@ class ComponentMediaItem extends Model
 
 		//Loop through the array containing the url of the images that will be deleted
 		foreach ($data['jsondata'] as $media_item_id) {
-			//Get the page id
-			$detailpage_id = $data['userDetail']['pageid'];
-			$media_item_id = $media_item_id[0];
-			$component_key = $media_item_id[1];
+			var_dump($media_item_id);
+			if($media_item_id[0] != ''){
+				//Get the page id
+				$detailpage_id = $data['userDetail']['pageid'];
+				$media_item_id = $media_item_id[0];
+				$component_key = $media_item_id[1];
+				if(isset($media_item_id[2])){
+					$path = $media_item_id[2];
+				}
 
-	        //Check if the user can change the item by getting the component_media_id
-	        $component_id = ComponentMediaitem::checkRecord('id',$media_item_id,$userid,$detailpage_id);
+		        //Check if the user can change the item by getting the component_media_id
+		        $component_id = ComponentMediaitem::checkRecord('id',$media_item_id,$userid,$detailpage_id);
 
-	        if($component_id != ''){
-	        	$ids_to_delete[] = $component_id;
-	        	$media_item_ids_to_delete[] = $media_item_id;
-	        }	
+		        if($component_id != ''){
+		        	$ids_to_delete[] = $component_id;
+		        	$media_item_ids_to_delete[] = $media_item_id;
+		        }	
+		    }    
 		}
 
 		if(!empty($ids_to_delete) && !empty($media_item_ids_to_delete)){

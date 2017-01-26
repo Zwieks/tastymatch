@@ -111,9 +111,13 @@
             if(object.parent().attr('media').length > 0){
                 remove_array.push(object.parent().attr('media'));
                 remove_array.push(object_key);
-                remove_array.push(dropZoneObjects[object_key].path);
 
-                dropZoneObjects[object_key].file = '';
+                if(typeof dropZoneObjects[object_key] != 'undefined')
+                    remove_array.push(dropZoneObjects[object_key].path);
+
+                if(typeof dropZoneObjects[object_key] != 'undefined')
+                    dropZoneObjects[object_key].file = '';
+
                 $.fn.Global.DELETE_COMPONENTS.push(remove_array);
             }
 
@@ -164,6 +168,52 @@
 
         function capitalizeFirstLetter(string) {
             return string.charAt(0).toUpperCase() + string.slice(1);
+        }
+
+        function addDefaultMediaObject(save_components){
+            console.log('addDefaultMediaObject');
+            console.log(save_components);
+            key = 'component-mediaitems-0';
+            save_components[key] = new Object();
+
+            save_components[key].elementid = key;
+            save_components[key].file = '';
+
+            if(typeof save_components[key].content === 'undefined' && key != 'component-headerimage')
+                save_components[key].content = '283';
+
+            save_components[key].num = 0;
+            save_components[key].name = '';
+            save_components[key].path = '';
+            save_components[key].randomname = '';
+
+            //Set object items
+            save_components[key] = setObjectItems(save_components, key); 
+
+            return save_components;
+        }
+
+        function setObjectItems(save_components, key){
+            //Find the table name
+            if(typeof save_components[key].componentId != 'undefined'){
+                var arr = save_components[key].componentId.split('-');
+            }else{
+                var arr = key.split('-');
+            }
+            //Put table name in object
+            save_components[key].table = 'component_'+arr[1];
+
+            //Put the URL in the object
+            save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
+
+            //Put the element id also in the object
+            save_components[key].elementid = key;
+
+            if(typeof $('#'+save_components[key].elementid).attr("media") != 'undefined' && $('#'+save_components[key].elementid).attr("media") != ''){
+                save_components[key].mediaid = $('#'+save_components[key].elementid).attr("media");
+            }
+
+            return save_components[key];
         }
 
         function addMediaItem() {
@@ -316,9 +366,12 @@
 
                 if(typeof content != 'undefined'){
                     save_components[content.componentId] = content;
+                    console.log('haha');
+                    console.log(save_components[content.componentId]);
                 }
             }
-
+                                    console.log('haha2');
+                    console.log(save_components);
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
                 var key = $(this).closest('.product-wrapper').attr('id');
@@ -353,9 +406,12 @@
                     }
                 }
             });
-
+                console.log('www');
+                console.log(save_components);
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
+                console.log('aaa');
+                console.log(dropZoneObjects[key]);
                 // Merge save_components into dropZoneObjects, recursively
                 if(key in save_components){
                     $.extend( true, dropZoneObjects, save_components);
@@ -381,6 +437,66 @@
                 }
             }
 
+
+            //Save each component to database
+            for(var key in save_components) {
+                //Check if the key is inside the delete array
+                $.each($.fn.Global.DELETE_COMPONENTS, function(ind, item) {
+                    if(key === item[1]){
+                        save_components[key].delete = 'true';
+                    }
+                });
+
+                //Set object items
+                save_components[key] = setObjectItems(save_components, key);
+            }
+
+            //Check if both the image and text are empty if so remove the media
+            var total_media_blocks = $('.media').not('.add-item').length,
+                index_key,
+                media_id;
+
+            if(typeof save_components['component-mediaitems-0'] === 'undefined'){
+                console.log('hier');
+                addDefaultMediaObject(save_components);       
+            }    
+
+            $('.media').not('.add-item').each(function( index ) {
+                if(total_media_blocks > 1){
+                    index_key = $(this).attr('id');
+                    media_id = $(this).attr('media');
+                }else{
+                    addDefaultMediaObject(save_components);   
+                }    
+
+                if(total_media_blocks > 1){
+                    if((typeof dropZoneObjects[index_key] === 'undefined' && 
+                        typeof save_components[index_key] === 'undefined' && 
+                        typeof media_id != 'undefined' && 
+                        media_id != '') ||
+                        (typeof save_components[index_key] === 'undefined' ||
+                          save_components[index_key].path == '' &&
+                          save_components[index_key].randomname == '' &&
+                          typeof save_components[index_key].content === 'undefined')){
+                            var remove_array = [];
+
+                            if(typeof save_components[index_key] != 'undefined')
+                                save_components[index_key].delete = 'true';
+
+                            remove_array.push($(this).attr('media'));
+                            remove_array.push(index_key);
+
+                            $.fn.Global.DELETE_COMPONENTS.push(remove_array);
+                            console.log($.fn.Global.DELETE_COMPONENTS);
+                    }
+                }    
+            });
+
+            if(objectLength(save_components) > 0){
+                //Save the component
+                saveMediaComponents(save_components);
+            }
+
             //Remove components if the file is empty
             if($.fn.Global.DELETE_COMPONENTS.length > 0){
                 deleteComponents();
@@ -389,41 +505,6 @@
             //Remove images
             if($.fn.Global.DELETE_IMAGES.length > 0){
                 deleteImages();
-            }
-
-            //Save each component to database
-            for(var key in save_components) {
-
-                //Check if the key is inside the delete array
-                $.each($.fn.Global.DELETE_COMPONENTS, function(ind, item) {
-                    if(key === item[1]){
-                        save_components[key].delete = 'true';
-                    }
-                });
-
-                //Find the table name
-                if(typeof save_components[key].componentId != 'undefined'){
-                    var arr = save_components[key].componentId.split('-');
-                }else{
-                    var arr = key.split('-');
-                }
-                //Put table name in object
-                save_components[key].table = 'component_'+arr[1];
-
-                //Put the URL in the object
-                save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
-
-                //Put the element id also in the object
-                save_components[key].elementid = key;
-
-                if(typeof $('#'+save_components[key].elementid).attr("media") != 'undefined' && $('#'+save_components[key].elementid).attr("media") != ''){
-                    save_components[key].mediaid = $('#'+save_components[key].elementid).attr("media");
-                }
-            }
-
-            if(objectLength(save_components) > 0 && typeof save_components[key].delete === 'undefined'){
-                //Save the component
-                saveMediaComponents(save_components);
             }
 
             console.log(save_components);
