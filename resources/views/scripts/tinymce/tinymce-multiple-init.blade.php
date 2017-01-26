@@ -34,3 +34,17 @@ tinymce.init({
             ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
     }
 });
+
+tinymce.init({
+    setup:function(ed) {
+        var placeholderText = '';
+        ContentCheck.setupVideo(ed,placeholderText);
+    },
+    selector:'.js-editable-video',
+    menubar:false,
+    inline: true,
+    plugins: " media",
+    toolbar: [
+        'undo redo media'
+    ]
+});

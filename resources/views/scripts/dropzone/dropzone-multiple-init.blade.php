@@ -2,6 +2,8 @@
 {!! $page_content['getMediaItems'] !!}
 @forelse ($page_content['getMediaItems'] as $item)
     var drop_id = 'DropzoneElementId'+{!! $loop->index !!},
+        mce_id = '#tinyMceElementId0'+{!! $loop->index !!},
+        mce_video_id = '#tinyMceVideoElementId'+{!! $loop->index !!},
         component_id = '{!! $item->component_mediaitem_id !!}';
 
     if(component_id != ''){
@@ -76,6 +78,14 @@
                     myObject.path = '';
                     myObject.name = '';
                     myObject.randomname = '';
+                });
+
+                this.on("drop", function(file) {
+                    if (this.files.length > 1) {
+                        this.emit("removedfile", mockFile);
+                    }else{
+                        this.emit("removedfile", mockFile);
+                    }
                 });
 
                 //Check there is already an image uploaded

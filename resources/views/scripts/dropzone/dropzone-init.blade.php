@@ -88,6 +88,12 @@
                         myObject.randomname = '';
                     });
 
+                    this.on("drop", function(file) {
+                        if (this.files.length > 1) {
+                            this.emit("removedfile", mockFile);
+                        }
+                    });
+
                     //Check there is already an image uploaded
                     @if(isset($page_content['getHeaderimage']->path) && $page_content['getHeaderimage']->path != '')
                         var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}',

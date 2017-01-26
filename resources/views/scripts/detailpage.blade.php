@@ -104,9 +104,13 @@
         }
         function removeMediaItem(object){
             var object_key = object.parent().attr('id'),
-                remove_array = [];
+                remove_array = [],
+                video_element = $('#'+object_key).find('.js-editable-video').attr('id');
 
-            //Check if the object contains an media tag. Ifso it is in the database, 
+            //Remove the video
+            tinymce.remove('#'+video_element);
+
+            //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
             if(object.parent().attr('media').length > 0){
                 remove_array.push(object.parent().attr('media'));
@@ -316,6 +320,7 @@
 
                 tinymce.init({
                     setup:function(ed) {
+                        console.log('testasdf');
                         var placeholderText = 'asdfasdf',
                             tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>';
                         tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';

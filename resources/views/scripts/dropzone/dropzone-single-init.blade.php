@@ -71,6 +71,12 @@ $.fn.myDropzoneEmpty = new Dropzone(
                 myObject.path = '';
                 myObject.randomname = '';
             });
+
+            this.on("drop", function(file) {
+                if (this.files.length > 1) {
+                    this.emit("removedfile", mockFile);
+                }
+            });
         }
     }
 );
