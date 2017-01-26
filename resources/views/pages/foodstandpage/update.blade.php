@@ -44,14 +44,13 @@
 <div id="js-editable-wrapper">
     <div class="editable-wrapper mediaitems-wrapper">
         @foreach($page_content['getMediaItems'] as $key => $item)
-
             @include('layouts.templates.update-mediaitem', array('data'=> $key ))
-        @endforeach    
+        @endforeach
     </div>
 </div>
 <div id="js_add_mediaitem" class="add-media-item-wrapper">
      <div class="add-media-item">
-        <div class="media">
+        <div class="media add-item">
             <div class="product-wrapper" data-icon="Z" title="Voeg een nieuw mediablok toe">
                 <div class="add-media-outline"></div>
             </div>

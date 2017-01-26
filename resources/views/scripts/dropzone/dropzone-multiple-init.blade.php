@@ -1,4 +1,5 @@
 //INIT FOR MEDIA ITEMS
+{!! $page_content['getMediaItems'] !!}
 @forelse ($page_content['getMediaItems'] as $item)
     var drop_id = 'DropzoneElementId'+{!! $loop->index !!},
         component_id = '{!! $item->component_mediaitem_id !!}';
@@ -73,6 +74,7 @@
                     removeItem(file);
                     myObject.file = '';
                     myObject.path = '';
+                    myObject.name = '';
                     myObject.randomname = '';
                 });
 
