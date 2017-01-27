@@ -34,9 +34,12 @@ class ComponentMediaItem extends Model
 		if(!isset($data['content']))
 			$data['content'] = '';
 
+		if(!isset($data['video']))
+			$data['video'] = '';
+
 		DB::table('component_mediaitems')
 			->where('id', $mediaitem_id)
-			->update(['image' => $data['path'],'content' => $data['content']]);
+			->update(['image' => $data['path'],'content' => $data['content'],'video' => $data['video']]);
 	}
 
 	public static function store($data){
@@ -49,6 +52,9 @@ class ComponentMediaItem extends Model
 
         if(isset($data['content']) && $data['content'] != '')
         	$ComponentMediaItem->content = $data['content'];
+
+		if(isset($data['video']) && $data['video'] != '')
+			$ComponentMediaItem->video = $data['video'];
 
         $ComponentMediaItem->save();
 

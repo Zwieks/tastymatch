@@ -108,10 +108,10 @@
                 text_element = $('#'+object_key).find('.js-editable-media ').attr('id');
                 video_element = $('#'+object_key).find('.js-editable-video').attr('id');
 
-            //Remove the text
+            //Remove TINYMCE text
             tinymce.remove('#'+text_element);
 
-            //Remove the video
+            //Remove TINYMCE video
             tinymce.remove('#'+video_element);
 
             //Check if the object contains a media tag. If so it is in the database,
@@ -211,7 +211,11 @@
             save_components[key].table = 'component_'+arr[1];
 
             //Put the URL in the object
-            save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
+            if(typeof arr[1] != 'undefined'){
+                save_components[key].url = 'Save'+capitalizeFirstLetter(arr[1])+'Component';
+            }else{
+                save_components[key].url = '';
+            }
 
             //Put the element id also in the object
             save_components[key].elementid = key;
@@ -310,7 +314,7 @@
 
                 tinymce.init({
                     setup:function(ed) {
-                        var placeholderText = 'asdf';
+                        var placeholderText = '';
                         ContentCheck.setupVideo(ed,placeholderText);
                     },
                     selector: mce_video_id,
@@ -323,9 +327,8 @@
                 });
 
                 tinymce.init({
-                    setup:function(ed) {
-                        console.log('testasdf');
-                        var placeholderText = 'asdfasdf',
+                    setup:function(ed){
+                        var placeholderText = '',
                             tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>';
                         tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';
                         ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty);
@@ -367,15 +370,24 @@
             var save_components = [];
 
             //Get the TINYMCE and put the changed components in the object
-            for (var i = 0; i < tinymce.editors.length; i++)
-            {
-                
+            for (var i = 0; i < tinymce.editors.length; i++){
                 //Get the content of the changed TINYMCE component
-                var content = TinyMceSave(tinymce.editors[i].id);
-                console.log(tinymce.editors[i].id);
+                var content = TinyMceSave(tinymce.editors[i].id),
+                    has_video = false;
 
                 if(typeof content != 'undefined'){
-                    save_components[content.componentId] = content;
+                    //Check if there is a video in the media item
+                    if(content.componentId in save_components){
+                        if(typeof content.video != 'undefined') {
+                            //Add only the video item
+                            save_components[content.componentId].video = content.video;
+                            has_video = true;
+                        }
+                    }
+
+                    //If object does not contain a video add it to the array
+                    if(has_video != true)
+                        save_components[content.componentId] = content;
                 }
             }
 
@@ -504,8 +516,8 @@
                 }    
             });
 
+            //SAVE the component
             if(objectLength(save_components) > 0){
-                //Save the component
                 saveMediaComponents(save_components);
             }
 

@@ -2,18 +2,18 @@
     var ContentCheck = {
         PLACEHOLDER_TEXT : '',
         SAVED_CONTENT : '',
+        SAVED_VIDEO : '',
         COUNT : 0,
         emptyBox : function(ed,object,placeholderText,tag) {
             //Get component ID
             var id = object.attr('id');
             $('#' + ed.id).addClass('empty-content');
-            ed.setContent(tag);
+            ed.setContent(placeholderText);
             $('#'+ed.id).removeClass('changed-content');
         },
 
          fillBox : function(ed,object){
             var id = object.attr('id');
-
             $('#'+ed.id).removeClass('empty-content');
             $('#'+ed.id).addClass('changed-content');
         },
@@ -32,7 +32,7 @@
             ed.on('blur', function(e) {
                 var content = ed.getContent();
                 if($.trim(content) == '' || $.trim(content) == placeholderText){
-                    ContentCheck.emptyBox(ed,$(this),placeholderText,tag);
+                    ContentCheck.emptyBox(ed,$(this),placeholderText,tag_empty);
                     //Loose the focus
                     $('#'+ed.id).blur();
                 }else if($.trim(content) != ''){
@@ -45,16 +45,28 @@
             });
         },
 
-        setupVideo : function(ed,placeholderText){
+        setupVideo : function(ed,placeholderText,saved_video){
             ed.on('NodeChange', function(e){
-                if(ed.getContent() != ''){
-                    $('#'+ed.id).parent().addClass('hasvideo');
+                var content = ed.getContent();
+
+                if(content != ''){
+                    $('#'+ed.id).parent().addClass('hasvideo changed-content');
                 }else{
                     if($('#'+ed.id).parent().hasClass('hasvideo')){
-                        $('#'+ed.id).parent().removeClass('hasvideo');
+                        $('#'+ed.id).parent().removeClass('hasvideo changed-content');
                     }
                 }
-            });
+
+                if($.trim(content) == ''){
+                    ContentCheck.emptyBox(ed,$(this),placeholderText,'');
+                }else if($.trim(content) != ''){
+                    ed.setContent(content);
+                    ContentCheck.fillBox(ed,$(this),placeholderText);
+                }else{
+                    ContentCheck.setSavedContent(ed,saved_video);
+                    ContentCheck.fillBox(ed,$(this),placeholderText);
+                }
+            }),
 
             ed.on('ProgressState', function(e) {
                 console.log('ProgressState event', e);
@@ -66,6 +78,16 @@
                 ContentCheck.fillBox(ed, $(this));
                 ed.setContent(content);
                 ContentCheck.SAVED_CONTENT = '';
+            }
+        },
+
+        setSavedVideo : function(ed,content){
+            console.log('klkl');
+            if(typeof content != 'undefined') {
+                console.log('setVideo');
+//                ContentCheck.fillBox(ed, $(this));
+//                ed.setContent(content);
+                ContentCheck.SAVED_VIDEO = '';
             }
         }
     };
@@ -82,7 +104,6 @@
                 @if(isset($page_content) && !is_null($page_content['getIntro']))
                     ContentCheck.SAVED_CONTENT = "{{ $page_content['getIntro']->content }}";
                 @endif
-
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector:'#js-editable-intro',
@@ -146,12 +167,18 @@
         if($('#'+id).hasClass('changed-content')){
 
             //Get component ID
-            id = tinymce.get(id);
+            var id = tinymce.get(id),
+                media_video = false,
+                object_componentid;
 
             if(typeof $('#'+id.id).parent().attr('id') != "undefined"){
-                var object_componentid = $('#'+id.id).parent().attr('id');
+                object_componentid = $('#'+id.id).parent().attr('id');
             }else if(typeof $('#'+id.id).parent().parent().attr('id') != "undefined"){
-                var object_componentid = $('#'+id.id).parent().parent().attr('id');
+                object_componentid = $('#'+id.id).parent().parent().attr('id');
+            }else if(typeof $('#'+id.id).closest('.media').attr('id') != "undefined"){
+                //Most likely contains a video
+                object_componentid = $('#'+id.id).closest('.media').attr('id');
+                media_video = true;
             }else{
                 return 'No components found';
             }
@@ -166,7 +193,11 @@
                     myObject.componentId = componentid;
                     myObject.selector = id.id;
                     myObject.userid = userid;
-                    myObject.content = content;
+                    if(media_video != true){
+                        myObject.content = content;
+                    }else{
+                        myObject.video = content;
+                    }
 
                 return myObject;
             }

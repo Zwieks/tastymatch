@@ -12,6 +12,6 @@
             <p id="@if(isset($data)){{'tinyMceVideoElementId'}}{{$data}}@else{{'tinyMceVideoElementId0'}}@endif" class="js-editable-video content editable editable-default" data-icon='0'></p>
         </div>  
 
-        <p id="@if(isset($data)){{'tinyMceElementId'}}{{$data}}@else{{'tinyMceElementId0'}}@endif" class="js-editable-media content editable editable-default">Plaat hier eventueel je tekst. Wanneer deze niet wordt ingevuld zal deze tekstbox niet getoond worden op de pagina.</p>
+        <p id="@if(isset($data)){{'tinyMceElementId'}}{{$data}}@else{{'tinyMceElementId0'}}@endif" class="js-editable-media content editable editable-default">{{ Lang::get('tinymce.detailpage-foodstand-mediaitem') }}</p>
     </div>
 </div>

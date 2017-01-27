@@ -1,6 +1,6 @@
 tinymce.init({
     setup:function(ed) {
-        var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-title') !!}',
+        var placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-mediaitem') !!}',
         tag = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false">' + placeholderText + '</p>',
         tag_empty = '<p id="tinyMceElementId0" class="js-editable-media content editable editable-default mce-content-body" contenteditable="true" spellcheck="false"></p>';
 
@@ -32,7 +32,14 @@ tinymce.init({
 tinymce.init({
     setup:function(ed) {
         var placeholderText = '';
-        ContentCheck.setupVideo(ed,placeholderText);
+
+        ContentCheck.SAVED_VIDEO = '';
+
+        @if(isset($page_content['getMediaItems'][0]) && !is_null($page_content['getMediaItems']))
+            ContentCheck.SAVED_VIDEO = '{!! $page_content['getMediaItems'][0]->video !!}';
+        @endif
+
+        ContentCheck.setupVideo(ed,placeholderText,ContentCheck.SAVED_VIDEO);
     },
     selector:'.js-editable-video',
     menubar:false,
@@ -42,6 +49,14 @@ tinymce.init({
         'undo redo media'
     ],
     init_instance_callback : function(ed) {
-console.log('jaja');
-    }    
+        var content = {!! $page_content['getMediaItems'] !!};
+
+        if(typeof content[ContentCheck.COUNT] != 'undefined'){
+            ContentCheck.SAVED_CONTENT = content[ContentCheck.COUNT].content;
+            ContentCheck.COUNT++
+        }
+
+        if(ContentCheck.SAVED_CONTENT != '')
+            ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
+    }
 });
