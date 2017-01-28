@@ -4,11 +4,16 @@
         SAVED_CONTENT : '',
         SAVED_VIDEO : '',
         COUNT : 0,
+        COUNT_VIDEO : 0,
         emptyBox : function(ed,object,placeholderText,tag) {
             //Get component ID
             var id = object.attr('id');
             $('#' + ed.id).addClass('empty-content');
-            ed.setContent(placeholderText);
+
+            if(tag != 'video'){
+                ed.setContent(placeholderText);
+            }
+
             $('#'+ed.id).removeClass('changed-content');
         },
 
@@ -47,7 +52,13 @@
 
         setupVideo : function(ed,placeholderText,saved_video){
             ed.on('NodeChange', function(e){
-                var content = ed.getContent();
+                var content;
+
+                if(ed.getContent() != ''){
+                    content = ed.getContent();
+                }else{
+                    content = saved_video;
+                }
 
                 if(content != ''){
                     $('#'+ed.id).parent().addClass('hasvideo changed-content');
@@ -58,7 +69,7 @@
                 }
 
                 if($.trim(content) == ''){
-                    ContentCheck.emptyBox(ed,$(this),placeholderText,'');
+                    ContentCheck.emptyBox(ed,$(this),placeholderText,'video');
                 }else if($.trim(content) != ''){
                     ed.setContent(content);
                     ContentCheck.fillBox(ed,$(this),placeholderText);
@@ -82,12 +93,10 @@
         },
 
         setSavedVideo : function(ed,content){
-            console.log('klkl');
             if(typeof content != 'undefined') {
-                console.log('setVideo');
-//                ContentCheck.fillBox(ed, $(this));
-//                ed.setContent(content);
-                ContentCheck.SAVED_VIDEO = '';
+               ContentCheck.fillBox(ed, $(this));
+               ed.setContent(content);
+               ContentCheck.SAVED_VIDEO = '';
             }
         }
     };

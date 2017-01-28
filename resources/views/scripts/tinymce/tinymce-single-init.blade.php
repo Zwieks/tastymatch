@@ -51,12 +51,12 @@ tinymce.init({
     init_instance_callback : function(ed) {
         var content = {!! $page_content['getMediaItems'] !!};
 
-        if(typeof content[ContentCheck.COUNT] != 'undefined'){
-            ContentCheck.SAVED_CONTENT = content[ContentCheck.COUNT].content;
-            ContentCheck.COUNT++
+        if(typeof content[ContentCheck.COUNT_VIDEO] != 'undefined'){
+            ContentCheck.SAVED_VIDEO = content[ContentCheck.COUNT_VIDEO].video;
+            ContentCheck.COUNT_VIDEO++;
         }
 
-        if(ContentCheck.SAVED_CONTENT != '')
-            ContentCheck.setSavedContent(ed,ContentCheck.SAVED_CONTENT);
+        if(ContentCheck.SAVED_VIDEO != '')
+            ContentCheck.setSavedVideo(ed,ContentCheck.SAVED_VIDEO);
     }
 });

@@ -1,5 +1,4 @@
 //INIT FOR MEDIA ITEMS
-{!! $page_content['getMediaItems'] !!}
 @forelse ($page_content['getMediaItems'] as $item)
     var drop_id = 'DropzoneElementId'+{!! $loop->index !!},
         mce_id = '#tinyMceElementId0'+{!! $loop->index !!},

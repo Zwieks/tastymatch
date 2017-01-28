@@ -315,7 +315,10 @@
                 tinymce.init({
                     setup:function(ed) {
                         var placeholderText = '';
-                        ContentCheck.setupVideo(ed,placeholderText);
+
+                        ContentCheck.SAVED_VIDEO = '';    
+
+                        ContentCheck.setupVideo(ed,placeholderText,ContentCheck.SAVED_VIDEO)
                     },
                     selector: mce_video_id,
                     menubar:false,
@@ -371,6 +374,9 @@
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++){
+
+                                            console.log('test');
+                            console.log(content);
                 //Get the content of the changed TINYMCE component
                 var content = TinyMceSave(tinymce.editors[i].id),
                     has_video = false;
@@ -378,7 +384,7 @@
                 if(typeof content != 'undefined'){
                     //Check if there is a video in the media item
                     if(content.componentId in save_components){
-                        if(typeof content.video != 'undefined') {
+                        if(typeof content.video != 'undefined' && content.video != '') {
                             //Add only the video item
                             save_components[content.componentId].video = content.video;
                             has_video = true;
