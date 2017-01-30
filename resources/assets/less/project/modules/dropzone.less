@@ -223,6 +223,7 @@
 
 .dz-file-preview {
 	.dz-image {
+		position: relative;
 		background: #999;
 		width: 100%;
 		height: 100%;
@@ -407,7 +408,14 @@
 
 	img {
 		.center;
-		width: 100%;
+		width: auto;
+		height: auto;
+		max-width:inherit;
+
+		@media @bp-MobileM{
+			height: auto;
+			max-width: 100vh;
+		}
 	}
 }
 
@@ -445,6 +453,11 @@
 	position: relative;
 	min-height: @spacing*15;
 	margin-bottom:@spacing;
+
+	@media @bp-MobileM{
+		min-height: @spacing*10;
+		margin-bottom: @spacing/2;
+	}
 }
 
 .dropzone{

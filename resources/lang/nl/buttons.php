@@ -5,4 +5,5 @@ return [
 	'search' => 'Zoeken',
 	'save' => 'Opslaan',
 	'preview' => 'Preview',
+	'add-menu-item' => 'Menu item toevoegen',
 ];

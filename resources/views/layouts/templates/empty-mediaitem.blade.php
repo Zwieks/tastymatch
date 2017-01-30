@@ -9,6 +9,8 @@
             <form id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId0'}}@endif" method="POST" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone dropzoneMedia" id="@if(isset($data)){{'DropzoneElementId'}}{{$data}}@else{{'DropzoneElementId0'}}@endif" data-icon='Q' enctype="multipart/form-data">
                 <input type="hidden" name="_token" value="{{csrf_token()}}">
             </form>
+
+            <span class="btn-icon js-remove-video" data-icon="U"></span>
             <p id="@if(isset($data)){{'tinyMceVideoElementId'}}{{$data}}@else{{'tinyMceVideoElementId0'}}@endif" class="js-editable-video content editable editable-default" data-icon='0'></p>
         </div>  
 

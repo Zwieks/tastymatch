@@ -56,6 +56,8 @@
 
                 if(ed.getContent() != ''){
                     content = ed.getContent();
+                }else  if($('#'+ed.id).hasClass('empty-content')){
+                    content = '';
                 }else{
                     content = saved_video;
                 }
@@ -91,14 +93,6 @@
                 ContentCheck.SAVED_CONTENT = '';
             }
         },
-
-        setSavedVideo : function(ed,content){
-            if(typeof content != 'undefined') {
-               ContentCheck.fillBox(ed, $(this));
-               ed.setContent(content);
-               ContentCheck.SAVED_VIDEO = '';
-            }
-        }
     };
 
     $.fn.initTinyMce = function initTinyMce(){

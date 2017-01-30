@@ -325,7 +325,7 @@
                     inline: true,
                     plugins: " media",
                     toolbar: [
-                        'undo redo media'
+                        'media'
                     ]
                 });
 
@@ -358,6 +358,26 @@
             $(this).parent().remove();
         });
 
+        //Remove VIDEO ITEM
+        $(document).on('click','.js-remove-video', function(){
+            var video_element = $(this).parent().find('.js-editable-video').attr('id'),
+                id = '#'+video_element,
+                object = $(this).parent().find('.js-editable-video');
+
+            // Empty the content
+            tinymce.activeEditor.setContent('');
+            ContentCheck.emptyBox(tinymce.activeEditor,object,'','video');
+            ContentCheck.SAVED_VIDEO = '';
+            tinymce.EditorManager.execCommand('mceAddEditor',true, video_element);
+
+            //Remove the classes that had been set if there was content
+            if($(id).parent().hasClass('hasvideo')){
+                $(id).parent().removeClass('hasvideo changed-content');
+                $(id).removeClass('changed-content');
+            }
+        });
+
+
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT WITH THE CRTL+S
         $(document).bind('keydown', function(e) {
             if(e.ctrlKey && (e.which == 83)) {
@@ -375,8 +395,6 @@
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++){
 
-                                            console.log('test');
-                            console.log(content);
                 //Get the content of the changed TINYMCE component
                 var content = TinyMceSave(tinymce.editors[i].id),
                     has_video = false;

@@ -35,7 +35,7 @@
             <h2>Menu</h2>
             @include('forms.detailpagemenu')
             <div class="add-menu-wrapper js-add-menuitem">
-                <span class="add-menuitem" data-icon="Z">menu item toevoegen</span>
+                <span class="add-menuitem" data-icon="Z">{{ Lang::get('buttons.add-menu-item') }}</span>
             </div>    
         </div>
     </div>
