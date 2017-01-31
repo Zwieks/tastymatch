@@ -1,6 +1,10 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&callback=initMap"></script>
 <script type="text/javascript">
     // This script requires the Places library. Include the libraries=places
+    var locations_object = [];
+    @foreach ($user['agenda'] as $item)
+        locations_object.push({!! $item !!});
+    @endforeach
 
     // parameter when you first load the API.
     var markers = [];
@@ -62,29 +66,30 @@
     }
 
     function createMap(map,animation){
-
+        $.each(locations_object, function(key, fd) {
+                if(fd['info'] != ""){
+                    var locations = set_locations(key,fd['info']);
+                    add_markers(key,map,locations,icons['events'].icon,animation);
+                }
+        });
     }
 
-    function set_locations(object){
+    function set_locations(i,object){
         var locations = [];
 
-        for (var i = 0; i < object.length; i++) {
-
-            if (object[i]['images'].length == 0){
-                object[i]['images'][0] = {
-                    file: 'logo.svg'
-                }
+        if (typeof object['images'] != 'undefined' && object['images'].length == 0){
+            object['images'][0] = {
+                file: 'logo.svg'
             }
-
-            locations.push([
-                object[i].description, 
-                object[i].lat, 
-                object[i].long, 
-                object[i]['images'][0].file, 
-                object[i].name,
-                object[i].slug
-            ]);
         }
+
+        locations.push([
+            object.description,
+            object.lat,
+            object.long,
+            object.name,
+            object.slug
+        ]);
 
         return locations;
     }
@@ -186,7 +191,19 @@
         createMap(map,animation);
     }
 
+    function getEventUrl(key){
+        if(key == 'events'){
+            var title = '{!! Lang::get('products.product-event') !!}';
+        }else if(key == 'foodstands'){
+            var title = '{!! Lang::get('products.product-foodstand') !!}';
+        }else if(key == 'entertainers'){
+            var title = '{!! Lang::get('products.product-entertainer') !!}';
+        }else{
+            var title = '{!! Lang::get('googlemaps.filter-keywords-title') !!}';
+        }
 
+        return title;
+    }
 
     window.onload = function (map) { 
 
