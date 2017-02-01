@@ -21,6 +21,7 @@
     @include('scripts.dropzone.dropzone-init')
     @include('scripts.googlemaps-single-init')
     @include('scripts.detailpage')
+    @include('scripts.datepicker.datepicker-init')
 @stop
 
 {{-- Include Controls --}}
