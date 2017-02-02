@@ -1,16 +1,16 @@
 <!-- {{$debugpath}} -->
-    {!! Form::open(['method' => 'post', 'class' => 'form-filter webbeheer-formulier']) !!}
+    {!! Form::open(['method' => 'post', 'class' => 'form-filter webbeheer-formulier calendar-filter']) !!}
         <fieldset>
         	<ul class="velden">
         		<li class="form-label">
 					<span>{{ Lang::get('daterangepicker.label') }}:</span>
-				</li>	
+				</li>
 
 
         		<li class="form-input-textfield" data-icon="V">
         			@include('forms.inputerror')
         			{!! Form::text('daterange', '') !!}
-        		</li>	
-        	</ul>	
-        </fieldset>	
+        		</li>
+        	</ul>
+        </fieldset>
     {!! Form::close() !!}

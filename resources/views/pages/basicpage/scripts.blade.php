@@ -19,3 +19,5 @@
 <script type="text/javascript" src="{{ URL::asset('js/jquery.owl.carousel.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/tinymce.min.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/dropzone.js') }}"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="{{ URL::asset('js/daterangepicker.js') }}"></script>
