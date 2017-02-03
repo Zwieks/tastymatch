@@ -3839,6 +3839,22 @@ html .cookie-explanation {
   right: 1.2rem;
   left: 1.2rem;
 }
+.google-maps-wrapper {
+  position: relative;
+}
+.google-maps-overlay,
+.google-maps-overlay-agenda {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  left: 0;
+  background-color: rgba(255, 255, 255, 0.65);
+}
+.google-maps-overlay-agenda {
+  width: 24rem;
+  height: 24rem;
+}
 /*
  *  Basis custom form styling
  */
@@ -5943,6 +5959,7 @@ form ol {
 }
 .daterangepicker.opensembed > .ranges {
   width: 100%;
+  margin: 0;
 }
 .daterangepicker.dropup:before {
   top: initial;
@@ -5986,6 +6003,7 @@ form ol {
 }
 .daterangepicker.show-calendar .calendar {
   display: block;
+  margin-bottom: 1.2rem;
 }
 .daterangepicker .range_inputs {
   text-align: right;
@@ -6017,10 +6035,19 @@ form ol {
 .daterangepicker .calendar .next {
   background: #fff;
 }
+.daterangepicker .calendar.right {
+  padding-left: 0.6rem;
+}
+.daterangepicker .calendar.left {
+  padding-right: 0.6rem;
+}
 .daterangepicker .calendar-table {
   border: 1px solid #fff;
   padding: 4px;
   background-color: rgba(70, 68, 71, 0.12);
+}
+.daterangepicker .available {
+  background: #fff;
 }
 .daterangepicker .available:hover,
 .daterangepicker .available:focus {
@@ -6147,7 +6174,7 @@ form ol {
 .daterangepicker .ranges {
   font-size: 11px;
   float: none;
-  margin: 4px;
+  margin: 4px 0 0 0;
   text-align: left;
 }
 .daterangepicker .ranges ul {

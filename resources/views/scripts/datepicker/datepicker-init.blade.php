@@ -1,5 +1,8 @@
 <script type="text/javascript">
-    $(document).ready(function(){  
+    $(document).ready(function(){
+        var user_agenda = {!! $user['agenda']->sortBy('date_start') !!},
+            last_user_agenda_start_date = {!! $user['agenda']->sortBy('date_start')->last() !!};
+
         $('input[name="daterange"]').daterangepicker({
             "alwaysShowCalendars": true,
             opens: "embed",
@@ -7,8 +10,8 @@
             locale: {
                 format: 'YYYY-MM-DD'
             },
-            startDate: '2017-01-01',
-            endDate: '2017-12-31'
+            startDate: '{!! Carbon::now() !!}',
+            endDate: last_user_agenda_start_date.date_start
         });
     });    
 </script>

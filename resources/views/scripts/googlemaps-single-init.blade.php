@@ -2,9 +2,6 @@
 <script type="text/javascript">
     // This script requires the Places library. Include the libraries=places
     var locations_object = [];
-    @foreach ($user['agenda'] as $item)
-        locations_object.push({!! $item !!});
-    @endforeach
 
     // parameter when you first load the API.
     var markers = [];
@@ -43,18 +40,14 @@
     };
 
     function initMap() {
+        //Get the user agenda items
+        locations_object = createDefaultAgendaObject();
+
         //Set to use to center map based on user info
         geocoder = new google.maps.Geocoder();
 
         //Set animation
         animation = false;
-
-        //Center the map based on user city and country
-        geocoder.geocode( {'address' : country+','+city}, function(results, status) {
-            if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-            }
-        });
 
         map = new google.maps.Map(document.getElementById('google-maps'), {
             zoom: 9,
@@ -63,14 +56,20 @@
         });
 
         createMap(map,animation);
+
+        //Set the bounds and zoom
+        setBounds();
+
+        //Update the agenda items
+        setAgendaItems();
     }
 
     function createMap(map,animation){
         $.each(locations_object, function(key, fd) {
-                if(fd['info'] != ""){
-                    var locations = set_locations(key,fd['info']);
-                    add_markers(key,map,locations,icons['events'].icon,animation);
-                }
+            if(fd['info'] != ""){
+                var locations = set_locations(key,fd['info']);
+                add_markers(key,map,locations,icons['events'].icon,animation);
+            }
         });
     }
 
@@ -163,32 +162,91 @@
         markers = [];
     }
 
-    // Markers filtering magic
-    function filterObject(){
-        locations_object = {};
-        checkedValues = [];
-        matching_words = {};
-        string = $.trim(document.getElementById('js-filter-input').value);    
-        var inputElements = document.getElementsByClassName('form-input-checkbox');
-        var i = 0;
+    // Create agenda object
+    function createAgendaObject(filter_start_date, filter_end_date){
+        var collection = {!! $user['agenda']->sortBy('date_start') !!};
+        var agenda_object = new Object();
+        var index = 0;
 
-        //Get the checkbox filters
-        for(var count=0; count < inputElements.length; ++count){
-            var element = document.getElementById("filter-"+count);
-            var value = element.checked;
-            if(value == true){
-                checkedValues.push(element.value.toUpperCase());
+        //Search in
+        for (var key in collection) {
+            if(typeof collection[key].date_start != 'undefined' && collection[key].date_start != ''){
+
+                if( new Date(collection[key].date_start).getTime() >= new Date(filter_start_date).getTime() && new Date(collection[key].date_end).getTime() <= new Date(filter_end_date).getTime()){
+                    agenda_object[index] = collection[key];
+                    index++;
+                }
             }
         }
 
-        //Show autocomplete list
-        createAutoComplete();
+        return agenda_object;
+    }
 
+    //Create default agenda object
+    function createDefaultAgendaObject(){
+        locations_object = [];
+
+        @foreach ($user['agenda'] as $item)
+            locations_object.push({!! $item !!});
+        @endforeach
+
+        return locations_object;
+    }
+
+    // Markers filtering magic
+    function filterObject(){
         //Remove all the markers
         deleteMarkers();
 
         //Add the new markers on the map
         createMap(map,animation);
+
+        //Set the bounds and zoom
+        setBounds();
+
+        //Update the agenda items
+        setAgendaItems();
+    }
+
+    //Set the agenda items
+    function setAgendaItems(){
+
+        //Get the agenda info
+        var agenda_listitems = '';
+
+        for (var key in locations_object) {
+            if(typeof locations_object[key]['info'].name != 'undefined' && locations_object[key]['info'].name != ''){
+                var name = locations_object[key]['info'].name;
+                var item = "<li class='agendaitem'><span data-icon='H'>"+name+"</span></li>";
+                agenda_listitems = agenda_listitems+item;
+            }
+        }
+
+        var contentAgenda = '<ul class="agendaitems-wrapper">'+agenda_listitems+'</ul>';
+
+        $('#js-google-maps-overlay-agenda').empty();
+        $('#js-google-maps-overlay-agenda').append(contentAgenda);
+
+    }
+
+    //Set the boundries and zoom of the viewport
+    function setBounds(){
+        var bounds = new google.maps.LatLngBounds();
+        for (var i = 0; i < markers.length; i++) {
+            bounds.extend(markers[i].getPosition());
+        }
+
+        if(i > 0){
+            map.fitBounds(bounds);
+
+            google.maps.event.addListenerOnce(map, 'bounds_changed', function(event) {
+                this.setZoom(map.getZoom()-1);
+
+                if (this.getZoom() > 15) {
+                    this.setZoom(15);
+                }
+            });
+        }
     }
 
     function getEventUrl(key){
@@ -205,7 +263,30 @@
         return title;
     }
 
-    window.onload = function (map) { 
+    window.onload = function (map) {
+        //Change Agenda input
+        $('input[name="daterange"]').on('apply.daterangepicker', function(ev, picker) {
+            //do something, like clearing an input
 
+            var filter_start_date = picker.startDate.format('YYYY-MM-DD'),
+                filter_end_date = picker.endDate.format('YYYY-MM-DD');
+
+            //Create the new object based on the user input
+            locations_object = createAgendaObject(filter_start_date,filter_end_date);
+
+            //Filter the object based on the user input
+            animation = false;
+            filterObject();
+        });
+
+        $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
+
+            //Set the default object
+            createDefaultAgendaObject();
+
+            //Filter the object based on the user input
+            animation = false;
+            filterObject();
+        });
     }
 </script>

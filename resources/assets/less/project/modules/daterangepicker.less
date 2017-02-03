@@ -116,6 +116,7 @@
 
 		> .ranges {
 			width: 100%;
+			margin:0;
 		}
 	}
 
@@ -179,6 +180,7 @@
 	&.show-calendar{
 		.calendar{
 			display: block;
+			margin-bottom:@spacing/2;
 		}
 	}
 
@@ -207,6 +209,14 @@
 		.next{
 			background: @white;
 		}
+
+		&.right{
+			padding-left: @spacing/4;
+		}
+
+		&.left{
+			padding-right: @spacing/4;
+		}
 	}
 
 	.calendar-table{
@@ -216,6 +226,8 @@
 	}
 
 	.available{
+		background: @white;
+
 		&:hover,
 		&:focus{
 			background-color: #eee;
@@ -368,7 +380,7 @@
 	.ranges {
 		font-size: 11px;
 		float: none;
-		margin: 4px;
+		margin: 4px 0 0 0;
 		text-align: left;
 
 		ul{
