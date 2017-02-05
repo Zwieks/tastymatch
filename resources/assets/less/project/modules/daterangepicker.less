@@ -3,6 +3,12 @@
 	display: none;
 }
 
+.daterangepicker-filter-label{
+	width: 100%;
+	margin-bottom: @spacing/2;
+	font-weight: 800;
+}
+
 .daterangepicker {
 	.box-shadow();
 	.displayflex;
@@ -193,6 +199,10 @@
 		padding: @spacing/4 @spacing;
 	}
 
+	.applyBtn{
+    	margin-right: @spacing/2;
+	}
+
 	.calendar{
 		display: none;
 		max-width: 200px;
@@ -361,6 +371,30 @@
 		i{
 			left: auto;
 			right: 8px;
+		}
+	}
+
+	.fa-chevron-left,
+	.fa-chevron-right{
+		position: relative;
+		display: block;
+
+		&:before{
+			.center;
+			font-family: @iconFont;
+			font-style: normal;
+		}
+	}
+
+	.fa-chevron-left{
+		&:before{
+			content:'N';
+		}
+	}
+
+	.fa-chevron-right{
+		&:before{
+			content:'O';
 		}
 	}
 

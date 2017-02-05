@@ -115,6 +115,7 @@
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 icon: image,
+                id:i,
                 animation: animation_type,
                 map: map
             });
@@ -131,8 +132,8 @@
                 contentString = '<div class="infowindow-wrapper">'+
                   '<div class="image-wrapper"><img src="/img/uploads/'+locations[i][3]+'"></div>'+
                   '<div class="text-wrapper">'+
-                  '<h3 class="firstHeading">'+locations[i][4]+'</h3>'+
-                  '<p>'+description+' <a href="'+url+'/'+locations[i][5]+'" target="_blank">{!! Lang::get('commons.more-info') !!}</a>'+'</p>'+
+                  '<h3 class="firstHeading">'+locations[i][3]+'</h3>'+
+                  '<p>'+description+' <a href="'+url+'/'+locations[i][4]+'" target="_blank">{!! Lang::get('commons.more-info') !!}</a>'+'</p>'+
                   '</div>'+
                   '</div>';
 
@@ -217,16 +218,46 @@
         for (var key in locations_object) {
             if(typeof locations_object[key]['info'].name != 'undefined' && locations_object[key]['info'].name != ''){
                 var name = locations_object[key]['info'].name;
-                var item = "<li class='agendaitem'><span data-icon='H'>"+name+"</span></li>";
+                var start = locations_object[key].date_start;
+                var end = locations_object[key].date_end;
+                var date = '';
+
+                if(typeof start != 'undefined' && start != ''){
+                    date = start+' - '+end;
+                }else{
+                    date = start;
+                }
+
+                var item = "<li class='agendaitem js-googlemap-agendaitem' marker-id='"+key+"'>"+
+                            "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
+                            "<span class='agenda-name'>"+name+"</span>"+
+                            "</li>";
                 agenda_listitems = agenda_listitems+item;
             }
         }
 
-        var contentAgenda = '<ul class="agendaitems-wrapper">'+agenda_listitems+'</ul>';
+        var contentAgenda = "<ul class='agendaitems-wrapper'>"+agenda_listitems+"</ul>";
 
-        $('#js-google-maps-overlay-agenda').empty();
-        $('#js-google-maps-overlay-agenda').append(contentAgenda);
+        $('#js-agenda-overview').empty();
+        $('#js-agenda-overview').append(contentAgenda);
 
+    }
+
+    function highlightMarker(id){
+        for (var i = 0; i < markers.length; i++) {
+            if(id === i){
+                markers[i].setAnimation(google.maps.Animation.BOUNCE);
+            }
+        } 
+    }
+
+    //Stop animation
+    function stopAnimation(id) {
+        for (var i = 0; i < markers.length; i++) {
+            if(id === i){                    
+                markers[i].setAnimation(null);
+            }    
+        }    
     }
 
     //Set the boundries and zoom of the viewport

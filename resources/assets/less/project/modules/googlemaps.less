@@ -256,12 +256,83 @@
 	.centerY;
 	.box-shadow;
 	left:0;
-	background-color: rgba(255, 255, 255, 0.65);
+	background-color: rgba(255, 255, 255, 0.88);
 }
 
 .google-maps-overlay-agenda{
+	.displayflex;
+	.flex-direction(column);
 	&:extend(.google-maps-overlay);
 
 	width: @spacing*10;
 	height: @spacing*10;
+	padding:@spacing/2;
+	border-left: 15px solid @primColor;
+
+	.add-agenda-item{
+		position: relative;
+		padding:@spacing/2;
+		margin-bottom: 0;
+		padding-left: @spacing;
+		margin-right: 0;
+		font-size: @XSmallHeadingSize;
+		width: 100%;
+		text-align: center;
+
+		&:before{
+			.center;
+			left: 18px;
+		}
+	}
+
+	.agendaitems-overview{
+		.flex-grow(1);
+	}
+
+	.agendaitems-wrapper{
+		margin: 0;
+		height: auto;
+	}
+
+	.overlay-agenda-title{
+		padding-bottom: @spacing/2;
+		border-bottom: 1px solid rgba(51,51,51,0.26);
+	}
+
+	.agendaitem{
+		cursor:pointer;
+		margin-bottom: @spacing/3;
+
+		&:hover,
+		&:focus{
+			span{
+				color:@primColor;
+			}
+		}
+
+		span{
+			position: relative;
+			font-size: @XSmallHeadingSize;
+			padding-left: @spacing/1.2;
+
+			&:before{
+				.center;
+				left: 6px;
+				font-size: 13px;
+			}
+		}
+	}
+
+	.agenda-name,
+	.agenda-date{
+		display: block;
+	}
+
+	.agenda-name{
+
+	}
+
+	.agenda-date{
+		font-weight: 800;
+	}
 }

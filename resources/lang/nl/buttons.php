@@ -6,4 +6,5 @@ return [
 	'save' => 'Opslaan',
 	'preview' => 'Preview',
 	'add-menu-item' => 'Menu item toevoegen',
+	'add-agenda-item' => 'Agenda item toevoegen',
 ];

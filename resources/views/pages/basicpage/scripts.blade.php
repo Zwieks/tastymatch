@@ -21,3 +21,4 @@
 <script type="text/javascript" src="{{ URL::asset('js/dropzone.js') }}"></script>
 <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 <script type="text/javascript" src="{{ URL::asset('js/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/bootstrap/modal.js') }}"></script>

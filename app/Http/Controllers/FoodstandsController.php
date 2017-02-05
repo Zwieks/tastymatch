@@ -44,8 +44,11 @@ class FoodstandsController extends Controller
                 //Get the user information
                 $user = $request->session()->get('user.global');
 
+                //Set page type
+                $page_type = 'new';
+
                 //return the view with the user session data
-                return view('auth.create-foodstand', compact('user','detailpage_id'));
+                return view('auth.create-foodstand', compact('user','detailpage_id','page_type'));
             }else{
                 return view('auth.error');
             }
@@ -141,6 +144,9 @@ class FoodstandsController extends Controller
         //Get the user information
         $user = $request->session()->get('user.global');
 
+        //Page type
+        $page_type = 'update';
+
         //Get content detailpage
         $page_content = Detailpage::with('getContact')
                         ->with('getIntro')
@@ -149,7 +155,7 @@ class FoodstandsController extends Controller
                         ->with('getMediaItems')
                         ->findOrFail($detailpage_id);
 
-        return view('auth.update-foodstand', compact('user','detailpage_id','page_content'));
+        return view('auth.update-foodstand', compact('user','detailpage_id','page_content', 'page_type'));
     }
 
     /**

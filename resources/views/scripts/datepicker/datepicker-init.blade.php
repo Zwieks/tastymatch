@@ -13,5 +13,19 @@
             startDate: '{!! Carbon::now() !!}',
             endDate: last_user_agenda_start_date.date_start
         });
+
+        //Set label
+        $('.js-filter-label').text( '{!! Lang::get('daterangepicker.label') !!}' );
     });    
+
+    //Hover
+    $(document).on('mouseover','.js-googlemap-agendaitem',function() {
+        var id = parseInt($(this).attr('marker-id'));
+        highlightMarker(id);
+    }); 
+
+    $(document).on('mouseleave','.js-googlemap-agendaitem',function() {
+        var id = parseInt($(this).attr('marker-id'));
+        stopAnimation(id);
+    }); 
 </script>

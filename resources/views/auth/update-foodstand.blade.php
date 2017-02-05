@@ -28,3 +28,8 @@
 @section('sticky-content')
     @include('sidebars.sticky.templatecontrols')
 @stop
+
+{{-- Include Modal --}}
+@section('modal')
+	@include('modals.basic', ['content' => "modals.agenda.create"])
+@stop

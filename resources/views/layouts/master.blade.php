@@ -46,5 +46,9 @@
        {{--render style='google-analytics'--}}
         @include('pages.basicpage.scripts')
         @yield('page-scripts')
+
+        @hasSection('modal')
+            @yield('modal')
+        @endif    
     </body>
 </html>
