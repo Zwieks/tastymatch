@@ -48,3 +48,27 @@ function ajaxAutocomplete($search_input) {
 		}
 	});
 }
+
+//Autocomplete Events using Ajax
+function ajaxSearchEvens($search_input) {
+
+	var token = $('meta[name="csrf-token"]').attr('content'),
+		url = '/ajax/search',
+		data = {q: $search_input};
+
+	$.ajax({
+		type: 'POST',
+		url: url,
+		headers: {'X-CSRF-TOKEN': token},
+		data: data,
+		datatype: 'JSON',
+		success: function (data) {
+			if(data.success == true) {
+				console.log(data.html);
+				//Put the results in de container
+				$('html').addClass('open-autocomplete');
+				$('#js-autocomplete-results .mCSB_container').html(data.html);
+			}
+		}
+	});
+}

@@ -49,11 +49,13 @@
 //** Deprecated `@screen-md` as of v3.0.1
 @screen-md:                  992px;
 @screen-md-min:              @screen-md;
+
 //** Deprecated `@screen-desktop` as of v3.0.1
 @screen-desktop:             @screen-md-min;
 
 // Kill the scroll on the body
 .modal-open {
+  padding-right: 0!important;
   overflow: hidden;
 }
 
@@ -68,6 +70,7 @@
   left: 0;
   z-index: @zindex-modal;
   -webkit-overflow-scrolling: touch;
+  padding-right: 0!important;
 
   // Prevent Chrome on Windows from adding a focus outline. For details, see
   // https://github.com/twbs/bootstrap/pull/10951.
@@ -101,7 +104,6 @@
   .background-clip;
   position: relative;
   background-color: @white;
-  border: 1px solid @borderColor;
   outline: 0;
 }
 
@@ -126,18 +128,43 @@
 
 // Modal header
 // Top section of the modal w/ title and dismiss
-.modal-header {
-  padding: @modal-title-padding;
-  border-bottom: 1px solid @modal-header-border-color;
+.modal-header{
+  .displayflex;
+  .justify-content(space-between);
+  .align-items(center);
+
   &:extend(.clearfix all);
+
+  padding-bottom:@spacing/2;
+  margin-bottom:@spacing/2;
+  border-bottom: 1px solid @modal-header-border-color;
 }
+
 // Close icon
-.modal-header .close {
-  margin-top: -2px;
+.modal-close {
+  .align-self(flex-start);
+  margin:-@spacing/2 -@spacing/1.5 0 0;
+  background: transparent;
+  color:@textColor;
+  width:@spacing;
+  height:@spacing;
+  position: relative;
+
+  &:before{
+    .center;
+    font-size: 19px;
+  }
+
+  &:hover,
+  &:focus{
+    color:@primColor;
+  }
 }
 
 // Title text within header
 .modal-title {
+  .flex-grow(1);
+
   margin: 0;
   line-height: @modal-title-line-height;
 }
@@ -146,15 +173,22 @@
 // Where all modal content resides (sibling of .modal-header and .modal-footer)
 .modal-body {
   position: relative;
-  padding: @modal-inner-padding;
+  padding-bottom:@spacing/2;
+  margin-bottom:@spacing/2;
+  border-bottom: 1px solid @modal-footer-border-color;
 }
 
 // Footer (for actions)
 .modal-footer {
-  padding: @modal-inner-padding;
-  text-align: right; // right align buttons
-  border-top: 1px solid @modal-footer-border-color;
+  .displayflex;
+  .justify-content(flex-end);
+
   &:extend(.clearfix all); // clear it in case folks use .pull-* classes on buttons
+  text-align: right; // right align buttons
+
+  button{
+    margin:0;
+  }
 
   // Properly space out buttons
   .btn + .btn {
@@ -189,6 +223,7 @@
   }
   .modal-content {
     .box-shadow(0 5px 15px rgba(0,0,0,.5));
+    padding:@spacing/2;
   }
 
   // Modal sizes

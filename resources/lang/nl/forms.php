@@ -43,4 +43,8 @@ return [
     'bic' => 'BIC',
     'support' => 'Support',
     'sales' => 'Verkoop',
+	'billing' => 'Offerte',
+	'datestart' => 'Begin datum',
+	'dateend' => 'Eind datum',
+	'searchevent' => 'Zoek een evenement of maak een nieuwe aan',
 ];

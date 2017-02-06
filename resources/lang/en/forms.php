@@ -44,4 +44,7 @@ return [
     'support' => 'Support',
     'sales' => 'Sales',
     'billing' => 'Billing',
+	'datestart' => 'Start date',
+	'dateend' => 'End date',
+	'searchevent' => 'Search your event or create a new one',
 ];
