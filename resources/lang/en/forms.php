@@ -47,4 +47,8 @@ return [
 	'datestart' => 'Start date',
 	'dateend' => 'End date',
 	'searchevent' => 'Search your event or create a new one',
+	'placeholder-title' => 'Enter the title here',
+	'location' => 'City',
+	'description' => 'Description',
+	'form-separator-to' => 'till',
 ];

@@ -35,7 +35,7 @@ class Search extends Model
 		// Making sure the user entered a keyword.
 		if($request->has('q')) {
 			//Using the Laravel Scout syntax to search the products table EVENT.
-			$posts_event = Event::search($request->get('q'))->get();
+			$posts_event = Event::search($request->get('q'))->where('searchable', 1)->get();
 			$posts_event = json_decode($posts_event);
 			$posts_event = images::getAllImages($posts_event);
 			$posts[trans('products.product-events')] = $posts_event;

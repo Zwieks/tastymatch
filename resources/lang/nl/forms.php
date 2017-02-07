@@ -47,4 +47,8 @@ return [
 	'datestart' => 'Begin datum',
 	'dateend' => 'Eind datum',
 	'searchevent' => 'Zoek een evenement of maak een nieuwe aan',
+	'placeholder-title' => 'Vul hier de titel in',
+	'location' => 'Plaats',
+	'description' => 'Beschrijving',
+	'form-separator-to' => 'tot',
 ];

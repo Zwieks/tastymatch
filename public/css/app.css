@@ -4210,6 +4210,9 @@ form ol {
 .remove-menuitem:before {
   font-size: 18px;
 }
+.form-separator {
+  padding: 0 1.2rem;
+}
 .modal-form label {
   width: 100%;
 }

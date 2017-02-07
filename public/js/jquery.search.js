@@ -64,10 +64,11 @@ function ajaxSearchEvens($search_input) {
 		datatype: 'JSON',
 		success: function (data) {
 			if(data.success == true) {
-				console.log(data.html);
 				//Put the results in de container
 				$('html').addClass('open-autocomplete');
 				$('#js-autocomplete-results .mCSB_container').html(data.html);
+				//Remove all the foodstands and entertainers results
+				$('#js-autocomplete-results .mCSB_container .items-wrapper-entertainers, #js-autocomplete-results .mCSB_container .items-wrapper-foodstands').remove();
 			}
 		}
 	});

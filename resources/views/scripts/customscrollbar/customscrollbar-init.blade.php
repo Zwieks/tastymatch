@@ -15,4 +15,20 @@
             });
         }
     });
+
+    $(document).on('click','.autocomplete-item',function(e) {
+        e.preventDefault();
+
+        //Get the name and id
+        var id = $(this).attr('id'),
+            name = $(this).attr('name'),
+            description = $(this).attr('des'),
+            location = $(this).attr('loc');
+
+        $("input[name='search-events']").val(name);
+        $("input[name='search-events']").attr('eventid',id);
+        $("textarea[name='description']").val(description);
+        $("input[name='location']").val(location);
+        return false;
+    });
 </script>
