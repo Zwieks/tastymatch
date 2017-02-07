@@ -50,7 +50,7 @@ function ajaxAutocomplete($search_input) {
 }
 
 //Autocomplete Events using Ajax
-function ajaxSearchEvens($search_input) {
+function ajaxSearchEvents($search_input) {
 
 	var token = $('meta[name="csrf-token"]').attr('content'),
 		url = '/ajax/search',

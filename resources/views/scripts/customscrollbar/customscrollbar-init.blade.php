@@ -4,7 +4,7 @@
         //Filter the object based on the user input
         e.preventDefault();
         //Perform the search
-        ajaxSearchEvens($(this).val());
+        ajaxSearchEvents($(this).val());
     });
 
     $(document).ready(function(){
@@ -29,6 +29,7 @@
         $("input[name='search-events']").attr('eventid',id);
         $("textarea[name='description']").val(description);
         $("input[name='location']").val(location);
+        $('html').removeClass('open-search, open-autocomplete');
         return false;
     });
 </script>
