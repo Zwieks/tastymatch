@@ -33,8 +33,12 @@ class AjaxController extends Controller
             //Perform the search
             $results = Search::onPageSearch($request);
 
-            //Return the view
-            $returnHTML = view('ajax.search')->with('results', json_decode($results))->render();
+            if(!empty($results)){
+                //Return the view
+                $returnHTML = view('ajax.search')->with('results', json_decode($results))->render();   
+            }else{
+                $returnHTML = '';
+            }
             return response()->json(array('success' => true, 'html'=>$returnHTML));
         }
     }

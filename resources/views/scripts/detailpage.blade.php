@@ -227,6 +227,23 @@
             return save_components[key];
         }
 
+        function createNiceFormObject(dataArray){
+            var formData = [],
+                count = 0;
+
+            $.each(dataArray, function(i, fd) {
+                if(fd.value != ""){
+                    var myObject = new Object();
+                        myObject[fd.name] = fd.value;
+
+                    formData[count] = myObject;
+                    count++;
+                }
+            });
+
+            return formData; 
+        }
+
         function addMediaItem() {
 
             var formData = {
@@ -431,18 +448,7 @@
                 //Find the form
                 if($('#'+target).parent().find('form').length > 0){
                     var dataArray = $('#'+target).find('form').serializeArray(),
-                        formData = [],
-                        count = 0;
-
-                    $.each(dataArray, function(i, fd) {
-                        if(fd.value != ""){
-                            var myObject = new Object();
-                                myObject[fd.name] = fd.value;
-
-                            formData[count] = myObject;
-                            count++;
-                        }
-                    });
+                    formData = createNiceFormObject(dataArray);   
 
                     if(objectLength(formData) != 0){
                         save_components[key].form = formData;
@@ -577,5 +583,20 @@
                 $(this).closest('.product-wrapper').removeClass('changed');
             }
         });
+
+        //Create Agenda item
+        $(document).on('click','.js-add-agenda-item',function(){    
+            // Get the form data
+            var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
+                formData = createNiceFormObject(dataArray);
+
+            //Check the data    
+            creat_new_marker(formData);
+            //Add the new markers on the map (GREEN color)
+
+            //Close the modal   
+
+            //Add the data to the global save object 
+        });    
     });
 </script>

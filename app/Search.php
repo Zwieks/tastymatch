@@ -30,7 +30,7 @@ class Search extends Model
 
     //Default search
 	public static function getSearchResults(Request $request){
-		$posts;
+		$posts = '';
 
 		// Making sure the user entered a keyword.
 		if($request->has('q')) {

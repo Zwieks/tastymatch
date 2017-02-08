@@ -66,10 +66,29 @@ function ajaxSearchEvents($search_input) {
 			if(data.success == true) {
 				//Put the results in de container
 				$('html').addClass('open-autocomplete');
-				$('#js-autocomplete-results .mCSB_container').html(data.html);
+
+				//Check if the returned data is empty
+				if(data.html != ''){
+					$('#js-autocomplete-results .mCSB_container').html(data.html);
+				}else{
+					removeDefaultInputs();
+				}
+
 				//Remove all the foodstands and entertainers results
 				$('#js-autocomplete-results .mCSB_container .items-wrapper-entertainers, #js-autocomplete-results .mCSB_container .items-wrapper-foodstands').remove();
 			}
 		}
 	});
+}
+
+function removeDefaultInputs(){
+    //Remove the ID as attribute of the object
+    $("input[name='search-events']").attr('eventid','');
+    //Empty the EVENT DESCRIPTION in the textarea
+    $("textarea[name='description']").val('').prop('readonly', false);
+    //Empty the EVENT LOCATION in the inputfield
+    $("input[name='location']").val('').prop('readonly', false);
+
+    //Hide the autocomplete
+    $('html').removeClass('open-search, open-autocomplete');
 }

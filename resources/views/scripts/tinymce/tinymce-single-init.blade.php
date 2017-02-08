@@ -49,12 +49,14 @@ tinymce.init({
         'media'
     ],
     init_instance_callback : function(ed) {
-        var content = {!! $page_content['getMediaItems'] !!};
-
-        if(typeof content[ContentCheck.COUNT_VIDEO] != 'undefined'){
-            ContentCheck.SAVED_VIDEO = content[ContentCheck.COUNT_VIDEO].video;
-            ContentCheck.COUNT_VIDEO++;
-        }
+         @if(isset($page_content['getMediaItems'][0]) && !is_null($page_content['getMediaItems']))
+            var content = {!! $page_content['getMediaItems'] !!};
+            if(typeof content[ContentCheck.COUNT_VIDEO] != 'undefined'){
+                ContentCheck.SAVED_VIDEO = content[ContentCheck.COUNT_VIDEO].video;
+                ContentCheck.COUNT_VIDEO++;
+            }
+        @endif
+        
 
         if(ContentCheck.SAVED_VIDEO != '')
             ContentCheck.setSavedVideo(ed,ContentCheck.SAVED_VIDEO);

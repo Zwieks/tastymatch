@@ -15,7 +15,6 @@ class SearchController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request){
-
         //Get user country
         $country = strtolower(urlencode(str_replace(' ', '_', getUserCountry())));
 

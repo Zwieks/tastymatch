@@ -1,6 +1,5 @@
-<!-- {{$debugpath}} -->
-
 @if(!empty($results))
+<!-- {{$debugpath}} -->
     <li class="ajax-search-item">
     	<section class="autocomplete-content">
     		@foreach ($results as $index => $objects)

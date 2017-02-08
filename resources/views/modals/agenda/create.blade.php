@@ -14,6 +14,6 @@
 
 {{--Modal FOOTER--}}
 <div class="modal-footer">
-	<button type="button" class="btn btn-primary">{{ Lang::get('buttons.create') }}</button>
+	<button type="button" class="btn btn-primary js-add-agenda-item">{{ Lang::get('buttons.create') }}</button>
 	<button type="button" class="btn btn-default" data-dismiss="modal">{{ Lang::get('buttons.cancel') }}</button>
 </div>

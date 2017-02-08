@@ -248,6 +248,7 @@
 	}
 }
 
+
 .google-maps-wrapper{
 	position: relative;
 }
@@ -292,6 +293,7 @@
 	.agendaitems-wrapper{
 		margin: 0;
 		height: auto;
+		max-height: @spacing*5;
 	}
 
 	.overlay-agenda-title{
@@ -308,6 +310,10 @@
 			span{
 				color:@primColor;
 			}
+		}
+
+		&.active{
+			color:@primColor;
 		}
 
 		span{

@@ -1,7 +1,7 @@
 <script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&callback=initMap"></script>
 <script type="text/javascript">
     // This script requires the Places library. Include the libraries=places
-    var locations_object = [];
+    $.fn.locations_object = [];
 
     // parameter when you first load the API.
     var markers = [];
@@ -41,8 +41,13 @@
 
     function initMap() {
         //Get the user agenda items
-        locations_object = createDefaultAgendaObject();
+        if($.fn.locations_object.length === 0){
+            $.fn.locations_object = createDefaultAgendaObject();
+        }else{
+            markers = [];
+        }
 
+        console.log( $.fn.locations_object);
         //Set to use to center map based on user info
         geocoder = new google.maps.Geocoder();
 
@@ -65,7 +70,7 @@
     }
 
     function createMap(map,animation){
-        $.each(locations_object, function(key, fd) {
+        $.each($.fn.locations_object, function(key, fd) {
             if(fd['info'] != ""){
                 var locations = set_locations(key,fd['info']);
                 add_markers(key,map,locations,icons['events'].icon,animation);
@@ -93,6 +98,83 @@
         return locations;
     }
 
+    function creat_new_marker(info){
+        var new_info_object = new Object();
+        var place_detail = [];
+        var lat = '';
+        var lng = '';
+
+
+        $.each(info, function(key, fd) {
+            new_info_object = jQuery.extend(new_info_object, fd);
+        });
+
+        //Get the new location
+        var location = new_info_object.location;
+
+        //Get the title
+        var name = new_info_object.searchevents;
+
+        //Get the start date
+        if(typeof new_info_object.datestart != 'undefined'){
+            var date_start = new_info_object.datestart;
+        }else{
+            var date_start = '';
+        }
+
+
+        //Get the end date
+        if(typeof new_info_object.dateend != 'undefined'){
+            var date_end = new_info_object.dateend;
+        }else{
+            var date_end = '';
+        }
+
+        //Get the description
+        if(typeof new_info_object.description != 'undefined'){
+            var description = new_info_object.description;
+        }else{
+            var description = '';
+        }
+
+        //Get the current user location
+        var country = '{!! App::getLocale() !!}';
+
+        //Get the details using the maps API
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val) {
+            if(val.results.length) {
+                var location = val.results[0].geometry.location;
+
+                //New objects
+                var new_detail_object = new Object();
+                    new_detail_object['description'] = description;
+                    new_detail_object['location'] = city;
+                    new_detail_object['name'] = name;
+                    new_detail_object['lat'] = location.lat.toString();
+                    new_detail_object['long'] = location.lng.toString();
+
+                var new_location_object = new Object();    
+                    new_location_object['new'] = true;
+                    new_location_object['date_end'] = date_end;
+                    new_location_object['date_start'] = date_start;
+                    new_location_object['id'] = (objectLength($.fn.locations_object)+1);
+                    new_location_object['info'] = new_detail_object;
+
+                //Add the new marker info the the $.fn.locations_object
+
+            }
+                $.fn.locations_object.push(new_location_object);   
+
+                 $('#modal').modal('toggle'); 
+                initMap();
+        });
+
+        // var locations = set_locations(key,fd['info']);
+        // add_markers(key,map,locations,icons['events'].icon,animation);\
+
+        //Count the current object length using function from DETAILPAGE script
+    }
+
     function add_markers(key,map,locations,icon,animation){
         infowindow = new google.maps.InfoWindow({});
         var marker, i, contentString;
@@ -115,7 +197,7 @@
             marker = new google.maps.Marker({
                 position: new google.maps.LatLng(locations[i][1], locations[i][2]),
                 icon: image,
-                id:i,
+                id:key,
                 animation: animation_type,
                 map: map
             });
@@ -138,10 +220,18 @@
                   '</div>';
 
                 return function () {
+                    $('.js-googlemap-agendaitem').removeClass('active');
+                    $(".agendaitems-wrapper").mCustomScrollbar("scrollTo","[marker-id="+marker.id+"]");
+                    $('[marker-id='+marker.id+']').addClass('active');
+
                     infowindow.setContent(contentString);
                     infowindow.open(map, marker);
                 }
             })(marker, i));
+
+            google.maps.event.addListener(infowindow,'closeclick',function(){
+               $('.js-googlemap-agendaitem').removeClass('active');
+            });
         }
     }
 
@@ -185,13 +275,14 @@
 
     //Create default agenda object
     function createDefaultAgendaObject(){
-        locations_object = [];
+
+        $.fn.locations_object = [];
 
         @foreach ($user['agenda'] as $item)
-            locations_object.push({!! $item !!});
+            $.fn.locations_object.push({!! $item !!});
         @endforeach
 
-        return locations_object;
+        return $.fn.locations_object;
     }
 
     // Markers filtering magic
@@ -215,11 +306,11 @@
         //Get the agenda info
         var agenda_listitems = '';
 
-        for (var key in locations_object) {
-            if(typeof locations_object[key]['info'].name != 'undefined' && locations_object[key]['info'].name != ''){
-                var name = locations_object[key]['info'].name;
-                var start = locations_object[key].date_start;
-                var end = locations_object[key].date_end;
+        for (var key in $.fn.locations_object) {
+            if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
+                var name = $.fn.locations_object[key]['info'].name;
+                var start = $.fn.locations_object[key].date_start;
+                var end = $.fn.locations_object[key].date_end;
                 var date = '';
 
                 if(typeof start != 'undefined' && start != ''){
@@ -236,10 +327,8 @@
             }
         }
 
-        var contentAgenda = "<ul class='agendaitems-wrapper'>"+agenda_listitems+"</ul>";
-
-        $('#js-agenda-overview').empty();
-        $('#js-agenda-overview').append(contentAgenda);
+        $('.agendaitems-wrapper .mCSB_container').empty();
+        $('.agendaitems-wrapper .mCSB_container').append(agenda_listitems);
 
     }
 
@@ -303,7 +392,7 @@
                 filter_end_date = picker.endDate.format('YYYY-MM-DD');
 
             //Create the new object based on the user input
-            locations_object = createAgendaObject(filter_start_date,filter_end_date);
+            $.fn.locations_object = createAgendaObject(filter_start_date,filter_end_date);
 
             //Filter the object based on the user input
             animation = false;
