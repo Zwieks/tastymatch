@@ -60,7 +60,7 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
-        createMap(map,animation);
+        createMap(map,animation,$.fn.locations_object);
 
         //Set the bounds and zoom
         setBounds();
@@ -69,8 +69,8 @@
         setAgendaItems();
     }
 
-    function createMap(map,animation){
-        $.each($.fn.locations_object, function(key, fd) {
+    function createMap(map,animation,set_markers){
+        $.each(set_markers, function(key, fd) {
             if(fd['info'] != ""){
                 var locations = set_locations(key,fd['info']);
                 add_markers(key,map,locations,icons['events'].icon,animation);
@@ -274,24 +274,23 @@
 
     //Create default agenda object
     function createDefaultAgendaObject(){
-        if(objectLength($.fn.locations_object) <= 0){
-            $.fn.locations_object = [];
-            @foreach ($user['agenda'] as $item)
-                $.fn.locations_object.push({!! $item !!});
-            @endforeach
-        }
+        $.fn.locations_object = [];
+
+        @foreach ($user['agenda'] as $item)
+            $.fn.locations_object.push({!! $item !!});
+        @endforeach
 
 
         return $.fn.locations_object;
     }
 
     // Markers filtering magic
-    function filterObject(){
+    function filterObject(set_markers){
         //Remove all the markers
         deleteMarkers();
 
         //Add the new markers on the map
-        createMap(map,animation);
+        createMap(map,animation,set_markers);
 
         //Set the bounds and zoom
         setBounds();
@@ -392,21 +391,21 @@
                 filter_end_date = picker.endDate.format('YYYY-MM-DD');
 
             //Create the new object based on the user input
-            $.fn.locations_object = createAgendaObject(filter_start_date,filter_end_date);
+            var set_markers = createAgendaObject(filter_start_date,filter_end_date);
 
             //Filter the object based on the user input
             animation = false;
-            filterObject();
+            filterObject(set_markers);
         });
 
         $('input[name="daterange"]').on('cancel.daterangepicker', function(ev, picker) {
 
             //Set the default object
-            createDefaultAgendaObject();
+            initMap();
 
             //Filter the object based on the user input
             animation = false;
-            filterObject();
+            filterObject($.fn.locations_object);
         });
     }
 </script>
