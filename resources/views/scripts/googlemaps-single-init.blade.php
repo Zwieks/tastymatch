@@ -98,7 +98,7 @@
         return locations;
     }
 
-    function creat_new_marker(info){
+    function create_new_marker(info){
         var new_info_object = new Object();
         var place_detail = [];
         var lat = '';
@@ -163,9 +163,8 @@
                 //Add the new marker info the the $.fn.locations_object
 
             }
-                $.fn.locations_object.push(new_location_object);   
-
-                 $('#modal').modal('toggle'); 
+                $.fn.locations_object.push(new_location_object);
+                $('#modal').modal('toggle');
                 initMap();
         });
 
@@ -275,12 +274,13 @@
 
     //Create default agenda object
     function createDefaultAgendaObject(){
+        if(objectLength($.fn.locations_object) <= 0){
+            $.fn.locations_object = [];
+            @foreach ($user['agenda'] as $item)
+                $.fn.locations_object.push({!! $item !!});
+            @endforeach
+        }
 
-        $.fn.locations_object = [];
-
-        @foreach ($user['agenda'] as $item)
-            $.fn.locations_object.push({!! $item !!});
-        @endforeach
 
         return $.fn.locations_object;
     }

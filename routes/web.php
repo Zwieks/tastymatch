@@ -91,6 +91,7 @@ Route::group(['middleware' => 'auth'], function()
 	Route::get('/zoeken', ['as' => 'index', 'uses' => 'SearchController@index']);
 
 	// AJAX
+	Route::post('/ajax/validateForm', 'AjaxController@getValidation');
 	Route::post('/ajax/search', 'AjaxController@getSearch');
 	Route::post('/ajax/upload', function(){
 		return json_encode(request()->file('photos')->storeAs('public/uploads/' . auth()->id(), request()->name));

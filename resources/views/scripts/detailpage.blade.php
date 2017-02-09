@@ -21,6 +21,56 @@
             });
         }
 
+        //Validate form
+        function validateForm(formData){
+            var token = $('meta[name="csrf-token"]').attr('content'),
+                url = '/ajax/validateForm',
+               error_response = false;
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: url,
+                headers: {'X-CSRF-TOKEN': token},
+                data: {jsondata: formData},
+                success: function (data) {
+                    if(data.success == true) {
+                        //Put the results in de container
+                        console.log('Component is opgeslagen');
+                        //Create the new marker
+                        create_new_marker(formData);
+                    }else{
+                        console.log('Oeps..');
+                    }
+                },
+                error: function(data){
+                    // Error...
+                    var errors = data.responseJSON,
+                        inputname,
+                        error_response = true;
+                    $.each(errors, function(index, error) {
+                        var result = error[0].split(' ');
+
+                        $.each(result, function(key, item){
+                            var search = 'jsondata';
+
+                            if (item.indexOf(search) !== -1){
+                                var location = index.split('.');
+                                inputname = location[location.length-1];
+                                var object =  $( "input[name="+inputname+"]");
+
+                                var text = error[0].replace(item, inputname);
+
+                                object.parent().find('.input-error p').text(text);
+                                object.parent().addClass('input-error');
+                                object.parent().find('.input-error').show();
+                            }
+                        });
+                    });
+                }
+            });
+        }
+
         function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/saveComponents';
@@ -565,7 +615,7 @@
         });
 
         //Check if the form has been altered
-        $(document).on('change','form :input',function(){    
+        $(document).on('change','form :input',function(){
             var $fields = $(this);
             var $emptyFields = $fields.filter(function() {
                 // remove the $.trim if whitespace is counted as filled
@@ -590,11 +640,8 @@
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
                 formData = createNiceFormObject(dataArray);
 
-            //Check the data    
-            creat_new_marker(formData);
-            //Add the new markers on the map (GREEN color)
-
-            //Close the modal   
+            //Check form inputs
+            validateForm(formData);
 
             //Add the data to the global save object 
         });    

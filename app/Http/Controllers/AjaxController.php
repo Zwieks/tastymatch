@@ -21,6 +21,26 @@ class AjaxController extends Controller
     //GLOBALS
     protected $mediaComponents = [];
 
+    /**
+     * Validate Form inputs with AJAX
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getValidation(Request $request)
+    {
+        if($this->checkAjaxRequest($request) == true) {
+            //Validate the input, when this fails it will return a json error
+            $this->validate($request, [
+                'jsondata.0.searchevents' => 'bail|required|string',
+                'jsondata.1.description' => 'sometimes|string',
+                'jsondata.2.location' => 'required|string',
+                'jsondata.3.datestart' => 'required|date|before:jsondata.4.dateend',
+                'jsondata.4.dateend' => 'date',
+            ]);
+        }
+
+        return response()->json(array('success' => true));
+    }
 
     /**
      * Get the search results from the AJAX request

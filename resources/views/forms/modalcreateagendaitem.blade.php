@@ -18,7 +18,7 @@
 
             <li class="form-input-textfield">
                 @include('forms.inputerror')
-                <label for="event-name">{{ Lang::get('forms.location') }}</label>
+                <label for="event-name">{{ Lang::get('forms.location') }}<em>*</em></label>
                 {!! Form::text('location') !!}
             </li>
 
@@ -33,7 +33,7 @@
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    <label for="date-end">{{ Lang::get('forms.dateend') }}<em>*</em></label>
+                    <label for="date-end">{{ Lang::get('forms.dateend') }}</label>
                     {!! Form::text('dateend','',array_merge(['dp' => 'true','id' => 'date-end'])) !!}
                 </li>
             </div>

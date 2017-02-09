@@ -25,6 +25,7 @@
     @include('scripts.datepicker.datepicker-single-init')
     @include('scripts.customscrollbar.customscrollbar-init')
     @include('scripts.autocomplete.autocomplete-agenda-init')
+    @include('scripts.modal.modal-init')
 @stop
 
 {{-- Include Controls --}}

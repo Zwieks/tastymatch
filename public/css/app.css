@@ -1817,6 +1817,7 @@ html div#cookie-bar {
   top: auto !important;
   left: auto !important;
   border: 0;
+  -webkit-filter: none;
   filter: none;
   position: fixed;
 }
@@ -4080,6 +4081,14 @@ form ol {
 .velden .multiple-wrapper label {
   cursor: pointer;
   width: auto;
+}
+.velden .multiple-wrapper {
+  position: relative;
+}
+.velden .multiple-wrapper li .input-error {
+  position: absolute;
+  width: 100%;
+  bottom: 2.88rem;
 }
 .detail-summary {
   margin-bottom: 0;
@@ -6749,7 +6758,7 @@ form ol {
   }
   .modal-content {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    padding: 1.2rem;
+    padding: 2.4rem;
   }
   .modal-sm {
     width: 300px;
