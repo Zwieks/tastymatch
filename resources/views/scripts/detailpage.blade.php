@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $.fn.Global = {
         DELETE_IMAGES : [],
+        AGENDA_ITEMS : [],
         DELETE_COMPONENTS : []
     };
 
@@ -21,6 +22,27 @@
             });
         }
 
+        /**
+         * Adds the new create agenda item to the Global save object
+         * @param NYS
+         * @return NYS
+         */
+        function addAgendaItemsToGlobalSaveObject(agendaitem){
+            var newAgendaObject = new Object();
+
+            for(var prop in agendaitem) {
+                if (agendaitem.hasOwnProperty(prop)) {
+                    for(var item in agendaitem[prop]) {
+                        newAgendaObject[item] = agendaitem[prop][item];
+                    }
+                }
+            }
+
+            $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
+
+            console.log($.fn.Global.AGENDA_ITEMS);
+        }
+
         //Validate form
         function validateForm(formData){
             var token = $('meta[name="csrf-token"]').attr('content'),
@@ -35,12 +57,10 @@
                 data: {jsondata: formData},
                 success: function (data) {
                     if(data.success == true) {
-                        //Put the results in de container
-                        console.log('Component is opgeslagen');
                         //Create the new marker
                         create_new_marker(formData);
                     }else{
-                        console.log('Oeps..');
+                        console.log('Something went wrong.. please let us know if you see this text');
                     }
                 },
                 error: function(data){
@@ -482,6 +502,8 @@
                 }
             }
 
+            //
+
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
                 var key = $(this).closest('.product-wrapper').attr('id');
@@ -505,6 +527,7 @@
                     }
                 }
             });
+
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
                 // Merge save_components into dropZoneObjects, recursively
@@ -634,16 +657,35 @@
             }
         });
 
-        //Create Agenda item
-        $(document).on('click','.js-add-agenda-item',function(){    
+
+        /**
+         * Form handeling when the user wants to save the agenda item
+         */
+        $(document).on('click','.js-add-agenda-item',function(){
             // Get the form data
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
-                formData = createNiceFormObject(dataArray);
+                eventIdObject = {},
+                searchObject = {};
+
+            eventIdObject['name'] = 'eventid';
+            eventIdObject['value'] = $('#js-filter-input').attr('eventid').toString();
+
+            searchObject['name'] = 'searchable';
+            if(eventIdObject['value'] != ''){
+                searchObject['value'] = '1';
+            }else{
+                searchObject['value'] = '0';
+            }
+
+            dataArray.push(eventIdObject,searchObject);
+
+            var formData = createNiceFormObject(dataArray);
 
             //Check form inputs
             validateForm(formData);
 
-            //Add the data to the global save object 
+            //Add the data to the global save object
+            addAgendaItemsToGlobalSaveObject(formData);
         });    
     });
 </script>

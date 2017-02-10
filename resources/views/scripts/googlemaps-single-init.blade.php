@@ -47,7 +47,6 @@
             markers = [];
         }
 
-        console.log( $.fn.locations_object);
         //Set to use to center map based on user info
         geocoder = new google.maps.Geocoder();
 
@@ -408,4 +407,18 @@
             filterObject($.fn.locations_object);
         });
     }
+
+    jQuery(document).ready(function($){
+        //Hover
+        $(document).on('mouseover','.js-googlemap-agendaitem',function() {
+            var id = parseInt($(this).attr('marker-id'));
+            highlightMarker(id);
+        });
+
+        $(document).on('mouseleave','.js-googlemap-agendaitem',function() {
+            var id = parseInt($(this).attr('marker-id'));
+            stopAnimation(id);
+        });
+    });
+
 </script>

@@ -5,6 +5,7 @@
         $('#modal').on('hidden.bs.modal', function () {
             $('#modal').find('div.input-error').hide();
             $('#modal').find('li.input-error').removeClass('input-error');
+            $('#js-filter-input').attr('eventid','');
             $('#js-modal-create-agenda-items').trigger("reset");
         });
     });

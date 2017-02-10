@@ -21,7 +21,7 @@
     @include('scripts.dropzone.dropzone-init')
     @include('scripts.googlemaps-single-init')
     @include('scripts.detailpage')
-    @include('scripts.datepicker.datepicker-init')
+    @include('scripts.datepicker.daterangepicker-init')
     @include('scripts.datepicker.datepicker-single-init')
     @include('scripts.customscrollbar.customscrollbar-init')
     @include('scripts.autocomplete.autocomplete-agenda-init')
