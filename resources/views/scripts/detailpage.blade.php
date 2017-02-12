@@ -5,6 +5,42 @@
         DELETE_COMPONENTS : []
     };
 
+    /**
+     * Adds the new create agenda item to the Global save object
+     * @param NYS
+     * @return NYS
+     */
+    function addAgendaItemsToGlobalSaveObject(agendaitem){
+        var newAgendaObject = new Object(),
+            count = 0;
+
+        for(var prop in agendaitem) {
+            if (agendaitem.hasOwnProperty(prop)) {
+                for(var item in agendaitem[prop]) {
+                    newAgendaObject[item] = agendaitem[prop][item];
+                }
+                count++;
+            }
+        }
+
+        $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
+
+        $.each($.fn.locations_object, function(index, value) {
+            if(value.id == $.fn.Global.AGENDA_ITEMS[0].id && typeof $.fn.Global.AGENDA_ITEMS[0].eventid != 'undefined'){
+                $.fn.locations_object[index].event_id = $.fn.Global.AGENDA_ITEMS[0].eventid;
+                $.fn.locations_object[index]['info'].id = $.fn.Global.AGENDA_ITEMS[0].eventid;
+                $.fn.locations_object[index]['info'].searchable = $.fn.Global.AGENDA_ITEMS[0].searchable.toString();
+            }else{
+                $.fn.locations_object[index]['info'].searchable = '0';
+            }
+            $.fn.locations_object[index]['info'].new = true;
+        });    
+       // test = $.fn.locations_object;
+         console.log($.fn.locations_object);
+        // console.log(test.length);
+        console.log($.fn.Global.AGENDA_ITEMS);
+    }
+
     $(document).ready(function(e) {
         //Add media item to template
         $('#js_add_mediaitem').on('click', function(){
@@ -21,28 +57,6 @@
                 $('#'+item.elementid).attr( "media", item.componentid );
             });
         }
-
-        /**
-         * Adds the new create agenda item to the Global save object
-         * @param NYS
-         * @return NYS
-         */
-        function addAgendaItemsToGlobalSaveObject(agendaitem){
-            var newAgendaObject = new Object();
-
-            for(var prop in agendaitem) {
-                if (agendaitem.hasOwnProperty(prop)) {
-                    for(var item in agendaitem[prop]) {
-                        newAgendaObject[item] = agendaitem[prop][item];
-                    }
-                }
-            }
-
-            $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
-
-            console.log($.fn.Global.AGENDA_ITEMS);
-        }
-
         //Validate form
         function validateForm(formData){
             var token = $('meta[name="csrf-token"]').attr('content'),
@@ -55,6 +69,7 @@
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
                 data: {jsondata: formData},
+                async:false,
                 success: function (data) {
                     if(data.success == true) {
                         //Create the new marker
@@ -665,7 +680,8 @@
             // Get the form data
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
                 eventIdObject = {},
-                searchObject = {};
+                searchObject = {},
+                countObject = {};
 
             eventIdObject['name'] = 'eventid';
             eventIdObject['value'] = $('#js-filter-input').attr('eventid').toString();
@@ -677,15 +693,15 @@
                 searchObject['value'] = '0';
             }
 
-            dataArray.push(eventIdObject,searchObject);
+            countObject['name'] = 'id';
+            countObject['value'] = objectLength($.fn.locations_object)+1;
+
+            dataArray.push(eventIdObject,searchObject,countObject);
 
             var formData = createNiceFormObject(dataArray);
 
             //Check form inputs
             validateForm(formData);
-
-            //Add the data to the global save object
-            addAgendaItemsToGlobalSaveObject(formData);
         });    
     });
 </script>

@@ -102,6 +102,7 @@
         var place_detail = [];
         var lat = '';
         var lng = '';
+        var position_innit = false;
 
 
         $.each(info, function(key, fd) {
@@ -139,18 +140,27 @@
         //Get the current user location
         var country = '{!! App::getLocale() !!}';
 
+        getLocationDetails(info,country,location,name,date_start,date_end,description);
+
+        // var locations = set_locations(key,fd['info']);
+        // add_markers(key,map,locations,icons['events'].icon,animation);\
+
+        //Count the current object length using function from DETAILPAGE script
+    }
+
+    function getLocationDetails(info,country,location,name,date_start,date_end,description){
         //Get the details using the maps API
-        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val) {
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
             if(val.results.length) {
-                var location = val.results[0].geometry.location;
+                var locationInfo = val.results[0].geometry.location;
 
                 //New objects
                 var new_detail_object = new Object();
                     new_detail_object['description'] = description;
-                    new_detail_object['location'] = city;
+                    new_detail_object['location'] = location;
                     new_detail_object['name'] = name;
-                    new_detail_object['lat'] = location.lat.toString();
-                    new_detail_object['long'] = location.lng.toString();
+                    new_detail_object['lat'] = locationInfo.lat.toString();
+                    new_detail_object['long'] = locationInfo.lng.toString();
 
                 var new_location_object = new Object();    
                     new_location_object['new'] = true;
@@ -160,17 +170,16 @@
                     new_location_object['info'] = new_detail_object;
 
                 //Add the new marker info the the $.fn.locations_object
-
-            }
                 $.fn.locations_object.push(new_location_object);
-                $('#modal').modal('toggle');
-                initMap();
+            }
+        }).success(function(new_location_object) {
+            $('#modal').modal('toggle');
+            initMap();
+
+            //Add the data to the global save object
+            addAgendaItemsToGlobalSaveObject(info);          
         });
 
-        // var locations = set_locations(key,fd['info']);
-        // add_markers(key,map,locations,icons['events'].icon,animation);\
-
-        //Count the current object length using function from DETAILPAGE script
     }
 
     function add_markers(key,map,locations,icon,animation){
