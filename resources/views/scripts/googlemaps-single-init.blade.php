@@ -320,14 +320,22 @@
     function setAgendaItems(){
 
         //Get the agenda info
-        var agenda_listitems = '';
+        var agenda_listitems = '',
+            eventid = '';
 
         for (var key in $.fn.locations_object) {
             if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
+                var id = $.fn.locations_object[key].id;
+
+                if(typeof $.fn.locations_object[key].event_id != 'undefined')
+                    eventid = $.fn.locations_object[key].event_id;
+
                 var name = $.fn.locations_object[key]['info'].name;
+                var location = $.fn.locations_object[key]['info'].location;
                 var start = $.fn.locations_object[key].date_start;
                 var end = $.fn.locations_object[key].date_end;
                 var date = '';
+                var edit = '';
 
                 if(typeof start != 'undefined' && start != ''){
                     date = start+' - '+end;
@@ -335,10 +343,14 @@
                     date = start;
                 }
 
-                var item = "<li class='agendaitem js-googlemap-agendaitem' marker-id='"+key+"'>"+
+                @if(isset($page_type) && ($page_type == 'update' || $page_type == 'new'))
+                    edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal' data-icon='X'";
+                @endif
+
+                var item = "<li id='"+id+"' event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"marker-id='"+key+"'>"+
                             "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
-                            "<span class='agenda-name'>"+name+"</span>"+
-                            "</li>";
+                            "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
+                            "</li>";       
                 agenda_listitems = agenda_listitems+item;
             }
         }

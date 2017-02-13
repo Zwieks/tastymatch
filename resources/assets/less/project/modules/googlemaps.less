@@ -266,7 +266,7 @@
 	&:extend(.google-maps-overlay);
 
 	width: @spacing*10;
-	height: @spacing*10;
+	height: @spacing*12.5;
 	padding:@spacing/2;
 	border-left: 15px solid @primColor;
 
@@ -293,7 +293,7 @@
 	.agendaitems-wrapper{
 		margin: 0;
 		height: auto;
-		max-height: @spacing*5;
+		max-height: @spacing*7.5;
 	}
 
 	.overlay-agenda-title{
@@ -304,6 +304,7 @@
 	.agendaitem{
 		cursor:pointer;
 		margin-bottom: @spacing/3;
+		position: relative;
 
 		&:hover,
 		&:focus{
@@ -315,6 +316,13 @@
 		&.active{
 			color:@primColor;
 		}
+
+	    &:before{
+	        .center;
+	        right:-5px;
+	        left:auto;
+	        top:10px;
+	    }
 
 		span{
 			position: relative;
