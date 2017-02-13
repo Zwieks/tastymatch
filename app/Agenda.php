@@ -25,10 +25,10 @@ class Agenda extends Model
 			$Agenda->event_id = $event_id;
 
 		if(isset($data['date_start']) && $data['date_start'] != '')
-			$Agenda->date_start = Carbon::parse($data['date_start'])->formatLocalized('%e %b %Y');
+			$Agenda->date_start = Carbon::parse($data['date_start'])->format('Y-m-d');
 
 		if(isset($data['date_end']) && $data['date_end'] != '')
-			$Agenda->date_end = Carbon::parse($data['date_end'])->formatLocalized('%e %b %Y');
+			$Agenda->date_end = Carbon::parse($data['date_end'])->format('Y-m-d');
 
 		$Agenda->save();
 
