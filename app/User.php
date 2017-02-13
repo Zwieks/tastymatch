@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Auth;
 
 class User extends Authenticatable
 {
@@ -25,6 +26,18 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public static function userSessionSetup(){
+        $user = User::with('roles','types','foodstands', 'entertainers', 'events','agenda')->where('id', '=', Auth::user()->id)->first();
+
+        //Get the product images
+        $user = Images::getAllUserProductImages($user);
+
+        //Get the agenda items
+        $user = Agenda::getAllUserAgendaDetails($user);
+
+        return $user;
+    }
 
     public function roles()
     {

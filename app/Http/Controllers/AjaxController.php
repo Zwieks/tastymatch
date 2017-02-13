@@ -14,12 +14,23 @@ use App\ComponentMediaItem;
 
 use App\Detailpage_User;
 use App\Detailpage;
+
+use App\Agenda_User;
+use App\Agenda;
+
+use App\Event_User;
+use App\Event;
+
 use App\ComponentMediaitem_User;
+
+use App\User;
+use App\Sessions;
 
 class AjaxController extends Controller
 {
     //GLOBALS
     protected $mediaComponents = [];
+    protected $agendaItems = [];
 
     /**
      * Validate Form inputs with AJAX
@@ -29,13 +40,15 @@ class AjaxController extends Controller
     public function getValidation(Request $request)
     {
         if($this->checkAjaxRequest($request) == true) {
+
             //Validate the input, when this fails it will return a json error
             $this->validate($request, [
-                'jsondata.0.searchevents' => 'bail|required|string',
-                'jsondata.1.description' => 'sometimes|string',
-                'jsondata.2.location' => 'required|string',
-                'jsondata.3.datestart' => 'required|date|before:jsondata.4.dateend',
-                'jsondata.4.dateend' => 'date',
+                'jsondata.searchevents' => 'bail|required|string',
+                'jsondata.eventtype' => 'numeric|between:0,10',
+                'jsondata.description' => 'sometimes|string',
+                'jsondata.location' => 'required|string',
+                'jsondata.datestart' => 'required|date|before:jsondata.dateend',
+                'jsondata.dateend' => 'date',
             ]);
         }
 
@@ -165,6 +178,47 @@ class AjaxController extends Controller
             }
 
             return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents)));
+        }
+    }
+
+    public function SaveAgendaitemsComponent(Request $request,$data,$detailpage_id){
+        $userid = $request->session()->get('user.global.id');
+
+        //If the item is not selected to be removed, save it
+        if(!isset($data['delete'])){
+            //Check if the user can change the item by getting the agenda_id
+            if(isset($data['event_id'])){
+                $event_id = $data['event_id'];
+                $agenda_id = Agenda_User::CheckAlreadyUpdated('agendas.id',$event_id,$userid);
+            }
+            //If the check give a valid component id related to the sser update the field else add a new item to the DB en pivot
+            if(isset($agenda_id) && $agenda_id != ''){
+                //Update the possible agenda dates
+                Agenda::updateFields($userid,$agenda_id,$data);
+            }else{
+                //Create a new event if the user did not select an existing one
+                if(isset($data['info']) && !empty($data['info']) && !isset($data['event_id'])){
+                    $event_id = Event::store($data);
+                    Event_User::store($userid,$event_id,$data);
+                }else{
+                    $event_id = $data['event_id'];
+                }
+
+                //Add the component data to the component table and get the id
+                $agenda_id = Agenda::store($data,$event_id);
+
+                //Add detailpage_id and $agenda_id to component_mediaitem_user table
+                Agenda_User::store($userid, $agenda_id);
+
+                //Add item data to the global variable
+                $this->agendaItems[] = ['agendaid' => $agenda_id];
+
+                //Update the Session
+                $user = User::userSessionSetup();
+
+                //Set User Data Session
+                Sessions::setGlobalUserSession($request, $user);
+            }
         }
     }
 

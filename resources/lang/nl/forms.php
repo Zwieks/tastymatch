@@ -50,5 +50,6 @@ return [
 	'placeholder-title' => 'Vul hier de titel in',
 	'location' => 'Plaats',
 	'description' => 'Beschrijving',
+	'eventtype' => 'Evenement type',
 	'form-separator-to' => 'tot',
 ];

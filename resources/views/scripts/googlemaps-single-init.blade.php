@@ -29,7 +29,8 @@
     var iconBase = '/img/googlemaps/markers/';
     var icons = {
         events: {
-            icon: iconBase + 'events-50.png'
+            icon: iconBase + 'events-50.png',
+            icon_new: iconBase + 'events-50.png'
         },
         foodstands: {
             icon: iconBase + 'foodstands-50.png'
@@ -137,10 +138,17 @@
             var description = '';
         }
 
+        //Get the type
+        if(typeof new_info_object.eventtype != 'undefined'){
+            var event_type = new_info_object.eventtype;
+        }else{
+            var event_type = '';
+        }
+
         //Get the current user location
         var country = '{!! App::getLocale() !!}';
 
-        getLocationDetails(info,country,location,name,date_start,date_end,description);
+        getLocationDetails(info,country,location,name,date_start,date_end,description,event_type);
 
         // var locations = set_locations(key,fd['info']);
         // add_markers(key,map,locations,icons['events'].icon,animation);\
@@ -148,21 +156,22 @@
         //Count the current object length using function from DETAILPAGE script
     }
 
-    function getLocationDetails(info,country,location,name,date_start,date_end,description){
+    function getLocationDetails(info,country,location,name,date_start,date_end,description,event_type){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
             if(val.results.length) {
                 var locationInfo = val.results[0].geometry.location;
 
                 //New objects
-                var new_detail_object = new Object();
+                var new_detail_object = {};
                     new_detail_object['description'] = description;
+                    new_detail_object['eventtype'] = event_type;
                     new_detail_object['location'] = location;
                     new_detail_object['name'] = name;
                     new_detail_object['lat'] = locationInfo.lat.toString();
                     new_detail_object['long'] = locationInfo.lng.toString();
 
-                var new_location_object = new Object();    
+                var new_location_object = {};
                     new_location_object['new'] = true;
                     new_location_object['date_end'] = date_end;
                     new_location_object['date_start'] = date_start;

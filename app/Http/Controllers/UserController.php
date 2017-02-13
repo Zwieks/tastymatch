@@ -31,13 +31,7 @@ class UserController extends Controller
 
             //Check if the user is already loggedin and the session has been set
             if (!$request->session()->has('user.global')) {
-                $user = User::with('roles','types','foodstands', 'entertainers', 'events','agenda')->where('id', '=', Auth::user()->id)->first();
-
-                //Get the product images
-                $user = Images::getAllUserProductImages($user);
-
-                //Get the product images
-                $user = Agenda::getAllUserAgendaDetails($user);
+                $user = User::userSessionSetup();
 
                 //Set User Data Session
                 Sessions::setGlobalUserSession($request, $user);

@@ -58,7 +58,7 @@
             });
         }
         //Validate form
-        function validateForm(formData){
+        function validateForm(formData,dataArray){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/validateForm',
                error_response = false;
@@ -72,6 +72,8 @@
                 async:false,
                 success: function (data) {
                     if(data.success == true) {
+                        //Create object for the GM handles
+                        formData = createNiceFormObject(dataArray);
                         //Create the new marker
                         create_new_marker(formData);
                     }else{
@@ -127,6 +129,7 @@
                         if(jQuery.parseJSON(data.mediaComponents).length > 0){
                             setDataAtributeMediaItems(jQuery.parseJSON(data.mediaComponents));
                         }
+
                         console.log('Component is opgeslagen');
                     }else{
                         console.log('Oeps..');
@@ -329,6 +332,16 @@
             return formData; 
         }
 
+        function createValidateObject(dataArray){
+            var formData = {};
+
+            $.each(dataArray, function(i, fd) {
+                formData[fd.name] = fd.value;
+            });
+
+            return formData;
+        }
+
         function addMediaItem() {
 
             var formData = {
@@ -517,7 +530,14 @@
                 }
             }
 
-            //
+            //Save the AGENDA FORM content
+            var count = 0;
+            $.each($.fn.locations_object, function(index, value) {
+                if(typeof value.new != 'undefined'){
+                    save_components['component-agendaitems-'+count] = value;
+                    count++;
+                }
+            });
 
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
@@ -525,7 +545,7 @@
 
                 //Check if the object already has been set
                 if(typeof save_components[key] === 'undefined') {
-                    var myObject = new Object();
+                    var myObject = {};
                         myObject.componentId = key;
                         myObject.selector = key;
                         save_components[key] = myObject;
@@ -698,10 +718,9 @@
 
             dataArray.push(eventIdObject,searchObject,countObject);
 
-            var formData = createNiceFormObject(dataArray);
-
+            var validateData = createValidateObject(dataArray);
             //Check form inputs
-            validateForm(formData);
+            validateForm(validateData,dataArray);
         });    
     });
 </script>

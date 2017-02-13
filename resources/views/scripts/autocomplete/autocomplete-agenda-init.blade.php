@@ -19,6 +19,7 @@
         var id = object.attr('id'),
             name = object.attr('name'),
             description = object.attr('des'),
+            type = object.attr('type'),
             location = object.attr('loc');
 
         //Put the EVENT NAME in the inputfield
@@ -29,6 +30,8 @@
         $("textarea[name='description']").val(description).prop('readonly', true);
         //Put the EVENT LOCATION in the inputfield
         $("input[name='location']").val(location).prop('readonly', true);
+        //Empty the EVENT TYPE in the inputfield
+        $("select[name='eventtype']").prop('selectedIndex',type).attr("disabled", true);
         //Hide the autocomplete
         $('html').removeClass('open-search, open-autocomplete');
     }

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use DB;
 
 class Agenda_User extends Model
 {
@@ -24,5 +25,29 @@ class Agenda_User extends Model
 
 	public function Agenda(){
 		return $this->hasOne('App\Agenda');
+	}
+
+	public static function store($userid, $agenda_id){
+		$AgendaUser = new Agenda_User;
+
+		$AgendaUser->user_id = $userid;
+		$AgendaUser->agenda_id = $agenda_id;
+
+		$AgendaUser->save();
+	}
+
+	public static function checkAlreadyUpdated($field,$event_id,$userid){
+		$check = DB::table('agenda_user')
+			->join('agendas', 'agenda_user.agenda_id', '=', 'agendas.id')
+			->select($field)
+			->where('event_id', '=', $event_id)
+			->where('user_id', '=', $userid)
+			->first();
+
+		if(isset($check->$field) && $check->$field != ''){
+			return $check->$field;
+		}else{
+			return $check = '';
+		}
 	}
 }

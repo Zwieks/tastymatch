@@ -29,4 +29,18 @@ class Event_User extends Model
 	public function EventType(){
 		return $this->hasOne('App\EventType');
 	}
+
+	public static function store($userid,$event_id,$data){
+		$EventUser = new Event_User;
+		$info = $data['info'];
+		if(isset($userid) && $userid != '')
+			$EventUser->user_id = $userid;
+
+		if(isset($event_id) && $event_id != '')
+			$EventUser->event_id = $event_id;
+
+		$EventUser->save();
+
+		return $EventUser->id;
+	}
 }

@@ -50,5 +50,6 @@ return [
 	'placeholder-title' => 'Enter the title here',
 	'location' => 'City',
 	'description' => 'Description',
+	'eventtype' => 'Event type',
 	'form-separator-to' => 'till',
 ];

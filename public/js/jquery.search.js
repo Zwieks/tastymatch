@@ -88,7 +88,8 @@ function removeDefaultInputs(){
     $("textarea[name='description']").val('').prop('readonly', false);
     //Empty the EVENT LOCATION in the inputfield
     $("input[name='location']").val('').prop('readonly', false);
-
-    //Hide the autocomplete
+	//Empty the EVENT TYPE in the inputfield
+	$("select[name='eventtype']").prop('selectedIndex',0).attr("disabled", false);
+	//Hide the autocomplete
     $('html').removeClass('open-search, open-autocomplete');
 }

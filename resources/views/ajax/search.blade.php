@@ -30,6 +30,11 @@
 										@else
 											des=""
 										@endif
+										@if(isset($object->type_id))
+											type="{{$object->type_id}}"
+										@else
+											type=""
+										@endif
 									>
 									@if(isset($object->images[0]) && $object->images[0]->file != '')
 										@php($image = $object->images[0]->file)
