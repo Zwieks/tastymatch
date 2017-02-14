@@ -53,6 +53,8 @@
                     removeAgendaItemBlocking(e);
                 }
             }else{
+                //Set title
+                $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
                 removeAgendaItemBlocking(e);
             }
         });
@@ -70,8 +72,6 @@
     }
 
     function removeAgendaItemBlocking(e){
-        //Set title
-        $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
         //Put the EVENT TITLE in READONLY
         $(e.currentTarget).find("input[name='searchevents']").prop('readonly', false);
         //Put the EVENT DESCRIPTION in READONLY

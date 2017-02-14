@@ -26,19 +26,28 @@
 
         //Update the items
         $.each($.fn.locations_object, function(index, value) {
-            if( value.event_id == newAgendaObject.eventid){
-                //Set the update NAME
-                $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
-                //Set the update TYPE
-                $.fn.locations_object[index]['info'].type_id = newAgendaObject.eventtype;
-                //Set the update DESCRIPTION
-                $.fn.locations_object[index]['info'].description = newAgendaObject.description;
-                //Set the update LOCATION
-                $.fn.locations_object[index]['info'].location = newAgendaObject.location;
-                //Set the update DATE START
-                $.fn.locations_object[index].date_start = newAgendaObject.datestart;
-                //Set the update DATE END
-                $.fn.locations_object[index].date_end = newAgendaObject.dateend;
+            if(value.event_id == newAgendaObject.eventid){
+                if(value.location != newAgendaObject.location){
+                    console.log($.fn.locations_object);
+                    $.fn.locations_object[index]['info'].location = newAgendaObject.location;
+                    //Remove array
+                    $.fn.locations_object.splice(index,1);
+                    //Set the update LOCATION
+                    create_new_marker(agendaitem);
+                }else{
+                    //Set the update NAME
+                    $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
+                    //Set the update TYPE
+                    $.fn.locations_object[index]['info'].type_id = newAgendaObject.eventtype;
+                    //Set the update DESCRIPTION
+                    $.fn.locations_object[index]['info'].description = newAgendaObject.description;
+                    //Set the update DATE START
+                    $.fn.locations_object[index].date_start = newAgendaObject.datestart;
+                    //Set the update DATE END
+                    $.fn.locations_object[index].date_end = newAgendaObject.dateend;
+
+                    $('#modal').modal('toggle');
+                }
             }
         });
 
@@ -74,7 +83,6 @@
             }else{
                 $.fn.locations_object[index]['info'].searchable = '0';
             }
-            $.fn.locations_object[index]['info'].new = true;
         });
     }
 
@@ -126,9 +134,6 @@
                         }else{
                             //Add the data to the global save object
                             updateAgendaItemsToGlobalSaveObject(formData);
-
-                            //Close the modal
-                            $('#modal').modal('toggle');
                         }
                     }else{
                         console.log('Something went wrong.. please let us know if you see this text');

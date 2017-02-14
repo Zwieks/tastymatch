@@ -109,9 +109,14 @@
         $.each(info, function(key, fd) {
             new_info_object = jQuery.extend(new_info_object, fd);
         });
+        //Get the status
+        var status = new_info_object.status;
 
         //Get the new location
         var location = new_info_object.location;
+
+        //Get the title
+        var eventid = new_info_object.eventid;
 
         //Get the title
         var name = new_info_object.searchevents;
@@ -122,7 +127,6 @@
         }else{
             var date_start = '';
         }
-
 
         //Get the end date
         if(typeof new_info_object.dateend != 'undefined'){
@@ -148,7 +152,7 @@
         //Get the current user location
         var country = '{!! App::getLocale() !!}';
 
-        getLocationDetails(info,country,location,name,date_start,date_end,description,event_type);
+        getLocationDetails(status,eventid,info,country,location,name,date_start,date_end,description,event_type);
 
         // var locations = set_locations(key,fd['info']);
         // add_markers(key,map,locations,icons['events'].icon,animation);\
@@ -156,7 +160,7 @@
         //Count the current object length using function from DETAILPAGE script
     }
 
-    function getLocationDetails(info,country,location,name,date_start,date_end,description,event_type){
+    function getLocationDetails(status,eventid,info,country,location,name,date_start,date_end,description,event_type){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
             if(val.results.length) {
@@ -172,7 +176,11 @@
                     new_detail_object['long'] = locationInfo.lng.toString();
 
                 var new_location_object = {};
-                    new_location_object['new'] = true;
+                    if(status != 'update'){
+                        new_detail_object['new'] = true;
+                    }
+
+                    new_location_object['event_id'] = eventid;
                     new_location_object['date_end'] = date_end;
                     new_location_object['date_start'] = date_start;
                     new_location_object['id'] = (objectLength($.fn.locations_object)+1);
@@ -358,7 +366,6 @@
 
         $('.agendaitems-wrapper .mCSB_container').empty();
         $('.agendaitems-wrapper .mCSB_container').append(agenda_listitems);
-
     }
 
     function highlightMarker(id){
