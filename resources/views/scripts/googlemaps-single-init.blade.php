@@ -318,7 +318,6 @@
 
     //Set the agenda items
     function setAgendaItems(){
-
         //Get the agenda info
         var agenda_listitems = '',
             eventid = '';
@@ -332,6 +331,7 @@
 
                 var name = $.fn.locations_object[key]['info'].name;
                 var location = $.fn.locations_object[key]['info'].location;
+                var searchable_id = $.fn.locations_object[key]['info'].searchable;
                 var start = $.fn.locations_object[key].date_start;
                 var end = $.fn.locations_object[key].date_end;
                 var date = '';
@@ -343,11 +343,12 @@
                     date = start;
                 }
 
+                //Set modal options if the page is new or in updates status
                 @if(isset($page_type) && ($page_type == 'update' || $page_type == 'new'))
                     edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal' data-icon='X'";
                 @endif
-
-                var item = "<li id='"+id+"' event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"marker-id='"+key+"'>"+
+                //Create the user agenda items
+                var item = "<li id='"+id+"' event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"marker-id='"+key+"' searchable='"+searchable_id+"'>"+
                             "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
                             "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
                             "</li>";       

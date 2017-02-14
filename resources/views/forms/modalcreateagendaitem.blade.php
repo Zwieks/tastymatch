@@ -6,7 +6,7 @@
             <li class="form-input-textfield">
                 @include('forms.inputerror')
                 <label for="event-name">{{ Lang::get('forms.searchevent') }}<em>*</em></label>
-                {!! Form::text('filter_keywords','',array_merge(['placeholder' => Lang::get('forms.placeholder-title'),'id' => 'js-filter-input', 'name' => 'searchevents','autocomplete' => 'off', 'eventid' => ''])) !!}
+                {!! Form::text('filter_keywords','',array_merge(['placeholder' => Lang::get('forms.placeholder-title'),'id' => 'js-filter-input', 'name' => 'searchevents','autocomplete' => 'off', 'eventid' => '', 'searchable' => ''])) !!}
                 <ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
             </li>
 

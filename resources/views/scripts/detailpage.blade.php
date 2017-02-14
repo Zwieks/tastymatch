@@ -6,6 +6,47 @@
     };
 
     /**
+     * Update agenda item in the Global save object
+     * @param NYS
+     * @return NYS
+     */
+    function updateAgendaItemsToGlobalSaveObject(agendaitem){
+        var newAgendaObject = new Object(),
+            count = 0;
+
+        //Create a better workable object
+        for(var prop in agendaitem) {
+            if (agendaitem.hasOwnProperty(prop)) {
+                for(var item in agendaitem[prop]) {
+                    newAgendaObject[item] = agendaitem[prop][item];
+                }
+                count++;
+            }
+        }
+
+        //Update the items
+        $.each($.fn.locations_object, function(index, value) {
+            if( value.event_id == newAgendaObject.eventid){
+                //Set the update NAME
+                $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
+                //Set the update TYPE
+                $.fn.locations_object[index]['info'].type_id = newAgendaObject.eventtype;
+                //Set the update DESCRIPTION
+                $.fn.locations_object[index]['info'].description = newAgendaObject.description;
+                //Set the update LOCATION
+                $.fn.locations_object[index]['info'].location = newAgendaObject.location;
+                //Set the update DATE START
+                $.fn.locations_object[index].date_start = newAgendaObject.datestart;
+                //Set the update DATE END
+                $.fn.locations_object[index].date_end = newAgendaObject.dateend;
+            }
+        });
+
+        //Update the agenda items
+        setAgendaItems();
+    }
+
+    /**
      * Adds the new create agenda item to the Global save object
      * @param NYS
      * @return NYS
@@ -34,11 +75,7 @@
                 $.fn.locations_object[index]['info'].searchable = '0';
             }
             $.fn.locations_object[index]['info'].new = true;
-        });    
-       // test = $.fn.locations_object;
-         console.log($.fn.locations_object);
-        // console.log(test.length);
-        console.log($.fn.Global.AGENDA_ITEMS);
+        });
     }
 
     $(document).ready(function(e) {
@@ -72,10 +109,27 @@
                 async:false,
                 success: function (data) {
                     if(data.success == true) {
+                        var status = '';
                         //Create object for the GM handles
                         formData = createNiceFormObject(dataArray);
-                        //Create the new marker
-                        create_new_marker(formData);
+
+                        //Get the object status
+                        $.each(formData, function(index, value) {
+                            if(typeof value['status'] != 'undefined')
+                                status = value['status'];
+                        });
+
+                        //Check if the marker has state 'new', if not create a new one
+                        if(status == 'new'){
+                            //Create the new marker
+                            create_new_marker(formData);
+                        }else{
+                            //Add the data to the global save object
+                            updateAgendaItemsToGlobalSaveObject(formData);
+
+                            //Close the modal
+                            $('#modal').modal('toggle');
+                        }
                     }else{
                         console.log('Something went wrong.. please let us know if you see this text');
                     }
@@ -701,24 +755,33 @@
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
                 eventIdObject = {},
                 searchObject = {},
-                countObject = {};
+                statusObject = {},
+            countObject = {};
 
             eventIdObject['name'] = 'eventid';
             eventIdObject['value'] = $('#js-filter-input').attr('eventid').toString();
 
             searchObject['name'] = 'searchable';
-            if(eventIdObject['value'] != ''){
+            statusObject['name'] = 'status';
+
+            if($('#js-filter-input').attr('searchable') != ''){
+                searchObject['value'] = $('#js-filter-input').attr('searchable').toString();
+                statusObject['value'] = 'update';
+            }else if(eventIdObject['value'] != ''){
                 searchObject['value'] = '1';
+                statusObject['value'] = 'new';
             }else{
                 searchObject['value'] = '0';
+                statusObject['value'] = 'new';
             }
 
             countObject['name'] = 'id';
             countObject['value'] = objectLength($.fn.locations_object)+1;
 
-            dataArray.push(eventIdObject,searchObject,countObject);
+            dataArray.push(eventIdObject,searchObject,countObject,statusObject);
 
             var validateData = createValidateObject(dataArray);
+
             //Check form inputs
             validateForm(validateData,dataArray);
         });    

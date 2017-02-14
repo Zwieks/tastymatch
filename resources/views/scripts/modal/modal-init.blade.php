@@ -8,5 +8,77 @@
             $('#js-filter-input').attr('eventid','');
             $('#js-modal-create-agenda-items').trigger("reset");
         });
+
+        //Click on the agenda item
+        $( "#modal" ).on('show.bs.modal', function(e){
+            if($(e.relatedTarget).attr('class') != 'btn-wrapper' && typeof $(e.relatedTarget).attr('class') != 'undefined'){
+                //Get the session
+                var agenda_items = $.fn.locations_object;
+                var marker_id = $(e.relatedTarget).attr('marker-id'),
+                    eventId = $(e.relatedTarget).attr('event-id'),
+                    agenda_item = agenda_items[marker_id],
+                    agenda_item_name = agenda_item['info'].name,
+                    agenda_item_type = agenda_item['info'].type_id,
+                    agenda_item_description = agenda_item['info'].description,
+                    agenda_item_location = agenda_item['info'].location,
+                    agenda_item_date_start = agenda_item.date_start,
+                    agenda_item_searchable = agenda_item['info'].searchable,
+                    agenda_item_date_end = agenda_item.date_end;
+
+                //Set event id if there is one
+                if(typeof eventId != 'undefined' && eventId != '') {
+                    $(e.currentTarget).find("input[name='searchevents']").attr('eventid', eventId);
+                    $(e.currentTarget).find("input[name='searchevents']").attr('searchable', agenda_item_searchable);
+                }
+                //Set title
+                $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
+                //populate the title
+                $(e.currentTarget).find('input[name="searchevents"]').val(agenda_item_name);
+                //populate the type
+                $(e.currentTarget).find('select[name="eventtype"]').prop('selectedIndex',agenda_item_type);
+                //populate the description
+                $(e.currentTarget).find('textarea[name="description"]').val(agenda_item_description);
+                //populate the location
+                $(e.currentTarget).find('input[name="location"]').val(agenda_item_location);
+                //Set DatePicker to October 3, 2008
+                $(e.currentTarget).find('input[name="datestart"]').datepicker("setDate", new Date(agenda_item_date_start) );
+                //Set DatePicker to October 3, 2008
+                $(e.currentTarget).find('input[name="dateend"]').datepicker("setDate", new Date(agenda_item_date_end) );
+
+                //Block editing
+                if(agenda_item_searchable == 1){
+                    addAgendaItemBlocking(e);
+                }
+                else{
+                    removeAgendaItemBlocking(e);
+                }
+            }else{
+                removeAgendaItemBlocking(e);
+            }
+        });
     });
+
+    function addAgendaItemBlocking(e){
+        //Put the EVENT TITLE in READONLY
+        $(e.currentTarget).find("input[name='searchevents']").prop('readonly', true);
+        //Put the EVENT DESCRIPTION in READONLY
+        $(e.currentTarget).find("textarea[name='description']").prop('readonly', true);
+        //Put the EVENT LOCATION in READONLY
+        $(e.currentTarget).find("input[name='location']").prop('readonly', true);
+        //Empty the EVENT TYPE in READONLY
+        $(e.currentTarget).find("select[name='eventtype']").attr("disabled", true);
+    }
+
+    function removeAgendaItemBlocking(e){
+        //Set title
+        $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
+        //Put the EVENT TITLE in READONLY
+        $(e.currentTarget).find("input[name='searchevents']").prop('readonly', false);
+        //Put the EVENT DESCRIPTION in READONLY
+        $(e.currentTarget).find("textarea[name='description']").prop('readonly', false);
+        //Put the EVENT LOCATION in READONLY
+        $(e.currentTarget).find("input[name='location']").prop('readonly', false);
+        //Empty the EVENT TYPE in READONLY
+        $(e.currentTarget).find("select[name='eventtype']").attr("disabled", false);
+    }
 </script>
