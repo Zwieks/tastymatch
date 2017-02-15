@@ -1,6 +1,7 @@
 <script type="text/javascript">
     $.fn.Global = {
         DELETE_IMAGES : [],
+        DELETE_AGENDA_ITEMS : [],
         AGENDA_ITEMS : [],
         DELETE_COMPONENTS : []
     };
@@ -28,11 +29,23 @@
         $.each($.fn.locations_object, function(index, value) {
             if(value.event_id == newAgendaObject.eventid){
                 if(value.location != newAgendaObject.location){
-                    console.log($.fn.locations_object);
-                    $.fn.locations_object[index]['info'].location = newAgendaObject.location;
+                    var remove_agendaitem_array = [];
+
+                    //Set the agenda id that can be removed
+                    remove_agendaitem_array.push($.fn.locations_object[index]['info'].id);
+
+                    //Set the eventid if the searchable is 0. When this is 0 the even can be deleted    
+                    if($.fn.locations_object[index]['info'].searchable == 0)
+                        remove_agendaitem_array.push($.fn.locations_object[index].id);
+
+                    //Put the Agenda item in the DELETE AGENDA ITEM aray.
+                    //This will be used to delete the agenda item in this array on deletion
+                    $.fn.Global.DELETE_AGENDA_ITEMS.push(remove_agendaitem_array);
+
                     //Remove array
                     $.fn.locations_object.splice(index,1);
-                    //Set the update LOCATION
+
+                    //Set the update LOCATION marker en put data in array
                     create_new_marker(agendaitem);
                 }else{
                     //Set the update NAME
