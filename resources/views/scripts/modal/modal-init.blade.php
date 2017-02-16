@@ -16,6 +16,7 @@
                 var agenda_items = $.fn.locations_object;
                 var marker_id = $(e.relatedTarget).attr('marker-id'),
                     eventId = $(e.relatedTarget).attr('event-id'),
+                    agendaId = $(e.relatedTarget).attr('id'),
                     agenda_item = agenda_items[marker_id],
                     agenda_item_name = agenda_item['info'].name,
                     agenda_item_type = agenda_item['info'].type_id,
@@ -30,6 +31,12 @@
                     $(e.currentTarget).find("input[name='searchevents']").attr('eventid', eventId);
                     $(e.currentTarget).find("input[name='searchevents']").attr('searchable', agenda_item_searchable);
                 }
+
+                //Set agenda id if there is one
+                if(typeof agendaId != 'undefined' && agendaId != '') {
+                    $(e.currentTarget).find("input[name='searchevents']").attr('agendaid', agendaId);
+                }
+
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
                 //populate the title

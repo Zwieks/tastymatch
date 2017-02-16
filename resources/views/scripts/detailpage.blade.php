@@ -27,20 +27,34 @@
 
         //Update the items
         $.each($.fn.locations_object, function(index, value) {
+            var in_delete_object = false;
+
+            //Check if agenda item is already in delete array
+            if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
+                $.each($.fn.Global.DELETE_AGENDA_ITEMS, function(delete_index, delete_value) {
+                    if(typeof delete_value['agenda_id'] != 'undefined' && delete_value['agenda_id'] == value.id){
+                        in_delete_object = true;
+                    }
+                });
+            }
+
+
             if(value.event_id == newAgendaObject.eventid){
                 if(value.location != newAgendaObject.location){
-                    var remove_agendaitem_array = [];
+                    if(in_delete_object == false){
+                        var remove_agendaitem_array = {};
 
-                    //Set the agenda id that can be removed
-                    remove_agendaitem_array.push($.fn.locations_object[index]['info'].id);
+                        //Set the agenda id that can be removed
+                        remove_agendaitem_array['agenda_id'] = parseInt($.fn.locations_object[index].id);
 
-                    //Set the eventid if the searchable is 0. When this is 0 the even can be deleted    
-                    if($.fn.locations_object[index]['info'].searchable == 0)
-                        remove_agendaitem_array.push($.fn.locations_object[index].id);
+                        //Set the eventid if the searchable is 0. When this is 0 the even can be deleted
+                        if($.fn.locations_object[index]['info'].searchable == 0)
+                            remove_agendaitem_array['event_id'] = parseInt($.fn.locations_object[index]['info'].id);
 
-                    //Put the Agenda item in the DELETE AGENDA ITEM aray.
-                    //This will be used to delete the agenda item in this array on deletion
-                    $.fn.Global.DELETE_AGENDA_ITEMS.push(remove_agendaitem_array);
+                        //Put the Agenda item in the DELETE AGENDA ITEM array.
+                        //This will be used to delete the agenda item in this array on deletion
+                        $.fn.Global.DELETE_AGENDA_ITEMS.push(remove_agendaitem_array);
+                    }
 
                     //Remove array
                     $.fn.locations_object.splice(index,1);
@@ -59,6 +73,7 @@
                     //Set the update DATE END
                     $.fn.locations_object[index].date_end = newAgendaObject.dateend;
 
+                    //Close the modal
                     $('#modal').modal('toggle');
                 }
             }
@@ -89,12 +104,10 @@
         $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
 
         $.each($.fn.locations_object, function(index, value) {
-            if(value.id == $.fn.Global.AGENDA_ITEMS[0].id && typeof $.fn.Global.AGENDA_ITEMS[0].eventid != 'undefined'){
+            if(typeof $.fn.Global.AGENDA_ITEMS[0].eventid != 'undefined' && value.event_id == $.fn.Global.AGENDA_ITEMS[0].eventid){
                 $.fn.locations_object[index].event_id = $.fn.Global.AGENDA_ITEMS[0].eventid;
                 $.fn.locations_object[index]['info'].id = $.fn.Global.AGENDA_ITEMS[0].eventid;
                 $.fn.locations_object[index]['info'].searchable = $.fn.Global.AGENDA_ITEMS[0].searchable.toString();
-            }else{
-                $.fn.locations_object[index]['info'].searchable = '0';
             }
         });
     }
@@ -610,6 +623,19 @@
                     count++;
                 }
             });
+            //Set DELETE AGENDA ITEMS content
+            if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
+                count = 0;
+
+                $.each($.fn.Global.DELETE_AGENDA_ITEMS, function(index, value) {
+                    if(typeof value != 'undefined'){
+                        save_components['delete-component-agendaitems-'+count] = value;
+                        count++;
+                    }
+                });
+
+                console.log(save_components);
+            }
 
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
@@ -774,16 +800,17 @@
                 eventIdObject = {},
                 searchObject = {},
                 statusObject = {},
-            countObject = {};
+                agendaidObject = {},
+                countObject = {};
 
             eventIdObject['name'] = 'eventid';
-            eventIdObject['value'] = $('#js-filter-input').attr('eventid').toString();
+            eventIdObject['value'] = $('#js-filter-input').attr('eventid');
 
             searchObject['name'] = 'searchable';
             statusObject['name'] = 'status';
 
             if($('#js-filter-input').attr('searchable') != ''){
-                searchObject['value'] = $('#js-filter-input').attr('searchable').toString();
+                searchObject['value'] = $('#js-filter-input').attr('searchable');
                 statusObject['value'] = 'update';
             }else if(eventIdObject['value'] != ''){
                 searchObject['value'] = '1';
@@ -793,10 +820,13 @@
                 statusObject['value'] = 'new';
             }
 
-            countObject['name'] = 'id';
+            countObject['name'] = 'count';
             countObject['value'] = objectLength($.fn.locations_object)+1;
 
-            dataArray.push(eventIdObject,searchObject,countObject,statusObject);
+            agendaidObject['name'] = 'id';
+            agendaidObject['value'] = $('#js-filter-input').attr('agendaid');
+
+            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject);
 
             var validateData = createValidateObject(dataArray);
 

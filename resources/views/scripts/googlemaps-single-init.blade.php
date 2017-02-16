@@ -109,13 +109,14 @@
         $.each(info, function(key, fd) {
             new_info_object = jQuery.extend(new_info_object, fd);
         });
+
         //Get the status
         var status = new_info_object.status;
 
         //Get the new location
         var location = new_info_object.location;
 
-        //Get the title
+        //Get the eventid
         var eventid = new_info_object.eventid;
 
         //Get the title
@@ -135,6 +136,14 @@
             var date_end = '';
         }
 
+        //Get the agenda id
+        if(typeof new_info_object.id != 'undefined'){
+            var agenda_id = new_info_object.id;
+        }else{
+            var agenda_id = '';
+        }
+
+
         //Get the description
         if(typeof new_info_object.description != 'undefined'){
             var description = new_info_object.description;
@@ -152,7 +161,7 @@
         //Get the current user location
         var country = '{!! App::getLocale() !!}';
 
-        getLocationDetails(status,eventid,info,country,location,name,date_start,date_end,description,event_type);
+        getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type);
 
         // var locations = set_locations(key,fd['info']);
         // add_markers(key,map,locations,icons['events'].icon,animation);\
@@ -160,7 +169,7 @@
         //Count the current object length using function from DETAILPAGE script
     }
 
-    function getLocationDetails(status,eventid,info,country,location,name,date_start,date_end,description,event_type){
+    function getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
             if(val.results.length) {
@@ -183,7 +192,7 @@
                     new_location_object['event_id'] = eventid;
                     new_location_object['date_end'] = date_end;
                     new_location_object['date_start'] = date_start;
-                    new_location_object['id'] = (objectLength($.fn.locations_object)+1);
+                    new_location_object['id'] = agenda_id;
                     new_location_object['info'] = new_detail_object;
 
                 //Add the new marker info the the $.fn.locations_object
@@ -304,7 +313,6 @@
         @foreach ($user['agenda'] as $item)
             $.fn.locations_object.push({!! $item !!});
         @endforeach
-
 
         return $.fn.locations_object;
     }
