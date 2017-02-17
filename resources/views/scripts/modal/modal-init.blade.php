@@ -6,6 +6,8 @@
             $('#modal').find('div.input-error').hide();
             $('#modal').find('li.input-error').removeClass('input-error');
             $('#js-filter-input').attr('eventid','');
+            $('#js-filter-input').attr('searchable','');
+            $('#js-filter-input').attr('delete','');
             $('#js-modal-create-agenda-items').trigger("reset");
         });
 
@@ -68,8 +70,6 @@
     });
 
     function addAgendaItemBlocking(e){
-        //Put the EVENT TITLE in READONLY
-        $(e.currentTarget).find("input[name='searchevents']").prop('readonly', true);
         //Put the EVENT DESCRIPTION in READONLY
         $(e.currentTarget).find("textarea[name='description']").prop('readonly', true);
         //Put the EVENT LOCATION in READONLY

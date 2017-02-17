@@ -24,8 +24,12 @@
 
         //Put the EVENT NAME in the inputfield
         $("input[name='searchevents']").val(name);
-        //Put the ID as attribute of the object
-        $("input[name='searchevents']").attr('eventid',id);
+
+        //Check if the item can be removed
+        if($("input[name='searchevents']").attr('searchable') != ''){
+            $("input[name='searchevents']").attr('delete',true);
+        }
+
         //Put the EVENT DESCRIPTION in the textarea
         $("textarea[name='description']").val(description).prop('readonly', true);
         //Put the EVENT LOCATION in the inputfield
