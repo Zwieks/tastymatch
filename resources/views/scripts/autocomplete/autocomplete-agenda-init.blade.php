@@ -26,7 +26,7 @@
         $("input[name='searchevents']").val(name);
 
         //Check if the item can be removed
-        if($("input[name='searchevents']").attr('searchable') != ''){
+        if($("input[name='searchevents']").attr('searchable') != '' && $("input[name='searchevents']").attr('eventid') != ''){
             $("input[name='searchevents']").attr('delete',true);
         }
 

@@ -8,6 +8,7 @@
             $('#js-filter-input').attr('eventid','');
             $('#js-filter-input').attr('searchable','');
             $('#js-filter-input').attr('delete','');
+            $('#js-filter-input').attr('agendaid','');
             $('#js-modal-create-agenda-items').trigger("reset");
         });
 
@@ -39,6 +40,9 @@
                     $(e.currentTarget).find("input[name='searchevents']").attr('agendaid', agendaId);
                 }
 
+                //Set new to false while this is an update
+                $(e.currentTarget).find('input[name="searchevents"]').attr('new', false);
+
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
                 //populate the title
@@ -64,6 +68,9 @@
             }else{
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
+                $(e.currentTarget).find('input[name="searchevents"]').attr('searchable', '');
+                $(e.currentTarget).find('input[name="searchevents"]').attr('new', true);
+                $(e.currentTarget).find('input[name="searchevents"]').attr('agendaid', '');
                 removeAgendaItemBlocking(e);
             }
         });

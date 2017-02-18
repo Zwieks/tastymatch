@@ -105,7 +105,6 @@
         var lng = '';
         var position_innit = false;
 
-
         $.each(info, function(key, fd) {
             new_info_object = jQuery.extend(new_info_object, fd);
         });
@@ -308,7 +307,7 @@
 
     //Create default agenda object
     function createDefaultAgendaObject(){
-        $.fn.locations_object = [];
+        $.fn.locations_ofbject = [];
 
         @foreach ($user['agenda'] as $item)
             $.fn.locations_object.push({!! $item !!});

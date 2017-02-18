@@ -24,49 +24,61 @@
                 count++;
             }
         }
-
+console.log('new agenda item');
+console.log(newAgendaObject);
         //Update the items
-        $.each($.fn.locations_object, function(index, value) {
-            var in_delete_object = false;
+        var length = $.fn.locations_object.length;
+        var delete_from_location_object = [];
+        for(var i=0; i<length ; i++){
 
-            //Check if agenda item is already in delete array. This is not the place where the DELETE array will be filled
+            //Check if agenda item is already in delete array. 
+            //This is not the place where the DELETE array will be filled
+            var in_delete_object = false;
+            //Loop through the delete array if this already has been set
             if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
                 $.each($.fn.Global.DELETE_AGENDA_ITEMS, function(delete_index, delete_value) {
-                    if(typeof delete_value['agenda_id'] != 'undefined' && delete_value['agenda_id'] == value.id){
+                    if(typeof delete_value['agenda_id'] != 'undefined' && delete_value['agenda_id'] == $.fn.locations_object[i].id){
                         in_delete_object = true;
                     }
                 });
             }
 
             //Put the agenda item in the delete array if necessary
-            if(value.event_id == newAgendaObject.eventid){
-                if(value.location != newAgendaObject.location){
+            if($.fn.locations_object[i].event_id == newAgendaObject.eventid){
+                if($.fn.locations_object[i].location != newAgendaObject.location){
                     if(in_delete_object == false){
-                        createRemoveArray(parseInt($.fn.locations_object[index].id), parseInt($.fn.locations_object[index]['info'].id), $.fn.locations_object[index]['info'].searchable);
+                        createRemoveArray(parseInt($.fn.locations_object[i].id), parseInt($.fn.locations_object[i]['info'].id), $.fn.locations_object[i]['info'].searchable);
                     }
 
-                    //Remove array
-                    $.fn.locations_object.splice(index,1);
+                    //Add the item you want to remove from the global location object to the remove array
+                    delete_from_location_object.push(i);
 
                     //Set the update LOCATION marker en put data in array
                     create_new_marker(agendaitem);
                 }else{
+                    //Check if the item is new or an update
+                    $.fn.locations_object[i].newitem = newAgendaObject.searchevents;
                     //Set the update NAME
-                    $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
+                    $.fn.locations_object[i]['info'].name = newAgendaObject.searchevents;
                     //Set the update TYPE
-                    $.fn.locations_object[index]['info'].type_id = newAgendaObject.eventtype;
+                    $.fn.locations_object[i]['info'].type_id = newAgendaObject.eventtype;
                     //Set the update DESCRIPTION
-                    $.fn.locations_object[index]['info'].description = newAgendaObject.description;
+                    $.fn.locations_object[i]['info'].description = newAgendaObject.description;
                     //Set the update DATE START
-                    $.fn.locations_object[index].date_start = newAgendaObject.datestart;
+                    $.fn.locations_object[i].date_start = newAgendaObject.datestart;
                     //Set the update DATE END
-                    $.fn.locations_object[index].date_end = newAgendaObject.dateend;
+                    $.fn.locations_object[i].date_end = newAgendaObject.dateend;
 
                     //Close the modal
                     $('#modal').modal('toggle');
                 }
             }
-        });
+        };  
+
+        //Remove the item from the global array
+        $.each(delete_from_location_object, function(ind, item) {
+            $.fn.locations_object.splice(item,1);  
+        });    
 
         //Update the agenda items
         setAgendaItems();
@@ -165,7 +177,9 @@
                 async:false,
                 success: function (data) {
                     if(data.success == true) {
-                        var status = '';
+                        var status = '',
+                            new_item ='';
+
                         //Create object for the GM handles
                         formData = createNiceFormObject(dataArray);
 
@@ -173,12 +187,13 @@
                         $.each(formData, function(index, value) {
                             if(typeof value['status'] != 'undefined')
                                 status = value['status'];
+                                new_item = value['new'];
                         });
 
                         //Check if the marker has state 'new', if not create a new one
-                        if(status == 'new'){
+                        if(status == 'new' || new_item == 'true'){
                             //Create the new marker
-                            create_new_marker(formData);
+                           create_new_marker(formData);
                         }
 
                         //Add the data to the global save object
@@ -641,6 +656,8 @@
             //Save the AGENDA FORM content
             var count = 0;
             $.each($.fn.locations_object, function(index, value) {
+                console.log(value)
+                console.log('end');
                 if(typeof value.new != 'undefined'){
                     save_components['component-agendaitems-'+count] = value;
                     count++;
@@ -824,12 +841,17 @@
                 deleteItem = $('#js-filter-input').attr('delete'),
                 agendaId = $('#js-filter-input').attr('agendaid'),
                 eventId = $('#js-filter-input').attr('eventid'),
+                newItem = $('#js-filter-input').attr('new'),
                 eventIdObject = {},
                 searchObject = {},
                 deleteObject = {},
+                newObject = {},
                 statusObject = {},
                 agendaidObject = {},
                 countObject = {};
+
+            newObject['name'] = 'new';
+            newObject['value'] = newItem; 
 
             eventIdObject['name'] = 'eventid';
             eventIdObject['value'] = eventId;
@@ -867,12 +889,14 @@
             agendaidObject['name'] = 'id';
             agendaidObject['value'] = agendaId;
 
-            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject,deleteObject);
+            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject,deleteObject,newObject);
 
             var validateData = createValidateObject(dataArray);
 
             //Put the old remove info in the remove array
-            createRemoveArray(agendaId, eventId, searchable);
+            if(newItem != 'true'){
+                createRemoveArray(agendaId, eventId, searchable);
+            }
 
             //Check form inputs
             validateForm(validateData,dataArray);
