@@ -24,8 +24,7 @@
                 count++;
             }
         }
-console.log('new agenda item');
-console.log(newAgendaObject);
+
         //Update the items
         var length = $.fn.locations_object.length;
         var delete_from_location_object = [];
@@ -43,9 +42,13 @@ console.log(newAgendaObject);
                 });
             }
 
-            //Put the agenda item in the delete array if necessary
+            //Check if the new created item is inside the locations_object
+            //Ifso then it requires an update
             if($.fn.locations_object[i].event_id == newAgendaObject.eventid){
-                if($.fn.locations_object[i].location != newAgendaObject.location){
+                //Check if the location has been changed
+                //This needs to be check because of the new marker thats needs to be added/removed
+                if($.fn.locations_object[i]['info'].location != newAgendaObject.location){
+                    //Check if the item is already in the delete object
                     if(in_delete_object == false){
                         createRemoveArray(parseInt($.fn.locations_object[i].id), parseInt($.fn.locations_object[i]['info'].id), $.fn.locations_object[i]['info'].searchable);
                     }
