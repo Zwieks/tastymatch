@@ -42,7 +42,12 @@
 
                 //Set new to false while this is an update
                 $(e.currentTarget).find('input[name="searchevents"]').attr('new', false);
-
+                //Set update is true or when it's an searchable event to false
+                if(agenda_item_searchable != '1'){
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('update', true);
+                }else{
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('update', false);
+                }
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
                 //populate the title
@@ -69,6 +74,7 @@
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
                 $(e.currentTarget).find('input[name="searchevents"]').attr('searchable', '');
+                $(e.currentTarget).find('input[name="searchevents"]').attr('update', false);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('new', true);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('agendaid', '');
                 removeAgendaItemBlocking(e);

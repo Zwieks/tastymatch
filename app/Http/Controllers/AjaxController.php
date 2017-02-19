@@ -183,9 +183,8 @@ class AjaxController extends Controller
 
     public function SaveAgendaitemsComponent(Request $request,$data,$detailpage_id){
         $userid = $request->session()->get('user.global.id');
-
         //If the item is not selected to be removed, save it
-        if(!isset($data['delete'])){
+        if(isset($data['newitem'])){
             //Check if the user can change the item by getting the agenda_id
             if(isset($data['event_id'])){
                 $event_id = $data['event_id'];
@@ -219,6 +218,10 @@ class AjaxController extends Controller
                 //Set User Data Session
                 Sessions::setGlobalUserSession($request, $user);
             }
+        }else if(isset($data['updateitem'])){
+            dd('update Item');
+        }else{
+            dd('delete Item');
         }
     }
 
