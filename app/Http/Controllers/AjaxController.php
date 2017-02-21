@@ -185,6 +185,7 @@ class AjaxController extends Controller
         $userid = $request->session()->get('user.global.id');
         //If the item is not selected to be removed, save it
         if(isset($data['newitem'])){
+            dd('new item');
             //Check if the user can change the item by getting the agenda_id
             if(isset($data['event_id'])){
                 $event_id = $data['event_id'];

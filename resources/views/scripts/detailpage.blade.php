@@ -667,6 +667,9 @@
                 }else if(typeof value.updateitem != 'undefined'){
                     save_components['component-agendaitems-update-'+count] = value;
                     count++;
+                }else if(typeof value.event_id == 'undefined' && value.id == ''){
+                    save_components['component-agendaitems-new-'+count] = value;
+                    count++;
                 }
             });
             //Set DELETE AGENDA ITEMS content
@@ -802,6 +805,7 @@
             if(objectLength(save_components) > 0){
                 saveMediaComponents(save_components);
             }
+            console.log(save_components);
 return false;
             //Remove components if the file is empty
             if($.fn.Global.DELETE_COMPONENTS.length > 0){
