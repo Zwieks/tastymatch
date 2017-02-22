@@ -35,6 +35,11 @@
 										@else
 											type=""
 										@endif
+										@if(isset($object->searchable))
+											searchable="{{$object->searchable}}"
+										@else
+											searchable=""
+										@endif										
 									>
 									@if(isset($object->images[0]) && $object->images[0]->file != '')
 										@php($image = $object->images[0]->file)

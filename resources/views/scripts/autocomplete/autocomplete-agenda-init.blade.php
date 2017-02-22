@@ -21,9 +21,12 @@
             description = object.attr('des'),
             type = object.attr('type'),
             location = object.attr('loc');
-
+            searchable = object.attr('searchable');
         //Put the EVENT NAME in the inputfield
         $("input[name='searchevents']").val(name);
+
+        if(typeof searchable != 'undefined')
+            $("input[name='searchevents']").attr('searchable', searchable);
 
         //Check if the item can be removed
         if($("input[name='searchevents']").attr('searchable') != '' && $("input[name='searchevents']").attr('eventid') != ''){
@@ -34,6 +37,8 @@
         $("textarea[name='description']").val(description).prop('readonly', true);
         //Put the EVENT LOCATION in the inputfield
         $("input[name='location']").val(location).prop('readonly', true);
+        //Put the CREATED EVENT ID in the inputfield
+        $("input[name='searchevents']").attr('data-neweventid',id);
         //Empty the EVENT TYPE in the inputfield
         $("select[name='eventtype']").prop('selectedIndex',type).attr("disabled", true);
         //Hide the autocomplete

@@ -184,14 +184,18 @@ class AjaxController extends Controller
     public function SaveAgendaitemsComponent(Request $request,$data,$detailpage_id){
         $userid = $request->session()->get('user.global.id');
         //If the item is not selected to be removed, save it
+
+        if (strpos($data['elementid'], 'new') !== false)
+            $data['newitem'] = true;
+        
         if(isset($data['newitem'])){
-            dd('new item');
+            dd('New item');
             //Check if the user can change the item by getting the agenda_id
             if(isset($data['event_id'])){
                 $event_id = $data['event_id'];
                 $agenda_id = Agenda_User::CheckAlreadyUpdated('agendas.id',$event_id,$userid);
             }
-            //If the check give a valid component id related to the sser update the field else add a new item to the DB en pivot
+            //If the check give a valid component id related to the user update the field else add a new item to the DB en pivot
             if(isset($agenda_id) && $agenda_id != ''){
                 //Update the possible agenda dates
                 Agenda::updateFields($userid,$agenda_id,$data);

@@ -73,7 +73,9 @@
             }else{
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
-                $(e.currentTarget).find('input[name="searchevents"]').attr('searchable', '');
+                if(typeof $(e.currentTarget).find('input[name="searchevents"]').attr('searchable') != 'undefined' &&
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('searchable') == '')
+                $(e.currentTarget).find('input[name="searchevents"]').attr('searchable', 'bla');
                 $(e.currentTarget).find('input[name="searchevents"]').attr('update', false);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('new', true);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('agendaid', '');

@@ -77,7 +77,6 @@
                 }
             };  
         }else{
-            console.log('length is smaller than 1');
             //Set the update LOCATION marker en put data in array
             create_new_marker(agendaitem);
         }    
@@ -175,7 +174,7 @@
         function validateForm(formData,dataArray){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/validateForm',
-               error_response = false;
+                error_response = false;
 
             $.ajax({
                 type: 'POST',
@@ -193,11 +192,11 @@
                         formData = createNiceFormObject(dataArray);
 
                         //Get the object status
-                        $.each(formData, function(index, value) {
-                            if(typeof value['status'] != 'undefined')
-                                status = value['status'];
-                                new_item = value['new'];
-                        });
+                        // $.each(formData, function(index, value) {
+                        //     if(typeof value['status'] != 'undefined')
+                        //         status = value['status'];
+                        //         new_item = value['new'];
+                        // });
 
                         //Add the data to the global save object
                         updateAgendaItemsToGlobalSaveObject(formData);
@@ -659,9 +658,9 @@
             //Save the AGENDA FORM content
             var count = 0;
             $.each($.fn.locations_object, function(index, value) {
-                console.log(value)
+                console.log(value);
                 console.log('end');
-                if(typeof value.newitem != 'undefined'){
+                if(typeof value['info'].new != 'undefined' && value['info'].new == true){
                     save_components['component-agendaitems-new-'+count] = value;
                     count++;
                 }else if(typeof value.updateitem != 'undefined'){
@@ -848,15 +847,19 @@ return false;
             // Get the form data
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
                 searchable = $('#js-filter-input').attr('searchable'),
+                newEventId = $('#js-filter-input').attr('data-neweventid'),
                 deleteItem = $('#js-filter-input').attr('delete'),
                 agendaId = $('#js-filter-input').attr('agendaid'),
                 eventId = $('#js-filter-input').attr('eventid'),
                 newItem = $('#js-filter-input').attr('new'),
                 updateItem = $('#js-filter-input').attr('update'),
+                status = $('#js-filter-input').attr('status'),
                 eventIdObject = {},
                 searchObject = {},
+                newEventObject = {},
                 deleteObject = {},
                 newObject = {},
+                updateObject = {},
                 statusObject = {},
                 agendaidObject = {},
                 countObject = {};
@@ -864,8 +867,8 @@ return false;
             newObject['name'] = 'new';
             newObject['value'] = newItem; 
 
-            newObject['name'] = 'update';
-            newObject['value'] = updateItem; 
+            updateObject['name'] = 'update';
+            updateObject['value'] = updateItem; 
 
             eventIdObject['name'] = 'eventid';
             eventIdObject['value'] = eventId;
@@ -880,13 +883,18 @@ return false;
 
             if(typeof searchable != 'undefined'){
                 searchObject['value'] = searchable;
-                statusObject['value'] = 'update';
+                statusObject['value'] = status;
             }else if(eventIdObject['value'] != ''){
                 searchObject['value'] = '1';
                 statusObject['value'] = 'new';
             }else{
                 searchObject['value'] = '0';
                 statusObject['value'] = 'new';
+            }
+
+            if(typeof newEventId != 'undefined'){
+                newEventObject['name'] = 'neweventid';
+                newEventObject['value'] = newEventId;
             }
 
             if(searchable != 1){
@@ -903,7 +911,7 @@ return false;
             agendaidObject['name'] = 'id';
             agendaidObject['value'] = agendaId;
 
-            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject,deleteObject,newObject);
+            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject,deleteObject,newObject,updateObject,newEventObject);
 
             var validateData = createValidateObject(dataArray);
 
@@ -914,6 +922,6 @@ return false;
 
             //Check form inputs
             validateForm(validateData,dataArray);
-        });    
+        });
     });
 </script>

@@ -103,6 +103,7 @@
         var place_detail = [];
         var lat = '';
         var lng = '';
+        var eventid = '';
         var position_innit = false;
 
         $.each(info, function(key, fd) {
@@ -116,7 +117,11 @@
         var location = new_info_object.location;
 
         //Get the eventid
-        var eventid = new_info_object.eventid;
+        if(typeof new_info_object.neweventid != 'undefined'){
+            eventid = new_info_object.neweventid;
+        }else{
+            eventid = new_info_object.eventid;
+        }
 
         //Get the title
         var name = new_info_object.searchevents;
