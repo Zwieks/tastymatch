@@ -10,6 +10,7 @@
      * Update agenda item in the Global save object
      * @param NYS
      * @return NYS
+     * TAG: UPDATEAGENDAGLOBALOBJECT
      */
     function updateAgendaItemsToGlobalSaveObject(agendaitem){
         var newAgendaObject = new Object(),
@@ -44,7 +45,7 @@
                 });
 
                 //Check if the new created item is inside the locations_object
-                //Ifso then it requires an update
+                //If so then it requires an update
                 if($.fn.locations_object[i].event_id == newAgendaObject.eventid){
                     //Check if the location has been changed
                     //This needs to be check because of the new marker thats needs to be added/removed
@@ -170,7 +171,11 @@
                 $('#'+item.elementid).attr( "media", item.componentid );
             });
         }
-        //Validate form
+
+        /**
+         * Validate form
+         * TAG: VALIDATEFORM
+         */
         function validateForm(formData,dataArray){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/validateForm',
@@ -190,13 +195,6 @@
 
                         //Create object for the GM handles
                         formData = createNiceFormObject(dataArray);
-
-                        //Get the object status
-                        // $.each(formData, function(index, value) {
-                        //     if(typeof value['status'] != 'undefined')
-                        //         status = value['status'];
-                        //         new_item = value['new'];
-                        // });
 
                         //Add the data to the global save object
                         updateAgendaItemsToGlobalSaveObject(formData);
@@ -842,6 +840,7 @@ return false;
 
         /**
          * Form handeling when the user wants to save the agenda item
+         * TAG: AGENDAHANDLER
          */
         $(document).on('click','.js-add-agenda-item',function(){
             // Get the form data
