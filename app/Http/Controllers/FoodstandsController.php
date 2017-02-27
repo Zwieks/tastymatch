@@ -76,6 +76,9 @@ class FoodstandsController extends Controller
             // the post as its payload
             Event::fire(new ViewCounter($post));
         }
+
+        //return the view with the user session data
+        return view('pages.foodstandpage.detail', compact('user','detailpage_id','page_type'));
     }
 
     public function checkRelation(Request $request,$slug)

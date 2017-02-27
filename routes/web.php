@@ -61,14 +61,14 @@ Route::get('blog/admin', array('as' => 'admin_area', 'uses' => 'BlogController@A
 Route::post('blog/add', array('as' => 'add_new_post', 'uses' => 'BlogController@Update'));
 
 // FOODSTANDS
-Route::get('foodstand', ['as' => 'index', 'uses' => 'FoodstandsController@index']) -> where('slug', '[\w\d\-\_]+');
+Route::get('/foodstand/{slug}', ['as' => 'index', 'uses' => 'FoodstandsController@single']) -> where('slug', '[\w\d\-\_]+');
 //Route::get('foodstand/{slug}', ['as' => 'foodstand.single', 'uses' => 'FoodstandsController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 // ENTERTAINERS
-Route::post('/entertainers/{slug}', ['as' => 'blog.single', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
+Route::post('/entertainer/{slug}', ['as' => 'blog.single', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 // EVENTS
-Route::post('/events/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
+Route::post('/event/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 //USER ACCESS ONLY
 Route::group(['middleware' => 'auth'], function()
