@@ -40,6 +40,12 @@
         }
     };
 
+    //set the content
+    //This is kind of a hack because we need to use an exception of the user object
+    @if(isset($user))
+        <?php $page_content = $user; ?>
+    @endif
+
     function initMap() {
         //Get the user agenda items
         if($.fn.locations_object.length === 0){
@@ -292,7 +298,7 @@
 
     // Create agenda object
     function createAgendaObject(filter_start_date, filter_end_date){
-        var collection = {!! $user['agenda']->sortBy('date_start') !!};
+        var collection = {!! $page_content['agenda']->sortBy('date_start') !!};
         var agenda_object = new Object();
         var index = 0;
 
@@ -314,8 +320,10 @@
     function createDefaultAgendaObject(){
         $.fn.locations_ofbject = [];
 
-        @foreach ($user['agenda'] as $item)
-            $.fn.locations_object.push({!! $item !!});
+        @foreach ($page_content['agenda'] as $item)
+            @if($detailpage_id == $item['detailpage_id'])
+                $.fn.locations_object.push({!! $item !!});
+            @endif    
         @endforeach
 
         return $.fn.locations_object;

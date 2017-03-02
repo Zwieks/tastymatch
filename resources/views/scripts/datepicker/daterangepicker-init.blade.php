@@ -1,7 +1,12 @@
 <script type="text/javascript">
     $(document).ready(function(){
-        var user_agenda = {!! $user['agenda']->sortBy('date_start') !!},
-            last_user_agenda_start_date = {!! $user['agenda']->sortBy('date_start')->last() !!};
+        //This is kind of a hack because we need to use an exception of the user object
+        @if(isset($user))
+            <?php $page_content = $user; ?>
+        @endif
+
+        var user_agenda = {!! $page_content['agenda']->sortBy('date_start') !!},
+            last_user_agenda_start_date = {!! $page_content['agenda']->sortBy('date_start')->last() !!};
 
         $('input[name="daterange"]').daterangepicker({
             "alwaysShowCalendars": true,

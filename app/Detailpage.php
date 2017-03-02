@@ -56,6 +56,13 @@ class Detailpage extends Model
 	}
 
 	/**
+	 * Get all the AGENDA ITEMS components of the detailpages
+	 */
+	public function agenda(){
+		return $this->hasMany('App\Agenda');
+	}
+
+	/**
 	 * Create a detailpage for an user. Common use on buttons
 	 *
 	 * @return \Illuminate\Http\Response

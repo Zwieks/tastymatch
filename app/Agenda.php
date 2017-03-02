@@ -47,16 +47,17 @@ class Agenda extends Model
 			->update(['date_start' => $data['date_start'],'date_end' => $data['date_end']]);
 	}
 
-	public static function getAllUserAgendaDetails($user){
+	public static function getAllUserAgendaDetails($page_content){
+
 		$i = 0;
 		//Get the comma separated image string from the database and get the images from the images table put this all in a new array
-		foreach ($user->agenda as $item) {
-        	$user['agenda'][$i]->date_start = Carbon::parse($item->date_start)->formatLocalized('%e %b %Y');
-        	$user['agenda'][$i]->date_end = Carbon::parse($item->date_end)->formatLocalized('%e %b %Y');
+		foreach ($page_content->agenda as $item) {
+        	$page_content['agenda'][$i]->date_start = Carbon::parse($item->date_start)->formatLocalized('%e %b %Y');
+        	$page_content['agenda'][$i]->date_end = Carbon::parse($item->date_end)->formatLocalized('%e %b %Y');
 			$item['info'] = event::where('id', '=', $item['event_id'])->first();
 			$i++;
 		}
 
-		return $user;
+		return $page_content;
 	}
 }

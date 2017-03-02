@@ -70,15 +70,18 @@ class FoodstandsController extends Controller
 
             // We will just be quick here and fetch the post
             // using the Post foodstand.
-            $post = Foodstand::where('slug', $slug)->first();
+            $page_content = Foodstand::getDetailPage($slug);
+
+            //Set the detailpage id
+            $detailpage_id = $page_content['detailpage_id'];
 
             // Next, we will fire off an event and pass along
             // the post as its payload
-            Event::fire(new ViewCounter($post));
+            Event::fire(new ViewCounter($page_content)); 
         }
 
         //return the view with the user session data
-        return view('pages.foodstandpage.detail', compact('user','detailpage_id','page_type'));
+        return view('auth.detail-foodstand', compact('page_content','detailpage_id'));
     }
 
     public function checkRelation(Request $request,$slug)
@@ -156,6 +159,7 @@ class FoodstandsController extends Controller
                         ->with('getMenu')
                         ->with('getHeaderimage')
                         ->with('getMediaItems')
+                        ->with('agenda')
                         ->findOrFail($detailpage_id);
 
         return view('auth.update-foodstand', compact('user','detailpage_id','page_content', 'page_type'));
