@@ -1,8 +1,6 @@
-@extends('heroimage.basic')
+@php($path = URL::asset('img/backgrounds/mainbg.png'))
 
-@section('heroimagepath')
-   {{--*/ $path = URL::asset('img/backgrounds/mainbg.png') /*--}}
-@stop
+@extends('heroimage.basic', ['path' => $path, 'alt'=> 'test'])
 
 @section('heroalinea')
    @include('heroimage.herotext')

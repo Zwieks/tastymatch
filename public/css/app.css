@@ -636,6 +636,10 @@ body {
   }
 }
 .page-wrapper {
+  -moz-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
   -moz-flex-grow: 1;
   -ms-flex-grow: 1;
   -webkit-box-flex: 1;
@@ -2230,6 +2234,9 @@ html[lang='en'] .comp-login .social-login:before {
 }
 .has-bgimage .page-content {
   margin-top: -2.4rem;
+}
+.component-foodstand .page-content {
+  margin-top: 0;
 }
 .logedin .page-wrapper {
   display: -webkit-box;
@@ -5243,16 +5250,16 @@ form ol {
   margin: auto;
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
-  top: 50%;
   position: absolute;
-  top: 100%;
+  top: 50%;
   left: 50%;
   max-width: none;
   height: auto;
+  min-width: 100%;
 }
 @media screen and (max-width: 1280px) {
   .page-hero-image {
-    padding-top: 20%;
+    padding-top: 25%;
   }
 }
 @media screen and (max-width: 768px) {
@@ -5617,6 +5624,216 @@ form ol {
 }
 .sticky-controls-wrapper .btn-wrapper span:last-child {
   border-bottom: none;
+}
+.component-wrapper {
+  display: -webkit-box;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -moz-align-items: flex-start;
+  -ms-align-items: flex-start;
+  -webkit-box-align: start;
+  align-items: flex-start;
+  margin-bottom: 2.4rem;
+}
+.component-wrapper .intro {
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  width: 66.66666667%;
+}
+@media screen and (max-width: 896px) {
+  .component-wrapper .intro {
+    -moz-flex-grow: inherit;
+    -ms-flex-grow: inherit;
+    -webkit-box-flex: inherit;
+    flex-grow: inherit;
+    width: 50%;
+    padding: 0 1.2rem 0 2.4rem;
+  }
+}
+@media screen and (max-width: 480px) {
+  .component-wrapper .intro {
+    width: 100%;
+    padding: 0;
+    margin-bottom: 2.4rem;
+  }
+}
+.component-wrapper .details-wrapper {
+  width: 33.33333333%;
+  margin-left: 2.4rem;
+  margin-top: -7.2rem;
+  z-index: 10;
+}
+@media screen and (max-width: 896px) {
+  .component-wrapper .details-wrapper {
+    -moz-flex-grow: inherit;
+    -ms-flex-grow: inherit;
+    -webkit-box-flex: inherit;
+    flex-grow: inherit;
+    width: 50%;
+    padding: 0 2.4rem 0 1.2rem;
+    margin-top: 0;
+    margin-left: 0;
+  }
+}
+@media screen and (max-width: 480px) {
+  .component-wrapper .details-wrapper {
+    width: 100%;
+    padding: 0;
+  }
+}
+.component-wrapper .details,
+.component-wrapper .menu {
+  margin-bottom: 2.4rem;
+}
+.component-wrapper .details .product-wrapper,
+.component-wrapper .menu .product-wrapper {
+  border-top: none;
+}
+.component-wrapper .details:last-child,
+.component-wrapper .menu:last-child {
+  margin-bottom: 0;
+}
+.component-wrapper .details:first-child .product-wrapper,
+.component-wrapper .menu:first-child .product-wrapper {
+  border-top: 15px solid #5d62ca;
+}
+.component-wrapper .details h2,
+.component-wrapper .menu h2,
+.component-wrapper .details .detailpage-title input,
+.component-wrapper .menu .detailpage-title input {
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 1.8rem;
+  margin-bottom: 1.2rem;
+}
+.component-wrapper .foodstand-menu-items ul {
+  margin: 0;
+}
+.component-wrapper .foodstand-menu-items li {
+  margin: 0 0 0.6rem 0;
+}
+.component-wrapper .foodstand-menu-items li:last-child {
+  margin: 0;
+}
+.component-wrapper .contact-list li {
+  position: relative;
+  padding-left: 2.4rem;
+  margin: 0 0 0.6rem 0;
+}
+.component-wrapper .contact-list li:last-child {
+  margin: 0;
+}
+.component-wrapper .contact-list li:before {
+  display: block;
+  margin: auto;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  left: 6px;
+  font-size: 15px;
+}
+.component-wrapper .contact-list a {
+  color: #333;
+}
+.component-wrapper .contact-list a:hover,
+.component-wrapper .contact-list a:focus {
+  color: #E3262E;
+}
+.component-wrapper .socialmedia-list {
+  display: -webkit-box;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: flex;
+  -moz-justify-content: flex-start;
+  -ms-justify-content: flex-start;
+  -webkit-box-pack: start;
+  justify-content: flex-start;
+  margin: 0 -1.2rem;
+}
+.component-wrapper .socialmedia-list li {
+  width: auto;
+  margin: 0 1.2rem 0 0;
+}
+.component-wrapper .socialmedia-list li:last-child {
+  margin: 0;
+}
+.component-wrapper .socialmedia-list a {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  position: relative;
+  display: block;
+  background: #fff;
+  text-align: center;
+  width: 4rem;
+  height: 3.6rem;
+  border-top: 3px solid #5d62ca;
+  color: #5d62ca;
+}
+.component-wrapper .socialmedia-list a:before {
+  display: block;
+  margin: auto;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 17px;
+}
+.component-wrapper .socialmedia-list a:hover,
+.component-wrapper .socialmedia-list a:focus {
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+.component-wrapper .media {
+  -moz-flex-grow: 1;
+  -ms-flex-grow: 1;
+  -webkit-box-flex: 1;
+  flex-grow: 1;
+  -webkit-align-self: stretch;
+  -ms-align-self: stretch;
+  -ms-grid-row-align: stretch;
+  align-self: stretch;
+  width: 33.33333333%;
+  padding: 1.2rem;
+}
+.component-wrapper .media figure,
+.component-wrapper .media iframe {
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  margin-bottom: 1.2rem;
+}
+.component-wrapper .media figure {
+  padding-top: 24rem;
+}
+.component-wrapper .media iframe {
+  max-width: 100%;
+}
+.component-wrapper .media img {
+  display: block;
+  margin: auto;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  max-width: 200%;
+}
+.component-wrapper .media p {
+  margin: 0;
+}
+.component-wrapper .media .product-wrapper {
+  border-top: 15px solid #2b8a66;
+}
+.component-wrapper.mediaitems-wrapper {
+  flex-wrap: wrap;
+  margin: 0 -1.2rem 2.4rem;
 }
 /* Third party */
 /* owl carousel */
@@ -6038,6 +6255,7 @@ form ol {
   width: auto;
   height: auto;
   max-width: inherit;
+  min-width: 100%;
 }
 @media screen and (max-width: 480px) {
   .dz-image img {

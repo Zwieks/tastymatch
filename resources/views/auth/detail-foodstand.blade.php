@@ -5,7 +5,7 @@
 @section('title', 'Foodstand')
 
 {{-- Name of body class --}}
-@section('type','Foodstand')
+@section('type','foodstand')
 
 {{-- Metadata content --}}
 @section('description', 'Foodstand')
@@ -15,13 +15,19 @@
     @include('pages.foodstandpage.detail')
 @stop
 
+{{-- Include heroimage --}}
+@section('heroimage')
+    @include('heroimage.detailpage')
+@stop
+
+
+
 {{-- Include Scripts --}}
 @section('page-scripts')
     @include('scripts.googlemaps-single-init')
     @include('scripts.detailpage')
     @include('scripts.datepicker.daterangepicker-init')
     @include('scripts.customscrollbar.customscrollbar-init')
-    @include('scripts.autocomplete.autocomplete-agenda-init')
     @include('scripts.modal.modal-init')
 @stop
 
