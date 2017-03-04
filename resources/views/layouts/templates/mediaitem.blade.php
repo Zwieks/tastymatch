@@ -1,7 +1,8 @@
 <!-- {{$debugpath}} -->
 <div class="media">
     <div class="product-wrapper">
-        <figure>
+
+        <figure data-toggle="modal" data-target=".modal" data-content="{{ ( $data['video'] != '' ? $data['video'] : URL::asset('storage/'.$data['image'])) }}" data-type="{{ ( $data['video'] != '' ? 'video' : 'image' ) }}">
             @if($data['video'] != '')
                 <?php
                     preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $data['video'], $match);

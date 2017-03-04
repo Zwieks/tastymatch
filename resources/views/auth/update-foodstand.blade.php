@@ -25,7 +25,7 @@
     @include('scripts.datepicker.datepicker-single-init')
     @include('scripts.customscrollbar.customscrollbar-init')
     @include('scripts.autocomplete.autocomplete-agenda-init')
-    @include('scripts.modal.modal-init')
+    @include('scripts.modal.modal-update-item-init')
 @stop
 
 {{-- Include Controls --}}
@@ -35,5 +35,5 @@
 
 {{-- Include Modal --}}
 @section('modal')
-	@include('modals.basic', ['content' => "modals.agenda.create"])
+	@include('modals.basic', ['content' => "modals.agenda.create", 'mediatype' => 'form']])
 @stop

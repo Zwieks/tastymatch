@@ -214,6 +214,72 @@
   overflow: scroll;
 }
 
+//Modal of the type media styling
+.modal-open .modal-media{
+  overflow: hidden;
+
+  .modal-header{
+    .centerY;
+    right: 0;
+    border:none;
+  }  
+
+  .modal-close{
+    &:before{
+      color:@white;
+      font-size: 24px;
+
+    }
+  }
+
+  .modal-content{
+    .box-shadow(none);
+    max-height: 100vh;
+    overflow: hidden;
+    background: transparent;
+    height: 100%;
+    padding:@spacing*2;
+  }
+
+  .modal-dialog{
+    position: absolute;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+    margin: 0 auto;
+  }
+
+  .modal-body{
+    height: 100%;
+    border: none;
+  }
+
+  img,
+  iframe{
+    .box-shadow();
+  }
+
+  figure{
+    .displayflex;
+    .justify-content(center);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+
+  iframe{
+    width: 100%;
+    height:100%;
+  }
+
+  img{
+    height: 100%;
+  }
+}
+
 // Scale up the modal
 @media (min-width: @screen-sm-min) {
   // Automatically set modal's width for larger viewports
