@@ -2,11 +2,15 @@
 	.displayflex;
 	.align-items(flex-start);
 
-	margin-bottom: @spacing;
+	margin-bottom: @spacing*2;
 
 	.intro{
 		.flex-grow(1);
 		width: 100%/3*2;
+
+		h2{
+			font-weight: 900;
+		}
 
 		@media @bp-TabletM{
 			.flex-grow(inherit);
@@ -123,7 +127,7 @@
 		}
 
 		a{
-			.box-shadow();
+			.box-shadow(0.2rem 0.2rem 0.5rem rgba(0,0,0,.125));
 			.scale(1);
 			position: relative;
 			display: block;
@@ -179,12 +183,13 @@
 
 		.product-wrapper{
 			border-top:15px solid @smoothGreen;
+			padding:@spacing;
 		}
 	}
 
 
 	&.mediaitems-wrapper{
 		.flex-wrap(wrap);
-		margin: 0 -@spacing/2 @spacing;
+		margin: 0 -@spacing/2 @spacing*2;
 	}
 }

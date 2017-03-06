@@ -35,5 +35,5 @@
 
 {{-- Include Modal --}}
 @section('modal')
-	@include('modals.basic', ['content' => "modals.agenda.create", 'mediatype' => 'form']])
+	@include('modals.basic', ['content' => "modals.agenda.create", 'mediatype' => 'form'])
 @stop

@@ -56,3 +56,40 @@
 		}
 	}
 }
+
+.youtube-playbtn{
+	position: relative;
+
+	&:before{
+		.center;
+		content:'5';
+		font-family: @iconFont;
+		z-index: 3;
+		display: block;
+		color:@white;
+		font-size: 24px;
+		width: 48px;
+    	height: 48px;
+    	line-height: 44px;
+    	text-align: center;
+    	background: rgba(43, 138, 102,0.5);
+    	border: 2px solid rgba(255,255,255,0.5);
+	}
+}
+
+.ytp-thumbnail-overlay{
+	.transition();
+	background: rgba(0,0,0,0.3);
+	position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    opacity: 1;
+
+    &:hover,
+    &:focus{
+    	opacity: 0;
+    }
+}

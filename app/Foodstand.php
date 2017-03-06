@@ -55,7 +55,7 @@ class Foodstand extends Model
 			->select('detailpage_id')
 			->where('slug', $slug)
 			->first();
-
+			
 		//Get the DETAILPAGE CONTENT
         $page_content = Detailpage::with('getContact')
             ->with('getIntro')

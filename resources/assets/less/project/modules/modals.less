@@ -42,7 +42,7 @@
 @zindex-modal-background:  1040;
 @zindex-modal:             1050;
 
-@screen-sm:                  768px;
+@screen-sm:                  900px;
 @screen-sm-min:              @screen-sm;
 
 // Medium screen / desktop
@@ -220,14 +220,15 @@
 
   .modal-header{
     .centerY;
-    right: 0;
+    right: @spacing;
     border:none;
+    top:@spacing*2;
   }  
 
   .modal-close{
     &:before{
       color:@white;
-      font-size: 24px;
+      font-size: 30px;
 
     }
   }
@@ -239,6 +240,10 @@
     background: transparent;
     height: 100%;
     padding:@spacing*2;
+
+    @media @bp-TabletM{
+          padding:@spacing*2 @spacing;
+    }
   }
 
   .modal-dialog{
@@ -263,6 +268,7 @@
   figure{
     .displayflex;
     .justify-content(center);
+    .align-items(center);
     position: absolute;
     top: 0;
     bottom: 0;
@@ -276,7 +282,8 @@
   }
 
   img{
-    height: 100%;
+    width: 100%;
+    height: auto;
   }
 }
 
@@ -287,6 +294,13 @@
     width: @modal-md;
     margin: 30px auto;
   }
+
+  .modal-media{
+    .modal-dialog {
+      width: @modal-lg;
+    }  
+  }
+
   .modal-content {
     .box-shadow(0 5px 15px rgba(0,0,0,.5));
     padding:@spacing;
