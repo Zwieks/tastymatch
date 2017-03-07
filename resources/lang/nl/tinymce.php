@@ -12,5 +12,6 @@ return [
 	'detailpage-foodstand-facebook' => 'Facebook URL',
 	'detailpage-foodstand-twitter' => 'Twitter URL',
 	'detailpage-foodstand-linkedin' => 'LinkedIn URL',
+	'detailpage-foodstand-googleplus' => 'GooglePlus URL',
 	'detailpage-foodstand-mediaitem' => 'Plaat hier eventueel je tekst. Wanneer deze niet wordt ingevuld zal deze tekstbox niet getoond worden op de pagina.',
 ];

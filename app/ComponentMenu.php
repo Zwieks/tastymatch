@@ -52,7 +52,7 @@ class ComponentMenu extends Model
 
 	public static function updateFields($component_id,$data){
 		$menu = ComponentMenu::createString($data['form']);
-
+dd($menu);
 		if(!isset($menu))
 			$menu = '';
 

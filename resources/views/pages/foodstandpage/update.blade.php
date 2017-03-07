@@ -1,4 +1,6 @@
 <!-- {{$debugpath}} -->
+
+{{-- HEADERIMAGE MODULE--}}
 <div id="component-headerimage" class="dropzone-wrapper">
     <form method="POST" action="{{url('ajax/upload')}}" class="webbeheer-formulier dropzone" id="DropzoneElementIdHeader" enctype="multipart/form-data">
         <input type="hidden" name="_token" value="{{csrf_token()}}">
@@ -8,8 +10,8 @@
 </div>
 
 <div class="editable-wrapper">
+    {{-- INTRO MODULE--}}
     <div class="intro">
-
         <div id="component-intro" class="product-wrapper">
             @include('forms.detailpagetitle')
 
@@ -20,19 +22,19 @@
     </div>
 
     <div class="details-wrapper">
+        {{-- CONTACT MODULE--}}
         <div id="component-contact" class="details product-wrapper">
             <h2>{{ Lang::get('tinymce.detailpage-foodstand-contact-intro')  }}</h2>
-
-
-           <div id="js-editable-contact" class="content editable">
+            <div id="js-editable-contact" class="content editable">
                <p class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-contact-description') }}</p>
             </div>
 
             @include('forms.detailpagecontact')
         </div>
 
+        {{-- MENU MODULE--}}
         <div id="component-menu" class="content product-wrapper foodstand-menu-items">
-            <h2>Menu</h2>
+            <h2>{{ Lang::get('detailpage.foodstand-menu') }}</h2>
             @include('forms.detailpagemenu')
             <div class="add-menu-wrapper js-add-menuitem">
                 <span class="add-menuitem" data-icon="Z">{{ Lang::get('buttons.add-menu-item') }}</span>
@@ -41,6 +43,7 @@
     </div>
 </div>
 
+{{-- MEDIA ITEMS MODULE--}}
 <div id="js-editable-wrapper">
     <div class="editable-wrapper mediaitems-wrapper">
         @foreach($page_content['getMediaItems'] as $key => $item)

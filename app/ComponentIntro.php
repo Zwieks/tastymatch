@@ -39,6 +39,6 @@ class ComponentIntro extends Model
 
 		DB::table('component_intro')
 	    	->where('id', $component_id)
-	    	->update(['name' => $data['form'][1]['title'], 'content' => $data['content']]);
+	    	->update(['name' => $data['form'][1]['title'], 'content' => preg_replace( "/\r|\n/", "", $data['content'])]);
 	}	
 }

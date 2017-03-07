@@ -12,5 +12,6 @@ return [
 	'detailpage-foodstand-facebook' => 'Facebook URL',
 	'detailpage-foodstand-twitter' => 'Twitter URL',
 	'detailpage-foodstand-linkedin' => 'LinkedIn URL',
+	'detailpage-foodstand-googleplus' => 'GooglePlus URL',
 	'detailpage-foodstand-mediaitem' => 'Place your media item text here. When there is no text, the text box will not be visible on you page.',
 ];

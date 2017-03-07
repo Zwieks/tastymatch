@@ -27,6 +27,14 @@
                 @include('forms.inputerror')
                 {!! Form::url('linkedin',isset($page_content['getContact']->linkedin) ? $page_content['getContact']->linkedin : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-linkedin')])) !!}
             </li>
+            <li class="form-input-textfield" data-icon="4">
+                @include('forms.inputerror')
+                {!! Form::url('instagram',isset($page_content['getContact']->instagram) ? $page_content['getContact']->instagram : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-instagram')])) !!}
+            </li>
+            <li class="form-input-textfield" data-icon="q">
+                @include('forms.inputerror')
+                {!! Form::url('googleplus',isset($page_content['getContact']->googleplus) ? $page_content['getContact']->googleplus : '' ,array_merge(['placeholder' => Lang::get('tinymce.detailpage-foodstand-googleplus')])) !!}
+            </li>
         </ul>
     </fieldset>
 {!! Form::close() !!}

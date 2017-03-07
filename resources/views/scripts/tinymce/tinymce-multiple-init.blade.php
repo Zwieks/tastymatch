@@ -70,7 +70,7 @@
             }
 
             if(ContentCheck.SAVED_VIDEO != ''){
-                ContentCheck.setSavedContent(ed,ContentCheck.SAVED_VIDEO);
+                ContentCheck.setSavedContent(ed,ContentCheck.SAVED_VIDEO,'video');
                 ContentCheck.COUNT_VIDEO++;
             }
         }    

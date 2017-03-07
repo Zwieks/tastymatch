@@ -593,6 +593,7 @@
         
         //Remove MENU ITEM
         $(document).on('click','.js-remove-menuitem',function(){
+            $(this).parent().find('input').val("");
             $(this).parent().remove();
         });
 
@@ -601,10 +602,9 @@
             var video_element = $(this).parent().find('.js-editable-video').attr('id'),
                 id = '#'+video_element,
                 object = $(this).parent().find('.js-editable-video');
-
             // Empty the content
-            tinymce.activeEditor.setContent('');
-            ContentCheck.emptyBox(tinymce.activeEditor,object,'','video');
+            tinymce.get(video_element).setContent('');
+            ContentCheck.emptyBox(tinymce.get(video_element),object,'','video');
             ContentCheck.SAVED_VIDEO = '';
             tinymce.EditorManager.execCommand('mceAddEditor',true, video_element);
 
@@ -685,7 +685,8 @@
 
             //Save check if components got any FORM childs
             $( ".changed" ).each(function( index ) {
-                var key = $(this).closest('.product-wrapper').attr('id');
+                var key = $(this).closest('.product-wrapper').attr('id'),
+                    formData;
 
                 //Check if the object already has been set
                 if(typeof save_components[key] === 'undefined') {
@@ -694,17 +695,23 @@
                         myObject.selector = key;
                         save_components[key] = myObject;
                 }
+
                 var target = save_components[key].componentId;
 
                 //Find the form
                 if($('#'+target).parent().find('form').length > 0){
-                    var dataArray = $('#'+target).find('form').serializeArray(),
+                    var dataArray = $('#'+target).find('form').serializeArray();
                     formData = createNiceFormObject(dataArray);   
 
                     if(objectLength(formData) != 0){
-                        save_components[key].form = formData;
+                        save_components[key].form = '';
                     }
                 }
+                console.log(formData);
+                console.log('lala');
+                save_components[key].form = formData;
+                console.log(save_components[key].form);
+                console.log('plog');
             });
 
             //Get the DROPZONE files en put them in the object

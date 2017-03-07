@@ -56,7 +56,7 @@
 
                 if(ed.getContent() != ''){
                     content = ed.getContent();
-                }else  if($('#'+ed.id).hasClass('empty-content')){
+                }else if($('#'+ed.id).hasClass('empty-content')){
                     content = '';
                 }else{
                     content = saved_video;
@@ -86,10 +86,14 @@
             });
         },
 
-        setSavedContent : function(ed,content){
+        setSavedContent : function(ed,content,type){
             if(typeof content != 'undefined') {
                 ContentCheck.fillBox(ed, $(this));
-                ed.setContent(content);
+                if(typeof type != 'undefined'){
+                    ed.setContent(content);
+                }else{
+                    ed.setContent($('<div/>').html(content).text());
+                }
                 ContentCheck.SAVED_CONTENT = '';
             }
         },
@@ -112,7 +116,7 @@
             selector:'#js-editable-intro',
             element_format : 'html',
             entity_encoding : 'raw',
-            force_br_newlines : true,
+            force_br_newlines : false,
             force_p_newlines : false,
             forced_root_block : '',
             menubar:false,

@@ -2173,6 +2173,7 @@ html[lang='en'] .comp-login .social-login:before {
 }
 .component-foodstand .page-content {
   margin-top: 2.4rem;
+  padding-top: 1rem;
 }
 .logedin .page-wrapper {
   display: -moz-flex;
@@ -4233,6 +4234,7 @@ form ol {
 }
 .detailpage-title input {
   margin-bottom: 0;
+  font-weight: 900;
 }
 .detailpage-title li,
 .detailpage-title input {
@@ -5576,6 +5578,7 @@ form ol {
 .component-wrapper .intro h2,
 .component-wrapper .intro .detailpage-title input {
   font-weight: 900;
+  margin-bottom: 1.2rem;
 }
 @media screen and (max-width: 896px) {
   .component-wrapper .intro {
