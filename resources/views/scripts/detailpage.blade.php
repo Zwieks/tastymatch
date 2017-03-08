@@ -3,6 +3,7 @@
         DELETE_IMAGES : [],
         DELETE_AGENDA_ITEMS : [],
         AGENDA_ITEMS : [],
+        SAVE_COMPONENTS : [],
         DELETE_COMPONENTS : []
     };
 
@@ -626,9 +627,9 @@
         });
 
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
-        $('.js-save-template').on('click', function(e){
+        $(document).on('click','.js-save-template', function(){
             //Contains all the TinyMce changes
-            var save_components = [];
+            var formdata = '';
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++){
@@ -639,33 +640,33 @@
 
                 if(typeof content != 'undefined'){
                     //Check if there is a video in the media item
-                    if(content.componentId in save_components){
+                    if(content.componentId in $.fn.Global.SAVE_COMPONENTS){
                         if(typeof content.video != 'undefined' && content.video != '') {
                             //Add only the video item
-                            save_components[content.componentId].video = content.video;
+                            $.fn.Global.SAVE_COMPONENTS[content.componentId].video = content.video;
                             has_video = true;
                         }
                     }
 
                     //If object does not contain a video add it to the array
                     if(has_video != true)
-                        save_components[content.componentId] = content;
+                        $.fn.Global.SAVE_COMPONENTS[content.componentId] = content;
                 }
             }
 
             //Save the AGENDA FORM content
             var count = 0;
             $.each($.fn.locations_object, function(index, value) {
-                console.log(value);
-                console.log('end');
+                //console.log(value);
+                //console.log('end');
                 if(typeof value['info'].new != 'undefined' && value['info'].new == true){
-                    save_components['component-agendaitems-new-'+count] = value;
+                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
                     count++;
                 }else if(typeof value.updateitem != 'undefined'){
-                    save_components['component-agendaitems-update-'+count] = value;
+                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
                     count++;
                 }else if(typeof value.event_id == 'undefined' && value.id == ''){
-                    save_components['component-agendaitems-new-'+count] = value;
+                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
                     count++;
                 }
             });
@@ -675,59 +676,28 @@
 
                 $.each($.fn.Global.DELETE_AGENDA_ITEMS, function(index, value) {
                     if(typeof value != 'undefined'){
-                        save_components['component-agendaitems-delete-'+count] = value;
+                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-delete-'+count] = value;
                         count++;
                     }
                 });
 
-                console.log(save_components);
+                //console.log($.fn.Global.SAVE_COMPONENTS);
             }
-
-            //Save check if components got any FORM childs
-            $( ".changed" ).each(function( index ) {
-                var key = $(this).closest('.product-wrapper').attr('id'),
-                    formData;
-
-                //Check if the object already has been set
-                if(typeof save_components[key] === 'undefined') {
-                    var myObject = {};
-                        myObject.componentId = key;
-                        myObject.selector = key;
-                        save_components[key] = myObject;
-                }
-
-                var target = save_components[key].componentId;
-
-                //Find the form
-                if($('#'+target).parent().find('form').length > 0){
-                    var dataArray = $('#'+target).find('form').serializeArray();
-                    formData = createNiceFormObject(dataArray);   
-
-                    if(objectLength(formData) != 0){
-                        save_components[key].form = '';
-                    }
-                }
-                console.log(formData);
-                console.log('lala');
-                save_components[key].form = formData;
-                console.log(save_components[key].form);
-                console.log('plog');
-            });
 
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
-                // Merge save_components into dropZoneObjects, recursively
-                if(key in save_components){
-                    $.extend( true, dropZoneObjects, save_components);
+                // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively
+                if(key in $.fn.Global.SAVE_COMPONENTS){
+                    $.extend( true, dropZoneObjects, $.fn.Global.SAVE_COMPONENTS);
                 }
 
-                save_components[key] = dropZoneObjects[key];
+                $.fn.Global.SAVE_COMPONENTS[key] = dropZoneObjects[key];
 
                 //Set image path
-                if(save_components[key].randomname != ''){
-                    save_components[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+save_components[key].randomname;
+                if($.fn.Global.SAVE_COMPONENTS[key].randomname != ''){
+                    $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
                 }else{
-                    save_components[key].path = '';
+                    $.fn.Global.SAVE_COMPONENTS[key].path = '';
                     //Add the remove item to tell this image have to be removed
                 }
 
@@ -749,17 +719,34 @@
             }
 
 
+            //Save check if components got any FORM childs
+            $.each($( ".changed" ), function(index, value) {
+                var key = $(value).closest('.product-wrapper').attr('id');
+                //Find the form
+                if($(value).length > 0 && !$(value).hasClass('calendar-filter')){
+                    if(typeof $.fn.Global.SAVE_COMPONENTS[key] === 'undefined'){
+                        $.fn.Global.SAVE_COMPONENTS[key] = {};
+                        $.fn.Global.SAVE_COMPONENTS[key].componentId = key;
+                        $.fn.Global.SAVE_COMPONENTS[key].selector = key;
+                    }
+
+                    var dataArray = $(value).closest('form').serializeArray();
+                    formData = createNiceFormObject(dataArray); 
+                    $.fn.Global.SAVE_COMPONENTS[key].form = formData;
+                }
+            }); 
+
             //Save each component to database
-            for(var key in save_components) {
+            for(var key in $.fn.Global.SAVE_COMPONENTS) {
                 //Check if the key is inside the delete array
                 $.each($.fn.Global.DELETE_COMPONENTS, function(ind, item) {
                     if(key === item[1]){
-                        save_components[key].delete = 'true';
+                        $.fn.Global.SAVE_COMPONENTS[key].delete = 'true';
                     }
                 });
 
                 //Set object items
-                save_components[key] = setObjectItems(save_components, key);
+                $.fn.Global.SAVE_COMPONENTS[key] = setObjectItems($.fn.Global.SAVE_COMPONENTS, key);
             }
 
             //Check if both the image and text are empty if so remove the media
@@ -767,8 +754,8 @@
                 index_key,
                 media_id;
 
-            if(typeof save_components['component-mediaitems-0'] === 'undefined'){
-                addDefaultMediaObject(save_components);       
+            if(typeof $.fn.Global.SAVE_COMPONENTS['component-mediaitems-0'] === 'undefined'){
+                addDefaultMediaObject($.fn.Global.SAVE_COMPONENTS);       
             }    
 
             $('.media').not('.add-item').each(function( index ) {
@@ -778,24 +765,24 @@
                 }else if(total_media_blocks == 1){
                     var index_key = $(this).attr('id'),
                         media_id = $(this).attr('media');
-                    setObjectItems(save_components, index_key);
+                    setObjectItems($.fn.Global.SAVE_COMPONENTS, index_key);
                 }else{
-                    addDefaultMediaObject(save_components);
+                    addDefaultMediaObject($.fn.Global.SAVE_COMPONENTS);
                 }    
 
                 if(total_media_blocks > 1){
                     if((typeof dropZoneObjects[index_key] === 'undefined' && 
-                        typeof save_components[index_key] === 'undefined' && 
+                        typeof $.fn.Global.SAVE_COMPONENTS[index_key] === 'undefined' && 
                         typeof media_id != 'undefined' && 
                         media_id != '') ||
-                        (typeof save_components[index_key] === 'undefined' ||
-                          save_components[index_key].path == '' &&
-                          save_components[index_key].randomname == '' &&
-                          typeof save_components[index_key].content === 'undefined')){
+                        (typeof $.fn.Global.SAVE_COMPONENTS[index_key] === 'undefined' ||
+                          $.fn.Global.SAVE_COMPONENTS[index_key].path == '' &&
+                          $.fn.Global.SAVE_COMPONENTS[index_key].randomname == '' &&
+                          typeof $.fn.Global.SAVE_COMPONENTS[index_key].content === 'undefined')){
                             var remove_array = [];
 
-                            if(typeof save_components[index_key] != 'undefined')
-                                save_components[index_key].delete = 'true';
+                            if(typeof $.fn.Global.SAVE_COMPONENTS[index_key] != 'undefined')
+                                $.fn.Global.SAVE_COMPONENTS[index_key].delete = 'true';
 
                             remove_array.push($(this).attr('media'));
                             remove_array.push(index_key);
@@ -806,11 +793,10 @@
             });
 
             //SAVE the component
-            if(objectLength(save_components) > 0){
-                saveMediaComponents(save_components);
+            if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
+                saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
             }
-            console.log(save_components);
-return false;
+
             //Remove components if the file is empty
             if($.fn.Global.DELETE_COMPONENTS.length > 0){
                 deleteComponents();
@@ -821,7 +807,7 @@ return false;
                 deleteImages();
             }
 
-            console.log(save_components);
+            console.log($.fn.Global.SAVE_COMPONENTS);
         });
 
         //Check if the form has been altered
