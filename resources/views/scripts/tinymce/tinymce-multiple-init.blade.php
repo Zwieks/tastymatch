@@ -20,6 +20,14 @@
 
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             });
+
+            ed.on('change', function(e,content) {
+                var parent_object = $('#'+ed.id).closest('.media');
+                
+                if(parent_object.attr('media') != ''){
+                    parent_object.attr('data-status','updated');
+                }
+            });
         },
         selector: '.js-editable-media',
         menubar:false,

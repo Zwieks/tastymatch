@@ -314,6 +314,8 @@
             }
             return result;
         }
+
+        //REMOVE MEDIA ITEM onclick
         function removeMediaItem(object){
             var object_key = object.parent().attr('id'),
                 remove_array = [],
@@ -332,12 +334,11 @@
                 remove_array.push(object.parent().attr('media'));
                 remove_array.push(object_key);
 
-                if(typeof dropZoneObjects[object_key] != 'undefined')
+                if(typeof dropZoneObjects[object_key] != 'undefined'){
                     remove_array.push(dropZoneObjects[object_key].path);
-
-                if(typeof dropZoneObjects[object_key] != 'undefined')
                     dropZoneObjects[object_key].file = '';
-
+                }
+                    
                 $.fn.Global.DELETE_COMPONENTS.push(remove_array);
             }
 
@@ -412,6 +413,8 @@
             return save_components;
         }
 
+
+        //Extends the object with the TABLE NAME,URL and ID
         function setObjectItems(save_components, key){
             //Find the table name
             if(typeof save_components[key].componentId != 'undefined'){
@@ -434,6 +437,7 @@
 
             if(typeof $('#'+save_components[key].elementid).attr("media") != 'undefined' && $('#'+save_components[key].elementid).attr("media") != ''){
                 save_components[key].mediaid = $('#'+save_components[key].elementid).attr("media");
+                save_components[key].status = $('#'+save_components[key].elementid).attr("data-status");
             }
 
             return save_components[key];
@@ -602,7 +606,18 @@
         $(document).on('click','.js-remove-video', function(){
             var video_element = $(this).parent().find('.js-editable-video').attr('id'),
                 id = '#'+video_element,
-                object = $(this).parent().find('.js-editable-video');
+                object = $(this).parent().find('.js-editable-video'),
+                parent_object = $(id).closest('.media'),
+                component_id = parent_object.attr('id');
+
+            if($(parent_object).attr('media') != ''){
+                $(parent_object).attr('data-status','updated');
+            }
+
+            if(typeof $.fn.Global.SAVE_COMPONENTS[component_id] != 'undefined'){
+                $.fn.Global.SAVE_COMPONENTS[component_id].video = '';
+            }
+
             // Empty the content
             tinymce.get(video_element).setContent('');
             ContentCheck.emptyBox(tinymce.get(video_element),object,'','video');
@@ -628,7 +643,7 @@
 
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $(document).on('click','.js-save-template', function(){
-            //Contains all the TinyMce changes
+            //Contains all the TinyMce change
             var formdata = '';
 
             //Get the TINYMCE and put the changed components in the object
@@ -694,7 +709,7 @@
                 $.fn.Global.SAVE_COMPONENTS[key] = dropZoneObjects[key];
 
                 //Set image path
-                if($.fn.Global.SAVE_COMPONENTS[key].randomname != ''){
+                if($.fn.Global.SAVE_COMPONENTS[key].randomname != '' && typeof $.fn.Global.SAVE_COMPONENTS[key].randomname != 'undefined'){
                     $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
                 }else{
                     $.fn.Global.SAVE_COMPONENTS[key].path = '';
@@ -736,7 +751,7 @@
                 }
             }); 
 
-            //Save each component to database
+            //Save each MEDIA ITEM to database
             for(var key in $.fn.Global.SAVE_COMPONENTS) {
                 //Check if the key is inside the delete array
                 $.each($.fn.Global.DELETE_COMPONENTS, function(ind, item) {
@@ -745,7 +760,7 @@
                     }
                 });
 
-                //Set object items
+                //EXTEND object item
                 $.fn.Global.SAVE_COMPONENTS[key] = setObjectItems($.fn.Global.SAVE_COMPONENTS, key);
             }
 
@@ -770,6 +785,7 @@
                     addDefaultMediaObject($.fn.Global.SAVE_COMPONENTS);
                 }    
 
+                //Check if the items must be removee
                 if(total_media_blocks > 1){
                     if((typeof dropZoneObjects[index_key] === 'undefined' && 
                         typeof $.fn.Global.SAVE_COMPONENTS[index_key] === 'undefined' && 
@@ -778,9 +794,10 @@
                         (typeof $.fn.Global.SAVE_COMPONENTS[index_key] === 'undefined' ||
                           $.fn.Global.SAVE_COMPONENTS[index_key].path == '' &&
                           $.fn.Global.SAVE_COMPONENTS[index_key].randomname == '' &&
-                          typeof $.fn.Global.SAVE_COMPONENTS[index_key].content === 'undefined')){
+                          typeof $.fn.Global.SAVE_COMPONENTS[index_key].content === 'undefined') ||
+                        ($.fn.Global.SAVE_COMPONENTS[index_key].path == '' &&
+                          $.fn.Global.SAVE_COMPONENTS[index_key].video == '')){
                             var remove_array = [];
-
                             if(typeof $.fn.Global.SAVE_COMPONENTS[index_key] != 'undefined')
                                 $.fn.Global.SAVE_COMPONENTS[index_key].delete = 'true';
 
@@ -788,9 +805,23 @@
                             remove_array.push(index_key);
 
                             $.fn.Global.DELETE_COMPONENTS.push(remove_array);
+                    }else{
+                        if($.fn.Global.SAVE_COMPONENTS[index_key].delete != '' && typeof $.fn.Global.SAVE_COMPONENTS[index_key].delete != 'undefined'){
+                            delete $.fn.Global.SAVE_COMPONENTS[index_key].delete;
+                        }
                     }
                 }    
             });
+
+
+            console.log('Save');
+            console.log($.fn.Global.SAVE_COMPONENTS);
+
+            console.log('Delete');
+            console.log($.fn.Global.DELETE_COMPONENTS);
+
+            console.log('Images');
+            console.log($.fn.Global.DELETE_IMAGES);
 
             //SAVE the component
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){

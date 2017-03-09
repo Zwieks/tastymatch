@@ -135,6 +135,7 @@
 		}
 	}
 }
+
 .editable-wrapper{
 	@media @bp-TabletM{
 		.flex-wrap(wrap);
@@ -223,6 +224,7 @@
 	position: relative;
 	cursor: pointer;
 	border:2px dashed rgba(0,0,0,0);
+	min-height: @spacing;
 
 	&:last-child{
 		margin-bottom: 0;
@@ -251,6 +253,7 @@
 }
 
 .editable{
+	min-height: @spacing;
 
 	li{
 		display: block;

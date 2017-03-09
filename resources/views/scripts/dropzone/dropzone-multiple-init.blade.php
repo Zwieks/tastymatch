@@ -55,6 +55,12 @@
 
                         //Add the image to a global variable
                         $.fn.Global.DELETE_IMAGES.push(remove_array);
+
+                        //Add the update class on the parent media element
+                        var parent_object = $('#'+id).closest('.media');
+                        if(parent_object.attr('media') != ''){
+                            parent_object.attr('data-status','updated');
+                        } 
                     }
 
                     myObject.num = count;
