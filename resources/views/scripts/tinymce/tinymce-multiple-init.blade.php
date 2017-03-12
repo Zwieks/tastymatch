@@ -24,7 +24,7 @@
             ed.on('change', function(e,content) {
                 var parent_object = $('#'+ed.id).closest('.media');
                 
-                if(parent_object.attr('media') != ''){
+                if(parent_object.attr('data-media') != ''){
                     parent_object.attr('data-status','updated');
                 }
             });

@@ -6,7 +6,7 @@
             <li class="form-input-textfield">
                 @include('forms.inputerror')
                 <label for="event-name">{{ Lang::get('forms.searchevent') }}<em>*</em></label>
-                {!! Form::text('filter_keywords','',array_merge(['placeholder' => Lang::get('forms.placeholder-title'),'id' => 'js-filter-input', 'name' => 'searchevents','autocomplete' => 'off', 'eventid' => '', 'searchable' => '', 'new' => 'true'])) !!}
+                {!! Form::text('filter_keywords','',array_merge(['placeholder' => Lang::get('forms.placeholder-title'),'id' => 'js-filter-input', 'name' => 'searchevents','autocomplete' => 'off', 'data-eventid' => '', 'data-searchable' => '', 'data-new' => 'true', 'data-changed' => 'false'])) !!}
                 <ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
             </li>
 
@@ -42,7 +42,7 @@
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
                     <label for="date-start">{{ Lang::get('forms.datestart') }}<em>*</em></label>
-                    {!! Form::text('datestart','',array_merge(['dp' => 'true', 'id' => 'date-start'])) !!}
+                    {!! Form::text('datestart','',array_merge(['data-dp' => 'true', 'id' => 'date-start', 'data-update' => 'false'])) !!}
                 </li>
                 <li>
                     <span class="form-separator">{{ Lang::get('forms.form-separator-to') }}</span>
@@ -50,7 +50,7 @@
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
                     <label for="date-end">{{ Lang::get('forms.dateend') }}</label>
-                    {!! Form::text('dateend','',array_merge(['dp' => 'true','id' => 'date-end'])) !!}
+                    {!! Form::text('dateend','',array_merge(['data-dp' => 'true','id' => 'date-end', 'data-update' => 'false'])) !!}
                 </li>
             </div>
         </ul>

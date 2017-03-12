@@ -146,12 +146,23 @@
         }
 
         $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
-
+console.log($.fn.locations_object);
         $.each($.fn.locations_object, function(index, value) {
             if(typeof $.fn.Global.AGENDA_ITEMS[0].eventid != 'undefined' && value.event_id == $.fn.Global.AGENDA_ITEMS[0].eventid){
                 $.fn.locations_object[index].event_id = $.fn.Global.AGENDA_ITEMS[0].eventid;
                 $.fn.locations_object[index]['info'].id = $.fn.Global.AGENDA_ITEMS[0].eventid;
                 $.fn.locations_object[index]['info'].searchable = $.fn.Global.AGENDA_ITEMS[0].searchable.toString();
+                $.fn.locations_object[index]['info'].updateagenda = $.fn.Global.AGENDA_ITEMS[0].updateagenda;
+
+                if(typeof $.fn.Global.AGENDA_ITEMS[0].update != 'undefined'){
+                    $.fn.locations_object[index]['info'].update = $.fn.Global.AGENDA_ITEMS[0].update;
+                }
+
+                if(typeof $.fn.Global.AGENDA_ITEMS[0].new != 'undefined'){
+                    $.fn.locations_object[index]['info'].new = $.fn.Global.AGENDA_ITEMS[0].new;
+                }
+
+                $.fn.locations_object[index]['info'].status = $.fn.Global.AGENDA_ITEMS[0].status;
             }
         });
     }
@@ -169,7 +180,7 @@
 
         function setDataAtributeMediaItems(components){
             $.each(components, function(key, item){
-                $('#'+item.elementid).attr( "media", item.componentid );
+                $('#'+item.elementid).attr( "data-media", item.componentid );
             });
         }
 
@@ -330,8 +341,8 @@
 
             //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
-            if(object.parent().attr('media').length > 0){
-                remove_array.push(object.parent().attr('media'));
+            if(object.parent().attr('data-media').length > 0){
+                remove_array.push(object.parent().attr('data-media'));
                 remove_array.push(object_key);
 
                 if(typeof dropZoneObjects[object_key] != 'undefined'){
@@ -435,8 +446,8 @@
             //Put the element id also in the object
             save_components[key].elementid = key;
 
-            if(typeof $('#'+save_components[key].elementid).attr("media") != 'undefined' && $('#'+save_components[key].elementid).attr("media") != ''){
-                save_components[key].mediaid = $('#'+save_components[key].elementid).attr("media");
+            if(typeof $('#'+save_components[key].elementid).attr("data-media") != 'undefined' && $('#'+save_components[key].elementid).attr("data-media") != ''){
+                save_components[key].mediaid = $('#'+save_components[key].elementid).attr("data-media");
                 save_components[key].status = $('#'+save_components[key].elementid).attr("data-status");
             }
 
@@ -476,7 +487,7 @@
                 count: ($('#js-editable-wrapper .editable-wrapper').children().length),
             };
             var token = $('meta[name="csrf-token"]').attr('content'),
-                    url = '/ajax/addMediaItem';
+                url = '/ajax/addMediaItem';
 
             $.ajax({
                 type: 'POST',
@@ -610,7 +621,7 @@
                 parent_object = $(id).closest('.media'),
                 component_id = parent_object.attr('id');
 
-            if($(parent_object).attr('media') != ''){
+            if($(parent_object).attr('data-media') != ''){
                 $(parent_object).attr('data-status','updated');
             }
 
@@ -671,19 +682,26 @@
 
             //Save the AGENDA FORM content
             var count = 0;
+
             $.each($.fn.locations_object, function(index, value) {
-                //console.log(value);
-                //console.log('end');
-                if(typeof value['info'].new != 'undefined' && value['info'].new == true){
-                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
-                    count++;
-                }else if(typeof value.updateitem != 'undefined'){
-                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
-                    count++;
-                }else if(typeof value.event_id == 'undefined' && value.id == ''){
-                    $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
-                    count++;
-                }
+                // console.log(value);
+                // console.log('end');
+                if(typeof value['info'].status != 'undefined'){
+                    if(value['info'].status == 'new'){
+                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
+                        count++;
+                    }else if(value['info'].status == 'update'){
+                        if(value['info'].updateagenda == 'true' && value['info'].searchable == '1'){
+                            $.fn.Global.SAVE_COMPONENTS['component-agendaitems-updateagendaonly-'+count] = value;
+                        }else{
+                            $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
+                        }
+                        count++;
+                    }else if(value['info'].status == 'delete'){
+                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-delete-'+count] = value;
+                        count++;
+                    }
+                } 
             });
             //Set DELETE AGENDA ITEMS content
             if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
@@ -776,10 +794,10 @@
             $('.media').not('.add-item').each(function( index ) {
                 if(total_media_blocks > 1){
                     index_key = $(this).attr('id');
-                    media_id = $(this).attr('media');
+                    media_id = $(this).attr('data-media');
                 }else if(total_media_blocks == 1){
                     var index_key = $(this).attr('id'),
-                        media_id = $(this).attr('media');
+                        media_id = $(this).attr('data-media');
                     setObjectItems($.fn.Global.SAVE_COMPONENTS, index_key);
                 }else{
                     addDefaultMediaObject($.fn.Global.SAVE_COMPONENTS);
@@ -801,7 +819,7 @@
                             if(typeof $.fn.Global.SAVE_COMPONENTS[index_key] != 'undefined')
                                 $.fn.Global.SAVE_COMPONENTS[index_key].delete = 'true';
 
-                            remove_array.push($(this).attr('media'));
+                            remove_array.push($(this).attr('data-media'));
                             remove_array.push(index_key);
 
                             $.fn.Global.DELETE_COMPONENTS.push(remove_array);
@@ -812,16 +830,6 @@
                     }
                 }    
             });
-
-
-            console.log('Save');
-            console.log($.fn.Global.SAVE_COMPONENTS);
-
-            console.log('Delete');
-            console.log($.fn.Global.DELETE_COMPONENTS);
-
-            console.log('Images');
-            console.log($.fn.Global.DELETE_IMAGES);
 
             //SAVE the component
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
@@ -869,14 +877,15 @@
         $(document).on('click','.js-add-agenda-item',function(){
             // Get the form data
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
-                searchable = $('#js-filter-input').attr('searchable'),
+                searchable = $('#js-filter-input').attr('data-searchable'),
                 newEventId = $('#js-filter-input').attr('data-neweventid'),
-                deleteItem = $('#js-filter-input').attr('delete'),
-                agendaId = $('#js-filter-input').attr('agendaid'),
-                eventId = $('#js-filter-input').attr('eventid'),
-                newItem = $('#js-filter-input').attr('new'),
-                updateItem = $('#js-filter-input').attr('update'),
-                status = $('#js-filter-input').attr('status'),
+                deleteItem = $('#js-filter-input').attr('data-delete'),
+                agendaId = $('#js-filter-input').attr('data-agendaid'),
+                eventId = $('#js-filter-input').attr('data-eventid'),
+                newItem = $('#js-filter-input').attr('data-new'),
+                updateItem = $('#js-filter-input').attr('data-update'),
+                status = $('#js-filter-input').attr('data-status'),
+                changed = $('#js-filter-input').attr('data-changed'),
                 eventIdObject = {},
                 searchObject = {},
                 newEventObject = {},
@@ -885,6 +894,7 @@
                 updateObject = {},
                 statusObject = {},
                 agendaidObject = {},
+                updateAgendaObject = {},
                 countObject = {};
 
             newObject['name'] = 'new';
@@ -906,13 +916,10 @@
 
             if(typeof searchable != 'undefined'){
                 searchObject['value'] = searchable;
-                statusObject['value'] = status;
-            }else if(eventIdObject['value'] != ''){
+            }else if(eventId != ''){
                 searchObject['value'] = '1';
-                statusObject['value'] = 'new';
             }else{
                 searchObject['value'] = '0';
-                statusObject['value'] = 'new';
             }
 
             if(typeof newEventId != 'undefined'){
@@ -922,10 +929,8 @@
 
             if(searchable != 1){
                 searchObject['value'] = searchable;
-                statusObject['value'] = 'update';
             }else{
                 searchObject['value'] = '1';
-                statusObject['value'] = 'new';
             }
 
             countObject['name'] = 'count';
@@ -934,7 +939,27 @@
             agendaidObject['name'] = 'id';
             agendaidObject['value'] = agendaId;
 
-            dataArray.push(eventIdObject,searchObject,countObject,statusObject,agendaidObject,deleteObject,newObject,updateObject,newEventObject);
+            $.each($('input[data-dp="true"]'), function(key, value) {
+                updateAgendaObject['name'] = 'updateagenda';
+                updateAgendaObject['value'] = $(value).attr('data-update');
+            });
+
+
+            //Set status for update/update-agenda-only/delete/new
+            statusObject['value'] = '';
+            if(changed == 'true'){
+                if(newItem == 'true'){
+                    statusObject['value'] = 'new';
+                }else if(updateAgendaObject['value'] == 'true' && searchable == '1'){
+                    statusObject['value'] = 'update-agenda-only';
+                }else if(updateItem == 'true'){
+                    statusObject['value'] = 'update';
+                }else if(deleteItem == 'true'){
+                    statusObject['value'] = 'delete';
+                }
+            }
+
+            dataArray.push(eventIdObject,searchObject,countObject,statusObject,updateAgendaObject,agendaidObject,deleteObject,newObject,updateObject,newEventObject);
 
             var validateData = createValidateObject(dataArray);
 

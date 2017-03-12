@@ -376,7 +376,7 @@
                     edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal' data-icon='X'";
                 @endif
                 //Create the user agenda items
-                var item = "<li id='"+id+"' event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"marker-id='"+key+"' searchable='"+searchable_id+"'>"+
+                var item = "<li id='"+id+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
                             "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
                             "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
                             "</li>";       
@@ -469,12 +469,12 @@
     jQuery(document).ready(function($){
         //Hover
         $(document).on('mouseover','.js-googlemap-agendaitem',function() {
-            var id = parseInt($(this).attr('marker-id'));
+            var id = parseInt($(this).attr('data-marker-id'));
             highlightMarker(id);
         });
 
         $(document).on('mouseleave','.js-googlemap-agendaitem',function() {
-            var id = parseInt($(this).attr('marker-id'));
+            var id = parseInt($(this).attr('data-marker-id'));
             stopAnimation(id);
         });
     });

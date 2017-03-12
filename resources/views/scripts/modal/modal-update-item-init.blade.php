@@ -1,15 +1,23 @@
+
 <script type="text/javascript">
     $(document).ready(function(e) {
+        // $('form#js-modal-create-agenda-items').on('change', function() {
+        //     console.log('test');
+        // });
 
         //Remove the input errors and empty all the input fields when the modal has been closed
         $('#modal').on('hidden.bs.modal', function () {
             $('#modal').find('div.input-error').hide();
             $('#modal').find('li.input-error').removeClass('input-error');
-            $('#js-filter-input').attr('eventid','');
-            $('#js-filter-input').attr('searchable','');
-            $('#js-filter-input').attr('delete','');
-            $('#js-filter-input').attr('agendaid','');
+            $('#js-filter-input').attr('data-eventid','');
+            $('#js-filter-input').attr('data-searchable','');
+            $('#js-filter-input').attr('data-delete','');
+            $('#js-filter-input').attr('data-agendaid','');
             $('#js-modal-create-agenda-items').trigger("reset");
+            //Set the data-update of the agenda to false
+            $('input[data-dp="true"]').attr("data-update", 'false');
+            //Set the changed status of the modal
+            $('#js-filter-input').attr('data-changed','false');
         });
 
         //Click on the agenda item
@@ -17,8 +25,8 @@
             if($(e.relatedTarget).attr('class') != 'btn-wrapper' && typeof $(e.relatedTarget).attr('class') != 'undefined'){
                 //Get the session
                 var agenda_items = $.fn.locations_object;
-                var marker_id = $(e.relatedTarget).attr('marker-id'),
-                    eventId = $(e.relatedTarget).attr('event-id'),
+                var marker_id = $(e.relatedTarget).attr('data-marker-id'),
+                    eventId = $(e.relatedTarget).attr('data-event-id'),
                     agendaId = $(e.relatedTarget).attr('id'),
                     agenda_item = agenda_items[marker_id],
                     agenda_item_name = agenda_item['info'].name,
@@ -31,22 +39,22 @@
 
                 //Set event id if there is one
                 if(typeof eventId != 'undefined' && eventId != '') {
-                    $(e.currentTarget).find("input[name='searchevents']").attr('eventid', eventId);
-                    $(e.currentTarget).find("input[name='searchevents']").attr('searchable', agenda_item_searchable);
+                    $(e.currentTarget).find("input[name='searchevents']").attr('data-eventid', eventId);
+                    $(e.currentTarget).find("input[name='searchevents']").attr('data-searchable', agenda_item_searchable);
                 }
 
                 //Set agenda id if there is one
                 if(typeof agendaId != 'undefined' && agendaId != '') {
-                    $(e.currentTarget).find("input[name='searchevents']").attr('agendaid', agendaId);
+                    $(e.currentTarget).find("input[name='searchevents']").attr('data-agendaid', agendaId);
                 }
 
                 //Set new to false while this is an update
-                $(e.currentTarget).find('input[name="searchevents"]').attr('new', false);
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-new', false);
                 //Set update is true or when it's an searchable event to false
                 if(agenda_item_searchable != '1'){
-                    $(e.currentTarget).find('input[name="searchevents"]').attr('update', true);
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('data-update', true);
                 }else{
-                    $(e.currentTarget).find('input[name="searchevents"]').attr('update', false);
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('data-update', false);
                 }
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
@@ -62,7 +70,8 @@
                 $(e.currentTarget).find('input[name="datestart"]').datepicker("setDate", new Date(agenda_item_date_start) );
                 //Set DatePicker to October 3, 2008
                 $(e.currentTarget).find('input[name="dateend"]').datepicker("setDate", new Date(agenda_item_date_end) );
-
+                //Set the data-update of the agenda to false
+                $(e.currentTarget).find('input[data-dp="true"]').attr("data-update", 'false');
                 //Block editing
                 if(agenda_item_searchable == 1){
                     addAgendaItemBlocking(e);
@@ -73,14 +82,25 @@
             }else{
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
-                if(typeof $(e.currentTarget).find('input[name="searchevents"]').attr('searchable') != 'undefined' &&
-                    $(e.currentTarget).find('input[name="searchevents"]').attr('searchable') == '')
-                $(e.currentTarget).find('input[name="searchevents"]').attr('searchable', 'bla');
-                $(e.currentTarget).find('input[name="searchevents"]').attr('update', false);
-                $(e.currentTarget).find('input[name="searchevents"]').attr('new', true);
-                $(e.currentTarget).find('input[name="searchevents"]').attr('agendaid', '');
+                if(typeof $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable') != 'undefined' &&
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable') == '')
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable', 'bla');
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-update', false);
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-new', true);
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid', '');
                 removeAgendaItemBlocking(e);
             }
+        });
+
+        //Check if the form has been altered
+        $(document).on('change','form#js-modal-create-agenda-items',function(){
+            var $fields = $(this);
+            var $emptyFields = $fields.filter(function() {
+                // remove the $.trim if whitespace is counted as filled
+                return $.trim(this.value) === "";
+            });
+
+            console.log($emptyFields.length);
         });
     });
 

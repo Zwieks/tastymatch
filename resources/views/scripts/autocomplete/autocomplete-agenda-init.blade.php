@@ -18,19 +18,19 @@
         //Get the name and id
         var id = object.attr('id'),
             name = object.attr('name'),
-            description = object.attr('des'),
-            type = object.attr('type'),
-            location = object.attr('loc');
-            searchable = object.attr('searchable');
+            description = object.attr('data-des'),
+            type = object.attr('data-type'),
+            location = object.attr('data-loc');
+            searchable = object.attr('data-searchable');
         //Put the EVENT NAME in the inputfield
         $("input[name='searchevents']").val(name);
 
         if(typeof searchable != 'undefined')
-            $("input[name='searchevents']").attr('searchable', searchable);
+            $("input[name='searchevents']").attr('data-searchable', searchable);
 
         //Check if the item can be removed
-        if($("input[name='searchevents']").attr('searchable') != '' && $("input[name='searchevents']").attr('eventid') != ''){
-            $("input[name='searchevents']").attr('delete',true);
+        if($("input[name='searchevents']").attr('data-searchable') != '' && $("input[name='searchevents']").attr('data-eventid') != ''){
+            $("input[name='searchevents']").attr('data-delete',true);
         }
 
         //Put the EVENT DESCRIPTION in the textarea

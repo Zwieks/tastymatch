@@ -21,14 +21,14 @@
 									   	href="/{{$object->url}}{{$object->slug}}"
 									   	target="_blank"
 									   	@if(isset($object->location))
-									   		loc="{{$object->location}}"
+									   		data-loc="{{$object->location}}"
 									   	@else
-									   		loc=""
+									   		data-loc=""
 									   	@endif
 									   	@if(isset($object->description))
-									   		des="{{$object->description}}"
+									   		data-des="{{$object->description}}"
 										@else
-											des=""
+											data-des=""
 										@endif
 										@if(isset($object->type_id))
 											type="{{$object->type_id}}"
@@ -36,9 +36,9 @@
 											type=""
 										@endif
 										@if(isset($object->searchable))
-											searchable="{{$object->searchable}}"
+											data-searchable="{{$object->searchable}}"
 										@else
-											searchable=""
+											data-searchable=""
 										@endif										
 									>
 									@if(isset($object->images[0]) && $object->images[0]->file != '')

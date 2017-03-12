@@ -6,7 +6,7 @@
         component_id = '{!! $item->component_mediaitem_id !!}';
 
     if(component_id != ''){
-        $('#component-mediaitems-'+{!! $loop->index !!}).attr( "media", component_id );
+        $('#component-mediaitems-'+{!! $loop->index !!}).attr( "data-media", component_id );
     }
     
     $.fn.myDropzone{!! $loop->index !!} = new Dropzone(
@@ -58,7 +58,7 @@
 
                         //Add the update class on the parent media element
                         var parent_object = $('#'+id).closest('.media');
-                        if(parent_object.attr('media') != ''){
+                        if(parent_object.attr('data-media') != ''){
                             parent_object.attr('data-status','updated');
                         } 
                     }
