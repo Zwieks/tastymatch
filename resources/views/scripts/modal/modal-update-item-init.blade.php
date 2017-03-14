@@ -93,14 +93,18 @@
         });
 
         //Check if the form has been altered
-        $(document).on('change','form#js-modal-create-agenda-items',function(){
-            var $fields = $(this);
-            var $emptyFields = $fields.filter(function() {
-                // remove the $.trim if whitespace is counted as filled
-                return $.trim(this.value) === "";
-            });
+        $(document).on('change','form#js-modal-create-agenda-items :input',function(){
+            if($('#modal').is(":visible")){
+                var $fields = $(this);
+                var $emptyFields = $fields.filter(function(e) {
+                    // remove the $.trim if whitespace is counted as filled
+                    return $.trim(this.value) === "";
+                });
 
-            console.log($emptyFields.length);
+                if ($emptyFields.length < 1) {
+                    $('#js-filter-input').attr('data-changed', 'true');
+                }
+            };
         });
     });
 

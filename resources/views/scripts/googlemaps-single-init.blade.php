@@ -117,7 +117,11 @@
         });
 
         //Get the status
-        var status = new_info_object.status;
+        if(typeof new_info_object.status != 'undefined'){
+            var status = new_info_object.status;
+        }else{
+            var status = '';
+        }
 
         //Get the new location
         var location = new_info_object.location;
@@ -168,10 +172,18 @@
             var event_type = '';
         }
 
+        //Get the searchable
+        if(typeof new_info_object.searchable != 'undefined'){
+            var searchable = new_info_object.searchable;
+        }else{
+            var searchable = '';
+        }
+
         //Get the current user location
         var country = '{!! App::getLocale() !!}';
 
-        getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type);
+        getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type,searchable);
+
 
         // var locations = set_locations(key,fd['info']);
         // add_markers(key,map,locations,icons['events'].icon,animation);\
@@ -179,7 +191,7 @@
         //Count the current object length using function from DETAILPAGE script
     }
 
-    function getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type){
+    function getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type,searchable){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
             if(val.results.length) {
@@ -193,10 +205,11 @@
                     new_detail_object['name'] = name;
                     new_detail_object['lat'] = locationInfo.lat.toString();
                     new_detail_object['long'] = locationInfo.lng.toString();
+                    new_detail_object['searchable'] = searchable;
 
                 var new_location_object = {};
-                    if(status != 'update'){
-                        new_detail_object['new'] = true;
+                    if(status != ''){
+                        new_detail_object['status'] = status;
                     }
 
                     new_location_object['event_id'] = eventid;
@@ -209,11 +222,10 @@
                 $.fn.locations_object.push(new_location_object);
             }
         }).success(function(new_location_object) {
-            $('#modal').modal('toggle');
             initMap();
 
             //Add the data to the global save object
-            addAgendaItemsToGlobalSaveObject(info);          
+            //addAgendaItemsToGlobalSaveObject(info);          
         });
 
     }
@@ -354,8 +366,11 @@
             if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
                 var id = $.fn.locations_object[key].id;
 
-                if(typeof $.fn.locations_object[key].event_id != 'undefined')
+                if(typeof $.fn.locations_object[key].event_id != 'undefined'){
                     eventid = $.fn.locations_object[key].event_id;
+                }else{
+                     eventid = '';
+                }
 
                 var name = $.fn.locations_object[key]['info'].name;
                 var location = $.fn.locations_object[key]['info'].location;
