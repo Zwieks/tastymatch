@@ -276,8 +276,8 @@
 
                 return function () {
                     $('.js-googlemap-agendaitem').removeClass('active');
-                    $(".agendaitems-wrapper").mCustomScrollbar("scrollTo","[marker-id="+marker.id+"]");
-                    $('[marker-id='+marker.id+']').addClass('active');
+                    $(".agendaitems-wrapper").mCustomScrollbar("scrollTo","[data-marker-id="+marker.id+"]");
+                    $('[data-marker-id='+marker.id+']').addClass('active');
 
                     infowindow.setContent(contentString);
                     infowindow.open(map, marker);
