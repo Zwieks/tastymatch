@@ -23,6 +23,7 @@
         //Click on the agenda item
         $( "#modal" ).on('show.bs.modal', function(e){
             if($(e.relatedTarget).attr('class') != 'btn-wrapper' && typeof $(e.relatedTarget).attr('class') != 'undefined'){
+
                 //Get the session
                 var agenda_items = $.fn.locations_object;
                 var marker_id = $(e.relatedTarget).attr('data-marker-id'),
@@ -79,12 +80,12 @@
                 else{
                     removeAgendaItemBlocking(e);
                 }
-            }else{
+            }else if($(e.relatedTarget).attr('class') == 'btn-wrapper' && typeof $(e.relatedTarget).attr('class') != 'undefined'){
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-create-title') !!}');
                 if(typeof $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable') != 'undefined' &&
                     $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable') == '')
-                $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable', 'bla');
+                $(e.currentTarget).find('input[name="searchevents"]').attr('data-searchable', '0');
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-update', false);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-new', true);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid', '');

@@ -222,10 +222,7 @@
                 $.fn.locations_object.push(new_location_object);
             }
         }).success(function(new_location_object) {
-            initMap();
-
-            //Add the data to the global save object
-            //addAgendaItemsToGlobalSaveObject(info);          
+            initMap();        
         });
 
     }

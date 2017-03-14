@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Event;
 use Carbon\Carbon;
 
+use DB;
 class Agenda extends Model
 {
 	/**
@@ -18,7 +19,7 @@ class Agenda extends Model
 		return $this->belongsToMany('App\Agenda_User');
 	}
 
-	public static function store($data,$event_id){
+	public static function store($data,$event_id,$detailpage_id){
 		$Agenda = new Agenda;
 
 		if(isset($event_id) && $event_id != '')
@@ -29,6 +30,9 @@ class Agenda extends Model
 
 		if(isset($data['date_end']) && $data['date_end'] != '')
 			$Agenda->date_end = Carbon::parse($data['date_end'])->format('Y-m-d');
+
+		if(isset($detailpage_id) && $detailpage_id != '')
+			$Agenda->detailpage_id = $detailpage_id;
 
 		$Agenda->save();
 
@@ -44,7 +48,7 @@ class Agenda extends Model
 
 		DB::table('agendas')
 			->where('id', $agenda_id)
-			->update(['date_start' => $data['date_start'],'date_end' => $data['date_end']]);
+			->update(['date_start' => Carbon::parse($data['date_start'])->format('Y-m-d'),'date_end' => Carbon::parse($data['date_end'])->format('Y-m-d')]);
 	}
 
 	public static function getAllUserAgendaDetails($page_content){

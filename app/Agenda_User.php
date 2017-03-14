@@ -44,8 +44,8 @@ class Agenda_User extends Model
 			->where('user_id', '=', $userid)
 			->first();
 
-		if(isset($check->$field) && $check->$field != ''){
-			return $check->$field;
+		if(isset($check->id) && $check->id != ''){
+			return $check->id;
 		}else{
 			return $check = '';
 		}

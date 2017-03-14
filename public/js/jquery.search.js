@@ -84,8 +84,9 @@ function ajaxSearchEvents($search_input) {
 function removeDefaultInputs(){
     //Remove the ID as attribute of the object
     $("#js-filter-input").attr('data-eventid','');
+    $("#js-filter-input").attr('data-neweventid','');
     //Set the data searchable back to empty
-    $("#js-filter-input").attr('data-searchable','');
+    $("#js-filter-input").attr('data-searchable','0');
     //Empty the EVENT DESCRIPTION in the textarea
     $("textarea[name='description']").val('').prop('readonly', false);
     //Empty the EVENT LOCATION in the inputfield

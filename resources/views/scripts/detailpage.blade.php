@@ -8,47 +8,6 @@
     };
 
     /**
-     * Adds the new create agenda item to the Global save object
-     * @param NYS
-     * @return NYS
-     */
-    // function addAgendaItemsToGlobalSaveObject(agendaitem){
-    //     var newAgendaObject = new Object(),
-    //         count = 0;
-
-    //     // for(var prop in agendaitem) {
-    //     //     if (agendaitem.hasOwnProperty(prop)) {
-    //     //         for(var item in agendaitem[prop]) {
-    //     //             newAgendaObject[item] = agendaitem[prop][item];
-    //     //         }
-    //     //         count++;
-    //     //     }
-    //     // }
-
-    //     // $.fn.Global.AGENDA_ITEMS.push(newAgendaObject);
-
-    //     $.each($.fn.locations_object, function(index, value) {
-    //         if(typeof $.fn.Global.AGENDA_ITEMS[0].eventid != 'undefined' && value.event_id == $.fn.Global.AGENDA_ITEMS[0].eventid){
-    //             $.fn.locations_object[index].event_id = $.fn.Global.AGENDA_ITEMS[0].eventid;
-    //             $.fn.locations_object[index]['info'].id = $.fn.Global.AGENDA_ITEMS[0].eventid;
-    //             $.fn.locations_object[index]['info'].searchable = $.fn.Global.AGENDA_ITEMS[0].searchable.toString();
-    //             $.fn.locations_object[index]['info'].updateagenda = $.fn.Global.AGENDA_ITEMS[0].updateagenda;
-
-    //             if(typeof $.fn.Global.AGENDA_ITEMS[0].update != 'undefined'){
-    //                 $.fn.locations_object[index]['info'].update = $.fn.Global.AGENDA_ITEMS[0].update;
-    //             }
-
-    //             if(typeof $.fn.Global.AGENDA_ITEMS[0].new != 'undefined'){
-    //                 $.fn.locations_object[index]['info'].new = $.fn.Global.AGENDA_ITEMS[0].new;
-    //             }
-
-    //             $.fn.locations_object[index]['info'].status = $.fn.Global.AGENDA_ITEMS[0].status;
-    //         }
-    //     });
-    // }
-
-
-    /**
      * Update agenda item in the Global save object
      * @param NYS
      * @return NYS
@@ -72,7 +31,6 @@
         }
 
         // console.log($.fn.locations_object);
-        console.log($.fn.locations_object);
         $.each($.fn.locations_object, function(index, value) {
             if(inCheck == false){
                 //Check if the new agenda item is already in the location object so an UPDATE
@@ -103,6 +61,7 @@
                             
                             create_new_marker(agendaitem);
                         }else{
+
                             //Set the update NAME
                             $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
                             //Set the update TYPE
@@ -113,6 +72,8 @@
                             $.fn.locations_object[index].date_start = newAgendaObject.datestart;
                             //Set the update DATE END
                             $.fn.locations_object[index].date_end = newAgendaObject.dateend;
+                            //Set the update STATYS
+                            $.fn.locations_object[index]['info'].status = 'update';
                         }    
 
                         inCheck = true;
@@ -164,75 +125,10 @@
             create_new_marker(agendaitem);
         }
 
-
-            console.log('start');
-                    console.log($.fn.locations_object);
         //Update the agenda items
         setAgendaItems(agendaitem);
         //Close the modal
         $('#modal').modal('toggle');
-        // //Update the items
-        // var length = $.fn.locations_object.length;
-        // var delete_from_location_object = [];
-
-        // //Check if the Global.DELETE_AGENDA_ITEMS has been set if not it should be a new item
-        // if($.fn.Global.AGENDA_ITEMS.length > 0){
-        //     for(var i=0; i<length; i++){
-
-        //         //Check if agenda item is already in delete array. 
-        //         //This is not the place where the DELETE array will be filled
-        //         var in_delete_object = false;
-        //         //Loop through the delete array if this already has been set
-        //         $.each($.fn.Global.AGENDA_ITEMS, function(delete_index, delete_value) {
-        //             if(typeof delete_value['agenda_id'] != 'undefined' && delete_value['agenda_id'] == $.fn.locations_object[i].id){
-        //                 in_delete_object = true;
-        //             }
-        //         });
-
-        //         //Check if the new created item is inside the locations_object
-        //         //If so then it requires an update
-        //         if($.fn.locations_object[i].event_id == newAgendaObject.eventid){
-        //             //Check if the location has been changed
-        //             //This needs to be check because of the new marker thats needs to be added/removed
-        //             if($.fn.locations_object[i]['info'].location != newAgendaObject.location){
-        //                 //Check if the item is already in the delete object
-        //                 if(in_delete_object != false){
-        //                     //Add the item you want to remove from the global location object to the remove array
-        //                     delete_from_location_object.push(i);
-        //                 }
-        //                 createRemoveArray(parseInt($.fn.locations_object[i].id), parseInt($.fn.locations_object[i]['info'].id), $.fn.locations_object[i]['info'].searchable);
-        //                 //Set the update LOCATION marker en put data in array
-        //                 create_new_marker(agendaitem);
-        //             }else{
-        //                 $.fn.locations_object[i].updateitem = 'update';
-        //                 //Set the update NAME
-        //                 $.fn.locations_object[i]['info'].name = newAgendaObject.searchevents;
-        //                 //Set the update TYPE
-        //                 $.fn.locations_object[i]['info'].type_id = newAgendaObject.eventtype;
-        //                 //Set the update DESCRIPTION
-        //                 $.fn.locations_object[i]['info'].description = newAgendaObject.description;
-        //                 //Set the update DATE START
-        //                 $.fn.locations_object[i].date_start = newAgendaObject.datestart;
-        //                 //Set the update DATE END
-        //                 $.fn.locations_object[i].date_end = newAgendaObject.dateend;
-
-        //                 //Close the modal
-        //                 $('#modal').modal('toggle');
-        //             }
-        //         }
-        //     };  
-        // }else{
-        //     //Set the update LOCATION marker en put data in array
-        //     create_new_marker(agendaitem);
-        // }    
-
-        // //Remove the item from the global array
-        // $.each(delete_from_location_object, function(ind, item) {
-        //     $.fn.locations_object.splice(item,1);  
-        // });    
-
-        // //Update the agenda items
-        // setAgendaItems();
     }
 
     /**
@@ -285,6 +181,30 @@
             $.each(components, function(key, item){
                 $('#'+item.elementid).attr( "data-media", item.componentid );
             });
+        }
+
+        function checkIfSingleObjectIsEmpty(index,value){
+            var key = 'component-agendaitems-updateagendaonly-'+index,
+            animationParams = {};
+            animationParams[key] = value;
+
+            var result = jQuery.isEmptyObject(animationParams);
+
+            return result;
+        }
+
+        function countStringNumberInKeys(object,string){
+            var count = 0;
+            for(var prop in object) {
+                if (object.hasOwnProperty(prop)) {
+                    // or Object.prototype.hasOwnProperty.call(obj, prop)
+                    if (prop.toLowerCase().indexOf(string) >= 0){
+                        count++;
+                    }
+                }
+            }
+
+            return count;
         }
 
         /**
@@ -759,6 +679,7 @@
         $(document).on('click','.js-save-template', function(){
             //Contains all the TinyMce change
             var formdata = '';
+            $.fn.Global.SAVE_COMPONENTS = [];
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++){
@@ -784,37 +705,24 @@
             }
 
             //Save the AGENDA FORM content
-            var count = 0;
-
             $.each($.fn.locations_object, function(index, value) {
                 if(typeof value['info'].status != 'undefined'){
+                    console.log(value['info'].status);
                     if(value['info'].status == 'new'){
+                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-new');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
-                        count++;
                     }else if(value['info'].status == 'update-agenda-only'){
-                            $.fn.Global.SAVE_COMPONENTS['component-agendaitems-updateagendaonly-'+count] = value;
-                        count++;
+                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-updateagendaonly');    
+                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-updateagendaonly-'+count] = value;
                     }else if(value['info'].status == 'update'){
+                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-update');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
                     }else if(value['info'].status == 'delete'){
+                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-delete');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-delete-'+count] = value;
-                        count++;
                     }
                 } 
             });
-            //Set DELETE AGENDA ITEMS content
-            if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
-                count = 0;
-
-                $.each($.fn.Global.DELETE_AGENDA_ITEMS, function(index, value) {
-                    if(typeof value != 'undefined'){
-                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-delete-'+count] = value;
-                        count++;
-                    }
-                });
-
-                //console.log($.fn.Global.SAVE_COMPONENTS);
-            }
 
             //Get the DROPZONE files en put them in the object
             for(var key in dropZoneObjects) {
@@ -968,6 +876,15 @@
             }
         });
 
+
+        /**
+         * Delete AGENDA item
+         * TAG: AGENDAHANDLER
+         */
+        $(document).on('click','.js-delete-agenda-item',function(){
+            console.log('test ');
+        });
+            
         /**
          * Form handeling when the user wants to save the agenda item
          * TAG: AGENDAHANDLER
@@ -1045,7 +962,7 @@
 
             //Set status for update/update-agenda-only/delete/new
             statusObject['value'] = '';
-            statusObject['value'] = 'new';
+
             if(changed == 'true'){
                 if(updateAgendaObject['value'] == 'true' && searchable == '1'){
                     statusObject['value'] = 'update-agenda-only';

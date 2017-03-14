@@ -6886,6 +6886,9 @@ form ol {
 .modal.in .modal-dialog {
   transform: translate(0, 0);
 }
+.modal .ghost-btn {
+  color: #E3262E;
+}
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
