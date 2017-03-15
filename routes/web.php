@@ -104,4 +104,6 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/ajax/deleteComponents', 'DetailPageController@deleteComponents');	
 	//DELETE IMAGES
 	Route::post('/ajax/deleteImages', 'ImagesController@delete');
+	//DELETE agenda items
+	Route::post('/ajax/deleteAgendaItems', 'AgendaController@deleteAgendaItems');
 });

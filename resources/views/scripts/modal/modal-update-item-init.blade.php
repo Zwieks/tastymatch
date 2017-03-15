@@ -18,6 +18,8 @@
             $('input[data-dp="true"]').attr("data-update", 'false');
             //Set the changed status of the modal
             $('#js-filter-input').attr('data-changed','false');
+            //Hide the delete button
+            $('#modal').find('.js-delete-agenda-item').hide();
         });
 
         //Click on the agenda item
@@ -59,6 +61,11 @@
                 }
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
+                //Show delete button
+                if($(e.currentTarget).find('input[name="searchevents"]').attr('data-new') == 'false' && 
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid') != '')
+                    $(e.currentTarget).find('.js-delete-agenda-item').show();
+
                 //populate the title
                 $(e.currentTarget).find('input[name="searchevents"]').val(agenda_item_name);
                 //populate the type

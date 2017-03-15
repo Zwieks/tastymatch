@@ -64,4 +64,75 @@ class Agenda extends Model
 
 		return $page_content;
 	}
+
+	public static function checkRecord($field,$agenda_id,$userid,$detailpage_id){
+		$check = DB::table('agendas')
+			->select($field)
+			->join('agenda_user', 'agendas.id', '=', 'agenda_user.agenda_id')
+			->where('detailpage_id', '=', $detailpage_id)
+			->where('user_id', '=', $userid)
+			->where('agenda_id', '=', $agenda_id)
+			->first();
+
+		if(isset($check->id) && $check->id != ''){
+			return $check->id;
+		}else{
+			return $check = '';
+		}
+	}
+
+	/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  array $ids_to_delete
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function destroy($ids_to_delete)
+	{
+	   DB::table('agendas')->whereIn('id', $ids_to_delete)->delete();
+	}
+
+	//Detete agenda items based on delete array
+	public static function deleteAgendaItems($request){
+		$userid = $request->session()->get('user.global.id');
+
+		$ids_to_delete = [];
+		$agendaids_to_delete = [];
+
+		//Get all the component data
+		$data = $request->all();
+
+		//Loop through the array containing the url of the images that will be deleted
+		foreach ($data['jsondata'] as $item) {
+			if($data['userDetail']['pageid'] != ''){
+				//Get the page id
+				$detailpage_id = $data['userDetail']['pageid'];
+				$deleteitem = $item['deleteitem'];
+				$agenda_id = $item['agenda_id'];
+				$event_id = $item['event_id'];
+
+				//Check if the user can change the item by getting the agenda_id
+		        $agenda_id = Agenda::checkRecord('agendas.id',$agenda_id,$userid,$detailpage_id);
+		        if($agenda_id != ''){
+		        	$agendaids_to_delete[] = $agenda_id;
+		        }
+		        //Check if the user can change the item by getting the agenda_id
+		        $searchable = Event::checkRecord('searchable',$event_id,$userid);
+
+		        if($searchable != '1'){
+		        	$eventids_to_delete[] = $event_id;
+		        }	
+		    }    
+		}
+
+		if(!empty($agendaids_to_delete)){
+			//dd($agendaids_to_delete);
+			Agenda::destroy($agendaids_to_delete);
+		}
+		return false;
+		// if(!empty($ids_to_delete) && !empty($media_item_ids_to_delete)){
+	 //    	ComponentMediaItem_user::destroy($ids_to_delete);  
+	 //    	ComponentMediaItem::destroy($media_item_ids_to_delete);  
+  //       }
+	}
 }

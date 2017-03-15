@@ -101,6 +101,21 @@ class Event extends Model
 	    	]);
 	}	
 
+	public static function checkRecord($field,$event_id,$userid){
+		$check = DB::table('events')
+			->select($field)
+			->join('event_user', 'events.id', '=', 'event_user.event_id')
+			->where('user_id', '=', $userid)
+			->where('event_id', '=', $event_id)
+			->first();
+
+		if(isset($check->searchable)){
+			return $check->searchable;
+		}else{
+			return $check = '';
+		}
+	}
+
 	//Get all the EVENTS
 	public static function getAll(){
 		$events = DB::table('events')->get();

@@ -17,13 +17,13 @@
 
 {{-- Include Scripts --}}
 @section('page-scripts')
+    @include('scripts.customscrollbar.customscrollbar-init')
     @include('scripts.tinymce.tinymce-init')
     @include('scripts.dropzone.dropzone-init')
     @include('scripts.googlemaps-single-init')
     @include('scripts.detailpage')
     @include('scripts.datepicker.daterangepicker-init')
     @include('scripts.datepicker.datepicker-single-init')
-    @include('scripts.customscrollbar.customscrollbar-init')
     @include('scripts.autocomplete.autocomplete-agenda-init')
     @include('scripts.modal.modal-update-item-init')
 @stop

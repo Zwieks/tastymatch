@@ -206,6 +206,7 @@
                     new_detail_object['lat'] = locationInfo.lat.toString();
                     new_detail_object['long'] = locationInfo.lng.toString();
                     new_detail_object['searchable'] = searchable;
+                    new_detail_object['random'] = '{!! md5(microtime()) !!}';
 
                 var new_location_object = {};
                     if(status != ''){
@@ -377,6 +378,12 @@
                 var date = '';
                 var edit = '';
 
+                if(typeof $.fn.locations_object[key]['info'].random != 'undefined'){
+                    var random = $.fn.locations_object[key]['info'].random;
+                }else{
+                    var random = '';
+                }
+
                 if(typeof start != 'undefined' && start != ''){
                     date = start+' - '+end;
                 }else{
@@ -388,7 +395,7 @@
                     edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal' data-icon='X'";
                 @endif
                 //Create the user agenda items
-                var item = "<li id='"+id+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
+                var item = "<li id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
                             "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
                             "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
                             "</li>";       

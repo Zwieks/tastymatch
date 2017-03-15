@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Agenda;
 class AgendaController extends Controller
 {
     /**
@@ -80,5 +81,15 @@ class AgendaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    /**
+     * Delete agenda items
+     *
+     * @param  array  jsondata, object userDetail
+     * @return \Illuminate\Http\Response
+     */
+    public function deleteAgendaItems(Request $request){
+        Agenda::deleteAgendaItems($request);  
     }
 }

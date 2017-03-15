@@ -6887,6 +6887,7 @@ form ol {
   transform: translate(0, 0);
 }
 .modal .ghost-btn {
+  display: none;
   color: #E3262E;
 }
 .modal-open .modal {

@@ -177,7 +177,7 @@ class AjaxController extends Controller
                 $this->$func($request,$data_items,$detailpage_id);
             }
 
-            return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents)));
+            return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents),'agendaItems' => json_encode($this->agendaItems)));
         }
     }
 
@@ -210,6 +210,8 @@ class AjaxController extends Controller
                 Agenda_User::store($userid, $agenda_id);
                 //Add the Event User table
                 Event_User::store($userid,$event_id,$data);
+                //Add item data to the global variable
+                $this->agendaItems[] = ['name' => $data['info']['name'],'eventid' => $event_id, 'agendaid' => $agenda_id, 'random' => $data['info']['random']];
             }else if($status == 'update' && $agenda_id != ''){
                 //Update the event
                 Event::updateFields($event_id,$data);

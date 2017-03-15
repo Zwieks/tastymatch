@@ -183,6 +183,14 @@
             });
         }
 
+        function setDataAtributeAgendaItems(items){
+            $.each(items, function(key, item){
+                var object = $('#js-agenda-overview').find('li[data-random="'+item.random+'"]');
+                object.attr( "id", item.agendaid );
+                object.attr( "data-event-id", item.eventid );
+            });
+        }
+
         function checkIfSingleObjectIsEmpty(index,value){
             var key = 'component-agendaitems-updateagendaonly-'+index,
             animationParams = {};
@@ -287,6 +295,10 @@
                         if(jQuery.parseJSON(data.mediaComponents).length > 0){
                             setDataAtributeMediaItems(jQuery.parseJSON(data.mediaComponents));
                         }
+                        //Update the new create agenda items data attributes
+                        if(jQuery.parseJSON(data.agendaItems).length > 0){
+                            setDataAtributeAgendaItems(jQuery.parseJSON(data.agendaItems));
+                        }    
 
                         console.log('Component is opgeslagen');
                     }else{
@@ -394,6 +406,27 @@
                 url: '/ajax/deleteComponents',
                 headers: {'X-CSRF-TOKEN': token},
                 data: {jsondata: $.fn.Global.DELETE_COMPONENTS, userDetail: userObject},
+                success: function () {
+                    $.fn.Global.DELETE_COMPONENTS = [];
+                },
+                error: function(){
+                    $.fn.Global.DELETE_COMPONENTS = [];
+                }
+            });
+        }
+
+        function deleteAgendaItems(){
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            var userObject = new Object();
+                userObject['pageid'] = $('input[name=pageid]').val();
+                
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ajax/deleteAgendaItems',
+                headers: {'X-CSRF-TOKEN': token},
+                data: {jsondata: $.fn.Global.DELETE_AGENDA_ITEMS, userDetail: userObject},
                 success: function () {
                     $.fn.Global.DELETE_COMPONENTS = [];
                 },
@@ -717,9 +750,6 @@
                     }else if(value['info'].status == 'update'){
                         var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-update');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
-                    }else if(value['info'].status == 'delete'){
-                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-delete');
-                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-delete-'+count] = value;
                     }
                 } 
             });
@@ -853,6 +883,11 @@
                 deleteImages();
             }
 
+            //Remove agenda items
+            if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
+                deleteAgendaItems();
+            }
+
             console.log($.fn.Global.SAVE_COMPONENTS);
         });
 
@@ -882,7 +917,11 @@
          * TAG: AGENDAHANDLER
          */
         $(document).on('click','.js-delete-agenda-item',function(){
-            console.log('test ');
+            //Set the delete attribute to true
+            $('#js-filter-input').attr('data-delete','true');
+            $('#js-filter-input').attr('data-changed','true');
+            //Trigger the normal handling
+            $('.js-add-agenda-item').trigger('click');
         });
             
         /**
@@ -964,23 +1003,18 @@
             statusObject['value'] = '';
 
             if(changed == 'true'){
-                if(updateAgendaObject['value'] == 'true' && searchable == '1'){
-                    statusObject['value'] = 'update-agenda-only';
+                if(deleteItem == 'true'){
+                    statusObject['value'] = 'delete';
                 }else if(updateItem == 'true'){
                     statusObject['value'] = 'update';
-                }else if(deleteItem == 'true'){
-                    statusObject['value'] = 'delete';
+                }else if(updateAgendaObject['value'] == 'true' && searchable == '1'){
+                    statusObject['value'] = 'update-agenda-only';
                 } 
             }
 
             dataArray.push(eventIdObject,searchObject,countObject,statusObject,updateAgendaObject,agendaidObject,deleteObject,newObject,updateObject,newEventObject);
 
             var validateData = createValidateObject(dataArray);
-
-            //Put the old remove info in the remove array
-            if(newItem != 'true' && updateItem != 'true'){
-                createRemoveArray(agendaId, eventId, searchable);
-            }
 
             //Check form inputs
             validateForm(validateData,dataArray);
