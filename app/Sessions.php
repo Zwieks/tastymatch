@@ -4,15 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-
+use App\User;
 class Sessions extends Model
 {
 	//Set the global user sessions after the user is loggedin
 	//Session is set in the User Controller
     public static function setGlobalUserSession(Request $request, $user){
-
-	    if($request->session()->has('user.global'))
+	    if($request->session()->has('user.global')){
 		    $request->session()->pull('user.global', '');
+        }
 
         //Set the Session
        	$request->session()->put('user.global', $user);

@@ -18,6 +18,7 @@
             delete_from_location_object = [],
             isUpdate = false,
             inCheck = false,
+            delete_array = [],
             count = 0;
 
         //Create a better workable object
@@ -30,7 +31,6 @@
             }
         }
 
-        // console.log($.fn.locations_object);
         $.each($.fn.locations_object, function(index, value) {
             if(inCheck == false){
                 //Check if the new agenda item is already in the location object so an UPDATE
@@ -55,17 +55,13 @@
                             agendaitem.push(newObject);
 
                             //Remove the item from the location object
-                            $.fn.locations_object.splice(index,1);
-
-                            deleteMarkers();
-                            
-                            create_new_marker(agendaitem);
+                            delete_array.push(index);
                         }else{
 
                             //Set the update NAME
                             $.fn.locations_object[index]['info'].name = newAgendaObject.searchevents;
                             //Set the update TYPE
-                            $.fn.locations_object[index]['info'].type_id = newAgendaObject.eventtype;
+                            $.fn.locations_object[index]['info'].type_id = newAgendaObject.type_id;
                             //Set the update DESCRIPTION
                             $.fn.locations_object[index]['info'].description = newAgendaObject.description;
                             //Set the update DATE START
@@ -77,14 +73,11 @@
                         }    
 
                         inCheck = true;
-                    }else if(newAgendaObject.status == 'delete'){
+                    }else if(newAgendaObject.status == 'delete'){   
                         $.fn.locations_object[index]['info'].status = 'delete';
                         createRemoveArray(parseInt(value.id), parseInt(value['info'].id), value['info'].searchable);
                         //Remove the item from the location object
-                        $.fn.locations_object.splice(index,1);
-
-                        deleteMarkers();
-                        initMap();
+                        delete_array.push(index); 
 
                         inCheck = true;
                     }else if(newAgendaObject.status == 'new'){
@@ -94,7 +87,7 @@
                         agendaitem.push(newObject);
                         
                         //Remove the item from the location object
-                        $.fn.locations_object.splice(index,1);
+                        delete_array.push(index); 
 
                         deleteMarkers();
                         
@@ -105,23 +98,31 @@
 
                     isUpdate = true;
                 }else if(typeof newAgendaObject.eventid == 'undefined' && typeof value.event_id == 'undefined'){
+                    createRemoveArray(parseInt(value.id), parseInt(value['info'].id), value['info'].searchable);
                     //Remove the item from the location object
-                    $.fn.locations_object.splice(index,1);
-
-                    deleteMarkers();
+                    delete_array.push(index); 
                     
                     inCheck = true;
                 }
             }    
         });
 
+        //Remove item from location object
+        $.each(delete_array, function(index, value) {
+            $.fn.locations_object.splice(value,1);
+
+            deleteMarkers();
+
+            initMap();
+        });
+
         //If there is no 
         if(isUpdate == false){
             var newObject = {};
                 newObject['status'] = 'new';
-
             agendaitem.push(newObject);
             //Set the update LOCATION marker en put data in array
+            deleteMarkers();
             create_new_marker(agendaitem);
         }
 
@@ -158,8 +159,7 @@
         remove_agendaitem_array['agenda_id'] = agenda_id;
 
         //Set the eventid if the searchable is 0. When this is 0 the even can be deleted
-        if(searchable == 0)
-            remove_agendaitem_array['event_id'] = event_id;
+        remove_agendaitem_array['event_id'] = event_id;
 
         //Put the Agenda item in the DELETE AGENDA ITEM array.
         //This will be used to delete the agenda item in this array on deletion
@@ -274,6 +274,21 @@
             });
         }
 
+        function updateLocationObject(items){
+            $.each(items, function(key, item){
+                if(typeof item.random != 'undefined' && item.random != ''){
+                    $.each($.fn.locations_object, function(index, value) {
+                        if(typeof value['info'].random != 'undefined' && item.random == value['info'].random){
+                            $.fn.locations_object[index].event_id = item.eventid;
+                            $.fn.locations_object[index].id = item.agendaid;
+                            $.fn.locations_object[index]['info'].status = 'delete';
+                            $.fn.locations_object[index]['info'].id = item.eventid;
+                        }
+                    });
+                }
+            });
+        }
+
         function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/saveComponents';
@@ -298,6 +313,8 @@
                         //Update the new create agenda items data attributes
                         if(jQuery.parseJSON(data.agendaItems).length > 0){
                             setDataAtributeAgendaItems(jQuery.parseJSON(data.agendaItems));
+                            //Update the location object
+                            updateLocationObject(jQuery.parseJSON(data.agendaItems));
                         }    
 
                         console.log('Component is opgeslagen');
@@ -419,8 +436,9 @@
             var token = $('meta[name="csrf-token"]').attr('content');
 
             var userObject = new Object();
+                userObject['userid'] = {{ Session::get('user.global.id') }};
                 userObject['pageid'] = $('input[name=pageid]').val();
-                
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -428,10 +446,12 @@
                 headers: {'X-CSRF-TOKEN': token},
                 data: {jsondata: $.fn.Global.DELETE_AGENDA_ITEMS, userDetail: userObject},
                 success: function () {
-                    $.fn.Global.DELETE_COMPONENTS = [];
+                    console.log('Agenda item deleted');
+                    //Update the location object
+                  //  $.fn.Global.DELETE_AGENDA_ITEMS = [];
                 },
                 error: function(){
-                    $.fn.Global.DELETE_COMPONENTS = [];
+                    console.log('Error');
                 }
             });
         }
@@ -712,7 +732,7 @@
         $(document).on('click','.js-save-template', function(){
             //Contains all the TinyMce change
             var formdata = '';
-            $.fn.Global.SAVE_COMPONENTS = [];
+            $.fn.Global.SAVE_COMPONENTS.length = 0;
 
             //Get the TINYMCE and put the changed components in the object
             for (var i = 0; i < tinymce.editors.length; i++){
@@ -740,7 +760,6 @@
             //Save the AGENDA FORM content
             $.each($.fn.locations_object, function(index, value) {
                 if(typeof value['info'].status != 'undefined'){
-                    console.log(value['info'].status);
                     if(value['info'].status == 'new'){
                         var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-new');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
@@ -751,7 +770,7 @@
                         var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-update');
                         $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
                     }
-                } 
+                }
             });
 
             //Get the DROPZONE files en put them in the object
@@ -840,7 +859,7 @@
                     addDefaultMediaObject($.fn.Global.SAVE_COMPONENTS);
                 }    
 
-                //Check if the items must be removee
+                //Check if the items must be removed
                 if(total_media_blocks > 1){
                     if((typeof dropZoneObjects[index_key] === 'undefined' && 
                         typeof $.fn.Global.SAVE_COMPONENTS[index_key] === 'undefined' && 
@@ -870,7 +889,7 @@
 
             //SAVE the component
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
-                saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
+                //saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
             }
 
             //Remove components if the file is empty
@@ -1004,6 +1023,7 @@
 
             if(changed == 'true'){
                 if(deleteItem == 'true'){
+                    newObject['value'] = 'false'; 
                     statusObject['value'] = 'delete';
                 }else if(updateItem == 'true'){
                     statusObject['value'] = 'update';

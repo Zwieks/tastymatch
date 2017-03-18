@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use File;
 use App\Agenda;
+
+use App\User;
+use Session;
+use App\Sessions;
+
 class AgendaController extends Controller
 {
     /**
@@ -90,6 +95,17 @@ class AgendaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function deleteAgendaItems(Request $request){
+       Session::forget('user.global.agenda');
+  
         Agenda::deleteAgendaItems($request);  
+
+        //Update the Session
+        $user = User::userSessionSetup();
+
+        //Set User Data Session
+        Sessions::setGlobalUserSession($request, $user);
+
+        //Return succes
+        return response()->json(array('success' => true));
     }
 }

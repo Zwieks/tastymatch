@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+use DB;
 class Event_User extends Model
 {
 	/**
@@ -42,5 +43,10 @@ class Event_User extends Model
 		$EventUser->save();
 
 		return $EventUser->id;
+	}
+
+	public static function destroy($ids_to_delete)
+	{
+	   DB::table('event_user')->whereIn('event_id', $ids_to_delete)->delete();
 	}
 }

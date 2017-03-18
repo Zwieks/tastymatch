@@ -2,11 +2,16 @@
 
 namespace App;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use App\Event;
 use Carbon\Carbon;
-
+use App\Agenda_User;
+use App\Event_User;
 use DB;
+
+use App\User;
+use App\Sessions;
 class Agenda extends Model
 {
 	/**
@@ -98,10 +103,11 @@ class Agenda extends Model
 
 		$ids_to_delete = [];
 		$agendaids_to_delete = [];
+		$eventids_to_delete = [];
 
 		//Get all the component data
 		$data = $request->all();
-
+		$test = [];
 		//Loop through the array containing the url of the images that will be deleted
 		foreach ($data['jsondata'] as $item) {
 			if($data['userDetail']['pageid'] != ''){
@@ -109,30 +115,48 @@ class Agenda extends Model
 				$detailpage_id = $data['userDetail']['pageid'];
 				$deleteitem = $item['deleteitem'];
 				$agenda_id = $item['agenda_id'];
-				$event_id = $item['event_id'];
+				if(isset($item['event_id'])){
+					$event_id = $item['event_id'];
+				}else{
+					$event_id = '';
+				}
 
 				//Check if the user can change the item by getting the agenda_id
 		        $agenda_id = Agenda::checkRecord('agendas.id',$agenda_id,$userid,$detailpage_id);
+
 		        if($agenda_id != ''){
 		        	$agendaids_to_delete[] = $agenda_id;
 		        }
 		        //Check if the user can change the item by getting the agenda_id
-		        $searchable = Event::checkRecord('searchable',$event_id,$userid);
-
-		        if($searchable != '1'){
-		        	$eventids_to_delete[] = $event_id;
-		        }	
+		        if($event_id != ''){
+			        $searchable = Event::checkRecord('searchable',$event_id,$userid);
+			        if($searchable < 1){
+			        	$test[] = $searchable;
+			        	$eventids_to_delete[] = $event_id;
+			        }else{
+			        	//Destroy items from pivot table
+			        	$empty_array = [];
+			        	$empty_array[] = $event_id;
+						Event_User::destroy($empty_array);
+			        }
+		        }
 		    }    
 		}
 
+		//Delete the agenda records from the pivot and agendas table
 		if(!empty($agendaids_to_delete)){
-			//dd($agendaids_to_delete);
+			// Delete records from agenda table
 			Agenda::destroy($agendaids_to_delete);
+			//Destroy items from pivot table
+			Agenda_User::destroy($agendaids_to_delete);
 		}
-		return false;
-		// if(!empty($ids_to_delete) && !empty($media_item_ids_to_delete)){
-	 //    	ComponentMediaItem_user::destroy($ids_to_delete);  
-	 //    	ComponentMediaItem::destroy($media_item_ids_to_delete);  
-  //       }
+
+		//Delete the event records from the pivot and events table
+		if(!empty($eventids_to_delete)){
+			// Delete records from agenda table
+			Event::destroy($eventids_to_delete);
+			//Destroy items from pivot table
+			Event_User::destroy($eventids_to_delete);
+		}
 	}
 }

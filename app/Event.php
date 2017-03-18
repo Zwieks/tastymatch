@@ -62,8 +62,8 @@ class Event extends Model
 		if(isset($info['searchable']) && $info['searchable'] != '')
 			$Event->searchable = $info['searchable'];
 
-		if(isset($info['eventtype']) && $info['eventtype'] != '')
-			$Event->type_id = $info['eventtype'];
+		if(isset($info['type_id']) && $info['type_id'] != '')
+			$Event->type_id = $info['type_id'];
 
 		$Event->save();
 
@@ -124,5 +124,16 @@ class Event extends Model
 		$events = images::getAllImages($events);
 
 		return $events;
+	}
+
+		/**
+	 * Remove the specified resource from storage.
+	 *
+	 * @param  array $ids_to_delete
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function destroy($ids_to_delete)
+	{
+	   DB::table('events')->whereIn('id', $ids_to_delete)->delete();
 	}
 }

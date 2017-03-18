@@ -36,6 +36,11 @@ class Agenda_User extends Model
 		$AgendaUser->save();
 	}
 
+	public static function destroy($ids_to_delete)
+	{
+	   DB::table('agenda_user')->whereIn('agenda_id', $ids_to_delete)->delete();
+	}
+
 	public static function checkAlreadyUpdated($field,$event_id,$userid){
 		$check = DB::table('agenda_user')
 			->join('agendas', 'agenda_user.agenda_id', '=', 'agendas.id')

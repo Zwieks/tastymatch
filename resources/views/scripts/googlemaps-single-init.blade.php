@@ -191,6 +191,11 @@
         //Count the current object length using function from DETAILPAGE script
     }
 
+    // Should work for most cases
+    function uniqId() {
+      return Math.round(new Date().getTime() + (Math.random() * 100));
+    }
+
     function getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type,searchable){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
@@ -200,13 +205,13 @@
                 //New objects
                 var new_detail_object = {};
                     new_detail_object['description'] = description;
-                    new_detail_object['eventtype'] = event_type;
+                    new_detail_object['type_id'] = event_type;
                     new_detail_object['location'] = location;
                     new_detail_object['name'] = name;
                     new_detail_object['lat'] = locationInfo.lat.toString();
                     new_detail_object['long'] = locationInfo.lng.toString();
                     new_detail_object['searchable'] = searchable;
-                    new_detail_object['random'] = '{!! md5(microtime()) !!}';
+                    new_detail_object['random'] = uniqId();
 
                 var new_location_object = {};
                     if(status != ''){
@@ -329,7 +334,6 @@
     //Create default agenda object
     function createDefaultAgendaObject(){
         $.fn.locations_ofbject = [];
-
         @foreach ($page_content['agenda'] as $item)
             @if($detailpage_id == $item['detailpage_id'])
                 $.fn.locations_object.push({!! $item !!});
@@ -359,7 +363,8 @@
         //Get the agenda info
         var agenda_listitems = '',
             eventid = '';
-
+console.log('setAgendaItems');
+console.log($.fn.locations_object);
         for (var key in $.fn.locations_object) {
             if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
                 var id = $.fn.locations_object[key].id;

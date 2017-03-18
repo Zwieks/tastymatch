@@ -220,59 +220,13 @@ class AjaxController extends Controller
             }else if($status == 'update-agenda-only' && $agenda_id != ''){
                 //Update ONLY the agenda data fields
                 Agenda::updateFields($userid,$agenda_id,$data);  
-            }else if($status == 'delete'){
-
             }
         }
-
         //Update the Session
         $user = User::userSessionSetup();
 
         //Set User Data Session
         Sessions::setGlobalUserSession($request, $user);
-
-                // if (strpos($data['elementid'], 'new') !== false)
-        //     $data['newitem'] = true;
-        // if(isset($data['newitem'])){
-        //     dd('New item');
-        //     //Check if the user can change the item by getting the agenda_id
-        //     if(isset($data['event_id'])){
-        //         $event_id = $data['event_id'];
-        //         $agenda_id = Agenda_User::CheckAlreadyUpdated('agendas.id',$event_id,$userid);
-        //     }
-        //     //If the check give a valid component id related to the user update the field else add a new item to the DB en pivot
-        //     if(isset($agenda_id) && $agenda_id != ''){
-        //         //Update the possible agenda dates
-        //         Agenda::updateFields($userid,$agenda_id,$data);
-        //     }else{
-        //         //Create a new event if the user did not select an existing one
-        //         if(isset($data['info']) && !empty($data['info']) && !isset($data['event_id'])){
-        //             $event_id = Event::store($data);
-        //             Event_User::store($userid,$event_id,$data);
-        //         }else{
-        //             $event_id = $data['event_id'];
-        //         }
-
-        //         //Add the component data to the component table and get the id
-        //         $agenda_id = Agenda::store($data,$event_id);
-
-        //         //Add detailpage_id and $agenda_id to component_mediaitem_user table
-        //         Agenda_User::store($userid, $agenda_id);
-
-        //         // //Add item data to the global variable
-        //         // $this->agendaItems[] = ['agendaid' => $agenda_id];
-
-        //         //Update the Session
-        //         $user = User::userSessionSetup();
-
-        //         //Set User Data Session
-        //         Sessions::setGlobalUserSession($request, $user);
-        //     }
-        // }else if(isset($data['updateitem'])){
-        //     dd('update Item');
-        // }else{
-        //     dd('delete Item');
-        // }
     }
 
     public function SaveMediaitemsComponent(Request $request,$data,$detailpage_id){
