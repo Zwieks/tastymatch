@@ -4,6 +4,7 @@
         DELETE_AGENDA_ITEMS : [],
         AGENDA_ITEMS : [],
         SAVE_COMPONENTS : [],
+        AJAX_COMPLETE : false,
         DELETE_COMPONENTS : []
     };
 
@@ -167,6 +168,14 @@
     }
 
     $(document).ready(function(e) {
+        $(document).ajaxComplete(function(){
+            if($.fn.Global.AJAX_COMPLETE == true){
+                resetSession();
+                $.fn.Global.AJAX_COMPLETE = false;
+            }
+            return false;
+        });
+
         //Add media item to template
         $('#js_add_mediaitem').on('click', function(){
             addMediaItem();
@@ -347,6 +356,10 @@
                         });
                     });
                 }
+            }).done(function(data){
+                if(data.success == true) {
+                    $.fn.Global.AJAX_COMPLETE = true;
+                }
             });
         }
 
@@ -454,6 +467,29 @@
                     console.log('Error');
                 }
             });
+        }
+
+
+        function resetSession(){
+            var token = $('meta[name="csrf-token"]').attr('content');
+
+            var userObject = new Object();
+                userObject['userid'] = {{ Session::get('user.global.id') }};
+                userObject['pageid'] = $('input[name=pageid]').val();
+
+            $.ajax({
+                type: 'POST',
+                dataType: 'json',
+                url: '/ajax/resetSession',
+                headers: {'X-CSRF-TOKEN': token},
+                data: {userDetail: userObject},
+                success: function () {
+                    console.log('Session has been reset');
+                },
+                error: function(){
+                    console.log('Error');
+                }
+            });                
         }
 
         function deleteImages(){
@@ -889,25 +925,25 @@
 
             //SAVE the component
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
-                //saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
-            }
+                saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
 
-            //Remove components if the file is empty
-            if($.fn.Global.DELETE_COMPONENTS.length > 0){
-                deleteComponents();
-            }
+                //Remove components if the file is empty
+                if($.fn.Global.DELETE_COMPONENTS.length > 0){
+                    deleteComponents();
+                }
 
-            //Remove images
-            if($.fn.Global.DELETE_IMAGES.length > 0){
-                deleteImages();
-            }
+                //Remove images
+                if($.fn.Global.DELETE_IMAGES.length > 0){
+                    deleteImages();
+                }
 
-            //Remove agenda items
-            if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
-                deleteAgendaItems();
-            }
+                //Remove agenda items
+                if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
+                    deleteAgendaItems();
+                }
 
-            console.log($.fn.Global.SAVE_COMPONENTS);
+                console.log($.fn.Global.SAVE_COMPONENTS);
+            }
         });
 
         //Check if the form has been altered

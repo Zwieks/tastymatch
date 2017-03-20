@@ -106,4 +106,6 @@ Route::group(['middleware' => 'auth'], function()
 	Route::post('/ajax/deleteImages', 'ImagesController@delete');
 	//DELETE agenda items
 	Route::post('/ajax/deleteAgendaItems', 'AgendaController@deleteAgendaItems');
+	//Reset the user session
+	Route::post('/ajax/resetSession', 'ajaxController@resetSession');
 });

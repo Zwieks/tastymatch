@@ -97,13 +97,7 @@ class AgendaController extends Controller
     public function deleteAgendaItems(Request $request){
        Session::forget('user.global.agenda');
   
-        Agenda::deleteAgendaItems($request);  
-
-        //Update the Session
-        $user = User::userSessionSetup();
-
-        //Set User Data Session
-        Sessions::setGlobalUserSession($request, $user);
+        Agenda::deleteAgendaItems($request);
 
         //Return succes
         return response()->json(array('success' => true));

@@ -222,11 +222,16 @@ class AjaxController extends Controller
                 Agenda::updateFields($userid,$agenda_id,$data);  
             }
         }
+    }
+
+    public function resetSession(Request $request){
         //Update the Session
         $user = User::userSessionSetup();
 
         //Set User Data Session
         Sessions::setGlobalUserSession($request, $user);
+
+        return response()->json(array('success' => true));
     }
 
     public function SaveMediaitemsComponent(Request $request,$data,$detailpage_id){
