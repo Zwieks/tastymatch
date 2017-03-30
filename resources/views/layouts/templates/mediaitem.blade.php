@@ -2,7 +2,7 @@
 <div class="media">
     <div class="product-wrapper">
 
-        <figure data-toggle="modal" data-target=".modal" data-content="{{ ( $data['video'] != '' ? $data['video'] : URL::asset('storage/'.$data['image'])) }}" data-type="{{ ( $data['video'] != '' ? 'video' : 'image' ) }}" class="{{ ( $data['video'] != '' ? 'youtube-playbtn' : 'image-wrapper' )}}">
+        <figure data-toggle="modal" data-target="#modal-media" data-content="{{ ( $data['video'] != '' ? $data['video'] : URL::asset('storage/'.$data['image'])) }}" data-type="{{ ( $data['video'] != '' ? 'video' : 'image' ) }}" class="{{ ( $data['video'] != '' ? 'youtube-playbtn' : 'image-wrapper' )}}">
 
             @if($data['video'] != '')
                 <?php
