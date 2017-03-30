@@ -66,6 +66,10 @@
             mapTypeId: google.maps.MapTypeId.ROADMAP
         });
 
+        if ($.fn.locations_object.length == 0) {
+            emptyMap();
+        }
+
         createMap(map,animation,$.fn.locations_object);
 
         //Set the bounds and zoom
@@ -190,6 +194,20 @@
       return Math.round(new Date().getTime() + (Math.random() * 100));
     }
 
+    //Create empty map
+    function emptyMap(){
+        var country = '{!! App::getLocale() !!}',
+            location = {!! json_encode($user['city']) !!};
+        $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){ 
+            var locationInfo = val.results[0].geometry.location;
+
+            var lat = locationInfo.lat,
+                long = locationInfo.lng;
+
+            map.setCenter({lat: lat, lng: long}); 
+        });
+    }
+
     function getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type,searchable){
         //Get the details using the maps API
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){
@@ -307,7 +325,7 @@
 
     // Create agenda object
     function createAgendaObject(filter_start_date, filter_end_date){
-        var collection = {!! $page_content['agenda']->sortBy('date_start') !!};
+        var collection = $.fn.locations_object;
         var agenda_object = new Object();
         var index = 0;
 
@@ -358,48 +376,53 @@
         var agenda_listitems = '',
             eventid = '';
 
-        for (var key in $.fn.locations_object) {
-            if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
-                var id = $.fn.locations_object[key].id;
 
-                if(typeof $.fn.locations_object[key].event_id != 'undefined'){
-                    eventid = $.fn.locations_object[key].event_id;
-                }else{
-                     eventid = '';
+        if($.fn.locations_object.length != 0){    
+            for (var key in $.fn.locations_object) {
+                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
+                    var id = $.fn.locations_object[key].id;
+
+                    if(typeof $.fn.locations_object[key].event_id != 'undefined'){
+                        eventid = $.fn.locations_object[key].event_id;
+                    }else{
+                         eventid = '';
+                    }
+
+                    var name = $.fn.locations_object[key]['info'].name;
+                    var location = $.fn.locations_object[key]['info'].location;
+                    var searchable_id = $.fn.locations_object[key]['info'].searchable;
+                    var start = $.fn.locations_object[key].date_start;
+                    var end = $.fn.locations_object[key].date_end;
+                    var date = '';
+                    var edit = '';
+
+                    if(typeof $.fn.locations_object[key]['info'].random != 'undefined'){
+                        var random = $.fn.locations_object[key]['info'].random;
+                    }else{
+                        var random = '';
+                    }
+
+                    if(typeof start != 'undefined' && start != ''){
+                        date = start+' - '+end;
+                    }else{
+                        date = start;
+                    }
+
+                    //Set modal options if the page is new or in updates status
+                    @if(isset($page_type) && ($page_type == 'update' || $page_type == 'new'))
+                        edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal-form' data-icon='X'";
+                    @endif
+                    //Create the user agenda items
+                    var item = "<li id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
+                                "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
+                                "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
+                                "</li>";       
+                    agenda_listitems = agenda_listitems+item;
                 }
-
-                var name = $.fn.locations_object[key]['info'].name;
-                var location = $.fn.locations_object[key]['info'].location;
-                var searchable_id = $.fn.locations_object[key]['info'].searchable;
-                var start = $.fn.locations_object[key].date_start;
-                var end = $.fn.locations_object[key].date_end;
-                var date = '';
-                var edit = '';
-
-                if(typeof $.fn.locations_object[key]['info'].random != 'undefined'){
-                    var random = $.fn.locations_object[key]['info'].random;
-                }else{
-                    var random = '';
-                }
-
-                if(typeof start != 'undefined' && start != ''){
-                    date = start+' - '+end;
-                }else{
-                    date = start;
-                }
-
-                //Set modal options if the page is new or in updates status
-                @if(isset($page_type) && ($page_type == 'update' || $page_type == 'new'))
-                    edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal-form' data-icon='X'";
-                @endif
-                //Create the user agenda items
-                var item = "<li id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
-                            "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
-                            "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
-                            "</li>";       
-                agenda_listitems = agenda_listitems+item;
             }
-        }
+        }else{
+            agenda_listitems = "<li class='agenda-empty'><span>{{ Lang::get('agenda.no-items') }}</span></li>";
+        }    
 
         $('.agendaitems-wrapper .mCSB_container').empty();
         $('.agendaitems-wrapper .mCSB_container').append(agenda_listitems);

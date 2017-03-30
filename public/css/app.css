@@ -3979,6 +3979,11 @@ html .cookie-explanation {
   -ms-flex-positive: 1;
   flex-grow: 1;
 }
+.google-maps-overlay-agenda .agenda-empty {
+  margin-bottom: 1.2rem;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
 .google-maps-overlay-agenda .agendaitems-wrapper {
   margin: 0;
   height: auto;

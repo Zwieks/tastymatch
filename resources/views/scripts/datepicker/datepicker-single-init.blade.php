@@ -1,7 +1,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
         $('input[data-dp="true"]').datepicker({
-            container:'#modal',
+            container:'#modal-form',
            	format: 'd M yyyy',
         }).on('changeDate', function (ev) {
     		if($('.datepicker').is(":visible")){
