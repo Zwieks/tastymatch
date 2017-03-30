@@ -27,3 +27,11 @@
 @section('sticky-content')
     @include('sidebars.sticky.templatecontrols')
 @stop
+
+{{-- Include Modal --}}
+@section('modal')
+	@include('modals.basic', ['content' => "modals.agenda.create", 'mediatype' => 'form','modaltype' => ''])
+    @include('modals.basic', ['content' => "modals.agenda.daterangepicker", 'mediatype' => 'daterange','modaltype' => ''])
+    @include('modals.basic', ['content' => "modals.agenda.success", 'mediatype' => 'success','modaltype' => 'notification'])
+    @include('modals.basic', ['content' => "modals.agenda.error", 'mediatype' => 'error','modaltype' => 'notification'])
+@stop

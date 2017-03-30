@@ -6,9 +6,9 @@
         // });
 
         //Remove the input errors and empty all the input fields when the modal has been closed
-        $('#modal').on('hidden.bs.modal', function () {
-            $('#modal').find('div.input-error').hide();
-            $('#modal').find('li.input-error').removeClass('input-error');
+        $('#modal-form').on('hidden.bs.modal', function () {
+            $('#modal-form').find('div.input-error').hide();
+            $('#modal-form').find('li.input-error').removeClass('input-error');
             $('#js-filter-input').attr('data-eventid','');
             $('#js-filter-input').attr('data-searchable','');
             $('#js-filter-input').attr('data-delete','');
@@ -19,11 +19,11 @@
             //Set the changed status of the modal
             $('#js-filter-input').attr('data-changed','false');
             //Hide the delete button
-            $('#modal').find('.js-delete-agenda-item').hide();
+            $('#modal-form').find('.js-delete-agenda-item').hide();
         });
 
         //Click on the agenda item
-        $( "#modal" ).on('show.bs.modal', function(e){
+        $( "#modal-form" ).on('show.bs.modal', function(e){
             if($(e.relatedTarget).attr('class') != 'btn-wrapper' && typeof $(e.relatedTarget).attr('class') != 'undefined'){
 
                 //Get the session
@@ -102,7 +102,7 @@
 
         //Check if the form has been altered
         $(document).on('change','form#js-modal-create-agenda-items :input',function(){
-            if($('#modal').is(":visible")){
+            if($('#modal-form').is(":visible")){
                 var $fields = $(this);
                 var $emptyFields = $fields.filter(function(e) {
                     // remove the $.trim if whitespace is counted as filled

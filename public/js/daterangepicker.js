@@ -94,6 +94,7 @@
 		//html template for the picker UI
 		if (typeof options.template !== 'string' && !(options.template instanceof $))
 			options.template = '<div class="daterangepicker dropdown-menu">' +
+				'<div class="daterange-wrapper">' +
 				'<div class="daterangepicker-filter-label">' +
 				'<span class="js-filter-label"></span>' +
 				'</div>' +
@@ -123,6 +124,7 @@
 				'<div class="range_inputs">' +
 				'<button class="applyBtn" disabled="disabled" type="button"></button> ' +
 				'<button class="cancelBtn" type="button"></button>' +
+				'</div>' +
 				'</div>' +
 				'</div>' +
 				'</div>';

@@ -71,7 +71,7 @@ Route::post('/entertainer/{slug}', ['as' => 'blog.single', 'uses' => 'Entertaine
 Route::post('/event/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 //USER ACCESS ONLY
-Route::group(['middleware' => 'auth'], function()
+Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()
 {
 	//Create DETAILPAGE
 	Route::get('create/detailpage/{slug}', 'DetailPageController@store');

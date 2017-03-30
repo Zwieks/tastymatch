@@ -33,5 +33,6 @@
 
 {{-- Include Modal --}}
 @section('modal')
-	@include('modals.basic', ['content' => "modals.media", 'mediatype' => 'media'])
+	@include('modals.basic', ['content' => "modals.agenda.daterangepicker", 'mediatype' => 'daterange','modaltype' => ''])
+	@include('modals.basic', ['content' => "modals.media", 'mediatype' => 'media','modaltype' => ''])
 @stop

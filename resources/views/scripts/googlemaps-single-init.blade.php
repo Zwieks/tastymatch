@@ -183,12 +183,6 @@
         var country = '{!! App::getLocale() !!}';
 
         getLocationDetails(agenda_id,status,eventid,info,country,location,name,date_start,date_end,description,event_type,searchable);
-
-
-        // var locations = set_locations(key,fd['info']);
-        // add_markers(key,map,locations,icons['events'].icon,animation);\
-
-        //Count the current object length using function from DETAILPAGE script
     }
 
     // Should work for most cases
@@ -227,8 +221,8 @@
                 //Add the new marker info the the $.fn.locations_object
                 $.fn.locations_object.push(new_location_object);
             }
-        }).success(function(new_location_object) {
-            initMap();        
+        }).done(function(new_location_object) {
+            initMap();     
         });
 
     }
@@ -363,8 +357,7 @@
         //Get the agenda info
         var agenda_listitems = '',
             eventid = '';
-console.log('setAgendaItems');
-console.log($.fn.locations_object);
+
         for (var key in $.fn.locations_object) {
             if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
                 var id = $.fn.locations_object[key].id;
@@ -397,7 +390,7 @@ console.log($.fn.locations_object);
 
                 //Set modal options if the page is new or in updates status
                 @if(isset($page_type) && ($page_type == 'update' || $page_type == 'new'))
-                    edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal' data-icon='X'";
+                    edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal-form' data-icon='X'";
                 @endif
                 //Create the user agenda items
                 var item = "<li id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+

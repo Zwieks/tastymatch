@@ -19,6 +19,7 @@
             delete_from_location_object = [],
             isUpdate = false,
             inCheck = false,
+            deleted = false,
             delete_array = [],
             count = 0;
 
@@ -84,9 +85,8 @@
                     }else if(newAgendaObject.status == 'new'){
                         var newObject = {};
                             newObject['searchable'] = '1';
-
                         agendaitem.push(newObject);
-                        
+
                         //Remove the item from the location object
                         delete_array.push(index); 
 
@@ -98,30 +98,35 @@
                     }   
 
                     isUpdate = true;
-                }else if(typeof newAgendaObject.eventid == 'undefined' && typeof value.event_id == 'undefined'){
+                }else if(typeof newAgendaObject.eventid == 'undefined' && typeof value.event_id == 'undefined' && typeof newAgendaObject.status != 'undefined' && newAgendaObject.status == 'delete'){
                     createRemoveArray(parseInt(value.id), parseInt(value['info'].id), value['info'].searchable);
                     //Remove the item from the location object
                     delete_array.push(index); 
                     
                     inCheck = true;
                 }
-            }    
+            } 
         });
 
         //Remove item from location object
-        $.each(delete_array, function(index, value) {
-            $.fn.locations_object.splice(value,1);
+        if(delete_array.length != 0){
+            $.each(delete_array, function(index, value) {
+                $.fn.locations_object.splice(value,1);
 
-            deleteMarkers();
+                deleteMarkers();
 
-            initMap();
-        });
+                initMap();
+            }); 
+
+            deleted = true;
+        }
 
         //If there is no 
-        if(isUpdate == false){
+        if(isUpdate == false && deleted == false){
             var newObject = {};
                 newObject['status'] = 'new';
             agendaitem.push(newObject);
+
             //Set the update LOCATION marker en put data in array
             deleteMarkers();
             create_new_marker(agendaitem);
@@ -130,7 +135,7 @@
         //Update the agenda items
         setAgendaItems(agendaitem);
         //Close the modal
-        $('#modal').modal('toggle');
+        $('#modal-form').modal('toggle');
     }
 
     /**
@@ -304,8 +309,14 @@
 
             var newObject = objectReplaceKeyNamesToNumbers(components);
             var userObject = new Object();
+
+            @if(!is_null(Session::get('user.global.id')))
                 userObject['userid'] = {{ Session::get('user.global.id') }};
-                userObject['pageid'] = $('input[name=pageid]').val();
+            @else
+                userObject['userid'] = '';
+            @endif 
+
+            userObject['pageid'] = $('input[name=pageid]').val();
 
             $.ajax({
                 type: 'POST',
@@ -327,8 +338,12 @@
                         }    
 
                         console.log('Component is opgeslagen');
+                        //Toggle save modal
+                        $('#modal-success').modal('toggle');
                     }else{
                         console.log('Oeps..');
+                        //Toggle save modal
+                        $('#modal-error').modal('toggle');
                     }
                 },
                 error: function(data){
@@ -360,6 +375,10 @@
                 if(data.success == true) {
                     $.fn.Global.AJAX_COMPLETE = true;
                 }
+
+                setTimeout(function(){ 
+                    $('.notification').modal('hide'); 
+                }, 1500);
             });
         }
 
@@ -449,8 +468,13 @@
             var token = $('meta[name="csrf-token"]').attr('content');
 
             var userObject = new Object();
-                userObject['userid'] = {{ Session::get('user.global.id') }};
                 userObject['pageid'] = $('input[name=pageid]').val();
+
+            @if(!is_null(Session::get('user.global.id')))
+                userObject['userid'] = {{ Session::get('user.global.id') }};
+            @else
+                userObject['userid'] = '';
+            @endif 
 
             $.ajax({
                 type: 'POST',
@@ -474,8 +498,13 @@
             var token = $('meta[name="csrf-token"]').attr('content');
 
             var userObject = new Object();
-                userObject['userid'] = {{ Session::get('user.global.id') }};
                 userObject['pageid'] = $('input[name=pageid]').val();
+
+            @if(!is_null(Session::get('user.global.id')))
+                userObject['userid'] = {{ Session::get('user.global.id') }};
+            @else
+                userObject['userid'] = null;
+            @endif 
 
             $.ajax({
                 type: 'POST',
@@ -820,7 +849,12 @@
 
                 //Set image path
                 if($.fn.Global.SAVE_COMPONENTS[key].randomname != '' && typeof $.fn.Global.SAVE_COMPONENTS[key].randomname != 'undefined'){
-                    $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+{{ Session::get('user.global.id') }}+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
+                    @if(!is_null(Session::get('user.global.id')))
+                        var session = {{ Session::get('user.global.id') }};
+                    @else
+                         var session = userObject['userid'] = '';
+                    @endif 
+                    $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+session+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
                 }else{
                     $.fn.Global.SAVE_COMPONENTS[key].path = '';
                     //Add the remove item to tell this image have to be removed
@@ -975,6 +1009,7 @@
             //Set the delete attribute to true
             $('#js-filter-input').attr('data-delete','true');
             $('#js-filter-input').attr('data-changed','true');
+
             //Trigger the normal handling
             $('.js-add-agenda-item').trigger('click');
         });
@@ -989,6 +1024,7 @@
                 searchable = $('#js-filter-input').attr('data-searchable'),
                 newEventId = $('#js-filter-input').attr('data-neweventid'),
                 deleteItem = $('#js-filter-input').attr('data-delete'),
+                removeItem = $('#js-filter-input').attr('data-remove','true'),
                 agendaId = $('#js-filter-input').attr('data-agendaid'),
                 eventId = $('#js-filter-input').attr('data-eventid'),
                 newItem = $('#js-filter-input').attr('data-new'),

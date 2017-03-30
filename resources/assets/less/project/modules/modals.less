@@ -89,6 +89,67 @@
     display: none;
     color:@primColor;
   }
+  .calendar{
+    width: 100%;
+    margin:0;
+
+    &.left,
+    &.right{
+      padding: 0;
+    }
+  }
+
+  .daterangepicker-filter-label{
+    display: none;
+  }
+
+  .daterangepicker{
+    width: 100%;
+  }
+
+  .daterange-wrapper{
+    display: block;
+    box-shadow: none;
+    border-left: 0;
+    padding:0;
+    width: 100%;
+  }
+
+  .formfilter-wrapper{
+    margin:0;
+    padding:0;
+  }
+
+  &.notification{
+    .modal-title{
+      font-weight: bold;
+    }
+
+    p{
+      margin: 0;
+      font-weight: bold;
+    }
+  }
+
+  &.modal-success{
+    .modal-title{
+      color: @successColor;
+    }
+
+    .modal-content{
+      border:4px solid @successColor;
+    }
+  }
+
+  &.modal-error{
+    .modal-title{
+      color: @errorColor;
+    }
+
+    .modal-content{
+      border:4px solid @errorColor;
+    }
+  } 
 }
 .modal-open .modal {
   overflow-x: hidden;
@@ -110,6 +171,10 @@
   position: relative;
   background-color: @white;
   outline: 0;
+
+  @media @bp-TabletLM{
+    padding:@spacing;
+  }
 }
 
 // Modal background
@@ -154,6 +219,7 @@
   width:@spacing;
   height:@spacing;
   position: relative;
+  z-index: 10000;
 
   &:before{
     .center;

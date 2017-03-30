@@ -11,7 +11,7 @@ use App\Images;
 use App\Agenda;
 use App\Sessions;
 use App\Foodstandtype;
-use App\GoogleMaps;
+use App\GoogleMaps; 
 use App\globalinfo;
 use Auth;
 

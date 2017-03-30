@@ -2464,6 +2464,21 @@ html .cookie-explanation button.request-cookies:before,
   font-size: 48px!important;
   text-shadow: 1px 1px 1px #797979;
 }
+.btn-icon-only {
+  -ms-align-self: flex-end;
+  -ms-flex-item-align: end;
+  align-self: flex-end;
+  width: 4.8rem;
+  position: relative;
+}
+.btn-icon-only:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
 .facebook-btn {
   background: #3b5998;
 }
@@ -3908,6 +3923,36 @@ html .cookie-explanation {
   padding: 1.2rem;
   border-left: 15px solid #E3262E;
 }
+@media screen and (max-width: 768px) {
+  .google-maps-overlay-agenda {
+    transform: translateX(-50%);
+    position: absolute;
+    left: 50%;
+    width: 100%;
+    height: auto;
+    position: relative;
+    margin-top: -4.8rem;
+    margin-bottom: 4.8rem;
+    background-color: #fff;
+  }
+}
+.google-maps-overlay-agenda .header-wrapper {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -moz-justify-content: space-between;
+  -ms-justify-content: space-between;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -moz-align-items: center;
+  -ms-align-items: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(51, 51, 51, 0.26);
+  margin-bottom: 1.2rem;
+}
 .google-maps-overlay-agenda .add-agenda-item {
   position: relative;
   padding: 1.2rem;
@@ -3939,9 +3984,17 @@ html .cookie-explanation {
   height: auto;
   max-height: 18rem;
 }
+.google-maps-overlay-agenda .btn-icon-only {
+  display: none;
+  margin: 0;
+}
+@media screen and (max-width: 768px) {
+  .google-maps-overlay-agenda .btn-icon-only {
+    display: block;
+  }
+}
 .google-maps-overlay-agenda .overlay-agenda-title {
-  padding-bottom: 1.2rem;
-  border-bottom: 1px solid rgba(51, 51, 51, 0.26);
+  margin: 0;
 }
 .google-maps-overlay-agenda .agendaitem {
   cursor: pointer;
@@ -5566,6 +5619,13 @@ form ol {
   align-items: flex-start;
   margin-bottom: 4.8rem;
 }
+@media screen and (max-width: 768px) {
+  .component-wrapper {
+    -moz-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+  }
+}
 .component-wrapper .intro {
   -webkit-flex-grow: 1;
   -moz-flex-grow: 1;
@@ -5590,7 +5650,7 @@ form ol {
     padding: 0 1.2rem 0 2.4rem;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .component-wrapper .intro {
     width: 100%;
     padding: 0;
@@ -5616,7 +5676,7 @@ form ol {
     margin-left: 0;
   }
 }
-@media screen and (max-width: 480px) {
+@media screen and (max-width: 768px) {
   .component-wrapper .details-wrapper {
     width: 100%;
     padding: 0;
@@ -5735,6 +5795,11 @@ form ol {
   align-self: stretch;
   width: 33.33333333%;
   padding: 1.2rem;
+}
+@media screen and (max-width: 768px) {
+  .component-wrapper .media {
+    width: 100%;
+  }
 }
 .component-wrapper .media figure,
 .component-wrapper .media iframe {
@@ -6231,47 +6296,6 @@ form ol {
   margin-bottom: 1.2rem;
   font-weight: 800;
 }
-.daterangepicker {
-  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: -ms-flex;
-  display: flex;
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  position: relative;
-  color: inherit;
-  background-color: #fff;
-  width: 60rem;
-  padding: 1.2rem;
-  margin-top: -0.6rem;
-  border-left: 15px solid #E3262E;
-}
-.daterangepicker:before,
-.daterangepicker:after {
-  opacity: 0;
-  position: absolute;
-  display: inline-block;
-  border-bottom-color: rgba(0, 0, 0, 0.2);
-  content: '';
-}
-.daterangepicker:before {
-  top: -7px;
-  border-right: 7px solid transparent;
-  border-left: 7px solid transparent;
-  border-bottom: 7px solid #ccc;
-}
-.daterangepicker:after {
-  top: -6px;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid #fff;
-  border-left: 6px solid transparent;
-}
-@media screen and (max-width: 640px) {
-  .daterangepicker {
-    width: auto;
-  }
-}
 .daterangepicker table {
   width: 100%;
   margin: 0;
@@ -6374,6 +6398,52 @@ form ol {
   display: block;
   margin-bottom: 1.2rem;
 }
+.daterangepicker .daterange-wrapper {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  position: relative;
+  color: inherit;
+  background-color: #fff;
+  width: 60rem;
+  padding: 1.2rem;
+  margin-top: -0.6rem;
+  border-left: 15px solid #E3262E;
+}
+@media screen and (max-width: 768px) {
+  .daterangepicker .daterange-wrapper {
+    display: none;
+  }
+}
+.daterangepicker .daterange-wrapper:before,
+.daterangepicker .daterange-wrapper:after {
+  opacity: 0;
+  position: absolute;
+  display: inline-block;
+  border-bottom-color: rgba(0, 0, 0, 0.2);
+  content: '';
+}
+.daterangepicker .daterange-wrapper:before {
+  top: -7px;
+  border-right: 7px solid transparent;
+  border-left: 7px solid transparent;
+  border-bottom: 7px solid #ccc;
+}
+.daterangepicker .daterange-wrapper:after {
+  top: -6px;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid #fff;
+  border-left: 6px solid transparent;
+}
+@media screen and (max-width: 640px) {
+  .daterangepicker .daterange-wrapper {
+    width: auto;
+  }
+}
 .daterangepicker .range_inputs {
   text-align: right;
 }
@@ -6394,8 +6464,12 @@ form ol {
 }
 .daterangepicker .calendar {
   display: none;
-  max-width: 200px;
-  margin: 4px;
+  width: 50%;
+}
+@media screen and (max-width: 640px) {
+  .daterangepicker .calendar {
+    width: 100%;
+  }
 }
 .daterangepicker .calendar th,
 .daterangepicker .calendar td {
@@ -6426,6 +6500,9 @@ form ol {
   background-color: #eee;
   border-color: transparent;
   color: inherit;
+}
+.daterangepicker .available:after {
+  opacity: 0;
 }
 .daterangepicker .week {
   font-size: 80%;
@@ -6570,6 +6647,7 @@ form ol {
   float: none;
   margin: 4px 0 0 0;
   text-align: left;
+  width: 100%;
 }
 .daterangepicker .ranges ul {
   list-style: none;
@@ -6890,6 +6968,50 @@ form ol {
   display: none;
   color: #E3262E;
 }
+.modal .calendar {
+  width: 100%;
+  margin: 0;
+}
+.modal .calendar.left,
+.modal .calendar.right {
+  padding: 0;
+}
+.modal .daterangepicker-filter-label {
+  display: none;
+}
+.modal .daterangepicker {
+  width: 100%;
+}
+.modal .daterange-wrapper {
+  display: block;
+  box-shadow: none;
+  border-left: 0;
+  padding: 0;
+  width: 100%;
+}
+.modal .formfilter-wrapper {
+  margin: 0;
+  padding: 0;
+}
+.modal.notification .modal-title {
+  font-weight: bold;
+}
+.modal.notification p {
+  margin: 0;
+  font-weight: bold;
+}
+.modal.modal-success .modal-title {
+  color: green;
+}
+.modal.modal-success .modal-content {
+  border: 4px solid green;
+}
+.modal.modal-error .modal-title {
+  color: #f00;
+}
+.modal.modal-error .modal-content {
+  border: 4px solid #f00;
+}
 .modal-open .modal {
   overflow-x: hidden;
   overflow-y: auto;
@@ -6907,6 +7029,11 @@ form ol {
   position: relative;
   background-color: #fff;
   outline: 0;
+}
+@media screen and (max-width: 900px) {
+  .modal-content {
+    padding: 2.4rem;
+  }
 }
 .modal-backdrop {
   position: fixed;
@@ -6950,6 +7077,7 @@ form ol {
   width: 2.4rem;
   height: 2.4rem;
   position: relative;
+  z-index: 10000;
 }
 .modal-close:before {
   display: block;

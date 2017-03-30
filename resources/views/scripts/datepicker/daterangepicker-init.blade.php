@@ -21,5 +21,21 @@
 
         //Set label
         $('.js-filter-label').text( '{!! Lang::get('daterangepicker.label') !!}' );
+
+        $(document).on('apply.daterangepicker', function(ev, picker) {
+            //do something, like clearing an input
+            var selector = picker.parentEl.selector,
+                modal_id = $(selector).closest('.modal').attr('id');
+            //Toggle the modal
+            $('#'+modal_id).modal('hide');
+        });
+
+        $(document).on('cancel.daterangepicker', function(ev, picker) {
+            //do something, like clearing an input
+            var selector = picker.parentEl.selector,
+                modal_id = $(selector).closest('.modal').attr('id');
+            //Toggle the modal
+            $('#'+modal_id).modal('hide');
+        });
     });
 </script>

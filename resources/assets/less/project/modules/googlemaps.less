@@ -270,6 +270,25 @@
 	padding:@spacing/2;
 	border-left: 15px solid @primColor;
 
+	@media @bp-TabletS{
+		.centerX;
+		width: 100%;
+		height: auto;
+		position: relative;
+		margin-top: -@spacing*2;
+		margin-bottom: @spacing*2;
+		background-color: @white;
+	}
+
+	.header-wrapper{
+		.displayflex;
+		.justify-content(space-between);
+		.align-items(center);
+		padding-bottom: @spacing/2;
+		border-bottom: 1px solid rgba(51,51,51,0.26);
+		margin-bottom: @spacing/2;
+	}
+
 	.add-agenda-item{
 		position: relative;
 		padding:@spacing/2;
@@ -296,9 +315,17 @@
 		max-height: @spacing*7.5;
 	}
 
+	.btn-icon-only{
+		display: none;
+		margin:0;
+
+		@media @bp-TabletS{
+			display: block;
+		}
+	}
+
 	.overlay-agenda-title{
-		padding-bottom: @spacing/2;
-		border-bottom: 1px solid rgba(51,51,51,0.26);
+		margin:0;
 	}
 
 	.agendaitem{

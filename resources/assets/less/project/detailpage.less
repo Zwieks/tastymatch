@@ -4,6 +4,10 @@
 
 	margin-bottom: @spacing*2;
 
+	@media @bp-TabletS{
+		.flex-direction(column);
+	}	
+
 	.intro{
 		.flex-grow(1);
 		width: 100%/3*2;
@@ -19,7 +23,7 @@
 			padding: 0 @spacing/2 0 @spacing;
 		}
 
-		@media @bp-MobileM{
+		@media @bp-TabletS{
 			width: 100%;
 			padding:0;
 			margin-bottom: @spacing;
@@ -40,7 +44,7 @@
 			margin-left: 0;
 		}
 
-		@media @bp-MobileM{
+		@media @bp-TabletS{
 			width: 100%;
 			padding:0;
 		}
@@ -156,6 +160,10 @@
 		.align-self(stretch);
 		width: 100%/3;
 		padding:@spacing/2;
+
+		@media @bp-TabletS{
+			width: 100%;
+		}
 
 		figure,
 		iframe{
