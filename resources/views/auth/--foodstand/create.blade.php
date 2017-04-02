@@ -12,7 +12,7 @@
 
 {{-- Include Content --}}
 @section('content')
-    @include('pages.foodstandpage.update')
+    @include('pages.detailpage.create',['detail' => "pages.detailpage.foodstand.detail"])
 @stop
 
 {{-- Include Scripts --}}

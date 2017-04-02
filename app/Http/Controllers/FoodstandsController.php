@@ -23,36 +23,9 @@ class FoodstandsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $slug)
+    public function index(Request $request, $type, $slug)
     {
 
-        //Get the user information
-        $userid = $request->session()->get('user.global.id');
-
-        //Check if the page is already created
-        $page = Detailpage_User::CheckPageState($slug,$userid);
-
-        if(isset($page) && $page != 'new'){
-            return redirect()->route('UpdateFoodstand', ['detailpage_id' => $slug]);
-        }else{
-            //Check if the slug is related to one of the page id's of the user
-            $record = FoodstandsController::checkRelation($request,$slug);
-
-            if($record != ''){
-                $detailpage_id = $slug;
-
-                //Get the user information
-                $user = $request->session()->get('user.global');
-
-                //Set page type
-                $page_type = 'new';
-
-                //return the view with the user session data
-                return view('auth.create-foodstand', compact('user','detailpage_id','page_type'));
-            }else{
-                return view('auth.error');
-            }
-        }
     }
 
     /**
@@ -80,19 +53,11 @@ class FoodstandsController extends Controller
             Event::fire(new ViewCounter($page_content)); 
         }
 
+        //Set the item type
+        $item_type = 'foodstand';
+
         //return the view with the user session data
-        return view('auth.detail-foodstand', compact('page_content','detailpage_id'));
-    }
-
-    public function checkRelation(Request $request,$slug)
-    {
-        //Get the user information
-        $userid = $request->session()->get('user.global.id');
-
-        //Check if the user can access the page
-        $record = Detailpage_User::checkUserRelation($userid,$slug);
-
-        return $record;
+        return view('auth.detailpages.view', compact('page_content','detailpage_id','item_type'));
     }
 
     /**
@@ -136,33 +101,6 @@ class FoodstandsController extends Controller
     public function edit($id)
     {
         //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $detailpage_id)
-    {
-        //Get the user information
-        $user = $request->session()->get('user.global');
-
-        //Page type
-        $page_type = 'update';
-
-        //Get content detailpage
-        $page_content = Detailpage::with('getContact')
-                        ->with('getIntro')
-                        ->with('getMenu')
-                        ->with('getHeaderimage')
-                        ->with('getMediaItems')
-                        ->with('agenda')
-                        ->findOrFail($detailpage_id);
-
-        return view('auth.update-foodstand', compact('user','detailpage_id','page_content', 'page_type'));
     }
 
     /**

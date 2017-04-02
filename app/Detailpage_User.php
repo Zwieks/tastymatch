@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 use DB;
 
 class Detailpage_User extends Model
@@ -18,6 +19,17 @@ class Detailpage_User extends Model
 	protected $fillable = array('user_id','detailpage_id');
 
 	public $timestamps = true;
+
+    public static function checkRelation(Request $request,$slug)
+    {
+        //Get the user information
+        $userid = $request->session()->get('user.global.id');
+
+        //Check if the user can access the page
+        $record = Detailpage_User::checkUserRelation($userid,$slug);
+
+        return $record;
+    }
 
 	public static function User(){
 		return $this->hasOne('App\User');

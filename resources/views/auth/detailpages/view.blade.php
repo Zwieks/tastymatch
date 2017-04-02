@@ -1,26 +1,17 @@
 <!-- {{$debugpath}} -->
 @extends('layouts.master')
-
-{{-- Page Title --}}
-@section('title', 'Foodstand')
-
-{{-- Name of body class --}}
-@section('type','foodstand')
-
-{{-- Metadata content --}}
-@section('description', 'Foodstand')
+{{-- Item specific detals --}}
+@include('auth.detailpages.'.$item_type.'.details')
 
 {{-- Include Content --}}
 @section('content')
-    @include('pages.foodstandpage.detail')
+    @include('pages.detailpage.view',['detail' => "pages.detailpage.".$item_type.".viewdetail"]))
 @stop
 
 {{-- Include heroimage --}}
 @section('heroimage')
     @include('heroimage.detailpage')
 @stop
-
-
 
 {{-- Include Scripts --}}
 @section('page-scripts')

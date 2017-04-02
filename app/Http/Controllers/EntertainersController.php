@@ -12,6 +12,10 @@ use App\Sessions;
 
 use App\Entertainer;
 
+use App\Detailpage;
+
+use App\Detailpage_User;
+
 class EntertainersController extends Controller
 {
     /**
@@ -21,7 +25,7 @@ class EntertainersController extends Controller
      */
     public function index()
     {
-        //
+
     }
 
     /**

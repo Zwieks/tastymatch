@@ -20,24 +20,18 @@
     </div>
 
     <div class="details-wrapper">
+        {{-- CONTACT MODULE--}}
         <div id="component-contact" class="details product-wrapper">
             <h2>{{ Lang::get('tinymce.detailpage-foodstand-contact-intro')  }}</h2>
-
-
-           <div id="js-editable-contact" class="content editable">
+            <div id="js-editable-contact" class="content editable">
                <p class="editable-default">{{ Lang::get('tinymce.detailpage-foodstand-contact-description') }}</p>
             </div>
 
             @include('forms.detailpagecontact')
         </div>
 
-        <div id="component-menu" class="content product-wrapper foodstand-menu-items">
-            <h2>{{ Lang::get('detailpage.foodstand-menu') }}</h2>
-            @include('forms.detailpagemenu')
-            <div class="add-menu-wrapper js-add-menuitem">
-                <span class="add-menuitem" data-icon="Z">{{ Lang::get('buttons.add-menu-item') }}</span>
-            </div>    
-        </div>
+        {{-- MENU MODULE--}}
+        @include($detail)
     </div>
 </div>
 

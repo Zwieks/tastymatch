@@ -2,5 +2,7 @@
 
 return [
 
-	'foodstand-menu' => 'Menu',
+	'foodstand-details' => 'Menu',
+	'eventertainer-details' => 'Details',
+	'event-details' => 'Plek informatie',
 ];

@@ -197,7 +197,12 @@
     //Create empty map
     function emptyMap(){
         var country = '{!! App::getLocale() !!}',
-            location = {!! json_encode($user['city']) !!};
+            location = '';
+
+            @if(isset($user['city']))
+                 location = {!! json_encode($user['city']) !!};
+            @endif
+
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){ 
             var locationInfo = val.results[0].geometry.location;
 

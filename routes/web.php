@@ -76,11 +76,12 @@ Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()
 	//Create DETAILPAGE
 	Route::get('create/detailpage/{slug}', 'DetailPageController@store');
 
-	// Create Foodstand
-	Route::get('create/foodstand/{slug}', 'FoodstandsController@index')->name('CreateFoodstand');
+	// CREATE PAGES
+	Route::get('create/{type}/{slug}', 'DetailpageController@createPage')->name('CreatePage');
 
-	// Update Foodstand
-	Route::get('update/foodstand/{slug}', 'FoodstandsController@update')->name('UpdateFoodstand');
+	// UPDATE PAGES
+	Route::get('update/{type}/{slug}', 'DetailpageController@updatePage')->name('UpdatePage');
+
 
 	// Upload image
 	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImagesController@upload']);

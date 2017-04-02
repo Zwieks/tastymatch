@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Detailpage_User;
 
 use DB;
@@ -24,6 +25,18 @@ class Detailpage extends Model
 	 */
 	public function getIntro(){
 		return $this->belongsTo('App\ComponentIntro','intro_id');
+	}
+
+	public static function checkPageType($detailpage_id, $type){
+	    $result = Detailpage::with('getContact')
+	            ->with('getIntro')
+	            ->with('getMenu')
+	            ->with('getHeaderimage')
+	            ->with('getMediaItems')
+	            ->with('agenda')
+	            ->findOrFail($detailpage_id);
+  
+	    return $result;        
 	}
 
 	/**

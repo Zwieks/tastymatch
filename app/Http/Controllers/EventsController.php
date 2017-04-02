@@ -12,6 +12,10 @@ use App\Sessions;
 
 use App\Event;
 
+use App\Detailpage;
+
+use App\Detailpage_User;
+
 class EventsController extends Controller
 {
     /**
@@ -19,9 +23,9 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request, $slug)
     {
-        //
+
     }
 
     /**
