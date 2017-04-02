@@ -92,10 +92,10 @@ class Detailpage extends Model
 	 * Update the state of the detailpage
 	 * possilbe returns: new, preview, published
 	 */
-	public static function updateState($state,$detailpage_id){
+	public static function updateState($state,$detailpage_id,$type){
 		DB::table('detailpages')
 			->where('id', $detailpage_id)
-			->update(['state' => $state]);
+			->update(['state' => $state, 'type' => $type]);
 	}
 
 	static function checkAlreadyUpdated($field,$detailpage_id){

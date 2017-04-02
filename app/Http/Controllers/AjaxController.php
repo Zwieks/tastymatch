@@ -161,6 +161,9 @@ class AjaxController extends Controller
             //Detailpage id
             $detailpage_id = $data['userDetail']['pageid'];
 
+            //Type of the page based on Foodstand, Event or Entertainer
+            $type = $data['itemType'];
+
             //Check if the user can access the page
             $record = Detailpage_User::checkUserRelation($userid,$detailpage_id);
 
@@ -168,8 +171,8 @@ class AjaxController extends Controller
                return response()->json(array('success' => false));
             }
 
-            //Update the state of the detailpage
-            Detailpage::updateState('preview',$detailpage_id);
+            //Update the state of the detailpage and add the type
+            Detailpage::updateState('preview',$detailpage_id, $type);
 
             //Save the Components by looping trough his own function
             foreach ($data['jsondata'] as $data_items) {

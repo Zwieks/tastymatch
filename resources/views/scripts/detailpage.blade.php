@@ -5,6 +5,7 @@
         AGENDA_ITEMS : [],
         SAVE_COMPONENTS : [],
         AJAX_COMPLETE : false,
+        TYPES : ['foodstand','entertainer','event'],
         DELETE_COMPONENTS : []
     };
 
@@ -305,7 +306,12 @@
 
         function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
-                url = '/ajax/saveComponents';
+                url = '/ajax/saveComponents',
+                type = '{!! Request::segment(2) !!}';
+
+            if(jQuery.inArray(type, $.fn.Global.TYPES) == -1){
+               return false;
+            }
 
             var newObject = objectReplaceKeyNamesToNumbers(components);
             var userObject = new Object();
@@ -323,7 +329,7 @@
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: {jsondata: newObject, userDetail: userObject},
+                data: {jsondata: newObject, userDetail: userObject, itemType: type},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container

@@ -104,7 +104,7 @@ class DetailPageController extends Controller
         $detailpage_id = Detailpage::add($userid);
 
         //return the view with the user session data
-        return redirect()->route('CreatePage', ['detailpage_id' => $detailpage_id]);
+        return redirect()->route('CreatePage', ['item_type' => $slug,'detailpage_id' => $detailpage_id]);
     }
 
     public function deleteComponents(Request $request){
