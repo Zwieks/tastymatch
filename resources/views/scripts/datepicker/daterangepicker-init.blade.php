@@ -1,12 +1,19 @@
 <script type="text/javascript">
     $(document).ready(function(){
+        var last_user_agenda_start_date = [];
         //This is kind of a hack because we need to use an exception of the user object
         @if(isset($user))
             <?php $page_content = $user; ?>
         @endif
 
-        var user_agenda = {!! $page_content['agenda']->sortBy('date_start') !!},
-            last_user_agenda_start_date = {!! $page_content['agenda']->sortBy('date_start')->last() !!};
+        var user_agenda = {!! $page_content['agenda']->sortBy('date_start') !!};
+
+        if(user_agenda.length > 0){
+            last_user_agenda_start_date = "{!! $page_content['agenda']->sortBy('date_start')->last() !!}";
+        }
+        else{
+            last_user_agenda_start_date = '{!! Carbon::now() !!}';
+        }
 
         $('input[name="daterange"]').daterangepicker({
             "alwaysShowCalendars": true,

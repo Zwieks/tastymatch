@@ -13,7 +13,7 @@ class CreateComponentsHeaderimageTable extends Migration
      */
     public function up()
     {
-        Schema::create('components_headerimage', function (Blueprint $table) {
+        Schema::create('component_headerimage', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ class CreateComponentsHeaderimageTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('components_headerimage');
+        Schema::dropIfExists('component_headerimage');
     }
 }
