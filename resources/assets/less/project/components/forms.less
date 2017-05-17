@@ -156,25 +156,22 @@ form ol {
 	}
 
 	.multiple-wrapper{
-		li{
-			display: inline-block;
-		}
-
-		label{
-			cursor: pointer;
-			width: auto;
-		}
-	}
-
-	.multiple-wrapper{
 		position: relative;
 
 		li{
+			display: inline-block;
+			width: auto;
+
 			.input-error{
 				position: absolute;
 				width:100%;
 				bottom: @spacing*1.2;
 			}
+		}
+
+		label{
+			cursor: pointer;
+			width: auto;
 		}
 	}
 }
@@ -267,12 +264,36 @@ form ol {
 			border:2px dashed rgba(0,0,0,0.4);
 			cursor: pointer;
 		}
+
+		&.form-label{
+			span{
+				font-weight: bold;
+			}
+		}
+	}
+
+	label{
+
 	}
 
 	input{
 		border:none;
 		min-height: @spacing;
 		width: 100%;
+
+		&.smallbox{
+			width: @spacing*3;
+			border: @borderWidth solid @borderColor;
+			min-height: @inputHeight;
+			padding: 0;
+			text-align: center;
+		}
+	}
+
+	.multiple-wrapper{
+		label{
+			font-weight: normal;
+		}
 	}
 }
 
@@ -333,6 +354,37 @@ form ol {
 .modal-form{
 	label{
 		width:100%;
+	}
+}
+
+.detailpage-standdetails{
+
+	label{
+		padding: 0 @spacing/1.5;
+	}
+
+	li{
+		padding-left: 0;
+
+		&:hover,
+		&:focus{
+			border: 2px solid @white;
+			cursor: default;
+		}
+
+		&:after{
+			content:'';
+		}
+	}
+
+	.form-input-checkbox{
+		padding-left: 0;
+	}
+
+	.animating-label{
+		label[for]{
+			top: 0.2rem;
+		}
 	}
 }
 /* end general webbeheer form */

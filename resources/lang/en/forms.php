@@ -52,4 +52,11 @@ return [
 	'description' => 'Description',
 	'eventtype' => 'Event type',
 	'form-separator-to' => 'till',
+    'facilities-label' => 'Facilities',
+    'facilities-gas' => 'Gas',
+    'facilities-water' => 'Water',
+    'facilities-electricity' => 'Electricity',
+    'size-label' => 'Dimensions',
+    'construct-label' => 'Build from',
+    'removing-label' => 'Removing from',
 ];

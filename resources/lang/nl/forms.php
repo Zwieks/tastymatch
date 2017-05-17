@@ -52,4 +52,11 @@ return [
 	'description' => 'Beschrijving',
 	'eventtype' => 'Evenement type',
 	'form-separator-to' => 'tot',
+    'facilities-label' => 'Voorzieningen',
+    'facilities-gas' => 'Gas',
+    'facilities-water' => 'Water',
+    'facilities-electricity' => 'Elektriciteit',
+    'size-label' => 'Afmetingen',
+    'construct-label' => 'Opbouwen vanaf',
+    'removing-label' => 'Afbouwen vanaf',
 ];

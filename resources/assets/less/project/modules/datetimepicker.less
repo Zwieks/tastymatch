@@ -1,0 +1,65 @@
+.bootstrap-datetimepicker-widget {
+	.box-shadow();
+	position: absolute;
+	background: @white;
+    z-index: 3;
+
+    td{
+    	text-align: center;
+    }
+
+    span{
+    	font-weight: bold;
+    }
+
+    .list-unstyled{
+    	.displayflex;
+    	background: @lightGrey;
+    }
+
+    .btn{
+	    height: @spacing;
+	    display: block;
+	    margin: 0;
+	    padding: @spacing/2 @spacing;
+	    position: relative;    
+	    background: transparent;
+
+	    &.incr,
+	    &.decr{
+	    	&:before{
+		    	.center;
+		  		color: @primColor;
+		  		font-family: @iconFont;
+	    	}
+	    }
+
+	    &.incr{
+	    	&:before{
+	    		content:'7';
+	    	}	
+	    }
+
+	    &.decr{
+	    	&:before{
+	    		content:'6';
+	    	}	
+	    }
+
+	    &.btn-primary{
+	    	background: @primColor;
+	    }
+	}
+
+	.btn-primary{
+		padding: @spacing/4;
+	}
+
+	.table-condensed{
+		margin: 0;
+	}
+
+	.picker-switch{
+		display: none!important;
+	}
+}	

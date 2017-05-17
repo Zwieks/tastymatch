@@ -4187,20 +4187,21 @@ form ol {
   font-size: 1.2rem;
   width: 100%;
 }
-.velden .multiple-wrapper li {
-  display: inline-block;
-}
-.velden .multiple-wrapper label {
-  cursor: pointer;
-  width: auto;
-}
 .velden .multiple-wrapper {
   position: relative;
+}
+.velden .multiple-wrapper li {
+  display: inline-block;
+  width: auto;
 }
 .velden .multiple-wrapper li .input-error {
   position: absolute;
   width: 100%;
   bottom: 2.88rem;
+}
+.velden .multiple-wrapper label {
+  cursor: pointer;
+  width: auto;
 }
 .detail-summary {
   margin-bottom: 0;
@@ -4281,10 +4282,23 @@ form ol {
   border: 2px dashed rgba(0, 0, 0, 0.4);
   cursor: pointer;
 }
+.detailpage li.form-label span {
+  font-weight: bold;
+}
 .detailpage input {
   border: none;
   min-height: 2.4rem;
   width: 100%;
+}
+.detailpage input.smallbox {
+  width: 7.2rem;
+  border: 1px solid #e5e5e5;
+  min-height: 3.6rem;
+  padding: 0;
+  text-align: center;
+}
+.detailpage .multiple-wrapper label {
+  font-weight: normal;
 }
 .detailpage-title {
   margin-bottom: 1.2rem;
@@ -4340,6 +4354,26 @@ form ol {
 }
 .modal-form label {
   width: 100%;
+}
+.detailpage-standdetails label {
+  padding: 0 1.6rem;
+}
+.detailpage-standdetails li {
+  padding-left: 0;
+}
+.detailpage-standdetails li:hover,
+.detailpage-standdetails li:focus {
+  border: 2px solid #fff;
+  cursor: default;
+}
+.detailpage-standdetails li:after {
+  content: '';
+}
+.detailpage-standdetails .form-input-checkbox {
+  padding-left: 0;
+}
+.detailpage-standdetails .animating-label label[for] {
+  top: 0.2rem;
 }
 /* end general webbeheer form */
 /*
@@ -6944,6 +6978,110 @@ form ol {
   border: 1px solid #ccc;
   margin-left: -5px;
   margin-right: -5px;
+}
+.bootstrap-datetimepicker-widget {
+  box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
+  position: absolute;
+  background: #fff;
+  z-index: 3;
+}
+.bootstrap-datetimepicker-widget td {
+  text-align: center;
+}
+.bootstrap-datetimepicker-widget span {
+  font-weight: bold;
+}
+.bootstrap-datetimepicker-widget .list-unstyled {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  background: #f8f8f8;
+}
+.bootstrap-datetimepicker-widget .btn,
+.bootstrap-datetimepicker-widget button,
+.bootstrap-datetimepicker-widget [type=submit],
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies,
+.bootstrap-datetimepicker-widget .call-to-action,
+.bootstrap-datetimepicker-widget .facebook-btn,
+.bootstrap-datetimepicker-widget .twitter-btm,
+.bootstrap-datetimepicker-widget .googleplus-btn {
+  height: 2.4rem;
+  display: block;
+  margin: 0;
+  padding: 1.2rem 2.4rem;
+  position: relative;
+  background: transparent;
+}
+.bootstrap-datetimepicker-widget .btn.incr:before,
+.bootstrap-datetimepicker-widget .btn.decr:before,
+.bootstrap-datetimepicker-widget button.incr:before,
+.bootstrap-datetimepicker-widget button.decr:before,
+.bootstrap-datetimepicker-widget [type=submit].incr:before,
+.bootstrap-datetimepicker-widget [type=submit].decr:before,
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies.incr:before,
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies.decr:before,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies.incr:before,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies.decr:before,
+.bootstrap-datetimepicker-widget .call-to-action.incr:before,
+.bootstrap-datetimepicker-widget .call-to-action.decr:before,
+.bootstrap-datetimepicker-widget .facebook-btn.incr:before,
+.bootstrap-datetimepicker-widget .facebook-btn.decr:before,
+.bootstrap-datetimepicker-widget .twitter-btm.incr:before,
+.bootstrap-datetimepicker-widget .twitter-btm.decr:before,
+.bootstrap-datetimepicker-widget .googleplus-btn.incr:before,
+.bootstrap-datetimepicker-widget .googleplus-btn.decr:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  color: #E3262E;
+  font-family: 'tastymatch';
+}
+.bootstrap-datetimepicker-widget .btn.incr:before,
+.bootstrap-datetimepicker-widget button.incr:before,
+.bootstrap-datetimepicker-widget [type=submit].incr:before,
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies.incr:before,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies.incr:before,
+.bootstrap-datetimepicker-widget .call-to-action.incr:before,
+.bootstrap-datetimepicker-widget .facebook-btn.incr:before,
+.bootstrap-datetimepicker-widget .twitter-btm.incr:before,
+.bootstrap-datetimepicker-widget .googleplus-btn.incr:before {
+  content: '7';
+}
+.bootstrap-datetimepicker-widget .btn.decr:before,
+.bootstrap-datetimepicker-widget button.decr:before,
+.bootstrap-datetimepicker-widget [type=submit].decr:before,
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies.decr:before,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies.decr:before,
+.bootstrap-datetimepicker-widget .call-to-action.decr:before,
+.bootstrap-datetimepicker-widget .facebook-btn.decr:before,
+.bootstrap-datetimepicker-widget .twitter-btm.decr:before,
+.bootstrap-datetimepicker-widget .googleplus-btn.decr:before {
+  content: '6';
+}
+.bootstrap-datetimepicker-widget .btn.btn-primary,
+.bootstrap-datetimepicker-widget button.btn-primary,
+.bootstrap-datetimepicker-widget [type=submit].btn-primary,
+.bootstrap-datetimepicker-widget html div#cookie-bar span.cookie-buttons .allow-cookies.btn-primary,
+.bootstrap-datetimepicker-widget html .cookie-explanation button.request-cookies.btn-primary,
+.bootstrap-datetimepicker-widget .call-to-action.btn-primary,
+.bootstrap-datetimepicker-widget .facebook-btn.btn-primary,
+.bootstrap-datetimepicker-widget .twitter-btm.btn-primary,
+.bootstrap-datetimepicker-widget .googleplus-btn.btn-primary {
+  background: #E3262E;
+}
+.bootstrap-datetimepicker-widget .btn-primary {
+  padding: 0.6rem;
+}
+.bootstrap-datetimepicker-widget .table-condensed {
+  margin: 0;
+}
+.bootstrap-datetimepicker-widget .picker-switch {
+  display: none!important;
 }
 .modal-open {
   padding-right: 0!important;

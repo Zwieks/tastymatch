@@ -23,3 +23,4 @@
 <script type="text/javascript" src="{{ URL::asset('js/daterangepicker.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/bootstrap/modal.js') }}"></script>
 <script type="text/javascript" src="{{ URL::asset('js/datepicker.min.js') }}"></script>
+<script type="text/javascript" src="{{ URL::asset('js/datetimepicker.js') }}"></script>

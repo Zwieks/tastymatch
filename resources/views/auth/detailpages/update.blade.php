@@ -17,6 +17,7 @@
     @include('scripts.detailpage')
     @include('scripts.datepicker.daterangepicker-init')
     @include('scripts.datepicker.datepicker-single-init')
+    @include('scripts.datepicker.datetimepicker-single-init')
     @include('scripts.autocomplete.autocomplete-agenda-init')
     @include('scripts.modal.modal-update-item-init')
 @stop
