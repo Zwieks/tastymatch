@@ -40,6 +40,9 @@
                     @include('forms.inputerror')
                     {!! Form::text('dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
                 </li>
+                <li>
+                    <span class="form-separator form-indication">{{ Lang::get('forms.form-indication-hours') }}</span>
+                </li>
             </div>
 
             <!-- AFBOUWEN -->
@@ -59,7 +62,33 @@
                     @include('forms.inputerror')
                     {!! Form::text('dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
                 </li>
+                <li>
+                    <span class="form-separator form-indication">{{ Lang::get('forms.form-indication-hours') }}</span>
+                </li>
             </div>
+
+            <li class="form-label">
+                <span>{{ Lang::get('forms.form-indication-lease') }}:</span>
+            </li>
+            <div class="multiple-wrapper">
+                <li>
+                    <span class="form-separator form-indication">&euro;</span>
+                </li>
+                <li class="form-input-textfield">
+                    @include('forms.inputerror')
+                    {!! Form::number('dateend','',array_merge(['class' => 'smallbox', 'id' => 'amount-start', 'placeholder' => Lang::get('forms.value-label')])) !!}
+                </li>
+                <li>
+                    <span class="form-separator">{{ Lang::get('forms.form-separator-to') }}</span>
+                </li>
+                <li>
+                    <span class="form-separator form-indication">&euro;</span>
+                </li>
+                <li class="form-input-textfield">
+                    @include('forms.inputerror')
+                    {!! Form::number('dateend','',array_merge(['class' => 'smallbox', 'id' => 'amount-end', 'placeholder' => Lang::get('forms.value-label')])) !!}
+                </li>
+            </div>    
         </ul>
     </fieldset>
 {!! Form::close() !!}

@@ -4297,6 +4297,9 @@ form ol {
   padding: 0;
   text-align: center;
 }
+.detailpage .multiple-wrapper {
+  margin-bottom: 1.2rem;
+}
 .detailpage .multiple-wrapper label {
   font-weight: normal;
 }
@@ -4351,6 +4354,9 @@ form ol {
 }
 .form-separator {
   padding: 0 1.2rem;
+}
+.form-indication {
+  padding: 0;
 }
 .modal-form label {
   width: 100%;
