@@ -46,6 +46,8 @@ return [
 	'billing' => 'Offerte',
 	'datestart' => 'Begin datum',
 	'dateend' => 'Eind datum',
+    'datestartshort' => 'Start',
+    'dateendshort' => 'Eind',
 	'searchevent' => 'Zoek een evenement of maak een nieuwe aan',
     'eventdate' => 'Evenement data',
 	'placeholder-title' => 'Vul hier de titel in',

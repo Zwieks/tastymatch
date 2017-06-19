@@ -46,6 +46,8 @@ return [
     'billing' => 'Billing',
 	'datestart' => 'Start date',
 	'dateend' => 'End date',
+    'datestartshort' => 'Start',
+    'dateendshort' => 'End',
 	'searchevent' => 'Search your event or create a new one',
     'eventdate' => 'Event data',
 	'placeholder-title' => 'Enter the title here',

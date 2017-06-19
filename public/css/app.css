@@ -4297,6 +4297,9 @@ form ol {
   padding: 0;
   text-align: center;
 }
+.detailpage input.date {
+  width: 9.6rem;
+}
 .detailpage .multiple-wrapper {
   margin-bottom: 1.2rem;
 }
