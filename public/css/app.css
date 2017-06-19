@@ -4361,24 +4361,30 @@ form ol {
 .modal-form label {
   width: 100%;
 }
-.detailpage-standdetails label {
+.foodstand-additional-stand-info {
+  margin-bottom: 2.4rem;
+}
+.foodstand-additional-stand-info:last-child {
+  margin-bottom: 0;
+}
+.detailpage-additionaldetails label {
   padding: 0 1.6rem;
 }
-.detailpage-standdetails li {
+.detailpage-additionaldetails li {
   padding-left: 0;
 }
-.detailpage-standdetails li:hover,
-.detailpage-standdetails li:focus {
+.detailpage-additionaldetails li:hover,
+.detailpage-additionaldetails li:focus {
   border: 2px solid #fff;
   cursor: default;
 }
-.detailpage-standdetails li:after {
+.detailpage-additionaldetails li:after {
   content: '';
 }
-.detailpage-standdetails .form-input-checkbox {
+.detailpage-additionaldetails .form-input-checkbox {
   padding-left: 0;
 }
-.detailpage-standdetails .animating-label label[for] {
+.detailpage-additionaldetails .animating-label label[for] {
   top: 0.2rem;
 }
 /* end general webbeheer form */

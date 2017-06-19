@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
-<div id="@if(isset($data)){{'component-mediaitems-'}}{{$data}}@else{{'component-mediaitems-0'}}@endif" class="media" media="">
+<div id="@if(isset($data)){{'component-mediaitems-'}}{{$data}}@else{{'component-mediaitems-0'}}@endif" class="media" data-media="">
 @if(isset($data) && $data != 0)
 	<div class="js-remove-mediaitem remove-media-item" data-icon="U" title="Verwijder media item"></div>
 @endif

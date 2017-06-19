@@ -32,7 +32,10 @@
             @include('forms.detailpagecontact')
         </div>
 
-        {{-- MENU MODULE--}}
+        {{-- ADDITIONAL DETAIL MODULE--}}
+        @include($additionaldetail)
+
+        {{-- DETAIL MODULE--}}
         @include($detail)
     </div>
 </div>

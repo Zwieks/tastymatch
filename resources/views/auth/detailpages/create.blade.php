@@ -1,11 +1,14 @@
 <!-- {{$debugpath}} -->
 @extends('layouts.master')
-{{-- Item specific detals --}}
+{{-- Item specific details --}}
 @include('auth.detailpages.'.$item_type.'.details')
 
 {{-- Include Content --}}
 @section('content')
-    @include('pages.detailpage.create',['detail' => "pages.detailpage.".$item_type.".detail"])
+    @include('pages.detailpage.create',
+        ['detail' => "pages.detailpage.".$item_type.".detail",
+            'additionaldetail' => "pages.detailpage.".$item_type.".additionaldetail",
+            'googlemaps' => "includes.googlemaps.".$item_type.".single-googlemap"])
 @stop
 
 {{-- Include Scripts --}}

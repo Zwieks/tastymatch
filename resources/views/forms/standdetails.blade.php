@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
-{!! Form::open(['method' => 'post', 'class' => 'detailpage detailpage-standdetails changed']) !!}
+{!! Form::open(['method' => 'post', 'class' => 'detailpage detailpage-additionaldetails changed']) !!}
     <fieldset>
         <ul class="velden">
             <!-- VOORZIENINGEN -->
