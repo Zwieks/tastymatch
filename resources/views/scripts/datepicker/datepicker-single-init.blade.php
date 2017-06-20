@@ -10,13 +10,22 @@
     		}
 		});
 
-        $('input[data-dp-event="true"]').datepicker({
+        $('input[data-dp-event-from="true"]').datepicker({
             container:'body',
             format: 'd M yyyy',
+            minDate : 0,
+            startDate: new Date(),
         }).on('changeDate', function (ev) {
-            if($('.datepicker').is(":visible")){
+            $('input[data-dp-event-to="true"]').datepicker('setStartDate', ev.date);
+        });
 
-            }
+        $('input[data-dp-event-to="true"]').datepicker({
+            container:'body',
+            format: 'd M yyyy',
+            minDate : 0,
+            startDate: $.fn.Global.ToEndDate,
+        }).on('changeDate', function (ev) {
+            //console.log(ev);
         });
     });
 </script>

@@ -57,6 +57,8 @@ return [
 	'form-separator-to' => 'tot',
     'form-indication-hours' => 'uur',
     'form-indication-lease' => 'Pacht indicatie',
+    'location-maps' => 'Locatie',
+    'location-placeholder' => 'Locatie details',
     'facilities-label' => 'Voorzieningen',
     'value-label' => 'Bedrag',
     'visitorscount-label' => 'Aantal bezoekers',

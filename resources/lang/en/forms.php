@@ -57,6 +57,8 @@ return [
 	'form-separator-to' => 'till',
     'form-indication-hours' => 'hour',
     'form-indication-lease' => 'Lease amount indication',
+    'location-maps' => 'Location',
+    'location-placeholder' => 'Location details',
     'facilities-label' => 'Facilities',
     'value-label' => 'Amount',
     'visitorscount-label' => 'Number of visitors',

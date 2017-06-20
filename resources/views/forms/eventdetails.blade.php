@@ -24,16 +24,25 @@
             <div class="multiple-wrapper">
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::text('eventdatestart','',array_merge(['placeholder' => Lang::get('forms.datestart'),'data-dp-event' => 'true', 'id' => 'date-start', 'data-update' => 'false', 'class' => 'smallbox date'])) !!}
+                    {!! Form::text('eventdatestart','',array_merge(['placeholder' => Lang::get('forms.datestart'),'data-dp-event-from' => 'true', 'id' => 'date-start', 'data-update' => 'false', 'class' => 'smallbox date'])) !!}
                 </li>
                 <li>
                     <span class="form-separator">{{ Lang::get('forms.form-separator-to') }}</span>
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::text('eventdateend','',array_merge(['placeholder' => Lang::get('forms.dateend'), 'data-dp-event' => 'true','id' => 'date-end', 'data-update' => 'false', 'class' => 'smallbox date'])) !!}
+                    {!! Form::text('eventdateend','',array_merge(['placeholder' => Lang::get('forms.dateend'), 'data-dp-event-to' => 'true','id' => 'date-end', 'data-update' => 'false', 'class' => 'smallbox date'])) !!}
                 </li>
             </div>
+
+            <!-- EVENT LOCATION -->
+            <li class="form-label">
+                <span>{{ Lang::get('forms.location-maps') }}:</span>
+            </li>
+
+            <li class="form-input-textfield">
+                {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text', 'id' => 'googlemaps-dropdown']) !!}
+            </li>
 
             <!-- VISITORS COUNT -->
             <li class="form-label">

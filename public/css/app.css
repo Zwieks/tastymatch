@@ -4300,6 +4300,12 @@ form ol {
 .detailpage input.date {
   width: 9.6rem;
 }
+.detailpage input.text {
+  width: 100%;
+  text-align: left;
+  padding: 0 1.2rem;
+  margin-bottom: 1.2rem;
+}
 .detailpage .multiple-wrapper {
   margin-bottom: 1.2rem;
 }
@@ -6804,7 +6810,7 @@ form ol {
 .datepicker-dropdown.datepicker-orient-top:after {
   bottom: -6px;
   border-bottom: 0;
-  border-top: 6px solid #fff;
+  border-top: 6px solid #e8e8e8;
 }
 .datepicker table {
   margin: 0;

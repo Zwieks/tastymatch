@@ -1,4 +1,4 @@
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&sensor=false&callback=initMap"></script>
 <script type="text/javascript">
     // This script requires the Places library. Include the libraries=places
     $.fn.locations_object = [];
@@ -46,6 +46,29 @@
         <?php $page_content = $user; ?>
     @endif
 
+    function getCityDropdown(input) {
+        var autocomplete = new google.maps.places.Autocomplete(input);
+        autocomplete.addListener('place_changed', function () {
+            var place = autocomplete.getPlace();
+            if (!place.geometry) {
+                // User entered the name of a Place that was not suggested and
+                // pressed the Enter key, or the Place Details request failed.
+                alert("No details available for input: '" + place.name + "'");
+                return;
+            }else{
+                var address = '';
+
+                if (place.address_components) {
+                    address = [
+                        (place.address_components[0] && place.address_components[0].short_name || ''),
+                        (place.address_components[2] && place.address_components[2].short_name || ''),
+                        (place.address_components[3] && place.address_components[3].short_name || ''),
+                        (place.address_components[4] && place.address_components[4].short_name || '')
+                    ].join(' ');
+                }
+            }
+        });
+    }
     function initMap() {
         //Get the user agenda items
         if($.fn.locations_object.length === 0){
@@ -54,29 +77,37 @@
             markers = [];
         }
 
+        //Check if there is a dropdown for the locations
+        if(document.getElementById('googlemaps-dropdown')) {
+            var input = document.getElementById('googlemaps-dropdown');
+            getCityDropdown(input);
+        }
+
         //Set to use to center map based on user info
         geocoder = new google.maps.Geocoder();
 
         //Set animation
         animation = false;
 
-        map = new google.maps.Map(document.getElementById('google-maps'), {
-            zoom: 9,
-            scrollwheel: false,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-        });
+        if(document.getElementById('google-maps')) {
+            map = new google.maps.Map(document.getElementById('google-maps'), {
+                zoom: 9,
+                scrollwheel: false,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
 
-        if ($.fn.locations_object.length == 0) {
-            emptyMap();
-        }
+            if ($.fn.locations_object.length == 0) {
+                emptyMap();
+            }
 
-        createMap(map,animation,$.fn.locations_object);
+            createMap(map,animation,$.fn.locations_object);
 
-        //Set the bounds and zoom
-        setBounds();
+            //Set the bounds and zoom
+            setBounds();
 
-        //Update the agenda items
-        setAgendaItems();
+            //Update the agenda items
+            setAgendaItems();
+        }    
     }
 
     function createMap(map,animation,set_markers){
