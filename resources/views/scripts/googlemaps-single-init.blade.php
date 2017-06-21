@@ -49,6 +49,18 @@
     function getCityDropdown(input) {
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function () {
+
+        var infowindow = new google.maps.InfoWindow();
+        var infowindowContent = document.getElementById('infowindow-content');
+        infowindow.setContent(infowindowContent);
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+            infowindow.close();
+            marker.setVisible(false);
+
             var place = autocomplete.getPlace();
             if (!place.geometry) {
                 // User entered the name of a Place that was not suggested and
@@ -56,6 +68,17 @@
                 alert("No details available for input: '" + place.name + "'");
                 return;
             }else{
+                // If the place has a geometry, then present it on a map.
+                if (place.geometry.viewport) {
+                    map.fitBounds(place.geometry.viewport);
+                } else {
+                    map.setCenter(place.geometry.location);
+                    map.setZoom(17);  // Why 17? Because it looks good.
+                }
+
+                marker.setPosition(place.geometry.location);
+                marker.setVisible(true);
+
                 var address = '';
 
                 if (place.address_components) {
@@ -107,7 +130,9 @@
 
             //Update the agenda items
             setAgendaItems();
-        }    
+        }   else{
+            emptyMap();
+        } 
     }
 
     function createMap(map,animation,set_markers){

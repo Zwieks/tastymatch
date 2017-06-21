@@ -35,15 +35,6 @@
                 </li>
             </div>
 
-            <!-- EVENT LOCATION -->
-            <li class="form-label">
-                <span>{{ Lang::get('forms.location-maps') }}:</span>
-            </li>
-
-            <li class="form-input-textfield">
-                {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text', 'id' => 'googlemaps-dropdown']) !!}
-            </li>
-
             <!-- VISITORS COUNT -->
             <li class="form-label">
                 <span>{{ Lang::get('forms.visitorscount-label') }}:</span>

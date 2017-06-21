@@ -13,6 +13,27 @@
 	}
 }
 
+#infowindow-content{
+	display: none;
+
+	.title {
+		font-weight: bold;
+	}
+}
+
+#map{
+	#infowindow-content {
+		display: inline;
+	}
+} 
+
+.pac-container:after {
+    /* Disclaimer: not needed to show 'powered by Google' if also a Google Map is shown */
+
+    background-image: none !important;
+    height: 0px;
+}
+
 .infowindow-wrapper{
 	.displayflex;
 	.flex-wrap(wrap);
