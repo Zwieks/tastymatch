@@ -10,7 +10,7 @@
 
             <li class="form-input-textfield">
                 {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text', 'id' => 'googlemaps-dropdown']) !!}
-                <span data-icon="y"></span>
+                <span class="icon" data-icon="y"></span>
             </li>
 		</ul>
 		<ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
