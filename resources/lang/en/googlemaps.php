@@ -7,4 +7,6 @@ return [
 	'filter-show' => 'Show',
 	'filter-map-label' => 'Find on map',
 	'filter-keywords-title' => 'Events seeking for',
+	'filter-location-label' => 'Show your event location on this map',
+	'filter-location-text' => 'Show your event location on this map',
 ];
