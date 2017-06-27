@@ -8,17 +8,17 @@
             </li>
             <div class="multiple-wrapper">
                 <li class="form-input-checkbox">
-                    <input class="checkbox checkboxfilter" type="checkbox" value="foodstands" name="filter_type" id="filter-1" checked>
+                    <input class="checkbox checkboxfilter" type="checkbox" value="{{ Lang::get('forms.facilities-gas') }}" name="filter_facility-gas" id="filter-1" checked>
                     <label for="filter-1">{{ Lang::get('forms.facilities-gas') }}</label>
                 </li>
 
                 <li class="form-input-checkbox">
-                    <input class="checkbox checkboxfilter" type="checkbox" value="foodstands" name="filter_type" id="filter-2" checked>
+                    <input class="checkbox checkboxfilter" type="checkbox" value="{{ Lang::get('forms.facilities-water') }}" name="filter_facility-water" id="filter-2" checked>
                     <label for="filter-2">{{ Lang::get('forms.facilities-water') }}</label>
                 </li>
 
                 <li class="form-input-checkbox">
-                    <input class="checkbox checkboxfilter" type="checkbox" value="foodstands" name="filter_type" id="filter-3" checked>
+                    <input class="checkbox checkboxfilter" type="checkbox" value="{{ Lang::get('forms.facilities-electricity') }}" name="filter_facility-electricity" id="filter-3" checked>
                     <label for="filter-3">{{ Lang::get('forms.facilities-electricity') }}</label>
                 </li>
             </div>
@@ -30,7 +30,7 @@
 
             <div class="multiple-wrapper">
                 <li class="form-input-textfield">
-                    {!! Form::text('datestart','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
+                    {!! Form::text('construct_datestart','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
 
                 </li>
                 <li>
@@ -38,7 +38,7 @@
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::text('dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
+                    {!! Form::text('construct_dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
                 </li>
                 <li>
                     <span class="form-separator form-indication">{{ Lang::get('forms.form-indication-hours') }}</span>
@@ -52,7 +52,7 @@
 
             <div class="multiple-wrapper">
                 <li class="form-input-textfield">
-                    {!! Form::text('datestart','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
+                    {!! Form::text('deconstruct_datestart','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
 
                 </li>
                 <li>
@@ -60,7 +60,7 @@
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::text('dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
+                    {!! Form::text('deconstruct_dateend','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-end', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
                 </li>
                 <li>
                     <span class="form-separator form-indication">{{ Lang::get('forms.form-indication-hours') }}</span>
@@ -76,7 +76,7 @@
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::number('dateend','',array_merge(['class' => 'smallbox', 'id' => 'amount-start', 'placeholder' => Lang::get('forms.value-label')])) !!}
+                    {!! Form::number('amountstart','',array_merge(['class' => 'smallbox', 'id' => 'amount-start', 'placeholder' => Lang::get('forms.value-label')])) !!}
                 </li>
                 <li>
                     <span class="form-separator">{{ Lang::get('forms.form-separator-to') }}</span>
@@ -86,7 +86,7 @@
                 </li>
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
-                    {!! Form::number('dateend','',array_merge(['class' => 'smallbox', 'id' => 'amount-end', 'placeholder' => Lang::get('forms.value-label')])) !!}
+                    {!! Form::number('amountend','',array_merge(['class' => 'smallbox', 'id' => 'amount-end', 'placeholder' => Lang::get('forms.value-label')])) !!}
                 </li>
             </div>    
         </ul>

@@ -8,5 +8,5 @@ return [
 	'filter-map-label' => 'Zoek op de kaart',
 	'filter-keywords-title' => 'Evenementen opzoek naar',
 	'filter-location-label' => 'Laat je even locatie zien op deze map',
-	'filter-location-text' => 'Enter detailed information about your event location. This may include zip code, place or address and we will do the rest!',
+	'filter-location-text' => 'Vul hier informatie over je event locatie in. Dit kan postcode, plaats of adres zijn en wij doen de rest!',
 ];

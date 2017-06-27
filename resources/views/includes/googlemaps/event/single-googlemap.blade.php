@@ -4,7 +4,9 @@
 		<h2>{{ Lang::get('googlemaps.filter-location-label') }}</h2>
 		<p>{{ Lang::get('googlemaps.filter-location-text') }}</p>
 	</div>
-	@include('forms.googlemapslocationfilter')
+	<div id="component-locationdetails" class="changed product-wrapper">
+		@include('forms.googlemapslocationfilter')
+	</div>	
 </div>
 
 <div class="google-maps-wrapper">

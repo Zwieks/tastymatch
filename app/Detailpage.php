@@ -40,7 +40,7 @@ class Detailpage extends Model
 	}
 
 	/**
-	 * Get all the INTRO components of the detailpages
+	 * Get all the CONTACT components of the detailpages
 	 */
 	public function getContact(){
 		return $this->belongsTo('App\ComponentContact','contact_id');
@@ -98,7 +98,7 @@ class Detailpage extends Model
 			->update(['state' => $state, 'type' => $type]);
 	}
 
-	static function checkAlreadyUpdated($field,$detailpage_id){
+	static function CheckAlreadyUpdated($field,$detailpage_id){
 	    $check = DB::table('detailpages')
 	    	->select($field)
 	        ->where('id', '=', $detailpage_id)

@@ -307,7 +307,8 @@
         function saveMediaComponents(components){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/saveComponents',
-                type = '{!! Request::segment(2) !!}';
+                type = '{!! Request::segment(2) !!}',
+                status = '{!! Request::segment(1) !!}';
 
             if(jQuery.inArray(type, $.fn.Global.TYPES) == -1){
                return false;
@@ -329,7 +330,7 @@
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: {jsondata: newObject, userDetail: userObject, itemType: type},
+                data: {jsondata: newObject, userDetail: userObject, itemType: type, itemStatus: status},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
@@ -581,7 +582,12 @@
                 var arr = key.split('-');
             }
             //Put table name in object
-            save_components[key].table = 'component_'+arr[1];
+            if(arr[1] == 'locationdetails'){
+                //Exception voor de event details
+                save_components[key].table = 'events';
+            }else{
+                save_components[key].table = 'component_'+arr[1];
+            }
 
             //Put the URL in the object
             if(typeof arr[1] != 'undefined'){

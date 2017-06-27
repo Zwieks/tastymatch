@@ -50,13 +50,13 @@
         var autocomplete = new google.maps.places.Autocomplete(input);
         autocomplete.addListener('place_changed', function () {
 
-        var infowindow = new google.maps.InfoWindow();
-        var infowindowContent = document.getElementById('infowindow-content');
-        infowindow.setContent(infowindowContent);
-        var marker = new google.maps.Marker({
-          map: map,
-          anchorPoint: new google.maps.Point(0, -29)
-        });
+            var infowindow = new google.maps.InfoWindow();
+            var infowindowContent = document.getElementById('infowindow-content');
+            infowindow.setContent(infowindowContent);
+            var marker = new google.maps.Marker({
+              map: map,
+              anchorPoint: new google.maps.Point(0, -29)
+            });
 
             infowindow.close();
             marker.setVisible(false);
@@ -65,7 +65,7 @@
             if (!place.geometry) {
                 // User entered the name of a Place that was not suggested and
                 // pressed the Enter key, or the Place Details request failed.
-                alert("No details available for input: '" + place.name + "'");
+                alert("Please select an option");
                 return;
             }else{
                 // If the place has a geometry, then present it on a map.
@@ -80,6 +80,14 @@
                 marker.setVisible(true);
 
                 var address = '';
+
+                var infowindowContent = document.getElementById('infowindow-content');
+
+                //Remove the coordinates if they are set
+                $('#place_lat, #place_lng').val('');
+                //Add the new coordinates to the inputfields
+                $('#place_lat').val(place.geometry.location.lat());
+                $('#place_lng').val(place.geometry.location.lng());
 
                 if (place.address_components) {
                     address = [
@@ -103,6 +111,12 @@
         //Check if there is a dropdown for the locations
         if(document.getElementById('googlemaps-dropdown')) {
             var input = document.getElementById('googlemaps-dropdown');
+
+            google.maps.event.addDomListener(input, 'keydown', function(event) { 
+            if (event.keyCode === 13) { 
+                event.preventDefault(); 
+            }
+      }); 
             getCityDropdown(input);
         }
 

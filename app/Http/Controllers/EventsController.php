@@ -70,7 +70,10 @@ class EventsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Get the user information
+        $userid = $request->session()->get('user.global.id');
+
+        $detailpage_id = Detailpage::add($userid);
     }
 
     /**

@@ -21,6 +21,12 @@ use App\Agenda;
 use App\Event_User;
 use App\Event;
 
+use App\Foodstand_User;
+use App\Foodstand;
+
+use App\Entertainer_User;
+use App\Entertainer;
+
 use App\ComponentMediaitem_User;
 
 use App\User;
@@ -153,6 +159,8 @@ class AjaxController extends Controller
                 'jsondata.*.form.*.googleplus' => 'url|max:255',
                 'jsondata.*.form.*.instagram' => 'url|max:255',
                 'jsondata.*.form.*.menuitem' => 'string|max:255',
+                'jsondata.*.form.*.menuitem' => 'string|max:255',
+                'jsondata.*.form.*.amountstart' => 'string|max:255',
             ]);
 
             //Get all the component data
@@ -164,6 +172,9 @@ class AjaxController extends Controller
             //Type of the page based on Foodstand, Event or Entertainer
             $type = $data['itemType'];
 
+            //Get the item status
+            $status = $data['itemStatus'];
+
             //Check if the user can access the page
             $record = Detailpage_User::checkUserRelation($userid,$detailpage_id);
 
@@ -174,10 +185,35 @@ class AjaxController extends Controller
             //Update the state of the detailpage and add the type
             Detailpage::updateState('preview',$detailpage_id, $type);
 
+            //Check if the detailpage is new or an excisting
+            //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE
+            if($status == 'new'){
+                //Check the type of the new created detailpage
+                if($type == 'event'){
+                    //Add the new event in the event table and return the ID
+                    $event_id = Event::store($data);
+                    //Add the Event User table
+                    Event_User::store($userid,$event_id,$data);
+                }elseif($type == 'foodstand'){
+                    //Add the new event in the event table and return the ID
+                    $foodstand_id = Foodstand::store($data);
+                    //Add the Event User table
+                    Foodstand_User::store($userid,$foodstand_id,$data);
+                }elseif($type == 'entertainer'){
+                    //Add the new event in the event table and return the ID
+                    $entertainer_id = Entertainer::store($data);
+                    //Add the Event User table
+                    Entertainer_User::store($userid,$entertainer_id,$data);
+                }
+            }
+
+            $this->SaveAdditionalinfoComponent($request,$data_items,$detailpage_id);
+            return false;
+
             //Save the Components by looping trough his own function
             foreach ($data['jsondata'] as $data_items) {
                 $func = $data_items['url'];
-                $this->$func($request,$data_items,$detailpage_id);
+                //$this->$func($request,$data_items,$detailpage_id);
             }
 
             return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents),'agendaItems' => json_encode($this->agendaItems)));
@@ -290,6 +326,48 @@ class AjaxController extends Controller
 
         //Store component ID in the detailpage table
         Detailpage::storeIntro($detailpage_id, $component_id);
+    }
+
+    public function SaveAdditionalinfoComponent(Request $request,$data,$detailpage_id){
+        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentAdditionalinfo::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentAdditionalinfo::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeAdditionalinfo($detailpage_id, $component_id);
+    }
+
+    public function SaveStandinfoComponent(Request $request,$data,$detailpage_id){
+        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentStandinfo::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentStandinfo::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeStandinfo($detailpage_id, $component_id);
+    }
+
+    public function SaveLocationdetailsComponent(Request $request,$data,$detailpage_id){
+        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
+
+        if($component_id != 0){
+            ComponentLocationdetails::updateFields($component_id,$data);
+        }else{
+            //Add the component data to the component table and get the id
+            $component_id = ComponentLocationdetails::store($data);
+        }
+
+        //Store component ID in the detailpage table
+        Detailpage::storeLocationdetails($detailpage_id, $component_id);
     }
 
     public function SaveContactComponent(Request $request,$data,$detailpage_id){

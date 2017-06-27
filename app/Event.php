@@ -65,6 +65,9 @@ class Event extends Model
 		if(isset($info['type_id']) && $info['type_id'] != '')
 			$Event->type_id = $info['type_id'];
 
+		if(isset($info['visitors_indication']) && $info['visitors_indication'] != '')
+			$Event->visitors_indication = $info['visitors_indication'];
+
 		$Event->save();
 
 		return $Event->id;
@@ -89,6 +92,9 @@ class Event extends Model
 		if(!isset($data['info']['type_id']))
 			$data['info']['type_id'] = '';
 
+		if(!isset($data['info']['visitors_indication']))
+			$data['info']['visitors_indication'] = '';
+
 		DB::table('events')
 	    	->where('id', $event_id)
 	    	->update([
@@ -97,7 +103,8 @@ class Event extends Model
 	    		'location' => $data['info']['location'],
 	    		'long' => $data['info']['long'],
 	    		'lat' => $data['info']['lat'],
-	    		'type_id' => $data['info']['type_id']
+	    		'type_id' => $data['info']['type_id'],
+	    		'visitors_indication' => $data['info']['visitors_indication']
 	    	]);
 	}	
 

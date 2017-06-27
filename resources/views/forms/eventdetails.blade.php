@@ -8,7 +8,7 @@
             </li>
             <div class="multiple-wrapper">
                 <li>
-                    {{ Form::select('size', 
+                    {{ Form::select('type', 
                         ['placeholder' => Lang::get('eventtypes.type'),
                                     '1' => Lang::get('eventtypes.dance'), 
                                     '2' => Lang::get('eventtypes.food'),
@@ -41,17 +41,17 @@
             </li>
             <div class="multiple-wrapper">
                 <li class="form-input-radio">
-                    <input class="radio checkboxfilter" type="radio" value="1" name="filter_type" id="visitorsfilter-1">
+                    <input class="radio checkboxfilter" type="radio" value="{{ Lang::get('forms.visitorscount-small') }}" name="filter_visitors" id="visitorsfilter-1">
                     <label for="visitorsfilter-1">{{ Lang::get('forms.visitorscount-small') }}</label>
                 </li>
 
                 <li class="form-input-radio">
-                    <input class="radio checkboxfilter" type="radio" value="2" name="filter_type" id="visitorsfilter-2" checked>
+                    <input class="radio checkboxfilter" type="radio" value="{{ Lang::get('forms.visitorscount-medium') }}" name="filter_visitors" id="visitorsfilter-2" checked>
                     <label for="visitorsfilter-2">{{ Lang::get('forms.visitorscount-medium') }}</label>
                 </li>
 
                 <li class="form-input-radio">
-                    <input class="radio checkboxfilter" type="radio" value="3" name="filter_type" id="visitorsfilter-3">
+                    <input class="radio checkboxfilter" type="radio" value="{{ Lang::get('forms.visitorscount-big') }}" name="filter_visitors" id="visitorsfilter-3">
                     <label for="visitorsfilter-3">{{ Lang::get('forms.visitorscount-big') }}</label>
                 </li>
             </div>      

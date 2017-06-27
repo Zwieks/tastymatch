@@ -1,5 +1,5 @@
 <!-- {{$debugpath}} -->
-<form method="get" id="js-googemap-filter" class="form-filter webbeheer-formulier" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
+{!! Form::open(['method' => 'get', 'class' => 'detailpage-locationinformation form-filter webbeheer-formulier changed', 'itemprop' => 'potentialAction', 'itemscope' => '', 'itemtype' => 'http://schema.org/SearchAction']) !!}
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	<fieldset>
 		<ul class="velden">
@@ -9,10 +9,12 @@
             </li>
 
             <li class="form-input-textfield">
-                {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text', 'id' => 'googlemaps-dropdown']) !!}
+                {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text no-submit', 'id' => 'googlemaps-dropdown']) !!}
                 <span class="icon" data-icon="y"></span>
             </li>
+                {{ Form::hidden('lat', '', array('id' => 'place_lat')) }}
+                {{ Form::hidden('lng', '', array('id' => 'place_lng')) }}
 		</ul>
 		<ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
 	</fieldset>
-</form>
+{!! Form::close() !!}
