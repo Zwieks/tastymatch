@@ -187,7 +187,7 @@ class AjaxController extends Controller
 
             //Check if the detailpage is new or an excisting
             //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE
-            if($status == 'new'){
+            if($status == 'create'){
                 //Check the type of the new created detailpage
                 if($type == 'event'){
                     //Add the new event in the event table and return the ID
@@ -206,7 +206,8 @@ class AjaxController extends Controller
                     Entertainer_User::store($userid,$entertainer_id,$data);
                 }
             }
-
+            echo $status.' en '.$type;
+return false;
             $this->SaveAdditionalinfoComponent($request,$data_items,$detailpage_id);
             return false;
 

@@ -25,7 +25,13 @@ class Event extends Model
 
 	public static function store($data){
 		$Event = new Event;
-		$info = $data['info'];
+
+		if(isset($data['info'])){
+			$info = $data['info'];
+		}else{
+			$info = [];
+		}
+
 		if(isset($info['name']) && $info['name'] != '')
 			$Event->name = $info['name'];
 
