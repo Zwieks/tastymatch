@@ -80,9 +80,9 @@ class Detailpage extends Model
 	 *
 	 * @return \Illuminate\Http\Response
 	 */
-	public static function add($userid){
+	public static function add($userid,$slug){
 		//Create the detailpage and put the id also in the pivot table
-		$detailpage_id = Detailpage::store($userid);
+		$detailpage_id = Detailpage::store($userid,$slug);
 		Detailpage_User::store($userid, $detailpage_id);
 
 		return $detailpage_id;
@@ -134,10 +134,11 @@ class Detailpage extends Model
 	/**
 	 * Store the new create detailpage
 	 */
-	public static function store($userid){
+	public static function store($userid,$type){
 		$Detailpage = new Detailpage;
 
 		$Detailpage->state = 'new';
+		$Detailpage->type = $type;
 		$Detailpage->public = 1;
 
 		$Detailpage->save();

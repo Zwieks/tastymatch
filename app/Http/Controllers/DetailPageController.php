@@ -101,7 +101,7 @@ class DetailPageController extends Controller
         //Get the user information
         $userid = $request->session()->get('user.global.id');
 
-        $detailpage_id = Detailpage::add($userid);
+        $detailpage_id = Detailpage::add($userid,$slug);
 
         //return the view with the user session data
         return redirect()->route('CreatePage', ['item_type' => $slug,'detailpage_id' => $detailpage_id]);

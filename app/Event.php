@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Images;
+
 use Carbon\Carbon;
 //Is searchable
 use Laravel\Scout\Searchable;
@@ -21,6 +22,106 @@ class Event extends Model
 	public function users()
 	{
 		return $this->belongsToMany('App\Event_User');
+	}
+
+	public static function dataFormat($data){
+		$eventInfo = [];
+
+		foreach ($data['jsondata'] as $key => $value) {
+			//Get the element ID
+			$elementId = $value['elementid'];
+
+			if($elementId == 'component-intro'){
+				foreach ($value['form'] as $item) {
+					if(isset($item['title'])){
+						$eventInfo['info']['name'] = $item['title'];
+						$info['info']['slug'] =  createSlug($item['title']);
+					}
+
+					if(isset($item['content'])){
+						$eventInfo['info']['description'] = $item['content'];
+					}
+				}
+			}	
+
+			if($elementId == 'component-locationdetails'){
+				foreach ($value['form'] as $item) {
+					if(isset($item['eventlocation'])){
+						$eventInfo['info']['location'] = $item['eventlocation'];
+					}
+
+					if(isset($item['lat'])){
+						$eventInfo['info']['lat'] = $item['lat'];
+					}	
+
+					if(isset($item['lng'])){
+						$eventInfo['info']['long'] = $item['lng'];
+					}
+				}
+			}
+
+			if($elementId == 'component-additionalinfo'){
+				foreach ($value['form'] as $item) {
+					if(isset($item['eventdatestart'])){
+						$eventInfo['info']['time_start'] = $item['eventdatestart'];
+					}
+
+					if(isset($item['eventdateend'])){
+						$eventInfo['info']['time_end'] = $item['eventdateend'];
+					}	
+
+					if(isset($item['type'])){
+						$eventInfo['info']['type_id'] = $item['type'];
+					}
+
+					if(isset($item['filter_visitors'])){
+						$eventInfo['info']['filter_visitors'] = $item['filter_visitors'];
+					}
+				}
+			}
+
+			if($elementId == 'component-standinfo'){
+				foreach ($value['form'] as $item) {
+					if(isset($item['filter_facility-gas'])){
+						$eventInfo['info']['facility-gas'] = $item['filter_facility-gas'];
+					}
+
+					if(isset($item['filter_facility-water'])){
+						$eventInfo['info']['facility-water'] = $item['filter_facility-water'];
+					}	
+
+					if(isset($item['filter_facility-electricity'])){
+						$eventInfo['info']['facility-electricity'] = $item['filter_facility-electricity'];
+					}
+
+					if(isset($item['construct_datestart'])){
+						$eventInfo['info']['construct_time_start'] = $item['construct_datestart'];
+					}
+
+					if(isset($item['construct_dateend'])){
+						$eventInfo['info']['construct_time_end'] = $item['construct_dateend'];
+					}
+
+					if(isset($item['deconstruct_datestart'])){
+						$eventInfo['info']['deconstruct_time_start'] = $item['deconstruct_datestart'];
+					}
+
+					if(isset($item['deconstruct_dateend'])){
+						$eventInfo['info']['deconstruct_time_end'] = $item['deconstruct_dateend'];
+					}
+
+					if(isset($item['amountstart'])){
+						$eventInfo['info']['amountstart'] = $item['amountstart'];
+					}
+
+					if(isset($item['amountend'])){
+						$eventInfo['info']['amountend'] = $item['amountend'];
+					}
+				}
+			}
+		}
+
+		return $eventInfo;
 	}
 
 	public static function store($data){

@@ -143,6 +143,7 @@ class AjaxController extends Controller
     }
 
     public function SaveComponents(Request $request){
+        //Here you already have an detailpage id
         if($this->checkAjaxRequest($request) == true){
             //User id
             $userid = $request->session()->get('user.global.id');
@@ -169,12 +170,6 @@ class AjaxController extends Controller
             //Detailpage id
             $detailpage_id = $data['userDetail']['pageid'];
 
-            //Type of the page based on Foodstand, Event or Entertainer
-            $type = $data['itemType'];
-
-            //Get the item status
-            $status = $data['itemStatus'];
-
             //Check if the user can access the page
             $record = Detailpage_User::checkUserRelation($userid,$detailpage_id);
 
@@ -182,29 +177,46 @@ class AjaxController extends Controller
                return response()->json(array('success' => false));
             }
 
+            //TYPE of the page based on Foodstand, Event or Entertainer
+            $type = $data['itemType'];
+
+            //Get the item STATUS
+            $status = $data['itemStatus'];
+
             //Update the state of the detailpage and add the type
             Detailpage::updateState('preview',$detailpage_id, $type);
 
             //Check if the detailpage is new or an excisting
             //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE
             if($status == 'create'){
-                //Check the type of the new created detailpage
-                if($type == 'event'){
-                    //Add the new event in the event table and return the ID
-                    $event_id = Event::store($data);
-                    //Add the Event User table
-                    Event_User::store($userid,$event_id,$data);
-                }elseif($type == 'foodstand'){
-                    //Add the new event in the event table and return the ID
-                    $foodstand_id = Foodstand::store($data);
-                    //Add the Event User table
-                    Foodstand_User::store($userid,$foodstand_id,$data);
-                }elseif($type == 'entertainer'){
-                    //Add the new event in the event table and return the ID
-                    $entertainer_id = Entertainer::store($data);
-                    //Add the Event User table
-                    Entertainer_User::store($userid,$entertainer_id,$data);
-                }
+                //Check if this is REALY an update
+                $pageid = Detailpage::CheckAlreadyUpdated('id',$detailpage_id);
+                //If there is a detailpage created continue else return error
+                if(isset($pageid) && $pageid != ''){
+                    //Check the type of the new created detailpage
+                    if($type == 'event'){
+                        //Format the data for the event
+                        $event_data = Event::dataFormat($data);
+                        
+                        return false;
+                        //Add the new event in the event table and return the ID
+                        $event_id = Event::store($event_data);
+                        //Add the Event User table
+                        Event_User::store($userid,$event_id,$data);
+                    }elseif($type == 'foodstand'){
+                        //Add the new event in the event table and return the ID
+                        $foodstand_id = Foodstand::store($data);
+                        //Add the Event User table
+                        Foodstand_User::store($userid,$foodstand_id,$data);
+                    }elseif($type == 'entertainer'){
+                        //Add the new event in the event table and return the ID
+                        $entertainer_id = Entertainer::store($data);
+                        //Add the Event User table
+                        Entertainer_User::store($userid,$entertainer_id,$data);
+                    }
+                }else{
+                    return response()->json(array('success' => false));
+                }    
             }
             echo $status.' en '.$type;
 return false;
@@ -285,7 +297,7 @@ return false;
                 $component_id = ComponentMediaitem_User::CheckAlreadyUpdated('id',$detailpage_id,$userid,$mediaitem_id);
             }
 
-            //If the check give a valid component id related to the user update the field else add a new item to the DB en pivot
+            //If the check give a valid component id related to the user: update the field else: add a new item to the DB en pivot
             if(isset($component_id) && $component_id != ''){
                 ComponentMediaItem::updateFields($userid,$mediaitem_id,$data);
             }else{
