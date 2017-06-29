@@ -12,8 +12,8 @@
 
 			<div class="user-item-detail-wrapper">
 				<section class="user-item-text">
-					<h3>{{ $item->name }}</h3>
-					<p>{{ str_limit($item->description, 350) }}</p>
+					<h3>{{-- $item->name --}}</h3>
+					<p>{{-- str_limit($item->description, 350) --}}</p>
 				</section>
 
 				<div class="user-item-info">

@@ -34,12 +34,7 @@ class Event extends Model
 			if($elementId == 'component-intro'){
 				foreach ($value['form'] as $item) {
 					if(isset($item['title'])){
-						$eventInfo['info']['name'] = $item['title'];
-						$info['info']['slug'] =  createSlug($item['title']);
-					}
-
-					if(isset($item['content'])){
-						$eventInfo['info']['description'] = $item['content'];
+						$eventInfo['info']['slug'] =  createSlug($item['title']);
 					}
 				}
 			}	
@@ -75,7 +70,7 @@ class Event extends Model
 					}
 
 					if(isset($item['filter_visitors'])){
-						$eventInfo['info']['filter_visitors'] = $item['filter_visitors'];
+						$eventInfo['info']['visitors_indication'] = $item['filter_visitors'];
 					}
 				}
 			}
@@ -83,15 +78,15 @@ class Event extends Model
 			if($elementId == 'component-standinfo'){
 				foreach ($value['form'] as $item) {
 					if(isset($item['filter_facility-gas'])){
-						$eventInfo['info']['facility-gas'] = $item['filter_facility-gas'];
+						$eventInfo['info']['facility_gas'] = $item['filter_facility-gas'];
 					}
 
 					if(isset($item['filter_facility-water'])){
-						$eventInfo['info']['facility-water'] = $item['filter_facility-water'];
+						$eventInfo['info']['facility_water'] = $item['filter_facility-water'];
 					}	
 
 					if(isset($item['filter_facility-electricity'])){
-						$eventInfo['info']['facility-electricity'] = $item['filter_facility-electricity'];
+						$eventInfo['info']['facility_electricity'] = $item['filter_facility-electricity'];
 					}
 
 					if(isset($item['construct_datestart'])){
@@ -133,12 +128,6 @@ class Event extends Model
 			$info = [];
 		}
 
-		if(isset($info['name']) && $info['name'] != '')
-			$Event->name = $info['name'];
-
-		if(isset($info['description']) && $info['description'] != '')
-			$Event->description = $info['description'];
-
 		if(isset($info['images_id']) && $info['images_id'] != '')
 			$Event->images_id = $info['images_id'];
 
@@ -153,6 +142,9 @@ class Event extends Model
 
 		if(isset($info['location']) && $info['location'] != '')
 			$Event->location = $info['location'];
+
+		if(isset($info['slug']) && $info['slug'] != '')
+			$Event->slug = $info['slug'];
 
 		if(isset($info['long']) && $info['long'] != '')
 			$Event->long = $info['long'];
@@ -175,18 +167,42 @@ class Event extends Model
 		if(isset($info['visitors_indication']) && $info['visitors_indication'] != '')
 			$Event->visitors_indication = $info['visitors_indication'];
 
+		if(isset($info['facility_gas']) && $info['facility_gas'] != '')
+			$Event->facility_gas = $info['facility_gas'];
+
+		if(isset($info['facility_water']) && $info['facility_water'] != '')
+			$Event->facility_water = $info['facility_water'];
+
+		if(isset($info['facility_electricity']) && $info['facility_electricity'] != '')
+			$Event->facility_electricity = $info['facility_electricity'];
+
+		if(isset($info['construct_time_start']) && $info['construct_time_start'] != '')
+			$Event->construct_datestart = $info['construct_time_start'];
+
+		if(isset($info['construct_time_end']) && $info['construct_time_end'] != '')
+			$Event->construct_dateend = $info['construct_time_end'];
+
+		if(isset($info['deconstruct_time_start']) && $info['deconstruct_time_start'] != '')
+			$Event->deconstruct_datestart = $info['deconstruct_time_start'];
+
+		if(isset($info['deconstruct_time_end']) && $info['deconstruct_time_end'] != '')
+			$Event->deconstruct_dateend = $info['deconstruct_time_end'];
+
+		if(isset($info['amountstart']) && $info['amountstart'] != '')
+			$Event->amountstart = $info['amountstart'];
+
+		if(isset($info['amountend']) && $info['amountend'] != '')
+			$Event->amountend = $info['amountend'];
+
+		if(isset($info['detailpage_id']) && $info['detailpage_id'] != '')
+			$Event->detailpage_id = $info['detailpage_id'];
+
 		$Event->save();
 
 		return $Event->id;
 	}
 
 	public static function updateFields($event_id,$data){
-		if(!isset($data['info']['name']))
-			$data['info']['name'] = '';
-
-		if(!isset($data['info']['description']))
-			$data['info']['description'] = '';
-
 		if(!isset($data['info']['location']))
 			$data['info']['location'] = '';
 
@@ -205,8 +221,6 @@ class Event extends Model
 		DB::table('events')
 	    	->where('id', $event_id)
 	    	->update([
-	    		'name' => $data['info']['name'],
-	    		'description' => $data['info']['description'],
 	    		'location' => $data['info']['location'],
 	    		'long' => $data['info']['long'],
 	    		'lat' => $data['info']['lat'],

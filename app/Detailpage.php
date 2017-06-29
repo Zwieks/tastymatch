@@ -34,8 +34,8 @@ class Detailpage extends Model
 	            ->with('getHeaderimage')
 	            ->with('getMediaItems')
 	            ->with('agenda')
+	            ->with('getEvent')
 	            ->findOrFail($detailpage_id);
-  
 	    return $result;        
 	}
 
@@ -51,6 +51,13 @@ class Detailpage extends Model
 	 */
 	public function getMenu(){
 		return $this->belongsTo('App\ComponentMenu','menu_id');
+	}
+
+	/**
+	 * Get all the EVENTS of the user
+	 */
+	public function getEvent(){
+		return $this->hasOne('App\Event');
 	}
 
 	/**

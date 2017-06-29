@@ -197,12 +197,13 @@ class AjaxController extends Controller
                     if($type == 'event'){
                         //Format the data for the event
                         $event_data = Event::dataFormat($data);
-                        
-                        return false;
+
+                        //Set the PageID in the event data
+                        $event_data['info']['detailpage_id'] = $pageid;
                         //Add the new event in the event table and return the ID
                         $event_id = Event::store($event_data);
                         //Add the Event User table
-                        Event_User::store($userid,$event_id,$data);
+                        Event_User::store($userid,$event_id,$event_data);
                     }elseif($type == 'foodstand'){
                         //Add the new event in the event table and return the ID
                         $foodstand_id = Foodstand::store($data);
@@ -218,15 +219,15 @@ class AjaxController extends Controller
                     return response()->json(array('success' => false));
                 }    
             }
-            echo $status.' en '.$type;
-return false;
-            $this->SaveAdditionalinfoComponent($request,$data_items,$detailpage_id);
-            return false;
 
             //Save the Components by looping trough his own function
             foreach ($data['jsondata'] as $data_items) {
                 $func = $data_items['url'];
-                //$this->$func($request,$data_items,$detailpage_id);
+
+                //Check if the method exsist 
+                if(method_exists($this,$func) == true){
+                    $this->$func($request,$data_items,$detailpage_id);
+                }
             }
 
             return response()->json(array('success' => true, 'mediaComponents' => json_encode($this->mediaComponents),'agendaItems' => json_encode($this->agendaItems)));
@@ -339,48 +340,6 @@ return false;
 
         //Store component ID in the detailpage table
         Detailpage::storeIntro($detailpage_id, $component_id);
-    }
-
-    public function SaveAdditionalinfoComponent(Request $request,$data,$detailpage_id){
-        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
-
-        if($component_id != 0){
-            ComponentAdditionalinfo::updateFields($component_id,$data);
-        }else{
-            //Add the component data to the component table and get the id
-            $component_id = ComponentAdditionalinfo::store($data);
-        }
-
-        //Store component ID in the detailpage table
-        Detailpage::storeAdditionalinfo($detailpage_id, $component_id);
-    }
-
-    public function SaveStandinfoComponent(Request $request,$data,$detailpage_id){
-        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
-
-        if($component_id != 0){
-            ComponentStandinfo::updateFields($component_id,$data);
-        }else{
-            //Add the component data to the component table and get the id
-            $component_id = ComponentStandinfo::store($data);
-        }
-
-        //Store component ID in the detailpage table
-        Detailpage::storeStandinfo($detailpage_id, $component_id);
-    }
-
-    public function SaveLocationdetailsComponent(Request $request,$data,$detailpage_id){
-        $component_id = Detailpage::CheckAlreadyUpdated('contact_id',$detailpage_id);
-
-        if($component_id != 0){
-            ComponentLocationdetails::updateFields($component_id,$data);
-        }else{
-            //Add the component data to the component table and get the id
-            $component_id = ComponentLocationdetails::store($data);
-        }
-
-        //Store component ID in the detailpage table
-        Detailpage::storeLocationdetails($detailpage_id, $component_id);
     }
 
     public function SaveContactComponent(Request $request,$data,$detailpage_id){

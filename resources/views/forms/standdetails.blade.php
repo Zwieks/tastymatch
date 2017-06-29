@@ -30,8 +30,7 @@
 
             <div class="multiple-wrapper">
                 <li class="form-input-textfield">
-                    {!! Form::text('construct_datestart','',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
-
+                    {!! Form::text('construct_datestart',isset($page_content['getIntro']->name) ? $page_content['getIntro']->name : '',array_merge(['data-dtp' => 'true', 'class' => 'smallbox', 'id' => 'date-start', 'data-update' => 'false', 'placeholder' => 'mm:hh'])) !!}
                 </li>
                 <li>
                     <span class="form-separator">{{ Lang::get('forms.form-separator-to') }}</span>

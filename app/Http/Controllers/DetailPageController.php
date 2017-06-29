@@ -42,7 +42,7 @@ class DetailPageController extends Controller
         $uppercase_type = ucfirst($type);
 
         if(isset($page) && $page != 'new'){
-            return redirect()->route('UpdatePage', ['detailpage_id' => $slug]);
+            return redirect()->route('UpdatePage', ['type' => $type,'detailpage_id' => $slug]);
         }else{
             //Check if the slug is related to one of the page id's of the user
             $record = Detailpage_User::checkRelation($request,$slug);
