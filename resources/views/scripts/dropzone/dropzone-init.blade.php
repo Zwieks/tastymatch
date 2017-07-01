@@ -96,7 +96,7 @@
 
                     //Check there is already an image uploaded
                     @if(isset($page_content['getHeaderimage']->path) && $page_content['getHeaderimage']->path != '')
-                        var path =  '{!! asset('storage/'.$page_content['getHeaderimage']->path) !!}',
+                        var path =  '{!! asset('storage/app/public/'.$page_content['getHeaderimage']->path) !!}',
                             component_image = '{!! $page_content['getHeaderimage']->path !!}',
                             image_name = component_image.split('/').pop(),
                             image_ext = component_image.split('.').pop();

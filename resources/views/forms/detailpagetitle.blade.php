@@ -8,4 +8,5 @@
             </li>
         </ul>
     </fieldset>
+    
 {!! Form::close() !!}

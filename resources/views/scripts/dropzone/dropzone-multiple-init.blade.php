@@ -95,7 +95,7 @@
 
                 //Check there is already an image uploaded
                 @if(isset($page_content['getMediaItems'][$loop->index]->image) && $page_content['getMediaItems'][$loop->index]->image != '')
-                    var path =  '{!! asset('storage/'.$page_content['getMediaItems'][$loop->index]->image) !!}',
+                    var path =  '{!! asset('storage/app/public/'.$page_content['getMediaItems'][$loop->index]->image) !!}',
                         component_image = '{!! $item->image !!}',
                         image_name = component_image.split('/').pop(),
                         image_ext = component_image.split('.').pop();

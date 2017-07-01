@@ -186,39 +186,54 @@ class AjaxController extends Controller
             //Update the state of the detailpage and add the type
             Detailpage::updateState('preview',$detailpage_id, $type);
 
-            //Check if the detailpage is new or an excisting
-            //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE
-            if($status == 'create'){
-                //Check if this is REALY an update
-                $pageid = Detailpage::CheckAlreadyUpdated('id',$detailpage_id);
-                //If there is a detailpage created continue else return error
-                if(isset($pageid) && $pageid != ''){
-                    //Check the type of the new created detailpage
-                    if($type == 'event'){
-                        //Format the data for the event
-                        $event_data = Event::dataFormat($data);
-
+            //Check if this is REALY an update
+            $pageid = Detailpage::CheckAlreadyUpdated('id',$detailpage_id);
+            //If there is a detailpage created continue else return error
+            if(isset($pageid) && $pageid != ''){
+                //Check the type of the new created detailpage
+                if($type == 'event'){
+                    //Format the data for the event
+                    $event_data = Event::dataFormat($data);
+                    //Check if the detailpage is new or an excisting
+                    //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE
+                    if($status == 'create'){
                         //Set the PageID in the event data
                         $event_data['info']['detailpage_id'] = $pageid;
                         //Add the new event in the event table and return the ID
                         $event_id = Event::store($event_data);
                         //Add the Event User table
                         Event_User::store($userid,$event_id,$event_data);
-                    }elseif($type == 'foodstand'){
+                    }elseif($status == 'update'){
+                        //Get the Event ID
+                        $event_id = Event::GetEventId($pageid);
+                        //Update the event
+                        Event::updateFields($event_id,$event_data);
+                    }    
+                }elseif($type == 'foodstand'){
+                    if($status == 'create'){
                         //Add the new event in the event table and return the ID
                         $foodstand_id = Foodstand::store($data);
                         //Add the Event User table
                         Foodstand_User::store($userid,$foodstand_id,$data);
-                    }elseif($type == 'entertainer'){
+                    }elseif($status == 'update'){
+                        //Update the event
+                        Foodstand::updateFields($event_id,$data);
+                    }  
+                }elseif($type == 'entertainer'){
+                    if($status == 'create'){
                         //Add the new event in the event table and return the ID
                         $entertainer_id = Entertainer::store($data);
                         //Add the Event User table
                         Entertainer_User::store($userid,$entertainer_id,$data);
-                    }
-                }else{
-                    return response()->json(array('success' => false));
-                }    
-            }
+                    }elseif($status == 'update'){
+                        //Update the event
+                        Entertainer::updateFields($event_id,$data);
+                    }    
+                } 
+            }    
+            else{
+                return response()->json(array('success' => false));
+            } 
 
             //Save the Components by looping trough his own function
             foreach ($data['jsondata'] as $data_items) {

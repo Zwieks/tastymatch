@@ -9,7 +9,9 @@
             </li>
 
             <li class="form-input-textfield">
-                {!! Form::text('eventlocation', '',['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text no-submit', 'id' => 'googlemaps-dropdown']) !!}
+                {!! Form::text('eventlocation', 
+                isset($page_content['getEvent']->location) ? $page_content['getEvent']->location : '',
+                ['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text no-submit', 'id' => 'googlemaps-dropdown']) !!}
                 <span class="icon" data-icon="y"></span>
             </li>
                 {{ Form::hidden('lat', '', array('id' => 'place_lat')) }}

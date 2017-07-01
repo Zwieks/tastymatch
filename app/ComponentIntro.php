@@ -25,8 +25,8 @@ class ComponentIntro extends Model
 		if(isset($data['content']) && $data['content'] != '')
 			$ComponentIntro->content = $data['content'];
 
-		if(isset($data['form'][0]['title']) && $data['form'][0]['title'] != '')
-			$ComponentIntro->name = $data['form'][0]['title'];
+		if(isset($data['title']) && $data['title'] != '')
+			$ComponentIntro->name = $data['title'];
 
 		$ComponentIntro->save();
 

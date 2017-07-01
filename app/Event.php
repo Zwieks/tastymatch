@@ -24,96 +24,110 @@ class Event extends Model
 		return $this->belongsToMany('App\Event_User');
 	}
 
+	/**
+	 * Get the EventId based on PagedId.
+	 */
+	public static function GetEventId($pageId){
+		$eventId = DB::table('events')
+		->select('id')
+		->where('detailpage_id', '=', $pageId)
+		->first();
+
+		return $eventId->id;
+	}
+
 	public static function dataFormat($data){
 		$eventInfo = [];
 
 		foreach ($data['jsondata'] as $key => $value) {
-			//Get the element ID
-			$elementId = $value['elementid'];
+			if(isset($value['form'])){
+				//Get the element ID
+				$elementId = $value['elementid'];
 
-			if($elementId == 'component-intro'){
-				foreach ($value['form'] as $item) {
-					if(isset($item['title'])){
-						$eventInfo['info']['slug'] =  createSlug($item['title']);
+				if($elementId == 'component-intro'){
+					foreach ($value['form'] as $item) {
+						if(isset($item['title'])){
+							$eventInfo['info']['slug'] =  createSlug($item['title']);
+						}
+					}
+				}	
+
+				if($elementId == 'component-locationdetails'){
+					foreach ($value['form'] as $item) {
+						if(isset($item['eventlocation'])){
+							$eventInfo['info']['location'] = $item['eventlocation'];
+						}
+
+						if(isset($item['lat'])){
+							$eventInfo['info']['lat'] = $item['lat'];
+						}	
+
+						if(isset($item['lng'])){
+							$eventInfo['info']['long'] = $item['lng'];
+						}
+					}
+				}
+
+				if($elementId == 'component-additionalinfo'){
+					foreach ($value['form'] as $item) {
+						if(isset($item['eventdatestart'])){
+							$eventInfo['info']['time_start'] = $item['eventdatestart'];
+						}
+
+						if(isset($item['eventdateend'])){
+							$eventInfo['info']['time_end'] = $item['eventdateend'];
+						}	
+
+						if(isset($item['type'])){
+							$eventInfo['info']['type_id'] = $item['type'];
+						}
+
+						if(isset($item['filter_visitors'])){
+							$eventInfo['info']['visitors_indication'] = $item['filter_visitors'];
+						}
+					}
+				}
+
+				if($elementId == 'component-standinfo'){
+					foreach ($value['form'] as $item) {
+						if(isset($item['filter_facility-gas'])){
+							$eventInfo['info']['facility_gas'] = $item['filter_facility-gas'];
+						}
+
+						if(isset($item['filter_facility-water'])){
+							$eventInfo['info']['facility_water'] = $item['filter_facility-water'];
+						}	
+
+						if(isset($item['filter_facility-electricity'])){
+							$eventInfo['info']['facility_electricity'] = $item['filter_facility-electricity'];
+						}
+
+						if(isset($item['construct_datestart'])){
+							$eventInfo['info']['construct_time_start'] = $item['construct_datestart'];
+						}
+
+						if(isset($item['construct_dateend'])){
+							$eventInfo['info']['construct_time_end'] = $item['construct_dateend'];
+						}
+
+						if(isset($item['deconstruct_datestart'])){
+							$eventInfo['info']['deconstruct_time_start'] = $item['deconstruct_datestart'];
+						}
+
+						if(isset($item['deconstruct_dateend'])){
+							$eventInfo['info']['deconstruct_time_end'] = $item['deconstruct_dateend'];
+						}
+
+						if(isset($item['amountstart'])){
+							$eventInfo['info']['amountstart'] = $item['amountstart'];
+						}
+
+						if(isset($item['amountend'])){
+							$eventInfo['info']['amountend'] = $item['amountend'];
+						}
 					}
 				}
 			}	
-
-			if($elementId == 'component-locationdetails'){
-				foreach ($value['form'] as $item) {
-					if(isset($item['eventlocation'])){
-						$eventInfo['info']['location'] = $item['eventlocation'];
-					}
-
-					if(isset($item['lat'])){
-						$eventInfo['info']['lat'] = $item['lat'];
-					}	
-
-					if(isset($item['lng'])){
-						$eventInfo['info']['long'] = $item['lng'];
-					}
-				}
-			}
-
-			if($elementId == 'component-additionalinfo'){
-				foreach ($value['form'] as $item) {
-					if(isset($item['eventdatestart'])){
-						$eventInfo['info']['time_start'] = $item['eventdatestart'];
-					}
-
-					if(isset($item['eventdateend'])){
-						$eventInfo['info']['time_end'] = $item['eventdateend'];
-					}	
-
-					if(isset($item['type'])){
-						$eventInfo['info']['type_id'] = $item['type'];
-					}
-
-					if(isset($item['filter_visitors'])){
-						$eventInfo['info']['visitors_indication'] = $item['filter_visitors'];
-					}
-				}
-			}
-
-			if($elementId == 'component-standinfo'){
-				foreach ($value['form'] as $item) {
-					if(isset($item['filter_facility-gas'])){
-						$eventInfo['info']['facility_gas'] = $item['filter_facility-gas'];
-					}
-
-					if(isset($item['filter_facility-water'])){
-						$eventInfo['info']['facility_water'] = $item['filter_facility-water'];
-					}	
-
-					if(isset($item['filter_facility-electricity'])){
-						$eventInfo['info']['facility_electricity'] = $item['filter_facility-electricity'];
-					}
-
-					if(isset($item['construct_datestart'])){
-						$eventInfo['info']['construct_time_start'] = $item['construct_datestart'];
-					}
-
-					if(isset($item['construct_dateend'])){
-						$eventInfo['info']['construct_time_end'] = $item['construct_dateend'];
-					}
-
-					if(isset($item['deconstruct_datestart'])){
-						$eventInfo['info']['deconstruct_time_start'] = $item['deconstruct_datestart'];
-					}
-
-					if(isset($item['deconstruct_dateend'])){
-						$eventInfo['info']['deconstruct_time_end'] = $item['deconstruct_dateend'];
-					}
-
-					if(isset($item['amountstart'])){
-						$eventInfo['info']['amountstart'] = $item['amountstart'];
-					}
-
-					if(isset($item['amountend'])){
-						$eventInfo['info']['amountend'] = $item['amountend'];
-					}
-				}
-			}
 		}
 
 		return $eventInfo;
@@ -218,6 +232,33 @@ class Event extends Model
 		if(!isset($data['info']['visitors_indication']))
 			$data['info']['visitors_indication'] = '';
 
+		if(!isset($data['info']['facility_gas']))
+			$data['info']['facility_gas'] = '';
+
+		if(!isset($data['info']['facility_water']))
+			$data['info']['facility_water'] = '';
+
+		if(!isset($data['info']['facility_electricity']))
+			$data['info']['facility_electricity'] = '';
+
+		if(!isset($data['info']['construct_time_start']))
+			$data['info']['construct_time_start'] = '';
+
+		if(!isset($data['info']['construct_time_end']))
+			$data['info']['construct_time_end'] = '';
+
+		if(!isset($data['info']['deconstruct_time_start']))
+			$data['info']['deconstruct_time_start'] = '';
+
+		if(!isset($data['info']['deconstruct_time_end']))
+			$data['info']['deconstruct_time_end'] = '';
+
+		if(!isset($data['info']['amountstart']))
+			$data['info']['amountstart'] = '';
+
+		if(!isset($data['info']['amountend']))
+			$data['info']['amountend'] = '';
+
 		DB::table('events')
 	    	->where('id', $event_id)
 	    	->update([
@@ -225,7 +266,17 @@ class Event extends Model
 	    		'long' => $data['info']['long'],
 	    		'lat' => $data['info']['lat'],
 	    		'type_id' => $data['info']['type_id'],
-	    		'visitors_indication' => $data['info']['visitors_indication']
+	    		'visitors_indication' => $data['info']['visitors_indication'],
+	    		'slug' => $data['info']['slug'],
+	    		'facility_gas' => $data['info']['facility_gas'],
+	    		'facility_water' => $data['info']['facility_water'],
+	    		'facility_electricity' => $data['info']['facility_electricity'],
+	    		'construct_datestart' => $data['info']['construct_time_start'],
+	    		'construct_dateend' => $data['info']['construct_time_end'],
+	    		'deconstruct_datestart' => $data['info']['deconstruct_time_start'],
+	    		'deconstruct_dateend' => $data['info']['deconstruct_time_end'],	
+	    		'amountstart' => $data['info']['amountstart'],
+	    		'amountend' => $data['info']['amountend']	
 	    	]);
 	}	
 

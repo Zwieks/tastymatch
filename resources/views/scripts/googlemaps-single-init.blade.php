@@ -48,6 +48,7 @@
 
     function getCityDropdown(input) {
         var autocomplete = new google.maps.places.Autocomplete(input);
+
         autocomplete.addListener('place_changed', function () {
 
             var infowindow = new google.maps.InfoWindow();
@@ -113,10 +114,11 @@
             var input = document.getElementById('googlemaps-dropdown');
 
             google.maps.event.addDomListener(input, 'keydown', function(event) { 
-            if (event.keyCode === 13) { 
-                event.preventDefault(); 
-            }
-      }); 
+                if (event.keyCode === 13) { 
+                    event.preventDefault(); 
+                }
+            });
+
             getCityDropdown(input);
         }
 
