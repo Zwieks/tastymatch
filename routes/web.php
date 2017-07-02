@@ -68,7 +68,8 @@ Route::get('/foodstand/{slug}', ['as' => 'index', 'uses' => 'FoodstandsControlle
 Route::post('/entertainer/{slug}', ['as' => 'blog.single', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 // EVENTS
-Route::post('/event/{slug}', ['as' => 'blog.single', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
+Route::get('/event/{slug}', ['as' => 'index', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
+Route::get('/evenement/{slug}', ['as' => 'index', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 //USER ACCESS ONLY
 Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()

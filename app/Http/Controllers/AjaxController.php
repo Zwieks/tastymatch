@@ -213,7 +213,7 @@ class AjaxController extends Controller
                     if($status == 'create'){
                         //Add the new event in the event table and return the ID
                         $foodstand_id = Foodstand::store($data);
-                        //Add the Event User table
+                        //Add the Event User tables
                         Foodstand_User::store($userid,$foodstand_id,$data);
                     }elseif($status == 'update'){
                         //Update the event

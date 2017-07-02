@@ -1,4 +1,4 @@
-<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&sensor=false&callback=initMap"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key={{env('GOOGLE_MAPS_KEY')}}&libraries=places&callback=initMap"></script>
 <script type="text/javascript">
     // This script requires the Places library. Include the libraries=places
     $.fn.locations_object = [];
@@ -43,14 +43,14 @@
     //set the content
     //This is kind of a hack because we need to use an exception of the user object
     @if(isset($user))
+        <?php $page_content_bu = $page_content; ?>
         <?php $page_content = $user; ?>
     @endif
 
     function getCityDropdown(input) {
         var autocomplete = new google.maps.places.Autocomplete(input);
-
         autocomplete.addListener('place_changed', function () {
-
+                      clearMarkers();
             var infowindow = new google.maps.InfoWindow();
             var infowindowContent = document.getElementById('infowindow-content');
             infowindow.setContent(infowindowContent);
@@ -61,7 +61,7 @@
 
             infowindow.close();
             marker.setVisible(false);
-
+            markers.push(marker);
             var place = autocomplete.getPlace();
             if (!place.geometry) {
                 // User entered the name of a Place that was not suggested and
@@ -101,6 +101,7 @@
             }
         });
     }
+
     function initMap() {
         //Get the user agenda items
         if($.fn.locations_object.length === 0){
@@ -152,12 +153,31 @@
     }
 
     function createMap(map,animation,set_markers){
-        $.each(set_markers, function(key, fd) {
-            if(fd['info'] != ""){
-                var locations = set_locations(key,fd['info']);
-                add_markers(key,map,locations,icons['events'].icon,animation);
-            }
+        if(set_markers.length != 0){
+            $.each(set_markers, function(key, fd) {
+                if(fd['info'] != ""){
+                    var locations = set_locations(key,fd['info']);
+                    add_markers(key,map,locations,icons['events'].icon,animation);
+                }
+            });
+        }else{
+            @if(isset($page_content_bu['getEvent']))
+                var lat = {{ $page_content_bu['getEvent']->lat }},
+                    long = {{ $page_content_bu['getEvent']->long }}
+            @endif
+
+            set_singleMarker(map, lat, long);
+        }
+    }
+
+    function set_singleMarker(map,lat,long){
+        marker = new google.maps.Marker({
+            position: new google.maps.LatLng(lat, long),
+            map: map,
+            animation: google.maps.Animation.DROP
         });
+
+        markers.push(marker);
     }
 
     function set_locations(i,object){
@@ -271,7 +291,9 @@
         var country = '{!! App::getLocale() !!}',
             location = '';
 
-            @if(isset($user['city']))
+            @if(isset($page_content_bu['getEvent']))
+                location = '{!! $page_content_bu['getEvent']->location !!}';
+            @else if(isset($user['city']))
                  location = {!! json_encode($user['city']) !!};
             @endif
 

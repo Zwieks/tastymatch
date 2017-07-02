@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Event;
-
 use Illuminate\Http\Request;
 
 use App\Events\ViewCounter;
@@ -23,7 +21,7 @@ class EventsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request, $slug)
+    public function index(Request $request, $type, $slug)
     {
 
     }
@@ -42,13 +40,18 @@ class EventsController extends Controller
             Sessions::setSingleEventSession($request, $slug);
 
             // We will just be quick here and fetch the post
-            // using the Post event.
-            $post = Event::where('slug', $slug)->first();
-
+            // using the Post foodstand.
+            $page_content = Event::where('slug', $slug)->first();
             // Next, we will fire off an event and pass along
             // the post as its payload
-            Event::fire(new ViewCounter($post));
+            //Event::fire(new ViewCounter($post));
         }
+
+        //Set the item type
+        $item_type = 'event';
+
+        //return the view with the user session data
+        return view('auth.detailpages.view', compact('page_content','detailpage_id','item_type'));
     }
 
 
