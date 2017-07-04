@@ -6,10 +6,16 @@
             <?php $page_content = $user; ?>
         @endif
 
-        var user_agenda = {!! $page_content['agenda']->sortBy('date_start') !!};
+        var user_agenda = [];
+
+        @if(isset($page_content['agenda']))
+            user_agenda = {!! $page_content['agenda']->sortBy('date_start') !!};  
+        @endif
 
         if(user_agenda.length > 0){
-            last_user_agenda_start_date = "{!! $page_content['agenda']->sortBy('date_start')->last() !!}";
+            @if(isset($page_content['agenda']))
+                last_user_agenda_start_date = "{!! $page_content['agenda']->sortBy('date_start')->last() !!}";
+            @endif    
         }
         else{
             last_user_agenda_start_date = '{!! Carbon::now() !!}';

@@ -39,9 +39,12 @@ class EventsController extends Controller
             //Set the Session
             Sessions::setSingleEventSession($request, $slug);
 
+            //Get the user information
+            $user = [];
+
             // We will just be quick here and fetch the post
             // using the Post foodstand.
-            $page_content = Event::where('slug', $slug)->first();
+            $page_content = Event::getDetailPage($slug);
             // Next, we will fire off an event and pass along
             // the post as its payload
             //Event::fire(new ViewCounter($post));
@@ -51,7 +54,7 @@ class EventsController extends Controller
         $item_type = 'event';
 
         //return the view with the user session data
-        return view('auth.detailpages.view', compact('page_content','detailpage_id','item_type'));
+        return view('auth.detailpages.view', compact('user','page_content','detailpage_id','item_type'));
     }
 
 

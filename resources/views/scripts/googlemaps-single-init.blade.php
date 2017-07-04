@@ -43,7 +43,9 @@
     //set the content
     //This is kind of a hack because we need to use an exception of the user object
     @if(isset($user))
-        <?php $page_content_bu = $page_content; ?>
+        @if(isset($page_content))
+            <?php $page_content_bu = $page_content; ?>
+        @endif
         <?php $page_content = $user; ?>
     @endif
 
@@ -293,7 +295,7 @@
 
             @if(isset($page_content_bu['getEvent']))
                 location = '{!! $page_content_bu['getEvent']->location !!}';
-            @else if(isset($user['city']))
+            @else if(isset($user) && !empty($user))
                  location = {!! json_encode($user['city']) !!};
             @endif
 
@@ -445,12 +447,13 @@
     //Create default agenda object
     function createDefaultAgendaObject(){
         $.fn.locations_ofbject = [];
-        @foreach ($page_content['agenda'] as $item)
-            @if($detailpage_id == $item['detailpage_id'])
-                $.fn.locations_object.push({!! $item !!});
-            @endif    
-        @endforeach
-
+        @if(isset($page_content['agenda']) && !empty($page_content['agenda']))
+            @foreach ($page_content['agenda'] as $item)
+                @if($detailpage_id == $item['detailpage_id'])
+                    $.fn.locations_object.push({!! $item !!});
+                @endif    
+            @endforeach
+        @endif 
         return $.fn.locations_object;
     }
 

@@ -14,8 +14,12 @@
                 ['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text no-submit', 'id' => 'googlemaps-dropdown']) !!}
                 <span class="icon" data-icon="y"></span>
             </li>
-                {{ Form::hidden('lat', '', array('id' => 'place_lat')) }}
-                {{ Form::hidden('lng', '', array('id' => 'place_lng')) }}
+                {{ Form::hidden('lat', 
+                    isset($page_content['getEvent']->lat) ? $page_content['getEvent']->lat : '',
+                    array('id' => 'place_lat')) }}
+                {{ Form::hidden('lng', 
+                    isset($page_content['getEvent']->long) ? $page_content['getEvent']->long : '',
+                    array('id' => 'place_lng')) }}
 		</ul>
 		<ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
 	</fieldset>

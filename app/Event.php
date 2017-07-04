@@ -16,6 +16,32 @@ class Event extends Model
 
 	protected $table = 'events';
 
+	public static function getDetailPage($slug){
+		//Get the DETAILPAGE ID of the selected item
+		$result = DB::table('events')
+			->join('detailpages', 'events.detailpage_id', '=', 'detailpages.id')
+			->select('detailpage_id')
+			->where('slug', $slug)
+			->first();
+			
+		//Get the DETAILPAGE CONTENT
+        $page_content = Detailpage::with('getContact')
+            ->with('getIntro')
+            ->with('getMenu')
+            ->with('getHeaderimage')
+            ->with('getMediaItems')
+            ->with('getEvent')
+            ->with('agenda')
+            ->findOrFail($result->detailpage_id);
+
+        //Get the AGENDA DETAILS and put them in the array
+        $page_content = Agenda::getAllUserAgendaDetails($page_content);   
+
+        $page_content['detailpage_id'] = $result->detailpage_id;
+
+		return $page_content;
+	}
+
 	/**
 	 * The users that belong to the event.
 	 */

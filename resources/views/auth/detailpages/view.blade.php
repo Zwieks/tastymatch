@@ -6,9 +6,9 @@
 {{-- Include Content --}}
 @section('content')
     @include('pages.detailpage.view',
-    		['detail' => "pages.detailpage.".$item_type.".viewdetail",
-	          'additionaldetail' => "pages.detailpage.".$item_type.".additionalviewdetail",
-	          'googlemaps' => "includes.googlemaps.".$item_type.".single-googlemap"])
+		['detail' => "pages.detailpage.".$item_type.".viewdetail",
+        'additionaldetail' => "pages.detailpage.".$item_type.".viewadditionaldetail",
+        'googlemaps' => "includes.googlemaps.".$item_type.".single-googlemap"])
 @stop
 
 {{-- Include heroimage --}}
