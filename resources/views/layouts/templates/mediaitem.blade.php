@@ -12,7 +12,7 @@
                 <div class="ytp-thumbnail-overlay"></div>   
                 <img src="https://img.youtube.com/vi/{{$youtube_id}}/hqdefault.jpg"/>
             @else
-                <img src="{{ URL::asset('storage/'.$data['image']) }}" alt=""/>
+                <img src="{{ URL::asset('storage/app/public/'.$data['image']) }}" alt=""/>
             @endif
         </figure> 
 

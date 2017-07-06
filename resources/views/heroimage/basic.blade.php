@@ -1,5 +1,6 @@
 <!-- {{$debugpath}} -->
 <div class="page-hero">
+
     @php($image_res = [320, 480, 640, 768, 896, 1024, 1280, 1366, 1680, 1920])
     <picture class="image page-hero-image">
         @if(!isset($path))

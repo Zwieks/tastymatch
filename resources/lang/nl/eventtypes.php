@@ -2,8 +2,8 @@
 
 return [
     'type' => 'Selecteer het type',
-	'dance' => 'Dance',
-    'food' => 'Food',
-    'sport' => 'Sport',
-    'wedding' => 'Trouwerij',
+	'type-1' => 'Dance',
+    'type-2' => 'Food',
+    'type-3' => 'Sport',
+    'type-4' => 'Trouwerij',
 ];

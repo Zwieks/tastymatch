@@ -10,10 +10,10 @@
                 <li>
                     {{ Form::select('type', 
                         ['placeholder' => Lang::get('eventtypes.type'),
-                                    '1' => Lang::get('eventtypes.dance'), 
-                                    '2' => Lang::get('eventtypes.food'),
-                                    '3' => Lang::get('eventtypes.sport'),
-                                    '4' => Lang::get('eventtypes.wedding')],
+                                    '1' => Lang::get('eventtypes.type-1'), 
+                                    '2' => Lang::get('eventtypes.type-2'),
+                                    '3' => Lang::get('eventtypes.type-3'),
+                                    '4' => Lang::get('eventtypes.type-4')],
                                     isset($page_content['getEvent']->type_id) ? $page_content['getEvent']->type_id : '') }}
                 </li>                    
             </div> 
