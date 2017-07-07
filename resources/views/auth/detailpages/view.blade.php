@@ -8,7 +8,7 @@
     @include('pages.detailpage.view',
 		['detail' => "pages.detailpage.".$item_type.".viewdetail",
         'additionaldetail' => "pages.detailpage.".$item_type.".viewadditionaldetail",
-        'googlemaps' => "includes.googlemaps.".$item_type.".single-googlemap"])
+        'googlemaps' => "includes.googlemaps.".$item_type.".view-single-googlemap"])
 @stop
 
 {{-- Include heroimage --}}

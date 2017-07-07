@@ -104,13 +104,45 @@
         });
     }
 
+    function initDirections(){
+        var autocomplete = new google.maps.places.Autocomplete(document.getElementById('googlemaps-dropdown-route'));
+        var directionsService = new google.maps.DirectionsService;
+        var directionsDisplay = new google.maps.DirectionsRenderer;
+
+        directionsDisplay.setMap(map);
+
+        var onChangeHandler = function() {
+          calculateAndDisplayRoute(directionsService, directionsDisplay);
+        };
+        document.getElementById('googlemaps-dropdown-route').addEventListener('change', onChangeHandler);
+        document.getElementById('location-end').addEventListener('change', onChangeHandler);
+    }
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        directionsService.route({
+            origin: document.getElementById('googlemaps-dropdown-route').value,
+            destination: document.getElementById('location-end').value,
+            travelMode: 'DRIVING'
+        }, function(response, status) {
+            if (status === 'OK') {
+                directionsDisplay.setDirections(response);
+
+                console.log(response);
+            } else {
+                directionsDisplay.setMap(null);
+                emptyMap();
+                initDirections();
+            }
+        });
+    }
+
     function initMap() {
         //Get the user agenda items
         if($.fn.locations_object.length === 0){
             $.fn.locations_object = createDefaultAgendaObject();
         }else{
             markers = [];
-        }
+        }  
 
         //Check if there is a dropdown for the locations
         if(document.getElementById('googlemaps-dropdown')) {
@@ -149,6 +181,13 @@
 
             //Update the agenda items
             setAgendaItems();
+
+             //Setup the Google directions
+             //This is used for the EVENT DETAIL PAGE
+            if(document.getElementById('googlemaps-dropdown-route') && document.getElementById('location-end')) {
+                initDirections();
+            }  
+
         }   else{
             emptyMap();
         } 

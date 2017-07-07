@@ -9,4 +9,6 @@ return [
 	'filter-keywords-title' => 'Events seeking for',
 	'filter-location-label' => 'Show your event location on this map',
 	'filter-location-text' => 'Enter detailed information about your event location. This may include zip code, place or address and we will do the rest!',
+	'filter-view-location-label' => 'Event location',
+	'filter-view-location-text' => 'Below you find the event location',
 ];

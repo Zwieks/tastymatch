@@ -78,4 +78,4 @@
 </div>
 
 {{--Render GoogleMaps --}}
-@include('includes.googlemaps.single-googlemap')
+@include($googlemaps)
