@@ -19,4 +19,45 @@ div[style] {
 	}
 }
 
+.modal,
+.page-mobile-nav-container{
+	display: none;
+}
+
+.mCustomScrollBox{
+	max-height: none!important;
+}
+
+.logo-print{
+	display: block!important;
+}
+
+.modal-open{
+	*{
+		display: none;
+	}
+	#modal-routedetails{
+		display: block;
+		visibility: visible;
+
+		*{
+			display: block;
+		}
+
+		ul{
+			padding: 0;
+		}
+
+		b,
+		span{
+			display: inline;
+
+			page-break-after: avoid;
+		}
+
+		.modal-header{
+			display: none;
+		}
+	}
+}
 // @TODO: Set elements that muse be hidden in the print-layout

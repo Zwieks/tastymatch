@@ -97,6 +97,10 @@
 		border: none;
     	background: none;
 	}
+
+	.hidden{
+		display: none;
+	}
 }
 
 .google-maps-intro{
@@ -362,6 +366,10 @@
 		max-height: @spacing*7.5;
 	}
 
+	.modalRouteDetail{
+		max-height: @spacing*7.5;
+	}
+
 	.btn-icon-only{
 		display: none;
 		margin:0;
@@ -423,4 +431,63 @@
 	.agenda-date{
 		font-weight: 800;
 	}
+}
+
+#directions-panel{
+	font-size: @smallestFontSize;
+	position: relative;
+
+	.empty{
+		font-style: italic;
+		font-weight: bold;
+	}
+
+	.ghost-btn{
+		position: absolute;
+		top: -1rem;
+		right:0;
+		width: @spacing*1.5;
+		height: @spacing*1.5;
+		color: @primColor;
+		border: none;
+
+		&:hover,
+		&:focus{
+			border: none;
+			cursor: pointer;
+		}
+
+		&:before{
+			.center;
+		}
+	}
+}
+
+#route-description{
+	margin: 0;
+    padding: 0;
+
+    .logo-print{
+    	display: none;
+    }
+}
+
+#route-description-wrapper{
+	margin: 0;
+	height: auto;
+	max-height: calc(100vh ~'-' @spacing*7.5);
+
+	p{
+		margin-bottom: 0;
+	}
+
+	span{
+		font-style: italic;
+		font-weight: bold;
+		font-size: @XSmallHeadingSize;
+	}
+}
+
+.detailpage-locationinformation{
+	min-height: @spacing*10.2;
 }

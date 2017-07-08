@@ -285,6 +285,23 @@
   overflow: scroll;
 }
 
+
+.modal-routedetails{
+    .print-btn{
+        padding-bottom: @spacing/4;
+        padding-left: 0;
+
+        &:before{
+            font-size: 20px;
+        }
+
+        &:hover,
+        &:focus{
+            color: @primColor;
+        }
+    }
+}
+
 //Modal of the type media styling
 .modal-open .modal-media{
   overflow: hidden;
@@ -360,27 +377,29 @@
 
 // Scale up the modal
 @media (min-width: @screen-sm-min) {
-  // Automatically set modal's width for larger viewports
-  .modal-dialog {
-    width: @modal-md;
-    margin: 30px auto;
-  }
-
-  .modal-media{
+    // Automatically set modal's width for larger viewports
     .modal-dialog {
-      width: @modal-lg;
-    }  
-  }
+        width: @modal-md;
+        margin: 30px auto;
+    }
 
-  .modal-content {
-    .box-shadow(0 5px 15px rgba(0,0,0,.5));
-    padding:@spacing;
-  }
+    .modal-media{
+        .modal-dialog {
+            width: @modal-lg;
+        }  
+    }
 
-  // Modal sizes
-  .modal-sm { width: @modal-sm; }
+    .modal-content {
+        .box-shadow(0 5px 15px rgba(0,0,0,.5));
+        padding:@spacing;
+    }
+
+    // Modal sizes
+    .modal-sm { 
+        width: @modal-sm; 
+    }
 }
 
 @media (min-width: @screen-md-min) {
-  .modal-lg { width: @modal-lg; }
+    .modal-lg { width: @modal-lg; }
 }

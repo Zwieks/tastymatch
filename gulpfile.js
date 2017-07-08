@@ -13,6 +13,8 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.less([
-        'site.less'
+        'site.less',
     ]);
+
+    mix.less('print.less', 'public/css/print.css');
 });

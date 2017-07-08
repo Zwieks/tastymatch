@@ -21,12 +21,15 @@
                     isset($page_content['getEvent']->long) ? $page_content['getEvent']->long : '',
                     array('id' => 'place_lng')) }}
 
-            <li>
+            <li class="hidden">
                 {!! Form::hidden('eventlocation', 
                     isset($page_content['getEvent']->location) ? $page_content['getEvent']->location : '',
                     ['placeholder' => Lang::get('forms.location-placeholder'),'class' => 'smallbox text no-submit', 'id' => 'location-end', 'readonly' => 'readonly', 'value' => isset($page_content['getEvent']->location) ? $page_content['getEvent']->location : '']) !!}
             </li>
 		</ul>
+        <div id="directions-panel">
+            <p class="empty">{{ Lang::get('googlemaps.mapempty-directions') }}</p>
+        </div>
 		<ul class="autocomplete mCustomScrollbar" id="js-autocomplete-results"></ul>
 	</fieldset>
 {!! Form::close() !!}

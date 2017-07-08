@@ -51,6 +51,11 @@ jQuery(document).ready(function($){
 	});
 });
 
+//Print the complete page on click
+$doc.on( 'click', '.js-pageprint', function () {
+	window.print();
+});
+
 jQuery(window).on('load', function(){
 
 	// Remove class when Javascript is loaded

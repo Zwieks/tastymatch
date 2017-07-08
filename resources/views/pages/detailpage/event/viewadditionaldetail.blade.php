@@ -2,6 +2,15 @@
 <div class="content product-wrapper detailpage-items">
     <h2>{{ Lang::get('detailpage.event-additinaldetails') }}</h2>
 
+	@if( isset($page_content['getEvent']->location))
+	    <section class="detailitem-wrapper">
+	    	<h3>{{ Lang::get('forms.eventlocation') }}</h3>
+	    	<div>
+	    		{{ $page_content['getEvent']->location }}
+	    	</div>
+	    </section>
+	@endif 
+
 	@if( isset($page_content['getEvent']->type_id))
 	    <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.eventtype') }}</h3>

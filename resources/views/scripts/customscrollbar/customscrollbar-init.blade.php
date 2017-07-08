@@ -12,5 +12,11 @@
                 theme:"light-3"
             });
         }
+
+        if($('#route-description-wrapper').length){
+            $("#route-description-wrapper").mCustomScrollbar({
+                theme:"light-3"
+            });
+        }
     });
 </script>

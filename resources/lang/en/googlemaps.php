@@ -11,4 +11,6 @@ return [
 	'filter-location-text' => 'Enter detailed information about your event location. This may include zip code, place or address and we will do the rest!',
 	'filter-view-location-label' => 'Event location',
 	'filter-view-location-text' => 'Below you find the event location',
+	'mapsummary-label' => 'Summary',
+	'mapempty-directions' => 'There is no information to show yet.',
 ];

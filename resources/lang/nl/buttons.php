@@ -10,4 +10,6 @@ return [
 	'preview' => 'Preview',
 	'add-menu-item' => 'Menu item toevoegen',
 	'add-agenda-item' => 'Agenda item toevoegen',
+	'maps-route-detail' => 'Detail route',
+	'maps-route-remove-label' => 'Route verwijderen',
 ];

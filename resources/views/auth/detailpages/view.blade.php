@@ -29,4 +29,5 @@
 @section('modal')
 	@include('modals.basic', ['content' => "modals.agenda.daterangepicker", 'mediatype' => 'daterange','modaltype' => ''])
 	@include('modals.basic', ['content' => "modals.media", 'mediatype' => 'media','modaltype' => ''])
+    @include('modals.basic', ['content' => "modals.routedetails", 'mediatype' => 'routedetails','modaltype' => ''])
 @stop

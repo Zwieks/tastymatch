@@ -8,7 +8,8 @@
         @include('pages.basicpage.head-meta')
         @include('pages.basicpage.head-socials')
 
-        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" >
+        <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}" type="text/css" media="screen">
+        <link rel="stylesheet" href="{{ URL::asset('css/print.css') }}" type="text/css" media="print" >
         <link rel="stylesheet" href="{{ URL::asset('css/fontstyle.css') }}" >
         <link rel="stylesheet" href="{{ URL::asset('css/CustomScrollbar.css') }}" />
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700,300,600' rel='stylesheet' type='text/css'>

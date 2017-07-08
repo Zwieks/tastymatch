@@ -104,6 +104,14 @@
         });
     }
 
+    function removeRoute(directionsDisplay){
+        $('#googlemaps-dropdown-route').val('');
+        document.getElementById('directions-panel').innerHTML = "<p class='empty'>{{ Lang::get('googlemaps.mapempty-directions') }}</p>";
+        directionsDisplay.setMap(null);
+        emptyMap();
+        initDirections();
+    }
+
     function initDirections(){
         var autocomplete = new google.maps.places.Autocomplete(document.getElementById('googlemaps-dropdown-route'));
         var directionsService = new google.maps.DirectionsService;
@@ -112,13 +120,27 @@
         directionsDisplay.setMap(map);
 
         var onChangeHandler = function() {
-          calculateAndDisplayRoute(directionsService, directionsDisplay);
+            calculateAndDisplayRoute(directionsService, directionsDisplay);
         };
         document.getElementById('googlemaps-dropdown-route').addEventListener('change', onChangeHandler);
         document.getElementById('location-end').addEventListener('change', onChangeHandler);
+
+        google.maps.event.addDomListener(document.getElementById('googlemaps-dropdown-route'), 'keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                calculateAndDisplayRoute(directionsService, directionsDisplay);
+            }
+        });
+
+        $(document).on('click','.js-remove-route',function() {
+            removeRoute(directionsDisplay);
+        });
     }
 
     function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var summaryPanel = document.getElementById('directions-panel');
+        var modalRouteDetail = '';
+
         directionsService.route({
             origin: document.getElementById('googlemaps-dropdown-route').value,
             destination: document.getElementById('location-end').value,
@@ -126,12 +148,32 @@
         }, function(response, status) {
             if (status === 'OK') {
                 directionsDisplay.setDirections(response);
+                var route = response.routes[0];
+                summaryPanel.innerHTML = '';
+                // For each route, display summary information.
+                for (var i = 0; i < route.legs.length; i++) {
+                    var routeSegment = i + 1;
+                    summaryPanel.innerHTML += "<b>{{ ucfirst(Lang::get('forms.form-separator-from')) }} </b>"+route.legs[i].start_address;
+                    summaryPanel.innerHTML += "<b> {{ Lang::get('forms.form-separator-to-location') }} </b>"+route.legs[i].end_address + '<br>';
+                    summaryPanel.innerHTML += "<b>"+route.legs[i].distance.text+"</b> ("+route.legs[i].duration.text+")<br>";
+                    summaryPanel.innerHTML += "<span class='btn modal-btn-route' data-toggle='modal' data-target='#modal-routedetails'>{{ Lang::get('buttons.maps-route-detail') }}</span>";
+                    summaryPanel.innerHTML += "<span class='ghost-btn js-remove-route' data-icon='k' title='{{ Lang::get('buttons.maps-route-remove-label') }}'></span>";
+                }
 
-                console.log(response);
+                for (var i = 0; i < route.legs[0].steps.length; i++) {
+                    var detail = route.legs[0].steps[i];
+                    direction = '<li><p>'+detail.instructions+'</p><span>'+detail.duration.text+'</span><span> ('+detail.distance.text+') </span></li><br>';
+
+                    modalRouteDetail = modalRouteDetail+direction;
+                }    
+
+                $('#route-description-wrapper .mCSB_container').empty();
+                $('#route-description-wrapper .mCSB_container').append(modalRouteDetail);
+                $('#googlemaps-dropdown-route').blur();
+
+               // console.log(route);
             } else {
-                directionsDisplay.setMap(null);
-                emptyMap();
-                initDirections();
+                removeRoute(directionsDisplay);
             }
         });
     }
@@ -150,7 +192,7 @@
 
             google.maps.event.addDomListener(input, 'keydown', function(event) { 
                 if (event.keyCode === 13) { 
-                    event.preventDefault(); 
+                    event.preventDefault();
                 }
             });
 

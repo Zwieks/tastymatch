@@ -942,7 +942,8 @@ html .cookie-explanation button.request-cookies,
 .call-to-action,
 .facebook-btn,
 .twitter-btm,
-.googleplus-btn {
+.googleplus-btn,
+.print-btn {
   display: inline-block;
   margin-bottom: 2.4rem;
   cursor: pointer;
@@ -2334,7 +2335,8 @@ html .cookie-explanation button.request-cookies,
 .call-to-action,
 .facebook-btn,
 .twitter-btm,
-.googleplus-btn {
+.googleplus-btn,
+.print-btn {
   transition: 0.15s ease-out;
   padding: 1.2rem 2.4rem;
   border: 0;
@@ -2502,6 +2504,14 @@ html .cookie-explanation button.request-cookies:before,
 .ghost-btn:focus {
   color: #E3262E;
   border-color: #E3262E;
+}
+.print-btn {
+  background: transparent;
+  color: inherit;
+  margin-bottom: 0;
+}
+.modal-btn-route {
+  margin-bottom: 0;
 }
 [data-title]:after {
   border-radius: 0;
@@ -3729,6 +3739,9 @@ html .cookie-explanation {
   border: none;
   background: none;
 }
+.google-maps-introwrapper .hidden {
+  display: none;
+}
 .google-maps-intro {
   box-shadow: 0 0.34285714rem 1.2rem rgba(0, 0, 0, 0.125);
   width: 33.33333333%;
@@ -4027,6 +4040,9 @@ html .cookie-explanation {
   height: auto;
   max-height: 18rem;
 }
+.google-maps-overlay-agenda .modalRouteDetail {
+  max-height: 18rem;
+}
 .google-maps-overlay-agenda .btn-icon-only {
   display: none;
   margin: 0;
@@ -4083,6 +4099,59 @@ html .cookie-explanation {
 }
 .google-maps-overlay-agenda .agenda-date {
   font-weight: 800;
+}
+#directions-panel {
+  font-size: 1.2rem;
+  position: relative;
+}
+#directions-panel .empty {
+  font-style: italic;
+  font-weight: bold;
+}
+#directions-panel .ghost-btn {
+  position: absolute;
+  top: -1rem;
+  right: 0;
+  width: 3.6rem;
+  height: 3.6rem;
+  color: #E3262E;
+  border: none;
+}
+#directions-panel .ghost-btn:hover,
+#directions-panel .ghost-btn:focus {
+  border: none;
+  cursor: pointer;
+}
+#directions-panel .ghost-btn:before {
+  display: block;
+  margin: auto;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+#route-description {
+  margin: 0;
+  padding: 0;
+}
+#route-description .logo-print {
+  display: none;
+}
+#route-description-wrapper {
+  margin: 0;
+  height: auto;
+  max-height: calc(100vh - 18rem);
+}
+#route-description-wrapper p {
+  margin-bottom: 0;
+}
+#route-description-wrapper span {
+  font-style: italic;
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.detailpage-locationinformation {
+  min-height: 24.48rem;
 }
 /*
  *  Basis custom form styling
@@ -7368,6 +7437,17 @@ form ol {
   width: 50px;
   height: 50px;
   overflow: scroll;
+}
+.modal-routedetails .print-btn {
+  padding-bottom: 0.6rem;
+  padding-left: 0;
+}
+.modal-routedetails .print-btn:before {
+  font-size: 20px;
+}
+.modal-routedetails .print-btn:hover,
+.modal-routedetails .print-btn:focus {
+  color: #E3262E;
 }
 .modal-open .modal-media {
   overflow: hidden;

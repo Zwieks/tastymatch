@@ -1,0 +1,103 @@
+/* Print styles
+-------------------------------------------------------------------*/
+/*
+ *  Add extra project print styling here
+ */
+figure {
+  margin: 0;
+}
+div[style] {
+  padding: 0 !important;
+  height: auto !important;
+}
+div[style] img {
+  max-width: 480px !important;
+  height: auto !important;
+  position: static !important;
+}
+.modal,
+.page-mobile-nav-container {
+  display: none;
+}
+.mCustomScrollBox {
+  max-height: none!important;
+}
+.logo-print {
+  display: block!important;
+}
+.modal-open * {
+  display: none;
+}
+.modal-open #modal-routedetails {
+  display: block;
+  visibility: visible;
+}
+.modal-open #modal-routedetails * {
+  display: block;
+}
+.modal-open #modal-routedetails ul {
+  padding: 0;
+}
+.modal-open #modal-routedetails b,
+.modal-open #modal-routedetails span {
+  display: inline;
+  page-break-after: avoid;
+}
+.modal-open #modal-routedetails .modal-header {
+  display: none;
+}
+* {
+  box-shadow: none !important;
+  background: transparent !important;
+  color: #000 !important;
+  /* Black prints faster: h5bp.com/s */
+  text-shadow: none !important;
+}
+body {
+  font-family: 'Arial', sans-serif;
+}
+a,
+a:visited {
+  text-decoration: underline;
+}
+pre,
+blockquote {
+  border: 1px solid #999;
+  page-break-inside: avoid;
+}
+thead {
+  display: table-header-group;
+  /* h5bp.com/t */
+}
+tr,
+img {
+  page-break-inside: avoid;
+}
+img {
+  max-width: 100% !important;
+}
+@page {
+  margin: 0.5cm;
+}
+p,
+h2,
+h3 {
+  orphans: 3;
+  widows: 3;
+}
+h2,
+h3 {
+  page-break-after: avoid;
+}
+/* Complete this list with elements that should always be hidden for print */
+.nav-trigger,
+.hide-from-layout,
+.page-mobilenavcontainer,
+.page-header,
+.page-breadcrumb,
+.comp-youtube,
+.page-footer {
+  display: none;
+}
+
+/*# sourceMappingURL=print.css.map */
