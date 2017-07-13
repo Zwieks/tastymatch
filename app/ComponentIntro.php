@@ -19,14 +19,13 @@ class ComponentIntro extends Model
 
 	public static function store($data){
 		// Validate the request...
-
 		$ComponentIntro = new ComponentIntro;
 
 		if(isset($data['content']) && $data['content'] != '')
 			$ComponentIntro->content = $data['content'];
 
-		if(isset($data['title']) && $data['title'] != '')
-			$ComponentIntro->name = $data['title'];
+		if(isset($data['form'][1]) && $data['form'][1]['title'] != '')
+			$ComponentIntro->name = $data['form'][1]['title'];
 
 		$ComponentIntro->save();
 

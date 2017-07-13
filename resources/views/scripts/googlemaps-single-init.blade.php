@@ -247,9 +247,9 @@
             @if(isset($page_content_bu['getEvent']))
                 var lat = {{ $page_content_bu['getEvent']->lat }},
                     long = {{ $page_content_bu['getEvent']->long }}
-            @endif
 
-            set_singleMarker(map, lat, long);
+                set_singleMarker(map, lat, long);
+            @endif
         }
     }
 
@@ -374,11 +374,15 @@
         var country = '{!! App::getLocale() !!}',
             location = '';
 
+            @if(isset($user['city']) && !empty($user['city']))
+                location = '{!! json_encode($user['city']) !!}';
+            @endif   
+
             @if(isset($page_content_bu['getEvent']))
                 location = '{!! $page_content_bu['getEvent']->location !!}';
-            @else if(isset($user) && !empty($user))
-                 location = {!! json_encode($user['city']) !!};
             @endif
+
+
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){ 
             var locationInfo = val.results[0].geometry.location;

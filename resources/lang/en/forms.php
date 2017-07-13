@@ -54,8 +54,10 @@ return [
 	'location' => 'City',
 	'description' => 'Description',
 	'eventtype' => 'Event type', 
+    'foodstandtype' => 'Foodstand type',
     'eventlocation' => 'Event location',
 	'form-separator-to' => 'till',
+    'form-separator-by' => 'by',
     'form-separator-to-location' => 'to',
     'form-separator-from' => 'from',
     'form-indication-hours' => 'hour',
@@ -76,4 +78,7 @@ return [
     'size-label' => 'Dimensions',
     'construct-label' => 'Build from',
     'removing-label' => 'Removing from',
+    'foodstanddimensions' => 'Dimensions',
+    'dimensionX' => 'Length',
+    'dimensionY' => 'Width',
 ];

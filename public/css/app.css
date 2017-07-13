@@ -4419,6 +4419,19 @@ form ol {
 .detailpage .multiple-wrapper label {
   font-weight: normal;
 }
+.detailpage .multiple-wrapper.fix-sizes {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin: 0 -1.2rem;
+}
+.detailpage .multiple-wrapper.fix-sizes li {
+  width: 50%;
+  padding: 0 1.2rem;
+}
 .detailpage-title {
   margin-bottom: 1.2rem;
 }
@@ -6015,6 +6028,11 @@ form ol {
   flex-wrap: wrap;
   margin: 0 -1.2rem 4.8rem;
 }
+/**Event page exceptions**/
+.component-Event #google-maps,
+.component-Event .page-content {
+  margin-bottom: 0;
+}
 /* Third party */
 /* owl carousel */
 .owl-carousel {
@@ -6319,14 +6337,28 @@ form ol {
   width: 0;
   transition: width 300ms ease-in-out;
 }
-.dropzone .dz-preview.dz-error .dz-error-message {
-  display: block;
-}
-.dropzone .dz-preview.dz-error:hover .dz-error-message {
+.dropzone .dz-preview.dz-error:hover .dz-error-message,
+.dropzone .dz-preview.dz-error:focus .dz-error-message {
   opacity: 1;
   pointer-events: auto;
 }
+.dropzone .dz-preview.dz-error .dz-error-message {
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: -ms-flex;
+  display: flex;
+  -moz-justify-content: center;
+  -ms-justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  opacity: 1;
+  top: 0;
+  background: rgba(193, 9, 9, 0.61);
+}
 .dropzone .dz-preview .dz-error-message {
+  position: relative;
   pointer-events: none;
   z-index: 1000;
   position: absolute;
@@ -6334,7 +6366,8 @@ form ol {
   opacity: 0;
   transition: opacity 0.3s ease;
   border-radius: 8px;
-  font-size: 13px;
+  font-size: 16px;
+  font-weight: bold;
   top: 130px;
   left: -10px;
   width: 140px;
@@ -6387,7 +6420,7 @@ form ol {
   content: '';
   width: 54px;
   height: 58px;
-  z-index: 10;
+  z-index: 9999;
 }
 .dz-remove:hover,
 .dz-remove:focus {

@@ -85,9 +85,15 @@ class ComponentMediaItem extends Model
 		//Get all the component data
 		$data = $request->all();
 
+		if(isset($data['jsondata'])){
+			$data_item = $data['jsondata'];
+		}else{
+			$data_item = $data;			
+		}
+
 		//Loop through the array containing the url of the images that will be deleted
-		foreach ($data['jsondata'] as $media_item_id) {
-			if($media_item_id[0] != ''){
+		foreach ($data_item as $media_item_id) {
+			if(isset($media_item_id[0]) && $media_item_id[0] != ''){
 				//Get the page id
 				$detailpage_id = $data['userDetail']['pageid'];
 				$media_item_id = $media_item_id[0];

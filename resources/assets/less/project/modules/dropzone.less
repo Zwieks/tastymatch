@@ -366,41 +366,67 @@
 	-ms-transition: width 300ms ease-in-out;
 	-o-transition: width 300ms ease-in-out;
 	transition: width 300ms ease-in-out; }
-.dropzone .dz-preview.dz-error .dz-error-message {
-	display: block; }
-.dropzone .dz-preview.dz-error:hover .dz-error-message {
-	opacity: 1;
-	pointer-events: auto; }
-.dropzone .dz-preview .dz-error-message {
-	pointer-events: none;
-	z-index: 1000;
-	position: absolute;
-	display: none;
-	opacity: 0;
-	-webkit-transition: opacity 0.3s ease;
-	-moz-transition: opacity 0.3s ease;
-	-ms-transition: opacity 0.3s ease;
-	-o-transition: opacity 0.3s ease;
-	transition: opacity 0.3s ease;
-	border-radius: 8px;
-	font-size: 13px;
-	top: 130px;
-	left: -10px;
-	width: 140px;
-	background: #be2626;
-	background: linear-gradient(to bottom, #be2626, #a92222);
-	padding: 0.5em 1.2em;
-	color: white; }
-.dropzone .dz-preview .dz-error-message:after {
-	content: '';
-	position: absolute;
-	top: -6px;
-	left: 64px;
-	width: 0;
-	height: 0;
-	border-left: 6px solid transparent;
-	border-right: 6px solid transparent;
-	border-bottom: 6px solid #be2626; }
+
+.dropzone{
+	.dz-preview{
+		&.dz-error{
+
+			&:hover,
+			&:focus{
+				.dz-error-message{
+					opacity: 1;
+					pointer-events: auto;
+				}
+			}
+
+			.dz-error-message{
+				.displayflex;
+				.justify-content(center);
+				width: 100%;
+				height: 100%;
+				opacity: 1;
+				top: 0;
+				background: rgba(193, 9, 9, 0.61);
+			}
+		}
+
+		.dz-error-message{
+			position: relative;
+			pointer-events: none;
+			z-index: 1000;
+			position: absolute;
+			display: none;
+			opacity: 0;
+			-webkit-transition: opacity 0.3s ease;
+			-moz-transition: opacity 0.3s ease;
+			-ms-transition: opacity 0.3s ease;
+			-o-transition: opacity 0.3s ease;
+			transition: opacity 0.3s ease;
+			border-radius: 8px;
+			font-size: 16px;
+			font-weight: bold;
+			top: 130px;
+			left: -10px;
+			width: 140px;
+			background: #be2626;
+			background: linear-gradient(to bottom, #be2626, #a92222);
+			padding: 0.5em 1.2em;
+			color: white;
+
+			&:after{
+				content: '';
+				position: absolute;
+				top: -6px;
+				left: 64px;
+				width: 0;
+				height: 0;
+				border-left: 6px solid transparent;
+				border-right: 6px solid transparent;
+				border-bottom: 6px solid #be2626;				
+			}
+		}
+	}
+}
 
 .dz-image{
 	width: 100%;
@@ -426,7 +452,7 @@
 	content:'';
 	width: 54px;
 	height: 58px;
-	z-index: 10;
+	z-index: 9999;
 
 	&:hover,
 	&:focus{

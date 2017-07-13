@@ -30,4 +30,18 @@ class Foodstand_User extends Model
 	public function FoodstandType(){
 		return $this->hasOne('App\FoodstandType');
 	}
+
+	public static function store($userid,$foodstand_id,$data){
+		$FoodstandUser = new Foodstand_User;
+		$info = $data['info'];
+		if(isset($userid) && $userid != '')
+			$FoodstandUser->user_id = $userid;
+
+		if(isset($foodstand_id) && $foodstand_id != '')
+			$FoodstandUser->foodstand_id = $foodstand_id;
+
+		$FoodstandUser->save();
+
+		return $FoodstandUser->id;
+	}
 }

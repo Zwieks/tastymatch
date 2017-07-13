@@ -65,6 +65,10 @@
                 if($(e.currentTarget).find('input[name="searchevents"]').attr('data-new') == 'false' && 
                     $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid') != '')
                     $(e.currentTarget).find('.js-delete-agenda-item').show();
+                //Show delete button when not saved but already created
+                if($(e.currentTarget).find('input[name="searchevents"]').attr('data-new') == 'false' && 
+                    $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid') == '')
+                    $(e.currentTarget).find('.js-delete-agenda-item').show();
 
                 //populate the title
                 $(e.currentTarget).find('input[name="searchevents"]').val(agenda_item_name);

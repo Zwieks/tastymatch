@@ -27,6 +27,12 @@ class Agenda extends Model
 	public static function store($data,$event_id,$detailpage_id){
 		$Agenda = new Agenda;
 
+		if(isset($data['info']['name']) && $data['info']['name'] != '')
+			$Agenda->name = $data['info']['name'];
+
+		if(isset($data['info']['description']) && $data['info']['description'] != '')
+			$Agenda->description = $data['info']['description'];
+
 		if(isset($event_id) && $event_id != '')
 			$Agenda->event_id = $event_id;
 

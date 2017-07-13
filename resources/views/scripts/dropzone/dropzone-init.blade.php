@@ -31,12 +31,13 @@
             {
                 paramName: 'photos',
                 url: '/ajax/upload',
+                maxFilesize: 1,
+                maxFiles: 1,
                 dictDefaultMessage: "{!! Lang::get('dropzone.header-image-text') !!}",
+                dictFileTooBig: "{!! Lang::get('dropzone.file-to-big') !!}",
                 dictRemoveFile: "",
                 clickable: true,
                 autoProcessQueue: false,
-                maxFilesize: 1,
-                maxFiles: 1,
                 uploadMultiple: false,
                 addRemoveLinks: true,
                 parallelUploads: 1,
@@ -55,6 +56,7 @@
                     this.on('sending', function(file, xhr, formData){
                         formData.append('name', myObject.randomname);
                     });
+              
 
                     this.on("addedfile", function(file) { 
                         var id = file.previewTemplate.previousSibling.parentElement.id;
@@ -78,6 +80,10 @@
                     this.on("success", function(file, response){
                         dropZoneObjects['component-headerimage'] = myObject;
                         dropZoneObjects['component-headerimage'].name =  myObject.randomname;
+                    });
+
+                    this.on('error', function(file, xhr, formData){
+                        delete dropZoneObjects['component-headerimage'];
                     });
 
                     this.on("removedfile", function(file) {

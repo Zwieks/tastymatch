@@ -17,7 +17,6 @@
                                     isset($page_content['getEvent']->type_id) ? $page_content['getEvent']->type_id : '') }}
                 </li>                    
             </div> 
-{{-- dd($page_content['getEvent']) --}}
 
             <!-- EVENT TYPE SELECT -->
             <li class="form-label">

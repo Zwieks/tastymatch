@@ -210,14 +210,19 @@ class AjaxController extends Controller
                         Event::updateFields($event_id,$event_data);
                     }    
                 }elseif($type == 'foodstand'){
+                    //Format the data for the foodstand
+                    $foodstand_data = Foodstand::dataFormat($data);
+
                     if($status == 'create'){
+                        //Set the PageID in the event data
+                        $foodstand_data['info']['detailpage_id'] = $pageid;
                         //Add the new event in the event table and return the ID
-                        $foodstand_id = Foodstand::store($data);
+                        $foodstand_id = Foodstand::store($foodstand_data);
                         //Add the Event User tables
-                        Foodstand_User::store($userid,$foodstand_id,$data);
+                        Foodstand_User::store($userid,$foodstand_id,$foodstand_data);
                     }elseif($status == 'update'){
                         //Update the event
-                        Foodstand::updateFields($event_id,$data);
+                        Foodstand::updateFields($foodstand_id,$foodstand_data);
                     }  
                 }elseif($type == 'entertainer'){
                     if($status == 'create'){
@@ -271,6 +276,7 @@ class AjaxController extends Controller
                 if($event_id == ''){
                    $event_id = Event::store($data);
                 }
+
                 //Add the component data to the component table and get the id
                 $agenda_id = Agenda::store($data,$event_id,$detailpage_id);
 
@@ -330,6 +336,7 @@ class AjaxController extends Controller
     }
 
     public function SaveHeaderimageComponent(Request $request,$data,$detailpage_id){
+
         $component_id = Detailpage::CheckAlreadyUpdated('headerimage_id',$detailpage_id);
 
         if($component_id != 0){

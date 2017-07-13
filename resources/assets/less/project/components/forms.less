@@ -307,6 +307,17 @@ form ol {
 		label{
 			font-weight: normal;
 		}
+
+		&.fix-sizes{
+			.displayflex;
+			.flex-wrap(wrap);
+			margin: 0 -@spacing/2;
+
+			li{
+				width: 100%/2;
+				padding: 0 @spacing/2;
+			}
+		}
 	}
 }
 

@@ -14,7 +14,7 @@
 
         if(user_agenda.length > 0){
             @if(isset($page_content['agenda']))
-                last_user_agenda_start_date = "{!! $page_content['agenda']->sortBy('date_start')->last() !!}";
+                last_user_agenda_start_date = '{!! $page_content['agenda']->sortBy('date_start')->last() !!}';
             @endif    
         }
         else{

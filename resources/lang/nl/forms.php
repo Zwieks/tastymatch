@@ -54,8 +54,10 @@ return [
 	'location' => 'Plaats',
 	'description' => 'Beschrijving',
 	'eventtype' => 'Evenement type',
+    'foodstandtype' => 'Foodstand type',
     'eventlocation' => 'Evenement locatie',
 	'form-separator-to' => 'tot',
+    'form-separator-by' => 'bij',
     'form-separator-to-location' => 'naar',
     'form-separator-from' => 'van',
     'form-indication-hours' => 'uur',
@@ -76,4 +78,7 @@ return [
     'size-label' => 'Afmetingen',
     'construct-label' => 'Opbouwen vanaf',
     'removing-label' => 'Afbouwen vanaf',
+    'foodstanddimensions' => 'Afmetingen',
+    'dimensionX' => 'Lengte',
+    'dimensionY' => 'Breedte',
 ];

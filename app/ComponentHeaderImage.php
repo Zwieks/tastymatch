@@ -27,7 +27,6 @@ class ComponentHeaderImage extends Model
 
 	public static function store($data){
         // Validate the request...
-
         $ComponentHeaderImage = new ComponentHeaderImage;
 
         if(isset($data['path']) && $data['path'] != '')
