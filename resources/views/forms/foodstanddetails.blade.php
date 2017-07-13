@@ -15,7 +15,7 @@
 
                 @foreach($types as $type)
                     <li class="form-input-checkbox">
-                        <input class="radio checkboxfilter" type="checkbox" value="{{ $loop->iteration }}" name="foodstand_type" id="foodstandtype-{{ $loop->iteration }}" {{ isset($page_content['getFoodstand']->foodstandtype_ids) && in_array($foodstandtypes_array, $loop->iteration) ? 'checked' : ''}}>
+                        <input class="radio checkboxfilter" type="checkbox" value="{{ $loop->iteration }}" name="foodstand_type" id="foodstandtype-{{ $loop->iteration }}" {{ isset($page_content['getFoodstand']->foodstandtype_ids) && in_array($loop->iteration,$foodstandtypes_array) ? 'checked' : ''}}>
                         <label for="foodstandtype-{{ $loop->iteration }}">{{ $type }}</label>
                     </li>
                 @endforeach     
@@ -30,7 +30,7 @@
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
                     {!! Form::number('dimensionx',
-                        isset($page_content['getFoodstand']->dimensionx) ? $page_content['getFoodstand']->dimensionx : '',
+                        isset($page_content['getFoodstand']->dimension_x) ? $page_content['getFoodstand']->dimension_x : '',
                         array_merge(['placeholder' => Lang::get('forms.dimensionX'),
                         'id' => 'foodstand-dimension-x', 
                         'class' => 'smallbox dimension'])) !!}
@@ -41,7 +41,7 @@
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
                     {!! Form::number('dimensiony',
-                    isset($page_content['getFoodstand']->dimensiony) ? $page_content['getFoodstand']->dimensiony : '',
+                    isset($page_content['getFoodstand']->dimension_y) ? $page_content['getFoodstand']->dimension_y : '',
                     array_merge(['placeholder' => Lang::get('forms.dimensionY'), 
                     'id' => 'foodstand-dimension-y', 
                     'class' => 'smallbox dimension'])) !!}

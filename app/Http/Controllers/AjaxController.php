@@ -221,6 +221,8 @@ class AjaxController extends Controller
                         //Add the Event User tables
                         Foodstand_User::store($userid,$foodstand_id,$foodstand_data);
                     }elseif($status == 'update'){
+                        //Get the Event ID
+                        $foodstand_id = Foodstand::GetFoodstandId($pageid);
                         //Update the event
                         Foodstand::updateFields($foodstand_id,$foodstand_data);
                     }  

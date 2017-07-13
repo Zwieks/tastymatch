@@ -5,7 +5,7 @@
 
 {{-- Include Content --}}
 @section('content')
-    @include('pages.detailpage.create',
+    @include('pages.detailpage.update',
         ['detail' => "pages.detailpage.".$item_type.".detail",
         'additionaldetail' => "pages.detailpage.".$item_type.".additionaldetail",
         'googlemaps' => "includes.googlemaps.".$item_type.".single-googlemap"])

@@ -35,6 +35,8 @@ class Detailpage extends Model
 	            ->with('getMediaItems')
 	            ->with('agenda')
 	            ->with('getEvent')
+	            ->with('getFoodstand')	
+	            ->with('getEntertainer')		                        
 	            ->findOrFail($detailpage_id);
 	    return $result;        
 	}
@@ -59,6 +61,21 @@ class Detailpage extends Model
 	public function getEvent(){
 		return $this->hasOne('App\Event');
 	}
+
+	/**
+	 * Get all the FOODSTAND of the user
+	 */
+	public function getFoodstand(){
+		return $this->hasOne('App\Foodstand');
+	}
+
+	/**
+	 * Get all the ENTERTAINER of the user
+	 */
+	public function getEntertainer(){
+		return $this->hasOne('App\Entertainer');
+	}
+
 
 	/**
 	 * Get all the HEADERIMAGE components of the detailpages

@@ -239,7 +239,7 @@
         if(set_markers.length != 0){
             $.each(set_markers, function(key, fd) {
                 if(fd['info'] != ""){
-                    var locations = set_locations(key,fd['info']);
+                    var locations = set_locations(key,fd);
                     add_markers(key,map,locations,icons['events'].icon,animation);
                 }
             });
@@ -266,18 +266,19 @@
     function set_locations(i,object){
         var locations = [];
 
-        if (typeof object['images'] != 'undefined' && object['images'].length == 0){
-            object['images'][0] = {
+        if (typeof object['info']['images'] != 'undefined' && object['info']['images'].length == 0){
+            object['info']['images'][0] = {
                 file: 'logo.svg'
             }
         }
 
         locations.push([
             object.description,
-            object.lat,
-            object.long,
+            object['info'].lat,
+            object['info'].long,
+            object['info'].location,
             object.name,
-            object.slug
+            object['info'].slug
         ]);
 
         return locations;
@@ -563,10 +564,9 @@
         var agenda_listitems = '',
             eventid = '';
 
-
         if($.fn.locations_object.length != 0){    
             for (var key in $.fn.locations_object) {
-                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
+                if(typeof $.fn.locations_object[key].name != 'undefined' && $.fn.locations_object[key].name != ''){
                     var id = $.fn.locations_object[key].id;
 
                     if(typeof $.fn.locations_object[key].event_id != 'undefined'){
@@ -575,7 +575,7 @@
                          eventid = '';
                     }
 
-                    var name = $.fn.locations_object[key]['info'].name;
+                    var name = $.fn.locations_object[key].name;
                     var location = $.fn.locations_object[key]['info'].location;
                     var searchable_id = $.fn.locations_object[key]['info'].searchable;
                     var start = $.fn.locations_object[key].date_start;

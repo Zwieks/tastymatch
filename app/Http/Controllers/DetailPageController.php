@@ -82,11 +82,14 @@ class DetailPageController extends Controller
         //Get content detailpage and check the type relations
         $page_content = Detailpage::checkPageType($detailpage_id, $item_type);
 
+        //Set page type
+        $page_type = 'update';
+
         //Return the view
         if(empty($page_content) || $page_content['type'] != $item_type){
             return view('errors.404');
         }else{
-            return view('auth.detailpages.update', compact('user','detailpage_id','page_content', 'item_type'));
+            return view('auth.detailpages.update', compact('user','detailpage_id','page_content', 'item_type','page_type'));
         }
     }
 

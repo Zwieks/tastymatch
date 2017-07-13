@@ -39,6 +39,18 @@ class Foodstand extends Model
 		return $foodstands;
 	}
 
+	/**
+	 * Get the EventId based on PagedId.
+	 */
+	public static function GetFoodstandId($pageId){
+		$eventId = DB::table('foodstands')
+		->select('id')
+		->where('detailpage_id', '=', $pageId)
+		->first();
+
+		return $eventId->id;
+	}
+
 	//Get all the FOODSTANDS form ALL USERS
 	public static function getAll(){
 		$foodstands = DB::table('foodstands')->get();
@@ -166,5 +178,48 @@ class Foodstand extends Model
 		$Foodstand->save();
 
 		return $Foodstand->id;		
+	}	
+
+	public static function updateFields($foodstand_id,$data){
+		if(!isset($data['info']['images_id']))
+			$data['info']['images_id'] = '';
+
+		if(!isset($data['info']['videos_id']))
+			$data['info']['videos_id'] = '';
+
+		if(!isset($data['info']['slug']))
+			$data['info']['slug'] = '';
+
+		if(!isset($data['info']['long']))
+			$data['info']['long'] = '';
+
+		if(!isset($data['info']['lat']))
+			$data['info']['lat'] = '';
+
+		if(!isset($data['info']['keywords']))
+			$data['info']['keywords'] = '';
+
+		if(!isset($data['info']['foodstand_types']))
+			$data['info']['foodstand_types'] = '';
+
+		if(!isset($data['info']['dimension_x']))
+			$data['info']['dimension_x'] = '';
+
+		if(!isset($data['info']['dimension_y']))
+			$data['info']['dimension_y'] = '';
+
+		DB::table('foodstands')
+	    	->where('id', $foodstand_id)
+	    	->update([
+	    		'images_id' => $data['info']['images_id'],
+	    		'videos_id' => $data['info']['videos_id'],
+	    		'slug' => $data['info']['slug'],
+	    		'long' => $data['info']['long'],
+	    		'lat' => $data['info']['lat'],
+	    		'keywords' => $data['info']['keywords'],
+	    		'foodstandtype_ids' => $data['info']['foodstand_types'],	
+	    		'dimension_x' => $data['info']['dimension_x'],		    		
+	    		'dimension_y' => $data['info']['dimension_y']
+	    	]);
 	}		
 }
