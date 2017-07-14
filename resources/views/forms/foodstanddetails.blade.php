@@ -41,10 +41,10 @@
                 <li class="form-input-textfield">
                     @include('forms.inputerror')
                     {!! Form::number('dimensiony',
-                    isset($page_content['getFoodstand']->dimension_y) ? $page_content['getFoodstand']->dimension_y : '',
-                    array_merge(['placeholder' => Lang::get('forms.dimensionY'), 
-                    'id' => 'foodstand-dimension-y', 
-                    'class' => 'smallbox dimension'])) !!}
+                        isset($page_content['getFoodstand']->dimension_y) ? $page_content['getFoodstand']->dimension_y : '',
+                        array_merge(['placeholder' => Lang::get('forms.dimensionY'), 
+                        'id' => 'foodstand-dimension-y', 
+                        'class' => 'smallbox dimension'])) !!}
                 </li>
                 <li>
                 <span class="form-separator form-indication">m<sup>2</sup></span>

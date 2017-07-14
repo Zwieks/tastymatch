@@ -1,49 +1,37 @@
 <!-- {{$debugpath}} -->
 <div class="content product-wrapper details detailpage-items">
-    <h2>{{ Lang::get('detailpage.event-additinaldetails') }}</h2>
+    <h2>{{ Lang::get('detailpage.foodstand-additinaldetails') }}</h2>
 
-	@if( isset($page_content['getEvent']->location))
-	    <section class="detailitem-wrapper">
-	    	<h3>{{ Lang::get('forms.eventlocation') }}</h3>
-	    	<div>
-	    		{{ $page_content['getEvent']->location }}
+    @if(isset($page_content['getFoodstand']->foodstandtype_ids))
+     	@php ($types = Lang::get('foodstandtypes'))
+     	@php ($foodstandtypes_array = explode(',',$page_content['getFoodstand']->foodstandtype_ids))
+
+        <section class="detailitem-wrapper">
+	    	<h3>{{ Lang::get('forms.foodstandtype') }}</h3>
+	    	<div class="block-items-wrapper">
+                @foreach($types as $type)
+	                @if(isset($page_content['getFoodstand']->foodstandtype_ids) && in_array($loop->iteration,$foodstandtypes_array))
+	                	<span class="block-item">{{$type}}</span>
+	                @endif
+                @endforeach
 	    	</div>
 	    </section>
-	@endif 
+    @endif   
 
-	@if( isset($page_content['getEvent']->type_id))
-	    <section class="detailitem-wrapper">
-	    	<h3>{{ Lang::get('forms.eventtype') }}</h3>
+    @if(isset($page_content['getFoodstand']->foodstandtype_ids))
+        <section class="detailitem-wrapper">
+	    	<h3>{{ Lang::get('forms.foodstanddimensions') }}</h3>
 	    	<div>
-	    		{{ Lang::get('eventtypes.type-'.$page_content['getEvent']->type_id) }}
-	    	</div>
-	    </section>
-	@endif 
-
-	@if( isset($page_content['getEvent']->time_start) || isset($page_content['getEvent']->time_end))
-	    <section class="detailitem-wrapper">
-	    	<h3>{{ Lang::get('forms.eventdate') }}</h3>
-	    	<div>
-	    		@if( isset($page_content['getEvent']->time_start))
-	    			<span>{{ Carbon\Carbon::parse($page_content['getEvent']->time_start)->format('d M Y') }}</span>
+	    		@if( isset($page_content['getFoodstand']->dimension_x))
+	    			<span>{{ $page_content['getFoodstand']->dimension_x }}</span>
 	    		@endif
 
-	     		@if( isset($page_content['getEvent']->time_end) )
-	     			<span> {{ Lang::get('forms.form-separator-to') }} </span>
-	    			<span>{{ Carbon\Carbon::parse($page_content['getEvent']->time_end)->format('d M Y') }}</span>
+	     		@if( isset($page_content['getFoodstand']->dimension_y) )
+	     			<span class="form-separator">x</span>
+	    			<span>{{ $page_content['getFoodstand']->dimension_y }}</span>
 	    		@endif
+	    		<span class="form-separator form-indication">m<sup>2</sup></span>
 	    	</div>
 	    </section>
-	@endif 
-
-	@if( isset($page_content['getEvent']->visitors_indication) )
-	    <section class="detailitem-wrapper">
-	    	<h3>{{ Lang::get('forms.visitorscount-label') }}</h3>
-	    	<div>
-	    		@if( isset($page_content['getEvent']->visitors_indication))
-	    			<span>{{$page_content['getEvent']->visitors_indication}}</span>
-	    		@endif
-	    	</div>
-	    </section>
-	@endif  
+    @endif   
 </div>

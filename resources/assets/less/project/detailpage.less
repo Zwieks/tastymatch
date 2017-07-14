@@ -213,6 +213,24 @@
 		}
 	}
 
+	.block-items-wrapper{
+		.displayflex;
+		.flex-wrap(wrap);
+		margin: @spacing/4 0 0;
+	}
+
+	.block-item{
+		padding: @spacing/4 @spacing/2;
+		background: @lightGrey;
+		margin: 0 @spacing/4 @spacing/3 0;
+		font-size: @smallestHeadingSize;
+		font-weight: bold;
+
+		&:last-child{
+			margin-right: 0;
+		}
+	}
+
 	&.mediaitems-wrapper{
 		.flex-wrap(wrap);
 		margin: 0 -@spacing/2 @spacing*2;
