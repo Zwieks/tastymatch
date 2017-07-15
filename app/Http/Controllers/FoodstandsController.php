@@ -45,6 +45,9 @@ class FoodstandsController extends Controller
             // using the Post foodstand.
             $page_content = Foodstand::getDetailPage($slug);
 
+            if($page_content == false)
+                return view('errors.foodstand-notfound');
+
             //Set the detailpage id
             $detailpage_id = $page_content['detailpage_id'];
 

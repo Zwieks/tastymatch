@@ -68,6 +68,11 @@ class Foodstand extends Model
 			->select('detailpage_id')
 			->where('slug', $slug)
 			->first();
+
+		//If there is no results found redirect to notfoud page
+		if(!isset($result->detailpage_id)){
+			return false;
+		}	
 			
 		//Get the DETAILPAGE CONTENT
         $page_content = Detailpage::with('getContact')
