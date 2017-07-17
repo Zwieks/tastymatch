@@ -313,9 +313,13 @@ form ol {
 			.flex-wrap(wrap);
 			margin: 0 -@spacing/2;
 
-			li{
+			div{
 				width: 100%/2;
 				padding: 0 @spacing/2;
+
+				.subitem{
+					padding-left: @spacing;
+				}
 			}
 		}
 	}
@@ -415,6 +419,45 @@ form ol {
 
 	.form-input-checkbox{
 		padding-left: 0;
+
+		&.dropdown{
+			position: relative;
+			width: 100%;
+
+			&:before{
+				.centerY;
+				top: 10px;
+				right: 0;
+				left: auto;
+				color: @primColor;
+				font-size: 16px;
+			}
+
+			label{
+				font-size: @smallestHeadingSize;
+			}
+		}
+	}
+
+	.submenu-wrapper{
+		.transition;
+
+		height: 0;
+		position: relative;
+		visibility: hidden;
+		opacity: 0;
+
+		label{
+			font-size: @smallestHeadingSize;
+			font-weight: 900;
+		}
+
+		&.active{
+			.transition;
+			height: 100%;
+			visibility:  visible;
+			opacity: 1;
+		}
 	}
 
 	.animating-label{

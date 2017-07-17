@@ -4428,9 +4428,12 @@ form ol {
   flex-wrap: wrap;
   margin: 0 -1.2rem;
 }
-.detailpage .multiple-wrapper.fix-sizes li {
+.detailpage .multiple-wrapper.fix-sizes div {
   width: 50%;
   padding: 0 1.2rem;
+}
+.detailpage .multiple-wrapper.fix-sizes div .subitem {
+  padding-left: 2.4rem;
 }
 .detailpage-title {
   margin-bottom: 1.2rem;
@@ -4512,6 +4515,40 @@ form ol {
 }
 .detailpage-additionaldetails .form-input-checkbox {
   padding-left: 0;
+}
+.detailpage-additionaldetails .form-input-checkbox.dropdown {
+  position: relative;
+  width: 100%;
+}
+.detailpage-additionaldetails .form-input-checkbox.dropdown:before {
+  transform: translateY(-50%);
+  position: absolute;
+  top: 50%;
+  top: 10px;
+  right: 0;
+  left: auto;
+  color: #E3262E;
+  font-size: 16px;
+}
+.detailpage-additionaldetails .form-input-checkbox.dropdown label {
+  font-size: 1.2rem;
+}
+.detailpage-additionaldetails .submenu-wrapper {
+  transition: 0.15s ease-out;
+  height: 0;
+  position: relative;
+  visibility: hidden;
+  opacity: 0;
+}
+.detailpage-additionaldetails .submenu-wrapper label {
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+.detailpage-additionaldetails .submenu-wrapper.active {
+  transition: 0.15s ease-out;
+  height: 100%;
+  visibility: visible;
+  opacity: 1;
 }
 .detailpage-additionaldetails .animating-label label[for] {
   top: 0.2rem;

@@ -45,6 +45,11 @@ class EventsController extends Controller
             // We will just be quick here and fetch the post
             // using the Post foodstand.
             $page_content = Event::getDetailPage($slug);
+
+
+            if($page_content == false)
+                return view('errors.foodstand-notfound');
+
             // Next, we will fire off an event and pass along
             // the post as its payload
             //Event::fire(new ViewCounter($post));

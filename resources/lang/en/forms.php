@@ -55,6 +55,8 @@ return [
 	'description' => 'Description',
 	'eventtype' => 'Event type', 
     'foodstandtype' => 'Foodstand type',
+    'entertainertype' => 'Entertainer type',
+    'entertainer-category' => 'Choose a category',
     'eventlocation' => 'Event location',
 	'form-separator-to' => 'till',
     'form-separator-by' => 'by',

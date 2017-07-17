@@ -42,13 +42,25 @@ class EntertainersController extends Controller
             Sessions::setSingleEntertainerSession($request, $slug);
 
             // We will just be quick here and fetch the post
-            // using the Post model.
-            $post = Entertainer::where('slug', $slug)->first();
+            // using the Post entertainer.
+            $page_content = Entertainer::getDetailPage($slug);
+
+            if($page_content == false)
+                return view('errors.entertainer-notfound');
+
+            //Set the detailpage id
+            $detailpage_id = $page_content['detailpage_id'];
 
             // Next, we will fire off an event and pass along
             // the post as its payload
-            Event::fire(new ViewCounter($post));
+            //Event::fire(new ViewCounter($post));
         }
+
+        //Set the item type
+        $item_type = 'entertainer';
+
+        //return the view with the user session data
+        return view('auth.detailpages.view', compact('page_content','detailpage_id','item_type'));
     }
 
     /**

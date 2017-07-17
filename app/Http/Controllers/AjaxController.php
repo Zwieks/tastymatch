@@ -227,16 +227,24 @@ class AjaxController extends Controller
                         Foodstand::updateFields($foodstand_id,$foodstand_data);
                     }  
                 }elseif($type == 'entertainer'){
+                    //Format the data for the entertainer
+                    $entertainer_data = Entertainer::dataFormat($data);
+                    dd($entertainer_data);
+                    return false;
                     if($status == 'create'){
-                        //Add the new event in the event table and return the ID
-                        $entertainer_id = Entertainer::store($data);
-                        //Add the Event User table
-                        Entertainer_User::store($userid,$entertainer_id,$data);
+                        //Set the PageID in the event data
+                        $entertainer_data['info']['detailpage_id'] = $pageid;
+                        //Add the new entertainer in the entertainers table and return the ID
+                        $entertainer_id = Entertainer::store($entertainer_data);
+                        //Add the Entertainer User table
+                        Entertainer_User::store($userid,$entertainer_id,$entertainer_data);
                     }elseif($status == 'update'){
-                        //Update the event
-                        Entertainer::updateFields($event_id,$data);
+                         //Get the Entertainer ID
+                        $entertainer_id = Entertainer::GetEntertainerId($pageid);
+                        //Update the Entertainer
+                        Entertainer::updateFields($entertainer_id,$entertainer_data);
                     }    
-                } 
+                }
             }    
             else{
                 return response()->json(array('success' => false));

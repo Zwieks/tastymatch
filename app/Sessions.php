@@ -49,7 +49,7 @@ class Sessions extends Model
 
     //When the user has been on the Entertainer detailpage the session will be set to affoid multple view counts in the database
     //Session is set in the Entertainer Controller
-    public static function setSingleEntertainersSession(Request $request, $slug){
+    public static function setSingleEntertainerSession(Request $request, $slug){
         //Set the Session
         $request->session()->put('viewed.entertainers'.$slug, true);
 

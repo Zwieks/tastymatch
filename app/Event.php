@@ -23,6 +23,11 @@ class Event extends Model
 			->select('detailpage_id')
 			->where('slug', $slug)
 			->first();
+
+		//If there is no results found redirect to notfoud page
+		if(!isset($result->detailpage_id)){
+			return false;
+		}
 			
 		//Get the DETAILPAGE CONTENT
         $page_content = Detailpage::with('getContact')
@@ -106,6 +111,7 @@ class Event extends Model
 
 						if(isset($item['type'])){
 							$eventInfo['info']['type_id'] = $item['type'];
+							$eventInfo['info']['tags'] = trans('eventtypes.type-'.$item['type']);
 						}
 
 						if(isset($item['filter_visitors'])){
@@ -204,6 +210,9 @@ class Event extends Model
 		if(isset($info['type_id']) && $info['type_id'] != '')
 			$Event->type_id = $info['type_id'];
 
+		if(isset($info['tags']) && $info['tags'] != '')
+			$Event->tags = $info['tags'];
+
 		if(isset($info['visitors_indication']) && $info['visitors_indication'] != '')
 			$Event->visitors_indication = $info['visitors_indication'];
 
@@ -255,6 +264,9 @@ class Event extends Model
 		if(!isset($data['info']['type_id']))
 			$data['info']['type_id'] = '';
 
+		if(!isset($data['info']['tags']))
+			$data['info']['tags'] = '';
+
 		if(!isset($data['info']['visitors_indication']))
 			$data['info']['visitors_indication'] = '';
 
@@ -302,7 +314,8 @@ class Event extends Model
 	    		'deconstruct_datestart' => $data['info']['deconstruct_time_start'],
 	    		'deconstruct_dateend' => $data['info']['deconstruct_time_end'],	
 	    		'amountstart' => $data['info']['amountstart'],
-	    		'amountend' => $data['info']['amountend']	
+	    		'amountend' => $data['info']['amountend'],
+	    		'tags' => $data['info']['tags']
 	    	]);
 	}	
 

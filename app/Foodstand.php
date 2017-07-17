@@ -121,10 +121,12 @@ class Foodstand extends Model
 
 				if($elementId == 'component-additionalinfo'){
 					$foodstand_types = '';
+					$tags = '';
 
 					foreach ($value['form'] as $item) {
 						if(isset($item['foodstand_type'])){
 							$foodstand_types = $foodstand_types.','.$item['foodstand_type'];
+							$tags = $tags.','.trans('foodstandtypes.type-'.$item['foodstand_type']);
 						}
 
 						if(isset($item['dimensionx'])){
@@ -137,6 +139,7 @@ class Foodstand extends Model
 					}
 
 					$foodstandInfo['info']['foodstand_types'] = trim($foodstand_types, ",");
+					$foodstandInfo['info']['tags'] = trim($tags, ",");
 				}
 			}	
 		}
@@ -180,6 +183,9 @@ class Foodstand extends Model
 		if(isset($info['dimension_y']) && $info['dimension_y'] != '')
 			$Foodstand->dimension_y = $info['dimension_y'];
 
+		if(isset($info['tags']) && $info['tags'] != '')
+			$Entertainer->tags = $info['tags'];
+
 		$Foodstand->save();
 
 		return $Foodstand->id;		
@@ -213,6 +219,9 @@ class Foodstand extends Model
 		if(!isset($data['info']['dimension_y']))
 			$data['info']['dimension_y'] = '';
 
+		if(!isset($data['info']['tags']))
+			$data['info']['tags'] = '';
+
 		DB::table('foodstands')
 	    	->where('id', $foodstand_id)
 	    	->update([
@@ -224,7 +233,8 @@ class Foodstand extends Model
 	    		'keywords' => $data['info']['keywords'],
 	    		'foodstandtype_ids' => $data['info']['foodstand_types'],	
 	    		'dimension_x' => $data['info']['dimension_x'],		    		
-	    		'dimension_y' => $data['info']['dimension_y']
+	    		'dimension_y' => $data['info']['dimension_y'],
+	    		'tags' => $data['info']['tags']
 	    	]);
 	}		
 }

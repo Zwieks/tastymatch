@@ -182,6 +182,21 @@
             return false;
         });
 
+        //Show more category items 
+        //Showed on Entertainer detailpages
+        $('.js-toggle-dropdown').on('click', function(){
+            var item = $(this).parent().parent().find('.submenu-wrapper');
+            item.toggleClass('active');
+
+            //Unset all checkboxes on toggle
+            if(!item.hasClass('active')){
+                item.find('input[type=checkbox]').attr('checked',false);
+                item.parent().find('.dropdown').attr('data-icon','O');
+            }else{
+                item.parent().find('.dropdown').attr('data-icon','M');
+            }
+        });
+
         //Add media item to template
         $('#js_add_mediaitem').on('click', function(){
             addMediaItem();

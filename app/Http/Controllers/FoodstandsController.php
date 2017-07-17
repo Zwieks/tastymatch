@@ -53,7 +53,7 @@ class FoodstandsController extends Controller
 
             // Next, we will fire off an event and pass along
             // the post as its payload
-            Event::fire(new ViewCounter($page_content)); 
+            //Event::fire(new ViewCounter($page_content)); 
         }
 
         //Set the item type

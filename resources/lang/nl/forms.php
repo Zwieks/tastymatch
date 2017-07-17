@@ -55,6 +55,8 @@ return [
 	'description' => 'Beschrijving',
 	'eventtype' => 'Evenement type',
     'foodstandtype' => 'Foodstand type',
+    'entertainertype' => 'Entertainer type',
+    'entertainer-category' => 'Kies een categorie',
     'eventlocation' => 'Evenement locatie',
 	'form-separator-to' => 'tot',
     'form-separator-by' => 'bij',
