@@ -190,7 +190,10 @@
 
             //Unset all checkboxes on toggle
             if(!item.hasClass('active')){
-                item.find('input[type=checkbox]').attr('checked',false);
+                //Check if the items are already saved
+                if(!item.hasClass('js-saved')){
+                    item.find('input[type=checkbox]').attr('checked',false);
+                }
                 item.parent().find('.dropdown').attr('data-icon','O');
             }else{
                 item.parent().find('.dropdown').attr('data-icon','M');
@@ -319,10 +322,11 @@
             });
         }
 
-        function saveMediaComponents(components){
+        function saveMediaComponents(components, object){
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/saveComponents',
                 type = '{!! Request::segment(2) !!}',
+                save = object.attr("data-save"),
                 status = '{!! Request::segment(1) !!}';
 
             if(jQuery.inArray(type, $.fn.Global.TYPES) == -1){
@@ -339,13 +343,13 @@
             @endif 
 
             userObject['pageid'] = $('input[name=pageid]').val();
-
+            var newWindow = window.open('/', '_blank');
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: url,
                 headers: {'X-CSRF-TOKEN': token},
-                data: {jsondata: newObject, userDetail: userObject, itemType: type, itemStatus: status},
+                data: {jsondata: newObject, userDetail: userObject, itemType: type, itemStatus: status, saveType: save},
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
@@ -362,6 +366,9 @@
                         console.log('Component is opgeslagen');
                         //Toggle save modal
                         $('#modal-success').modal('toggle');
+                    }else if(data.success == false && data.preview == true){
+                        //If preview op 
+                        newWindow.location = '/preview/'+data.type+'/'+data.cache_id;
                     }else{
                         console.log('Oeps..');
                         //Toggle save modal
@@ -823,7 +830,9 @@
         //SAVE ALL THE CUSTOM TEMPLATE CONTENT
         $(document).on('click','.js-save-template', function(){
             //Contains all the TinyMce change
-            var formdata = '';
+            var formdata = '',
+                object = $(this);
+
             $.fn.Global.SAVE_COMPONENTS.length = 0;
 
             //Get the TINYMCE and put the changed components in the object
@@ -889,6 +898,10 @@
 
                 //Upload the image or add the path to delete array
                 if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != '' && dropZoneObjects[key].file != 'uploaded'){
+                    if(object.attr("data-save") === 'preview'){
+                        $.fn.myDropzoneTheFirst.options.url = "/ajax/temp";   
+                    }
+
                     dropZoneObjects[key].file.processQueue();
                 }
                 else if(dropZoneObjects[key].file === ''){
@@ -986,7 +999,7 @@
 
             //SAVE the component
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
-                saveMediaComponents($.fn.Global.SAVE_COMPONENTS);
+                saveMediaComponents($.fn.Global.SAVE_COMPONENTS, object);
 
                 //Remove components if the file is empty
                 if($.fn.Global.DELETE_COMPONENTS.length > 0){
@@ -1002,8 +1015,6 @@
                 if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
                     deleteAgendaItems();
                 }
-
-                console.log($.fn.Global.SAVE_COMPONENTS);
             }
         });
 

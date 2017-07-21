@@ -8,6 +8,8 @@ use App\Detailpage_User;
 use App\ComponentMediaItem;
 use App\ComponentMediaItem_User;
 
+use Cache;
+
 class DetailPageController extends Controller
 {
     /**
@@ -64,6 +66,26 @@ class DetailPageController extends Controller
             }else{
                 return view('errors.404');
             }
+        }
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function previewPage(Request $request, $item_type, $cache_id)
+    {
+        //Get the preview page content
+        $page_content = json_decode($request->session()->get($cache_id), true);
+
+        //Return the view
+        if(empty($page_content)){
+            return view('errors.404');
+        }else{
+            return view('auth.detailpages.preview', compact('page_content','item_type','cache_id'));
         }
     }
 

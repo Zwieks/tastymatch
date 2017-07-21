@@ -65,7 +65,7 @@ Route::get('/foodstand/{slug}', ['as' => 'index', 'uses' => 'FoodstandsControlle
 //Route::get('foodstand/{slug}', ['as' => 'foodstand.single', 'uses' => 'FoodstandsController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 // ENTERTAINERS
-Route::post('/entertainer/{slug}', ['as' => 'blog.single', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
+Route::get('/entertainer/{slug}', ['as' => 'index', 'uses' => 'EntertainersController@Single']) -> where('slug', '[\w\d\-\_]+');
 
 // EVENTS
 Route::get('/event/{slug}', ['as' => 'index', 'uses' => 'EventsController@Single']) -> where('slug', '[\w\d\-\_]+');
@@ -83,6 +83,9 @@ Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()
 	// UPDATE PAGES
 	Route::get('update/{type}/{slug}', 'DetailpageController@updatePage')->name('UpdatePage');
 
+	// PREVIEW PAGES
+	Route::get('preview/{type}/{cacheid}', 'DetailpageController@previewPage')->name('PreviewPage');
+
 
 	// Upload image
 	Route::post('/upload', ['as' => 'user.upload', 'uses' => 'ImagesController@upload']);
@@ -97,6 +100,9 @@ Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()
 	Route::post('/ajax/search', 'AjaxController@getSearch');
 	Route::post('/ajax/upload', function(){
 		return json_encode(request()->file('photos')->storeAs('public/uploads/' . auth()->id(), request()->name));
+	});
+	Route::post('/ajax/temp', function(){
+		return json_encode(request()->file('photos')->storeAs('public/uploads/temp/' . auth()->id(), request()->name));
 	});
 	//Add MEDIAITEM
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');

@@ -212,7 +212,7 @@
                 mapTypeId: google.maps.MapTypeId.ROADMAP
             });
 
-            if ($.fn.locations_object.length == 0) {
+            if ($.fn.locations_object.length === 0) {
                 emptyMap();
             }
 
@@ -381,6 +381,8 @@
 
             @if(isset($page_content_bu['getEvent']))
                 location = '{!! $page_content_bu['getEvent']->location !!}';
+            @else    
+                location = country;
             @endif
 
 
@@ -634,7 +636,19 @@
 
     //Set the boundries and zoom of the viewport
     function setBounds(){
-        var bounds = new google.maps.LatLngBounds();
+        var country = '{!! App::getLocale() !!}',
+            bounds = new google.maps.LatLngBounds();
+
+        if(markers.length === 0){
+            var geocoder = new google.maps.Geocoder();
+            geocoder.geocode( { 'address': country}, function(results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    map.fitBounds(results[0].geometry.viewport);
+                }
+            });
+        }
+
         for (var i = 0; i < markers.length; i++) {
             bounds.extend(markers[i].getPosition());
         }

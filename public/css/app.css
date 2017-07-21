@@ -2178,6 +2178,16 @@ html[lang='en'] .comp-login .social-login:before {
 .has-bgimage .page-content {
   margin-top: -2.4rem;
 }
+.has-bgimage.component-Event .page-content,
+.has-bgimage.component-Entertainer .page-content,
+.has-bgimage.component-Foodstand .page-content {
+  margin-top: 0;
+}
+.has-bgimage.component-Event .details-wrapper,
+.has-bgimage.component-Entertainer .details-wrapper,
+.has-bgimage.component-Foodstand .details-wrapper {
+  margin-top: -4.8rem;
+}
 .component-foodstand .page-content {
   margin-top: 2.4rem;
 }

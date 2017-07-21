@@ -83,4 +83,5 @@ return [
     'foodstanddimensions' => 'Afmetingen',
     'dimensionX' => 'Lengte',
     'dimensionY' => 'Breedte',
+    'entertainertags-label' => 'Kenmerken',
 ];

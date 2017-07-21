@@ -83,4 +83,5 @@ return [
     'foodstanddimensions' => 'Dimensions',
     'dimensionX' => 'Length',
     'dimensionY' => 'Width',
+    'entertainertags-label' => 'Tags',
 ];

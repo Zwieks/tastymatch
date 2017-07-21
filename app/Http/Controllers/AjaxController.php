@@ -177,11 +177,47 @@ class AjaxController extends Controller
                return response()->json(array('success' => false));
             }
 
+            //Check if the page is a preview/concept or normal
+            if(isset($data['saveType'])){
+                $save_type = $data['saveType'];
+            }else{
+                $save_type = '';
+            }
+
             //TYPE of the page based on Foodstand, Event or Entertainer
             $type = $data['itemType'];
 
             //Get the item STATUS
             $status = $data['itemStatus'];
+
+            if($save_type != '' && $save_type === 'preview'){
+                //Create session and get the id
+                $cache_id = str_random(20);
+                $form_data = '';
+                $component_data = '';
+                $content = [];
+
+                if($type === 'event'){
+                    $form_data = Event::dataFormat($data);
+                }elseif($type === 'foodstand'){
+                    $form_data = Foodstand::dataFormat($data);
+                }elseif($type === 'entertainer'){
+                    $form_data = Entertainer::dataFormat($data);
+                }else{
+                    return response()->json(array('success' => false));
+                }
+
+                $component_data = Detailpage::PreviewComponentData($data,$form_data);
+
+                $content = array_merge($content, $component_data);
+                $content = array_merge($content, $form_data);
+
+                //Create new cache
+                Sessions::setPreviewPageSession($request, $cache_id, json_encode($content));
+
+                //Preview the page
+                return response()->json(array('cache_id' => $cache_id,'type' => $type,'preview' => true,'success' => false, 'content' => json_encode($content)));
+            }
 
             //Update the state of the detailpage and add the type
             Detailpage::updateState('preview',$detailpage_id, $type);
@@ -229,8 +265,7 @@ class AjaxController extends Controller
                 }elseif($type == 'entertainer'){
                     //Format the data for the entertainer
                     $entertainer_data = Entertainer::dataFormat($data);
-                    dd($entertainer_data);
-                    return false;
+
                     if($status == 'create'){
                         //Set the PageID in the event data
                         $entertainer_data['info']['detailpage_id'] = $pageid;

@@ -12,20 +12,21 @@
                 @if(isset($page_content['getEntertainer']->entertainertype_ids))
                     @php ($entertainertypes_array = explode(',',$page_content['getEntertainer']->entertainertype_ids))
                     @php ($subentertainertypes_array = explode(',',$page_content['getEntertainer']->subentertainertype_ids))
+                    @php ($tags_array = explode(',',$page_content['getEntertainer']->tags))
                 @endif    
 
                 @foreach($types as $type)
                     <div>
-                        <li class="form-input-checkbox dropdown" data-icon="O">
+                        <li class="form-input-checkbox dropdown" data-icon="{{ isset($page_content['getEntertainer']->entertainertype_ids) && in_array($loop->iteration,$entertainertypes_array) ? 'M' : 'O'}}">
                             <input class="radio checkboxfilter" data-icon="~" type="checkbox" value="{{ $loop->iteration }}" name="entertainer_type" id="entertainertype-{{ $loop->iteration }}" {{ isset($page_content['getEntertainer']->entertainertype_ids) && in_array($loop->iteration,$entertainertypes_array) ? 'checked' : ''}}>
                             <label class="js-toggle-dropdown" for="entertainertype-{{ $loop->iteration }}">{{ $type['label'] }}</label>
                         </li>  
 
-                        <ul class="submenu-wrapper">
+                        <ul class="submenu-wrapper {{ isset($page_content['getEntertainer']->entertainertype_ids) && in_array($loop->iteration,$entertainertypes_array) ? 'active js-saved' : ''}}">
                             @foreach($type as $key => $subitem)
                                 @if(substr($key, 0, strlen('subtype-')) === 'subtype-')
                                      <li class="form-input-checkbox subitem">
-                                        <input class="radio checkboxfilter" type="checkbox" value="{{ $subitem }}" name="subentertainer_type" id="{{$subitem}}-subentertainertype-{{ $loop->iteration }}" {{ isset($page_content['getEntertainer']->subentertainertype_ids) && in_array($loop->iteration,$subentertainertypes_array) ? 'checked' : ''}}>
+                                        <input class="radio checkboxfilter" type="checkbox" value="{{ $subitem }}" name="subentertainer_type" id="{{$subitem}}-subentertainertype-{{ $loop->iteration }}" {{ isset($page_content['getEntertainer']->subentertainertype_ids) && in_array($subitem,$tags_array) ? 'checked' : ''}}>
                                         <label for="{{$subitem}}-subentertainertype-{{ $loop->iteration }}">{{ $subitem }}</label>
                                     </li>         
                                 @endif

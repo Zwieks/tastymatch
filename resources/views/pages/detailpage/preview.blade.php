@@ -16,17 +16,17 @@
             <div class="content">
                <p>{!! html_entity_decode($page_content['getContact']['content']) !!}</p>
                <ul class="velden contact-list">
-               		@if($page_content['getContact']['phone'] != '')
+               		@if(isset($page_content['getContact']['phone']) && $page_content['getContact']['phone'] != '')
                			<li data-icon="V">
                				<a href="tel:{{$page_content['getContact']['phone']}}">{{$page_content['getContact']['phone']}}</a>
                			</li>
                		@endif	
-               		@if($page_content['getContact']['email'] != '')
+               		@if(isset($page_content['getContact']['email']) && $page_content['getContact']['email'] != '')
                			<li data-icon="e">
                				<a href="mailto:{{$page_content['getContact']['email']}}">{{$page_content['getContact']['email']}}</a>
                			</li>
                		@endif	    
-               		@if($page_content['getContact']['site'] != '')
+               		@if(isset($page_content['getContact']['site']) && $page_content['getContact']['site'] != '')
                			<li data-icon="3">
                				<a href="{{$page_content['getContact']['site']}}" target="_blank">{{$page_content['getContact']['site']}}</a>
                			</li>
@@ -34,27 +34,27 @@
                </ul>
 
                 <ul class="velden socialmedia-list">
-               		@if($page_content['getContact']['facebook'] != '')
+               		@if(isset($page_content['getContact']['facebook']) && $page_content['getContact']['facebook'] != '')
                			<li>
                				<a data-icon="f" href="{{$page_content['getContact']['facebook']}}" target="_blank"></a>
                			</li>
                		@endif	
-               		@if($page_content['getContact']['twitter'] != '')
+               		@if(isset($page_content['getContact']['twitter']) && $page_content['getContact']['twitter'] != '')
                			<li>
                				<a data-icon="l" href="{{$page_content['getContact']['twitter']}}" target="_blank"></a>
                			</li>
                		@endif	    
-               		@if($page_content['getContact']['linkedin'] != '')
+               		@if(isset($page_content['getContact']['linkedin']) && $page_content['getContact']['linkedin'] != '')
                			<li>
                				<a data-icon="g" href="{{$page_content['getContact']['linkedin']}}" target="_blank"></a>
                			</li>
                		@endif	  
-               		@if($page_content['getContact']['instagram'] != '')
+               		@if(isset($page_content['getContact']['instagram']) && $page_content['getContact']['instagram'] != '')
                			<li>
                				<a data-icon="4" href="{{$page_content['getContact']['instagram']}}" target="_blank"></a>
                			</li>
                		@endif	  
-               		@if($page_content['getContact']['googleplus'] != '')
+               		@if(isset($page_content['getContact']['googleplus']) && $page_content['getContact']['googleplus'] != '')
                			<li>
                				<a data-icon="q" href="{{$page_content['getContact']['googleplus']}}" target="_blank"></a>
                			</li>

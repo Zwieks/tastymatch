@@ -13,3 +13,7 @@ use Illuminate\Foundation\Inspiring;
 Artisan::command('inspire', function () {
 	$this->comment(Inspiring::quote());
 })->describe('Display an inspiring quote');
+
+Artisan::command('deletetempfolder', function () {
+    $this->info("Removing temp folder!");
+})->describe('Removing temp folder located in the storage');

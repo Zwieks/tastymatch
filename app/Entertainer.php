@@ -111,11 +111,13 @@ class Entertainer extends Model
 					$entertainer_types = '';
 					$subentertainer_types = '';
 					$tags = '';
+					$category = '';
 
 					foreach ($value['form'] as $key => $item) {
 						if(isset($item['entertainer_type'])){
 							$entertainer_types = $entertainer_types.','.$item['entertainer_type'];
 							$tags = $tags.','.trans('entertainertypes.type-'.$item['entertainer_type'].'.label');
+							$category = $category.','.trans('entertainertypes.type-'.$item['entertainer_type'].'.label');
 						}
 
 						if(isset($item['subentertainer_type'])){
@@ -124,7 +126,7 @@ class Entertainer extends Model
 						    foreach ($array as $parentIndex => $parentValue) {
 						        foreach ($parentValue as $index => $value) {
 						            if ($value == $item['subentertainer_type']) {
-						            	$subentertainer_types = $subentertainer_types.','.substr($index, -1);;
+						            	$subentertainer_types = $subentertainer_types.','.substr($parentIndex, -1).'-'.substr($index, -1);
 						               	$tags = $tags.','.trans('entertainertypes.'.$parentIndex.'.'.$index);
 						            }
 						        }
@@ -135,10 +137,10 @@ class Entertainer extends Model
 					$foodstandInfo['info']['entertainer_types'] = trim($entertainer_types, ",");
 					$foodstandInfo['info']['subentertainer_types'] = trim($subentertainer_types, ",");
 					$foodstandInfo['info']['tags'] = trim($tags, ",");
+					$foodstandInfo['info']['category'] = trim($category, ",");
 				}
 			}	
 		}
-
 		return $foodstandInfo;
 	}
 
@@ -175,6 +177,12 @@ class Entertainer extends Model
 		if(isset($info['tags']) && $info['tags'] != '')
 			$Entertainer->tags = $info['tags'];
 
+		if(isset($info['category']) && $info['category'] != '')
+			$Entertainer->categories = $info['category'];
+
+		if(isset($info['subentertainer_types']) && $info['subentertainer_types'] != '')
+			$Entertainer->subentertainertype_ids = $info['subentertainer_types'];
+
 		$Entertainer->save();
 
 		return $Entertainer->id;		
@@ -206,6 +214,12 @@ class Entertainer extends Model
 		if(!isset($data['info']['tags']))
 			$data['info']['tags'] = '';
 
+		if(!isset($data['info']['category']))
+			$data['info']['category'] = '';
+
+		if(!isset($data['info']['subentertainer_types']))
+			$data['info']['subentertainer_types'] = '';
+
 		DB::table('entertainers')
 	    	->where('id', $entertainer_id)
 	    	->update([
@@ -216,7 +230,9 @@ class Entertainer extends Model
 	    		'lat' => $data['info']['lat'],
 	    		'keywords' => $data['info']['keywords'],
 	    		'entertainertype_ids' => $data['info']['entertainer_types'],
-	    		'tags' => $data['info']['tags']
+	    		'tags' => $data['info']['tags'],
+	    		'categories' => $data['info']['category'],
+	    		'subentertainertype_ids' => $data['info']['subentertainer_types']
 	    	]);
 	}
 }

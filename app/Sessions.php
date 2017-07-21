@@ -20,6 +20,13 @@ class Sessions extends Model
         return true;
     }
 
+    public static function setPreviewPageSession(Request $request, $cache_id, $data){
+        //Set the Session
+        $request->session()->put($cache_id, $data);
+
+        return true;
+    }    
+
 	//When the user has been on the Blog detailpage the session will be set to affoid multple view counts in the database
 	//Session is set in the Blog Controller
     public static function setSingleBlogSession(Request $request, $slug){

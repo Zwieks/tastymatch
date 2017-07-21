@@ -41,6 +41,33 @@ class Detailpage extends Model
 	    return $result;        
 	}
 
+
+	public static function PreviewComponentData($data){
+		$eventInfo = [];
+
+		foreach ($data['jsondata'] as $key => $value) {
+			if(isset($value['componentId'])){
+				$pieces = explode("-", $value['componentId']);
+				$type = $pieces[1];
+
+				$eventInfo['get'.ucwords($type)] = $value;
+			}
+
+			if(isset($value['form'])){
+				foreach ($value['form'] as $form_key => $form_value) {
+					foreach ($form_value as $keyitem => $item) {
+						if($keyitem === 'title')
+							$keyitem = 'name';
+
+						$eventInfo['get'.ucwords($type)][$keyitem] = $item;
+					}
+				}
+			}
+		}
+
+		return $eventInfo;
+	}	
+
 	/**
 	 * Get all the CONTACT components of the detailpages
 	 */
@@ -110,6 +137,14 @@ class Detailpage extends Model
 		Detailpage_User::store($userid, $detailpage_id);
 
 		return $detailpage_id;
+	}
+
+	/**
+	 * Create content for the preview page
+	 * possilbe returns: View
+	 */
+	public static function previewPage($data,$type){
+		
 	}
 
 	/**
