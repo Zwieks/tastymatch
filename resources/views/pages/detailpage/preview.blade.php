@@ -14,7 +14,9 @@
             <h2>{{ Lang::get('tinymce.detailpage-foodstand-contact-intro')  }}</h2>
 
             <div class="content">
-               <p>{!! html_entity_decode($page_content['getContact']['content']) !!}</p>
+                @if(isset($page_content['getContact']['content']) && $page_content['getContact']['content'] != '')
+                  <p>{!! html_entity_decode($page_content['getContact']['content']) !!}</p>
+                @endif  
                <ul class="velden contact-list">
                		@if(isset($page_content['getContact']['phone']) && $page_content['getContact']['phone'] != '')
                			<li data-icon="V">
@@ -70,16 +72,17 @@
         @include($detail)
     </div>
 </div>  
-
+{{dd($page_content)}}
 <div class="component-wrapper mediaitems-wrapper">
-    @foreach($page_content['getMediaItems'] as $key => $item)
-      @if($item['image'] != '' || $item['content'] != '' || $item['video'] != '')
-        @include('layouts.templates.mediaitem', array('data'=> $item ))
-      @endif  
-    @endforeach
+  @if(isset($page_content['getMediaitems']) && $page_content['getMediaitems'] != '')
+      @foreach($page_content['getMediaitems'] as $key => $item)
+        @if((isset($item['image']) && $item['image'] != '') || (isset($item['content']) && $item['content'] != '') || (isset($item['video']) && $item['video'] != ''))
+          @include('layouts.templates.mediaitem', array('data'=> $item ))
+        @endif  
+      @endforeach
+  @endif
 </div>
-
 {{--Render GoogleMaps --}}
-@if(isset($page_content['agenda'][0]) || $page_content['type'] === 'event')
+@if(isset($page_content['agenda'][0]) || $item_type === 'event')
   @include($googlemaps)
 @endif  

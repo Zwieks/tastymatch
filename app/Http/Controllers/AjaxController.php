@@ -31,6 +31,7 @@ use App\ComponentMediaitem_User;
 
 use App\User;
 use App\Sessions;
+use App\Images;
 
 class AjaxController extends Controller
 {
@@ -217,6 +218,8 @@ class AjaxController extends Controller
 
                 //Preview the page
                 return response()->json(array('cache_id' => $cache_id,'type' => $type,'preview' => true,'success' => false, 'content' => json_encode($content)));
+            }else{
+                Images::moveImagesTempToUpload($request);
             }
 
             //Update the state of the detailpage and add the type

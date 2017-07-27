@@ -101,9 +101,7 @@ Route::group(['middleware' => 'auth','middleware' => 'usersession'], function()
 	Route::post('/ajax/upload', function(){
 		return json_encode(request()->file('photos')->storeAs('public/uploads/' . auth()->id(), request()->name));
 	});
-	Route::post('/ajax/temp', function(){
-		return json_encode(request()->file('photos')->storeAs('public/uploads/temp/' . auth()->id(), request()->name));
-	});
+	Route::post('/ajax/temp', 'imagesController@previewUpload');
 	//Add MEDIAITEM
 	Route::post('/ajax/addMediaItem', 'AjaxController@AddMediaItem');
 	//Save MEDIA components

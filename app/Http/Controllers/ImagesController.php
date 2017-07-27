@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Images;
+use Storage;
 
 use Illuminate\Http\Request;
 
@@ -110,5 +111,10 @@ class ImagesController extends Controller
     public function upload(Request $request)
     {
         return false;
+    }
+
+    public function previewUpload(Request $request){
+        //Images::deleteUserTempImages($request);
+        return json_encode(request()->file('photos')->storeAs('public/uploads/temp/' . auth()->id(), request()->name));
     }
 }

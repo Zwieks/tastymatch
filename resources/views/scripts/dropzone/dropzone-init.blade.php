@@ -5,11 +5,25 @@
 
     //Remove item from upload list in array
     function removeItem(file){
-        for (var i = 0; i < dropZoneObjects.length; i++){
-            if(dropZoneObjects[i].name == file.name){
-               dropZoneObjects.splice(dropZoneObjects[i-1], 1);
+        if (typeof dropZoneObjects != "undefined" && typeof dropZoneObjects == "object") {
+            for(var prop in dropZoneObjects) {
+                if (dropZoneObjects.hasOwnProperty(prop)) {
+                    if(dropZoneObjects[prop].name == file.randomname || dropZoneObjects[prop].name == file.name){
+                        dropZoneObjects[prop].file = '';
+
+                        var object_key = dropZoneObjects[prop].elementid,
+                            media_id = dropZoneObjects[prop].mediaid,
+                            remove_array = [];
+
+                        remove_array.push(dropZoneObjects[prop].path);
+                        remove_array.push(object_key);
+                        remove_array.push(media_id);
+
+                        $.fn.Global.DELETE_IMAGES.push(remove_array);
+                    }
+                }
             }
-        }   
+        }     
     }
 
     function objectLength(obj) {
@@ -73,6 +87,8 @@
                         myObject.name = file.name;
                         myObject.file = $.fn.myDropzoneTheFirst;
                         myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
+
+                        file.randomname = myObject.randomname;
 
                         dropZoneObjects['component-headerimage'] = myObject;
                     });

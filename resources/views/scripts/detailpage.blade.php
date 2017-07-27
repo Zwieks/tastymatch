@@ -9,6 +9,10 @@
         DELETE_COMPONENTS : []
     };
 
+    if($.fn.Global.DELETE_IMAGES.length != 0){
+        $.fn.Global.DELETE_IMAGE = [];
+    }
+
     /**
      * Update agenda item in the Global save object
      * @param NYS
@@ -343,7 +347,11 @@
             @endif 
 
             userObject['pageid'] = $('input[name=pageid]').val();
-            var newWindow = window.open('/', '_blank');
+
+            if(save === 'preview'){
+                var newWindow = window.open('/', '_blank');
+            }
+
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
@@ -678,9 +686,10 @@
             })
             .done(function(data) {
                 var drop_id = 'DropzoneElementId'+data.id,
-                        mce_id = '#tinyMceElementId'+data.id,
-                        mce_video_id = '#tinyMceVideoElementId'+data.id;
-                $.fn.myDropzoneThethird = new Dropzone(
+                    mce_id = '#tinyMceElementId'+data.id,
+                    mce_video_id = '#tinyMceVideoElementId'+data.id;
+
+                $.fn['myDropzoneThethird'+data.id] = new Dropzone(
                     '#'+drop_id, //id of drop zone element 2
                     {
                         paramName: 'photos',
@@ -719,8 +728,10 @@
                                 myObject.num = count;
                                 myObject.id = id;
                                 myObject.name = file.name;
-                                myObject.file = $.fn.myDropzoneThethird;
+                                myObject.file = $.fn['myDropzoneThethird'+data.id];
                                 myObject.randomname = random+'.'+file.type.split('/').pop();
+
+                                file.randomname = myObject.randomname;
 
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
                             });
@@ -728,7 +739,6 @@
                             this.on("success", function(file, response){
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
                                 dropZoneObjects['component-mediaitems-'+count].name =  myObject.randomname;
-
                             });
 
                             this.on("removedfile", function(file) {
@@ -875,6 +885,9 @@
             });
 
             //Get the DROPZONE files en put them in the object
+            var previewCount = 0;
+            var previewCountsib = 1;
+            var tempUpload = false;
             for(var key in dropZoneObjects) {
                 // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively
                 if(key in $.fn.Global.SAVE_COMPONENTS){
@@ -883,14 +896,27 @@
 
                 $.fn.Global.SAVE_COMPONENTS[key] = dropZoneObjects[key];
 
+                @if(!is_null(Session::get('user.global.id')))
+                    var session = {{ Session::get('user.global.id') }};
+                @else
+                     var session = userObject['userid'] = '';
+                @endif 
+
                 //Set image path
-                if($.fn.Global.SAVE_COMPONENTS[key].randomname != '' && typeof $.fn.Global.SAVE_COMPONENTS[key].randomname != 'undefined'){
-                    @if(!is_null(Session::get('user.global.id')))
-                        var session = {{ Session::get('user.global.id') }};
-                    @else
-                         var session = userObject['userid'] = '';
-                    @endif 
+                if($.fn.Global.SAVE_COMPONENTS[key].randomname != '' && typeof $.fn.Global.SAVE_COMPONENTS[key].randomname != 'undefined' && object.attr("data-save") != 'preview'){
                     $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+session+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
+                    $.fn.Global.SAVE_COMPONENTS[key].uploadtype = 'save';
+
+                }else if($.fn.Global.SAVE_COMPONENTS[key].randomname != '' && typeof $.fn.Global.SAVE_COMPONENTS[key].randomname != 'undefined' && object.attr("data-save") === 'preview'){
+
+                    if($.fn.Global.SAVE_COMPONENTS[key].file != 'uploaded'){
+                        $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/temp/'+session+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
+                    }else{
+                        $.fn.Global.SAVE_COMPONENTS[key].path = 'uploads/'+session+'/'+$.fn.Global.SAVE_COMPONENTS[key].randomname;
+                    }
+
+                    $.fn.Global.SAVE_COMPONENTS[key].uploadtype = 'preview';
+
                 }else{
                     $.fn.Global.SAVE_COMPONENTS[key].path = '';
                     //Add the remove item to tell this image have to be removed
@@ -899,12 +925,33 @@
                 //Upload the image or add the path to delete array
                 if(typeof dropZoneObjects[key].file != 'undefined' && dropZoneObjects[key].file != '' && dropZoneObjects[key].file != 'uploaded'){
                     if(object.attr("data-save") === 'preview'){
-                        $.fn.myDropzoneTheFirst.options.url = "/ajax/temp";   
+                        var uploadUrl = '/ajax/temp';
+                    }else{
+                        var uploadUrl = '/ajax/upload';
+                    }
+
+                    if(typeof $.fn.myDropzoneTheFirst != 'undefined' && $.fn.myDropzoneTheFirst !== null){
+                        $.fn.myDropzoneTheFirst.options.url = uploadUrl;
+                    }
+
+                    if(typeof($.fn['myDropzone' + previewCount]) != "undefined" && $.fn['myDropzone' + previewCount] !== null){
+                        $.fn['myDropzone' + previewCount].options.url = uploadUrl;
+                        previewCount++;
+                    }  
+
+                    if(typeof $.fn.myDropzoneEmpty != 'undefined' && $.fn.myDropzoneEmpty !== null){
+                        $.fn.myDropzoneEmpty.options.url = uploadUrl;
+                    }
+
+                    if(typeof $.fn['myDropzoneThethird' + previewCountsib] != 'undefined' && $.fn['myDropzoneThethird' + previewCountsib] !== null){
+                        $.fn['myDropzoneThethird' + previewCountsib].options.url = uploadUrl;
+                        previewCountsib++;
                     }
 
                     dropZoneObjects[key].file.processQueue();
                 }
-                else if(dropZoneObjects[key].file === ''){
+
+                if(dropZoneObjects[key].file === ''){
                     var object_key = dropZoneObjects[key].elementid,
                         media_id = dropZoneObjects[key].mediaid,
                         remove_array = [];
@@ -915,6 +962,8 @@
                     //Delete image file inside the folder by add the name inside the delete_image array
                     $.fn.Global.DELETE_IMAGES.push(remove_array);
                 }
+
+                console.log($.fn.Global.DELETE_IMAGES);
             }
 
 
@@ -1001,19 +1050,21 @@
             if(objectLength($.fn.Global.SAVE_COMPONENTS) > 0){
                 saveMediaComponents($.fn.Global.SAVE_COMPONENTS, object);
 
-                //Remove components if the file is empty
-                if($.fn.Global.DELETE_COMPONENTS.length > 0){
-                    deleteComponents();
-                }
+                if(object.attr("data-save") != 'preview'){
+                    //Remove components if the file is empty
+                    if($.fn.Global.DELETE_COMPONENTS.length > 0){
+                        deleteComponents();
+                    }
 
-                //Remove images
-                if($.fn.Global.DELETE_IMAGES.length > 0){
-                    deleteImages();
-                }
+                    //Remove images
+                    if($.fn.Global.DELETE_IMAGES.length > 0){
+                        deleteImages();
+                    }
 
-                //Remove agenda items
-                if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
-                    deleteAgendaItems();
+                    //Remove agenda items
+                    if($.fn.Global.DELETE_AGENDA_ITEMS.length > 0){
+                        deleteAgendaItems();
+                    }
                 }
             }
         });

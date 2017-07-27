@@ -50,7 +50,20 @@ class Detailpage extends Model
 				$pieces = explode("-", $value['componentId']);
 				$type = $pieces[1];
 
-				$eventInfo['get'.ucwords($type)] = $value;
+				if($type != 'mediaitems'){
+					$eventInfo['get'.ucwords($type)] = $value;
+				}
+			}
+
+			if(isset($value['elementid'])){
+				$pieces = explode("-", $value['elementid']);
+				$type = $pieces[1];
+
+				if(count($pieces) > 2 && $type === 'mediaitems'){
+					$eventInfo['get'.ucwords($type).$pieces[2]] = $value;
+				}else{
+					$eventInfo['get'.ucwords($type)] = $value;
+				}
 			}
 
 			if(isset($value['form'])){

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\globalinfo;
 
 use File;
+use Storage;
 
 class Images extends Model
 {
@@ -67,9 +68,7 @@ class Images extends Model
 
 		//Loop through the array containing the url of the images that will be deleted
 		foreach ($data['jsondata'] as $image_item) {
-
-			$path = storage_path() . $image_item[0];
-
+			$path = storage_path() .'/app/public/'. $image_item[0];
 			//Check if image exist
 			if(file_exists($path)) {
 				//Delete the image from the folder
@@ -82,4 +81,33 @@ class Images extends Model
 			}
 		}
 	}
+
+	public static function moveImagesTempToUpload($request){
+        $from = 'public/uploads/temp/'. auth()->id().'/';
+        $to = 'public/uploads/'. auth()->id().'/';
+
+		$files = Storage::allFiles($from);
+
+		if(!empty($files)){
+			$allFiles = Storage::allFiles($from);
+
+			foreach ($allFiles as $key => $file) {
+				$tmp = explode('/', $file);
+				$file = end($tmp);
+				# code...
+				Storage::move($from.$file, $to.$file);
+			}
+        }
+        	
+        Images::deleteUserTempImages($request);
+    }
+
+	public static function deleteUserTempImages($request){
+        $directory = 'public/uploads/temp/'. auth()->id().'/';
+        $files = Storage::allFiles($directory);
+
+        if(!empty($files)){
+            Storage::deleteDirectory($directory);
+        }
+    }
 }
