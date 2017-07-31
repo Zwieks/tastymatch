@@ -362,6 +362,8 @@
                     if(data.success == true) {
                         //Put the results in de container
                         if(jQuery.parseJSON(data.mediaComponents).length > 0){
+                            console.log('hallo');
+                            console.log('Data is: '+data.mediaComponents);
                             setDataAtributeMediaItems(jQuery.parseJSON(data.mediaComponents));
                         }
                         //Update the new create agenda items data attributes
@@ -459,7 +461,8 @@
 
             //Remove TINYMCE video
             tinymce.remove('#'+video_element);
-
+console.log('456');
+console.log('Data media: '+object.parent().attr('data-media'));
             //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
             if(object.parent().attr('data-media').length > 0){
@@ -470,10 +473,13 @@
                     remove_array.push(dropZoneObjects[object_key].path);
                     dropZoneObjects[object_key].file = '';
                 }
-                    
+
+                $.fn.Global.DELETE_COMPONENTS.push(remove_array);
+            }else{
                 $.fn.Global.DELETE_COMPONENTS.push(remove_array);
             }
-
+console.log('123');
+console.log($.fn.Global.DELETE_COMPONENTS);
             //Remove the object from the HTML
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
@@ -721,19 +727,41 @@
 
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
-                                var suffix = id.match(/\d+/);
-                                var random = (new Date).getTime();
-                                count = suffix[0];
+                                count = objectLength(dropZoneObjects)-1;
+
+                                //Add the image to the delete array on change
+
+                                                                    console.log('jaja');
+                                    console.log('tratra');
+                                    var object_key = myObject.elementid,
+                                        media_id = myObject.mediaid,
+                                        remove_array = [];
+
+                                    remove_array.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+myObject.name);
+                                    remove_array.push(object_key);
+                                    remove_array.push(media_id);
+
+                                    //Add the image to a global variable
+                                    $.fn.Global.DELETE_IMAGES.push(remove_array);
+
+                                    //Add the update class on the parent media element
+                                    var parent_object = $('#'+id).closest('.media');
+                                    if(parent_object.attr('data-media') != ''){
+                                        parent_object.attr('data-status','updated');
+                                    } 
+                                
 
                                 myObject.num = count;
                                 myObject.id = id;
                                 myObject.name = file.name;
                                 myObject.file = $.fn['myDropzoneThethird'+data.id];
-                                myObject.randomname = random+'.'+file.type.split('/').pop();
+                                myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
 
                                 file.randomname = myObject.randomname;
 
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
+                                console.log(dropZoneObjects['component-mediaitems-'+count]);
+                                console.log('end');
                             });
 
                             this.on("success", function(file, response){
@@ -742,11 +770,16 @@
                             });
 
                             this.on("removedfile", function(file) {
+                                console.log('removedfile');
+                                console.log(file);
                                 removeItem(file);
                                 myObject.file = '';
                                 myObject.path = '';
                                 myObject.randomname = '';
                             });
+
+
+                            //Check there is already an image uploaded
                         }
                     }
                 );
@@ -889,7 +922,7 @@
             var previewCountsib = 1;
             var tempUpload = false;
             for(var key in dropZoneObjects) {
-                // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively
+                // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively            
                 if(key in $.fn.Global.SAVE_COMPONENTS){
                     $.extend( true, dropZoneObjects, $.fn.Global.SAVE_COMPONENTS);
                 }
@@ -950,20 +983,19 @@
 
                     dropZoneObjects[key].file.processQueue();
                 }
-
+console.log('testrewr');
+                console.log(dropZoneObjects[key]);
                 if(dropZoneObjects[key].file === ''){
                     var object_key = dropZoneObjects[key].elementid,
                         media_id = dropZoneObjects[key].mediaid,
                         remove_array = [];
 
-                    remove_array.push('/app/public/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
+                    remove_array.push('/uploads/'+'{{ Session::get('user.global.id') }}/'+dropZoneObjects[key].name);
                     remove_array.push(object_key);
                     remove_array.push(media_id);
                     //Delete image file inside the folder by add the name inside the delete_image array
                     $.fn.Global.DELETE_IMAGES.push(remove_array);
                 }
-
-                console.log($.fn.Global.DELETE_IMAGES);
             }
 
 

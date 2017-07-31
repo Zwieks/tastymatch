@@ -20,6 +20,7 @@
                         remove_array.push(media_id);
 
                         $.fn.Global.DELETE_IMAGES.push(remove_array);
+                        console.log($.fn.Global.DELETE_IMAGES);
                     }
                 }
             }
