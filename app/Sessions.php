@@ -22,7 +22,7 @@ class Sessions extends Model
 
     public static function setPreviewPageSession(Request $request, $cache_id, $data){
         //Set the Session
-        $request->session()->put($cache_id, $data);
+        $request->session()->flash($cache_id, $data);
 
         return true;
     }    

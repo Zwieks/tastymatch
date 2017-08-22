@@ -2,46 +2,46 @@
 <div class="content product-wrapper details detailpage-items">
     <h2>{{ Lang::get('detailpage.event-additinaldetails') }}</h2>
 
-	@if( isset($page_content['getEvent']->location))
+	@if( isset($page_content['getLocationdetails']['eventlocation']))
 	    <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.eventlocation') }}</h3>
 	    	<div>
-	    		{{ $page_content['getEvent']->location }}
+	    		{{ $page_content['getLocationdetails']['eventlocation']}}
 	    	</div>
 	    </section>
 	@endif 
 
-	@if( isset($page_content['getEvent']->type_id))
+	@if( isset($page_content['getAdditionalinfo']['type']))
 	    <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.eventtype') }}</h3>
 	    	<div>
-	    		{{ Lang::get('eventtypes.type-'.$page_content['getEvent']->type_id) }}
+	    		{{ Lang::get('eventtypes.type-'.$page_content['getAdditionalinfo']['type']) }}
 	    	</div>
 	    </section>
 	@endif 
 
-	@if( isset($page_content['getEvent']->time_start) || isset($page_content['getEvent']->time_end))
+	@if( isset($page_content['getAdditionalinfo']['eventdatestart']) || isset($page_content['getAdditionalinfo']['eventdateend']))
 	    <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.eventdate') }}</h3>
 	    	<div>
-	    		@if( isset($page_content['getEvent']->time_start))
-	    			<span>{{ Carbon\Carbon::parse($page_content['getEvent']->time_start)->format('d M Y') }}</span>
+	    		@if( isset($page_content['getAdditionalinfo']['eventdatestart']))
+	    			<span>{{ Carbon\Carbon::parse($page_content['getAdditionalinfo']['eventdatestart'])->format('d M Y') }}</span>
 	    		@endif
 
-	     		@if( isset($page_content['getEvent']->time_end) )
+	     		@if( isset($page_content['getAdditionalinfo']['eventdateend']) )
 	     			<span> {{ Lang::get('forms.form-separator-to') }} </span>
-	    			<span>{{ Carbon\Carbon::parse($page_content['getEvent']->time_end)->format('d M Y') }}</span>
+	    			<span>{{ Carbon\Carbon::parse($page_content['getAdditionalinfo']['eventdateend'])->format('d M Y') }}</span>
 	    		@endif
 	    	</div>
 	    </section>
 	@endif 
 
-	@if( isset($page_content['getEvent']->visitors_indication) )
+	@if( isset($page_content['getAdditionalinfo']['filter_visitors']) )
 	    <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.visitorscount-label') }}</h3>
 	    	<div>
-	    		@if( isset($page_content['getEvent']->visitors_indication))
-	    			<span>{{$page_content['getEvent']->visitors_indication}}</span>
+	    		@if( isset($page_content['getAdditionalinfo']['filter_visitors']))
+	    			<span>{{$page_content['getAdditionalinfo']['filter_visitors']}}</span>
 	    		@endif
 	    	</div>
 	    </section>

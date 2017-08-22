@@ -80,12 +80,15 @@ class DetailPageController extends Controller
     {
         //Get the preview page content
         $page_content = json_decode($request->session()->get($cache_id), true);
+        
+        //Get the user information
+        $userid = $request->session()->get('user.global.id');
 
         //Return the view
         if(empty($page_content)){
-            return view('errors.404');
+            return view('auth.detailpages.preview', compact('userid','page_content','item_type','cache_id'));
         }else{
-            return view('auth.detailpages.preview', compact('page_content','item_type','cache_id'));
+            return view('auth.detailpages.preview', compact('userid','page_content','item_type','cache_id'));
         }
     }
 

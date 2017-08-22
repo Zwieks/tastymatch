@@ -2,10 +2,10 @@
 <div class="content product-wrapper details detailpage-items">
     <h2>{{ Lang::get('detailpage.entertainer-additinaldetails') }}</h2>
 
-    @if(isset($page_content['getEntertainer']->entertainertype_ids))
+    @if(isset($page_content['info']['entertainer_types']))
      	@php ($types = Lang::get('entertainertypes'))
-     	@php ($entertainertypes_array = explode(',',$page_content['getEntertainer']->entertainertype_ids))
-        @php ($tags_array = explode(',',$page_content['getEntertainer']->tags))
+     	@php ($entertainertypes_array = explode(',',$page_content['info']['entertainer_types']))
+        @php ($tags_array = explode(',',$page_content['info']['tags']))
 
         <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.entertainertags-label') }}</h3>

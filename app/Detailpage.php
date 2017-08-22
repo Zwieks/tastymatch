@@ -164,10 +164,10 @@ class Detailpage extends Model
 	 * Update the state of the detailpage
 	 * possilbe returns: new, preview, published
 	 */
-	public static function updateState($state,$detailpage_id,$type){
+	public static function updateState($state,$detailpage_id,$type,$view_state){
 		DB::table('detailpages')
 			->where('id', $detailpage_id)
-			->update(['state' => $state, 'type' => $type]);
+			->update(['state' => $state, 'type' => $type, 'public' => $view_state]);
 	}
 
 	static function CheckAlreadyUpdated($field,$detailpage_id){
@@ -211,7 +211,7 @@ class Detailpage extends Model
 
 		$Detailpage->state = 'new';
 		$Detailpage->type = $type;
-		$Detailpage->public = 1;
+		$Detailpage->public = 0;
 
 		$Detailpage->save();
 

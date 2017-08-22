@@ -2445,6 +2445,14 @@ html .cookie-explanation button.request-cookies:before,
 .save:focus {
   color: #000;
 }
+.concept {
+  background: #f7b824;
+  color: #fff;
+}
+.concept:hover,
+.concept:focus {
+  color: #000;
+}
 .readmore {
   transition: 0.15s ease-out;
   font-weight: bold;

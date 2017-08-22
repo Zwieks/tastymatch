@@ -72,16 +72,21 @@
         @include($detail)
     </div>
 </div>  
-{{dd($page_content)}}
+
 <div class="component-wrapper mediaitems-wrapper">
-  @if(isset($page_content['getMediaitems']) && $page_content['getMediaitems'] != '')
-      @foreach($page_content['getMediaitems'] as $key => $item)
-        @if((isset($item['image']) && $item['image'] != '') || (isset($item['content']) && $item['content'] != '') || (isset($item['video']) && $item['video'] != ''))
-          @include('layouts.templates.mediaitem', array('data'=> $item ))
-        @endif  
-      @endforeach
-  @endif
+@if(isset($page_content))
+  @foreach($page_content as $key => $item)
+    @if("getMediaitems" == substr($key,0,13))
+      @if(isset($item['path']) && $item['path'] != '' ||
+        (isset($item['content']) && $item['content'] != '') ||
+        (isset($item['video']) && $item['video'] != ''))
+          @include('layouts.templates.preview-mediaitem', array('data'=> $item ))
+      @endif
+    @endif
+  @endforeach
+@endif  
 </div>
+
 {{--Render GoogleMaps --}}
 @if(isset($page_content['agenda'][0]) || $item_type === 'event')
   @include($googlemaps)

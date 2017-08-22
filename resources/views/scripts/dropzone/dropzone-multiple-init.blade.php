@@ -41,7 +41,7 @@
 
                 this.on("addedfile", function(file) {
                     var id = file.previewTemplate.previousSibling.parentElement.id;
-                    count = objectLength(dropZoneObjects);
+                    count = objectLength(dropZoneObjects)-1;
 
                     //Add the image to the delete array on change
                     if(typeof myObject.file != 'undefined'){
@@ -79,6 +79,7 @@
 
                 this.on("removedfile", function(file) { 
                     removeItem(file);
+                    console.log('hallo daar');
                     myObject.file = '';
                     myObject.path = '';
                     myObject.name = '';

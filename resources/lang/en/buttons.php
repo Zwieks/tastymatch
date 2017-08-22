@@ -4,6 +4,7 @@ return [
 	'register' => 'Free registration',
 	'search' => 'Search',
 	'save' => 'Save',
+	'concept' => 'Concept',
 	'cancel' => 'Cancel',
 	'create' => 'Create',
 	'delete' => 'Delete',

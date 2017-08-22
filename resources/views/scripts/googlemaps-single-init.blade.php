@@ -46,7 +46,12 @@
         @if(isset($page_content))
             <?php $page_content_bu = $page_content; ?>
         @endif
-        <?php $page_content = $user; ?>
+        <?php $page_content = $user;?>
+    @else
+        @if(isset($page_content))
+            <?php $user = session('user.global');?>    
+            <?php $page_content_bu = $page_content; ?>
+        @endif 
     @endif
 
     function getCityDropdown(input) {
@@ -213,11 +218,10 @@
             });
 
             if ($.fn.locations_object.length === 0) {
-                emptyMap();
+               //emptyMap();
             }
 
             createMap(map,animation,$.fn.locations_object);
-
             //Set the bounds and zoom
             setBounds();
 
@@ -244,9 +248,20 @@
                 }
             });
         }else{
-            @if(isset($page_content_bu['getEvent']))
+            @if(isset($page_content_bu['getEvent']) && $page_content_bu['getEvent']->lat != 0 && $page_content_bu['getEvent']->long != 0)
                 var lat = {{ $page_content_bu['getEvent']->lat }},
-                    long = {{ $page_content_bu['getEvent']->long }}
+                    long = {{ $page_content_bu['getEvent']->long }};
+
+                set_singleMarker(map, lat, long);
+            @endif    
+
+            @if(isset($page_content_bu['info']) && 
+                isset($page_content_bu['info']['lat']) && 
+                $page_content_bu['info']['lat'] != 0 && 
+                isset($page_content_bu['info']['long']) && 
+                $page_content_bu['info']['long'] != 0)    
+                var lat = {{ $page_content_bu['info']['lat'] }},
+                    long = {{ $page_content_bu['info']['long'] }};
 
                 set_singleMarker(map, lat, long);
             @endif
@@ -374,18 +389,15 @@
     function emptyMap(){
         var country = '{!! App::getLocale() !!}',
             location = '';
+        @if(isset($user['city']) && !empty($user['city']))
+            location = '{!! json_encode($user['city']) !!}';
+        @endif   
 
-            @if(isset($user['city']) && !empty($user['city']))
-                location = '{!! json_encode($user['city']) !!}';
-            @endif   
-
-            @if(isset($page_content_bu['getEvent']))
-                location = '{!! $page_content_bu['getEvent']->location !!}';
-            @else    
-                location = country;
-            @endif
-
-
+        @if(isset($page_content_bu['getEvent']) && $page_content_bu['getEvent']->location != '')
+            location = '{!! $page_content_bu['getEvent']->location !!}';
+        @else   
+            location = country;
+        @endif
 
         $.getJSON("https://maps.googleapis.com/maps/api/geocode/json?region="+country+"&address="+encodeURIComponent(location)+"&key={{env('GOOGLE_MAPS_KEY')}}", function(val){ 
             var locationInfo = val.results[0].geometry.location;

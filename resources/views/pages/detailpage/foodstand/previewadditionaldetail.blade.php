@@ -1,16 +1,15 @@
 <!-- {{$debugpath}} -->
 <div class="content product-wrapper details detailpage-items">
     <h2>{{ Lang::get('detailpage.foodstand-additinaldetails') }}</h2>
-
-    @if(isset($page_content['getFoodstand']->foodstandtype_ids))
+    @if(isset($page_content['getFoodstand']['foodstand_types']))
      	@php ($types = Lang::get('foodstandtypes'))
-     	@php ($foodstandtypes_array = explode(',',$page_content['getFoodstand']->foodstandtype_ids))
+     	@php ($foodstandtypes_array = explode(',',$page_content['info']['foodstand_types']))
 
         <section class="detailitem-wrapper">
 	    	<h3>{{ Lang::get('forms.foodstandtype') }}</h3>
 	    	<div class="block-items-wrapper">
                 @foreach($types as $type)
-	                @if(isset($page_content['getFoodstand']->foodstandtype_ids) && in_array($loop->iteration,$foodstandtypes_array))
+	                @if(isset($page_content['getFoodstand']['foodstand_types']) && in_array($loop->iteration,$foodstandtypes_array))
 	                	<span class="block-item">{{$type}}</span>
 	                @endif
                 @endforeach

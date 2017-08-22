@@ -181,8 +181,18 @@ class AjaxController extends Controller
             //Check if the page is a preview/concept or normal
             if(isset($data['saveType'])){
                 $save_type = $data['saveType'];
+
+                if($save_type === 'concept'){
+                    $view_state = 0;
+                    $page_state = 'concept';
+                }else{
+                    $view_state = 1;
+                    $page_state = 'public';
+                }
             }else{
                 $save_type = '';
+                $page_state = 'concept';
+                $view_state = 0;
             }
 
             //TYPE of the page based on Foodstand, Event or Entertainer
@@ -194,8 +204,8 @@ class AjaxController extends Controller
             if($save_type != '' && $save_type === 'preview'){
                 //Create session and get the id
                 $cache_id = str_random(20);
-                $form_data = '';
                 $component_data = '';
+                $form_data = '';
                 $content = [];
 
                 if($type === 'event'){
@@ -215,15 +225,18 @@ class AjaxController extends Controller
 
                 //Create new cache
                 Sessions::setPreviewPageSession($request, $cache_id, json_encode($content));
+                if(session()->exists($cache_id)){
+                    //Preview the page
+                    return response()->json(array('userid' => $userid, 'cache_id' => $cache_id,'type' => $type,'preview' => true,'success' => false, 'content' => $request->session()->get($cache_id, 'default')));
+                }else{
 
-                //Preview the page
-                return response()->json(array('cache_id' => $cache_id,'type' => $type,'preview' => true,'success' => false, 'content' => json_encode($content)));
+                }  
             }else{
                 Images::moveImagesTempToUpload($request);
             }
 
             //Update the state of the detailpage and add the type
-            Detailpage::updateState('preview',$detailpage_id, $type);
+            Detailpage::updateState($page_state,$detailpage_id, $type, $view_state);
 
             //Check if this is REALY an update
             $pageid = Detailpage::CheckAlreadyUpdated('id',$detailpage_id);

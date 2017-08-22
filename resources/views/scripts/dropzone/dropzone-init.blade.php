@@ -20,7 +20,6 @@
                         remove_array.push(media_id);
 
                         $.fn.Global.DELETE_IMAGES.push(remove_array);
-                        console.log($.fn.Global.DELETE_IMAGES);
                     }
                 }
             }
@@ -75,7 +74,7 @@
 
                     this.on("addedfile", function(file) { 
                         var id = file.previewTemplate.previousSibling.parentElement.id;
-                        count = objectLength(dropZoneObjects);
+                        count = objectLength(dropZoneObjects)-1;
 
                         //Add the image to the delete array on change
                         if(typeof myObject.file != 'undefined'){

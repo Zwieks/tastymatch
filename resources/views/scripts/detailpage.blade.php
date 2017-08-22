@@ -362,8 +362,6 @@
                     if(data.success == true) {
                         //Put the results in de container
                         if(jQuery.parseJSON(data.mediaComponents).length > 0){
-                            console.log('hallo');
-                            console.log('Data is: '+data.mediaComponents);
                             setDataAtributeMediaItems(jQuery.parseJSON(data.mediaComponents));
                         }
                         //Update the new create agenda items data attributes
@@ -461,8 +459,6 @@
 
             //Remove TINYMCE video
             tinymce.remove('#'+video_element);
-console.log('456');
-console.log('Data media: '+object.parent().attr('data-media'));
             //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
             if(object.parent().attr('data-media').length > 0){
@@ -474,12 +470,20 @@ console.log('Data media: '+object.parent().attr('data-media'));
                     dropZoneObjects[object_key].file = '';
                 }
 
+                for(var key in dropZoneObjects) {       
+                    if(remove_array[1] == key) {
+                        //Add the image to a global variable
+                        $.fn.Global.DELETE_IMAGES.push(remove_array);
+                        
+                        delete dropZoneObjects[key];
+
+                    }
+                } 
                 $.fn.Global.DELETE_COMPONENTS.push(remove_array);
             }else{
-                $.fn.Global.DELETE_COMPONENTS.push(remove_array);
+                delete dropZoneObjects[object_key];
             }
-console.log('123');
-console.log($.fn.Global.DELETE_COMPONENTS);
+
             //Remove the object from the HTML
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
@@ -670,6 +674,16 @@ console.log($.fn.Global.DELETE_COMPONENTS);
             return formData;
         }
 
+        function createRandomString() {
+          var text = "";
+          var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+          for (var i = 0; i < 30; i++)
+            text += possible.charAt(Math.floor(Math.random() * possible.length));
+
+          return text;
+        }
+
         function addMediaItem() {
 
             var formData = {
@@ -730,9 +744,6 @@ console.log($.fn.Global.DELETE_COMPONENTS);
                                 count = objectLength(dropZoneObjects)-1;
 
                                 //Add the image to the delete array on change
-
-                                                                    console.log('jaja');
-                                    console.log('tratra');
                                     var object_key = myObject.elementid,
                                         media_id = myObject.mediaid,
                                         remove_array = [];
@@ -749,19 +760,16 @@ console.log($.fn.Global.DELETE_COMPONENTS);
                                     if(parent_object.attr('data-media') != ''){
                                         parent_object.attr('data-status','updated');
                                     } 
-                                
-
+                            
                                 myObject.num = count;
                                 myObject.id = id;
                                 myObject.name = file.name;
                                 myObject.file = $.fn['myDropzoneThethird'+data.id];
-                                myObject.randomname = '{!! str_random(30) !!}'+'.'+file.type.split('/').pop();
+                                myObject.randomname = createRandomString()+'.'+file.type.split('/').pop();
 
                                 file.randomname = myObject.randomname;
 
                                 dropZoneObjects['component-mediaitems-'+count] = myObject;
-                                console.log(dropZoneObjects['component-mediaitems-'+count]);
-                                console.log('end');
                             });
 
                             this.on("success", function(file, response){
@@ -770,12 +778,13 @@ console.log($.fn.Global.DELETE_COMPONENTS);
                             });
 
                             this.on("removedfile", function(file) {
-                                console.log('removedfile');
-                                console.log(file);
                                 removeItem(file);
                                 myObject.file = '';
                                 myObject.path = '';
                                 myObject.randomname = '';
+                                var key = $('#'+this['element'].id).closest('.media').attr('id');
+
+                                delete dropZoneObjects[key];
                             });
 
 
@@ -921,6 +930,7 @@ console.log($.fn.Global.DELETE_COMPONENTS);
             var previewCount = 0;
             var previewCountsib = 1;
             var tempUpload = false;
+
             for(var key in dropZoneObjects) {
                 // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively            
                 if(key in $.fn.Global.SAVE_COMPONENTS){
@@ -983,8 +993,7 @@ console.log($.fn.Global.DELETE_COMPONENTS);
 
                     dropZoneObjects[key].file.processQueue();
                 }
-console.log('testrewr');
-                console.log(dropZoneObjects[key]);
+
                 if(dropZoneObjects[key].file === ''){
                     var object_key = dropZoneObjects[key].elementid,
                         media_id = dropZoneObjects[key].mediaid,

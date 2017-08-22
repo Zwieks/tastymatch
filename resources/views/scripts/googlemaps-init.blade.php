@@ -121,7 +121,7 @@
             });
 
             //Count the description string and truncate when it is to long
-            if(locations[i][0].length < 100){
+            if(typeof locations[i][0] != 'undefined' && locations[i][0].length < 100){
                 var description = locations[i][0];
             }else{
                 var description = locations[i][0].substring(0,100)+'...';
