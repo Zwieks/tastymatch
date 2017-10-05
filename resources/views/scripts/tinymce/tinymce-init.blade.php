@@ -146,6 +146,11 @@
                 ContentCheck.setupDefault(ed,placeholderText,tag,tag_empty,ContentCheck.SAVED_CONTENT);
             },
             selector: '#js-editable-contact',
+            element_format : 'html',
+            entity_encoding : 'raw',
+            force_br_newlines : false,
+            force_p_newlines : false,
+            forced_root_block : '',
             menubar:false,
             inline: true,
             plugins: "textcolor colorpicker",

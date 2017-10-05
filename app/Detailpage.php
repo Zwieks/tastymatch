@@ -5,7 +5,11 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use App\Detailpage_User;
+use App\Images;
 
+use File;
+use Storage;
+use URL;
 use DB;
 
 class Detailpage extends Model
@@ -44,14 +48,37 @@ class Detailpage extends Model
 
 	public static function PreviewComponentData($data){
 		$eventInfo = [];
+		$agendaInfo = [];
 
 		foreach ($data['jsondata'] as $key => $value) {
-			if(isset($value['componentId'])){
-				$pieces = explode("-", $value['componentId']);
-				$type = $pieces[1];
+			if(isset($value['table'])){
+				$pieces = explode("_", $value['table']);
 
+				if(isset($pieces[1])){
+					$type = $pieces[1];
+				}else{
+					$type = '';
+				}
+				
 				if($type != 'mediaitems'){
 					$eventInfo['get'.ucwords($type)] = $value;
+
+					if($type === 'agendaitems'){
+						$uniqueId = $value['info']['random'];
+						$inArray = false;
+
+						foreach ($agendaInfo as $key => $item) {
+							if($uniqueId == $item['info']['random']){
+								$inArray = true;
+							}
+						}
+
+						if($inArray == false){
+							$agendaInfo[] = $value;
+						}	
+
+						$eventInfo['getAgendaItems'] = $agendaInfo;
+					}
 				}
 			}
 
@@ -59,7 +86,14 @@ class Detailpage extends Model
 				$pieces = explode("-", $value['elementid']);
 				$type = $pieces[1];
 
-				if(count($pieces) > 2 && $type === 'mediaitems'){
+				//CHECK IF THE IMAGE EXISTS
+				$value = Images::checkImagePath($value);
+
+				if($type == 'mediaitems'){
+					//var_dump($pieces);
+				}
+
+				if(count($pieces) > 2 && $type == 'mediaitems'){
 					$eventInfo['get'.ucwords($type).$pieces[2]] = $value;
 				}else{
 					$eventInfo['get'.ucwords($type)] = $value;
@@ -80,6 +114,7 @@ class Detailpage extends Model
 
 		return $eventInfo;
 	}	
+
 
 	/**
 	 * Get all the CONTACT components of the detailpages
@@ -209,7 +244,7 @@ class Detailpage extends Model
 	public static function store($userid,$type){
 		$Detailpage = new Detailpage;
 
-		$Detailpage->state = 'new';
+		$Detailpage->state = 'concept';
 		$Detailpage->type = $type;
 		$Detailpage->public = 0;
 

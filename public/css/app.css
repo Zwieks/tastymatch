@@ -7943,10 +7943,6 @@ form ol {
 .editable-default:last-child {
   margin-bottom: 0;
 }
-.editable-default:hover,
-.editable-default:focus {
-  border: 2px dashed rgba(0, 0, 0, 0.4);
-}
 .editable-default:after {
   transform: translateY(-50%);
   position: absolute;
@@ -7963,6 +7959,16 @@ form ol {
 }
 .editable {
   min-height: 2.4rem;
+  border: 2px solid transparent;
+  padding: 0 1.2rem;
+  margin: 0 -1.2rem;
+}
+.editable.js-editable-video {
+  margin: 0;
+}
+.editable:hover,
+.editable:focus {
+  border: 2px dashed rgba(0, 0, 0, 0.4);
 }
 .editable li {
   display: block;
@@ -7978,6 +7984,10 @@ form ol {
   box-shadow: none;
   position: relative;
   padding-bottom: 0;
+}
+.mce-edit-focus {
+  outline: none!important;
+  border: 2px dashed rgba(0, 0, 0, 0.4);
 }
 .mce-edit-focus .default {
   color: #333;

@@ -234,8 +234,9 @@
                 initDirections();
             }  
 
-        }   else{
-            emptyMap();
+        }else{
+            if(typeof map != 'undefined')
+                emptyMap();
         } 
     }
 
@@ -288,11 +289,11 @@
         }
 
         locations.push([
-            object.description,
+            object['info'].description,
             object['info'].lat,
             object['info'].long,
             object['info'].location,
-            object.name,
+            object['info'].name,
             object['info'].slug
         ]);
 
@@ -576,24 +577,33 @@
     function setAgendaItems(){
         //Get the agenda info
         var agenda_listitems = '',
+            preview = false,
             eventid = '';
 
-        if($.fn.locations_object.length != 0){    
+        @if(isset($page_content['getAgendaitems']) && ($page_content['getAgendaitems']['info']['status'] == 'new'))   
+            preview = true;
+
+            var array = '{!! json_encode($page_content['getAgendaItems']) !!}';
+            $.fn.locations_object = jQuery.parseJSON(array);
+        @endif
+
+        if($.fn.locations_object.length != 0 || preview == true){    
             for (var key in $.fn.locations_object) {
-                if(typeof $.fn.locations_object[key].name != 'undefined' && $.fn.locations_object[key].name != ''){
+                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
                     var id = $.fn.locations_object[key].id;
 
                     if(typeof $.fn.locations_object[key].event_id != 'undefined'){
-                        eventid = $.fn.locations_object[key].event_id;
+                        eventid = $.fn.locations_object[key].event_id; 
                     }else{
                          eventid = '';
                     }
 
-                    var name = $.fn.locations_object[key].name;
+                    var name = $.fn.locations_object[key]['info'].name;
                     var location = $.fn.locations_object[key]['info'].location;
                     var searchable_id = $.fn.locations_object[key]['info'].searchable;
                     var start = $.fn.locations_object[key].date_start;
                     var end = $.fn.locations_object[key].date_end;
+                    var $page_type = $.fn.locations_object[key]['info'].status;
                     var date = '';
                     var edit = '';
 
@@ -627,6 +637,8 @@
 
         $('.agendaitems-wrapper .mCSB_container').empty();
         $('.agendaitems-wrapper .mCSB_container').append(agenda_listitems);
+
+        createMap(map,animation,$.fn.locations_object);
     }
 
     function highlightMarker(id){

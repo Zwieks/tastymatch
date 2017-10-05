@@ -230,11 +230,6 @@
 		margin-bottom: 0;
 	}
 
-	&:hover,
-	&:focus{
-		border:2px dashed rgba(0,0,0,0.4);
-	}
-
 	&:after{
 		.centerY;
 	    top: -12px;
@@ -254,6 +249,20 @@
 
 .editable{
 	min-height: @spacing;
+    border: 2px solid transparent;
+    padding: 0 @spacing/2;
+    margin: 0 -@spacing/2;
+
+
+    &.js-editable-video{
+    	margin: 0;
+    }
+
+	&:hover,
+	&:focus{
+		border:2px dashed rgba(0,0,0,0.4);
+	}
+
 
 	li{
 		display: block;
@@ -276,6 +285,9 @@
 }
 
 .mce-edit-focus{
+	outline: none!important;
+	border: 2px dashed rgba(0, 0, 0, 0.4);
+
 	.default{
 		color:@textColor;
 		cursor: auto;

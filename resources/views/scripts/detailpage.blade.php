@@ -348,14 +348,15 @@
 
             userObject['pageid'] = $('input[name=pageid]').val();
 
-            if(save === 'preview'){
-                var newWindow = window.open('/', '_blank');
-            }
+            // if(save === 'preview'){
+            //     var newWindow = window.open('/', '_blank');
+            // }
 
             $.ajax({
                 type: 'POST',
                 dataType: 'json',
                 url: url,
+                async:    false,
                 headers: {'X-CSRF-TOKEN': token},
                 data: {jsondata: newObject, userDetail: userObject, itemType: type, itemStatus: status, saveType: save},
                 success: function (data) {
@@ -376,6 +377,7 @@
                         $('#modal-success').modal('toggle');
                     }else if(data.success == false && data.preview == true){
                         //If preview op 
+                        var newWindow = window.open('/', '_blank');
                         newWindow.location = '/preview/'+data.type+'/'+data.cache_id;
                     }else{
                         console.log('Oeps..');
@@ -447,6 +449,12 @@
             return result;
         }
 
+        function reIndexMedia(dropZoneObjects){
+
+
+            return dropZoneObjects;
+        }
+
         //REMOVE MEDIA ITEM onclick
         function removeMediaItem(object){
             var object_key = object.parent().attr('id'),
@@ -459,6 +467,11 @@
 
             //Remove TINYMCE video
             tinymce.remove('#'+video_element);
+
+            var DropzoneId = object.parent().find('form.dropzone').attr('id');
+
+            console.log(DropzoneId);
+
             //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
             if(object.parent().attr('data-media').length > 0){
@@ -488,6 +501,17 @@
             object.parent().fadeOut( 0, function() {
                 object.parent().remove();
             });
+
+            //REINDEX MEDIA ITEMS
+            var DropzoneId = DropzoneId.replace ( /[^\d.]/g, '' );
+
+            delete $.fn.Global.SAVE_COMPONENTS['component-mediaitems-'+DropzoneId];
+                        console.log('test');
+                        console.log(DropzoneId);
+            console.log($.fn.Global.SAVE_COMPONENTS['component-mediaitems-'+DropzoneId]);
+            dropZoneObjects = reIndexMedia(dropZoneObjects);
+
+            console.log(dropZoneObjects);
         }
 
         function deleteComponents(){
@@ -686,8 +710,11 @@
 
         function addMediaItem() {
 
+            var lastElementIdNum = parseInt($('#js-editable-wrapper .mediaitems-wrapper .media:last-child').attr( "id" ).replace ( /[^\d.]/g, '' ));
+
             var formData = {
-                count: ($('#js-editable-wrapper .editable-wrapper').children().length),
+                count: ($('#js-editable-wrapper .mediaitems-wrapper').children().length),
+                elementNum: lastElementIdNum+1,
             };
             var token = $('meta[name="csrf-token"]').attr('content'),
                 url = '/ajax/addMediaItem';
@@ -700,16 +727,16 @@
                 success: function (data) {
                     if(data.success == true) {
                         //Put the results in de container
-                        $('#js-editable-wrapper .editable-wrapper').append(data.html);
+                        $('#js-editable-wrapper .mediaitems-wrapper').append(data.html);
                     }
                 }
             })
             .done(function(data) {
-                var drop_id = 'DropzoneElementId'+data.id,
-                    mce_id = '#tinyMceElementId'+data.id,
-                    mce_video_id = '#tinyMceVideoElementId'+data.id;
+                var drop_id = 'DropzoneElementId'+data.elementNum,
+                    mce_id = '#tinyMceElementId'+data.elementNum,
+                    mce_video_id = '#tinyMceVideoElementId'+data.elementNum;
 
-                $.fn['myDropzoneThethird'+data.id] = new Dropzone(
+                $.fn['myDropzoneThethird'+data.elementNum] = new Dropzone(
                     '#'+drop_id, //id of drop zone element 2
                     {
                         paramName: 'photos',
@@ -741,8 +768,9 @@
 
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
-                                count = objectLength(dropZoneObjects)-1;
-
+                                count = data.elementNum;
+                                console.log('Delete');
+                                console.log($.fn.Global.DELETE_COMPONENTS);
                                 //Add the image to the delete array on change
                                     var object_key = myObject.elementid,
                                         media_id = myObject.mediaid,
@@ -760,11 +788,11 @@
                                     if(parent_object.attr('data-media') != ''){
                                         parent_object.attr('data-status','updated');
                                     } 
-                            
-                                myObject.num = count;
+                            console.log(data.elementNum);
+                                myObject.num = data.elementNum;
                                 myObject.id = id;
                                 myObject.name = file.name;
-                                myObject.file = $.fn['myDropzoneThethird'+data.id];
+                                myObject.file = $.fn['myDropzoneThethird'+data.elementNum];
                                 myObject.randomname = createRandomString()+'.'+file.type.split('/').pop();
 
                                 file.randomname = myObject.randomname;
@@ -930,11 +958,17 @@
             var previewCount = 0;
             var previewCountsib = 1;
             var tempUpload = false;
+            $.fn.Global.SAVE_COMPONENTS['mediaitems'] = [];
 
             for(var key in dropZoneObjects) {
                 // Merge $.fn.Global.SAVE_COMPONENTS into dropZoneObjects, recursively            
                 if(key in $.fn.Global.SAVE_COMPONENTS){
                     $.extend( true, dropZoneObjects, $.fn.Global.SAVE_COMPONENTS);
+                }
+
+
+                if(key.indexOf('mediaitems') !== -1){
+                    $.fn.Global.SAVE_COMPONENTS['mediaitems'][key] = dropZoneObjects[key];
                 }
 
                 $.fn.Global.SAVE_COMPONENTS[key] = dropZoneObjects[key];
@@ -1006,8 +1040,7 @@
                     $.fn.Global.DELETE_IMAGES.push(remove_array);
                 }
             }
-
-
+                console.log($.fn.Global.SAVE_COMPONENTS);
             //Save check if components got any FORM childs
             $.each($( ".changed" ), function(index, value) {
                 var key = $(value).closest('.product-wrapper').attr('id');

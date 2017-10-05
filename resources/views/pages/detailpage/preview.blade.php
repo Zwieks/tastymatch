@@ -74,6 +74,8 @@
 </div>  
 
 <div class="component-wrapper mediaitems-wrapper">
+
+
 @if(isset($page_content))
   @foreach($page_content as $key => $item)
     @if("getMediaitems" == substr($key,0,13))
@@ -88,6 +90,6 @@
 </div>
 
 {{--Render GoogleMaps --}}
-@if(isset($page_content['agenda'][0]) || $item_type === 'event')
+@if(isset($page_content['agenda'][0]) || $item_type === 'event' || isset($page_content['getAgendaItems']))
   @include($googlemaps)
 @endif  

@@ -7,6 +7,7 @@ use App\Detailpage;
 use App\Detailpage_User;
 use App\ComponentMediaItem;
 use App\ComponentMediaItem_User;
+use App\Sessions;
 
 use Cache;
 
@@ -43,7 +44,7 @@ class DetailPageController extends Controller
         //Type of item
         $uppercase_type = ucfirst($type);
 
-        if(isset($page) && $page != 'new'){
+        if(isset($page) && $page != 'concept'){
             return redirect()->route('UpdatePage', ['type' => $type,'detailpage_id' => $slug]);
         }else{
             //Check if the slug is related to one of the page id's of the user
@@ -56,7 +57,7 @@ class DetailPageController extends Controller
                 $user = $request->session()->get('user.global');
 
                 //Set page type
-                $page_type = 'new';
+                $page_type = 'concept';
 
                 //Set the item type
                 $item_type = $type;
@@ -130,6 +131,9 @@ class DetailPageController extends Controller
         $userid = $request->session()->get('user.global.id');
 
         $detailpage_id = Detailpage::add($userid,$slug);
+
+        $cache_id = str_random(20);
+        Sessions::setPreviewPageSession($request, $cache_id, '');
 
         //return the view with the user session data
         return redirect()->route('CreatePage', ['item_type' => $slug,'detailpage_id' => $detailpage_id]);

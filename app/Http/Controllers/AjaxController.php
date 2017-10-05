@@ -138,8 +138,8 @@ class AjaxController extends Controller
             //Return the view
             $data = $request->all();
 
-            $returnHTML = view('layouts.templates.empty-mediaitem')->with('data', $data['count'])->render();
-            return response()->json(array('success' => true, 'html'=>$returnHTML, 'id'=>$data['count']));
+            $returnHTML = view('layouts.templates.empty-mediaitem')->with('data', $data['elementNum'])->render();
+            return response()->json(array('success' => true, 'html'=>$returnHTML, 'elementNum'=>$data['elementNum'] ,'id'=>$data['count']));
         }
     }
 
@@ -208,6 +208,7 @@ class AjaxController extends Controller
                 $form_data = '';
                 $content = [];
 
+                //ONLY FOR FORMS
                 if($type === 'event'){
                     $form_data = Event::dataFormat($data);
                 }elseif($type === 'foodstand'){
@@ -346,7 +347,7 @@ class AjaxController extends Controller
                 //Add the Event User table
                 Event_User::store($userid,$event_id,$data);
                 //Add item data to the global variable
-                $this->agendaItems[] = ['name' => $data['info']['name'],'eventid' => $event_id, 'agendaid' => $agenda_id, 'random' => $data['info']['random']];
+                $this->agendaItems[] = ['componentid' => $agenda_id,'name' => $data['info']['name'],'eventid' => $event_id, 'agendaid' => $agenda_id, 'random' => $data['info']['random']];
             }else if($status == 'update' && $agenda_id != ''){
                 //Update the event
                 Event::updateFields($event_id,$data);

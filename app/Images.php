@@ -58,6 +58,30 @@ class Images extends Model
 	}
 
 	/**
+	 * Check if the image is in the TEMP or the UPLOAD folder
+	 */
+	public static function checkImagePath($value){
+		if (array_key_exists("path",$value) && $value['path'] != ''){
+
+			$path = storage_path() .'/app/public/'. $value['path'];
+
+			if (!File::exists($path)){
+							//echo ' WEL '.$path;
+				$temp = explode('/temp/', $value['path']);
+
+				if(count($temp) === 2){
+					$value['path']  = $temp[0].'/'.$temp[1];
+				}else{
+					$temp = explode('uploads/', $value['path']);
+					$value['path']  = $temp[0].'uploads/temp/'.$temp[1];
+				}
+			}
+		}
+
+		return $value;
+	}
+
+	/**
 	 * Delete the images from the storage folder
 	 * @return \Illuminate\Http\Response
 	 */

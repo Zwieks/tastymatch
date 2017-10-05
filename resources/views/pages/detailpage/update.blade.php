@@ -43,9 +43,13 @@
 {{-- MEDIA ITEMS MODULE--}}
 <div id="js-editable-wrapper">
     <div class="editable-wrapper mediaitems-wrapper">
+    @if(count($page_content['getMediaItems']) > 0)
         @foreach($page_content['getMediaItems'] as $key => $item)
             @include('layouts.templates.update-mediaitem', array('data'=> $key ))
         @endforeach
+    @else
+        @include('layouts.templates.empty-mediaitem')
+    @endif
     </div>
 </div>
 <div id="js_add_mediaitem" class="add-media-item-wrapper">
