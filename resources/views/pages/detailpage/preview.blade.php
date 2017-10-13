@@ -4,7 +4,10 @@
         <div id="component-intro" class="product-wrapper">
             <div class="content">
             	<h2>{{$page_content['getIntro']['name']}}</h2>
-                <p>{!! html_entity_decode($page_content['getIntro']['content']) !!}</p>
+
+                @if(isset($page_content['getIntro']['content']) && $page_content['getIntro']['content'] != '')
+                  <p>{!! html_entity_decode($page_content['getIntro']['content']) !!}</p>
+                @endif  
             </div>
         </div>
     </div>

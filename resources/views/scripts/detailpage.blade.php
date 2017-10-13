@@ -423,18 +423,29 @@
 
         function objectReplaceKeyNamesToNumbers(obj) {
             var result = [],
-            num = 0;
+            num = 1;
             for(var prop in obj) {
                 if (obj.hasOwnProperty(prop)) {
-                    result[num] = obj[prop];
 
-                    if(typeof result[num].file != 'undefined'){
-                        result[num].file =  'uploaded';
-                    }
+                    if(prop == 'component-intro'){
+                        result[0] = obj[prop];
 
-                    num++;    
+                        if(typeof result[0].file != 'undefined'){
+                            result[0].file =  'uploaded';
+                        }
+                    }else{
+                        result[num] = obj[prop];
+
+                        if(typeof result[num].file != 'undefined'){
+                            result[num].file =  'uploaded';
+                        }
+
+                        num++;
+                    } 
                 }
             }
+
+            //reindex
             return result;
         }
 
@@ -447,12 +458,6 @@
                 }
             }
             return result;
-        }
-
-        function reIndexMedia(dropZoneObjects){
-
-
-            return dropZoneObjects;
         }
 
         //REMOVE MEDIA ITEM onclick
@@ -506,12 +511,6 @@
             var DropzoneId = DropzoneId.replace ( /[^\d.]/g, '' );
 
             delete $.fn.Global.SAVE_COMPONENTS['component-mediaitems-'+DropzoneId];
-                        console.log('test');
-                        console.log(DropzoneId);
-            console.log($.fn.Global.SAVE_COMPONENTS['component-mediaitems-'+DropzoneId]);
-            dropZoneObjects = reIndexMedia(dropZoneObjects);
-
-            console.log(dropZoneObjects);
         }
 
         function deleteComponents(){
@@ -769,8 +768,7 @@
                             this.on("addedfile", function(file) {
                                 var id = file.previewTemplate.previousSibling.parentElement.id;
                                 count = data.elementNum;
-                                console.log('Delete');
-                                console.log($.fn.Global.DELETE_COMPONENTS);
+
                                 //Add the image to the delete array on change
                                     var object_key = myObject.elementid,
                                         media_id = myObject.mediaid,
@@ -788,7 +786,7 @@
                                     if(parent_object.attr('data-media') != ''){
                                         parent_object.attr('data-status','updated');
                                     } 
-                            console.log(data.elementNum);
+                           
                                 myObject.num = data.elementNum;
                                 myObject.id = id;
                                 myObject.name = file.name;
@@ -925,7 +923,7 @@
                 if(typeof content != 'undefined'){
                     //Check if there is a video in the media item
                     if(content.componentId in $.fn.Global.SAVE_COMPONENTS){
-                        if(typeof content.video != 'undefined' && content.video != '') {
+                        if(typeof content.video != 'undefined') {
                             //Add only the video item
                             $.fn.Global.SAVE_COMPONENTS[content.componentId].video = content.video;
                             has_video = true;
@@ -935,6 +933,16 @@
                     //If object does not contain a video add it to the array
                     if(has_video != true)
                         $.fn.Global.SAVE_COMPONENTS[content.componentId] = content;
+
+
+                    var str = content.componentId;
+                    arr = str.split('-');
+                    var strPart = arr[1];
+
+                    if($('#js-editable-'+strPart).hasClass('empty-content') || 
+                        $('#'+content.componentId).find('.js-editable-media').hasClass('empty-content')){
+                            $.fn.Global.SAVE_COMPONENTS[content.componentId].content = '';
+                    }
                 }
             }
 

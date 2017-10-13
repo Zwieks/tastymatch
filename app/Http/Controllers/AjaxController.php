@@ -31,6 +31,7 @@ use App\ComponentMediaitem_User;
 
 use App\User;
 use App\Sessions;
+use Validator;
 use App\Images;
 
 class AjaxController extends Controller
@@ -148,6 +149,39 @@ class AjaxController extends Controller
         if($this->checkAjaxRequest($request) == true){
             //User id
             $userid = $request->session()->get('user.global.id');
+
+
+
+            //Rules for form fields
+            // $rules = array(
+            //     'title' => 'bail|required|string|max:255',
+            //     'jsondata.*.form.*.phone' => 'numeric',
+            //     'jsondata.*.form.*.email' => 'email|max:255',
+            //     'jsondata.*.form.*.site' =>  'url|max:30',
+            // );
+
+            // //Custom message for individual fields
+            // $messages = array(
+            //     'title.required' => 'Training Id should not be empty...',
+            //     'survey_name.required' => 'Survey Name  is Essential...',
+            //     'question.required' => 'Question is urgent...',
+            //     'answer_option.required' => 'Answer option can be any one but required...'
+
+            // );
+
+            // $validator = Validator::make($request->all(), $rules, $messages);
+
+            // //Check for validation
+            // if ($validator->fails()) {
+            //     //if validation fails
+            //     return redirect()->back()->withInput()->withErrors($validator);
+            // } else {
+            //     //Validation is successful and do as you wish
+            //     return "All data are validated !!";
+
+            // }
+            //dd($request['jsondata']);
+            //$title = collect($request)->sort();
 
             //Validate the input, when this fails it will return a json error
             $this->validate($request, [

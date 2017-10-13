@@ -17,7 +17,7 @@
             $('#'+ed.id).removeClass('changed-content');
         },
 
-         fillBox : function(ed,object){
+        fillBox : function(ed,object){
             var id = object.attr('id');
             $('#'+ed.id).removeClass('empty-content');
             $('#'+ed.id).addClass('changed-content');
@@ -35,8 +35,22 @@
                 }
             }),
             ed.on('blur', function(e) {
-                var content = ed.getContent();
+                var content = ed.getContent(),
+                    str = ed.id,
+                    arr = str.split('-'),
+                    strPart = arr[2];  
+
                 if($.trim(content) == '' || $.trim(content) == placeholderText){
+                    var placeholderText = '';
+
+                    if(strPart == 'intro'){
+                        placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-description') !!}';
+                    }else if(strPart == 'contact'){
+                        placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}';
+                    }else{
+                        placeholderText = '{!! Lang::get('tinymce.detailpage-foodstand-mediaitem') !!}';
+                    }
+                    
                     ContentCheck.emptyBox(ed,$(this),placeholderText,tag_empty);
                     //Loose the focus
                     $('#'+ed.id).blur();
@@ -133,7 +147,7 @@
 
         tinymce.init({
             setup:function(ed) {
-                var placeholderText = "{!! Lang::get('tinymce.detailpage-foodstand-contact-description') !!}",
+                var placeholderText = "{!! Lang::get('tinymce.detailpage-foodstand-contact') !!}",
                     tag = '<p class="editable-default">' + placeholderText + '</p>',
                     tag_empty = '<p class="contact-intro"></p>';
 
@@ -174,12 +188,12 @@
         @endif
     }
 
-    function TinyMceSave(id) {
+    function TinyMceSave(GetId) {
         //Use get without #
-        if($('#'+id).hasClass('changed-content')){
+        if($('#'+GetId).hasClass('changed-content') || $('#'+GetId).hasClass('empty-content')){
 
             //Get component ID
-            var id = tinymce.get(id),
+            var id = tinymce.get(GetId),
                 media_video = false,
                 object_componentid;
 
@@ -195,9 +209,13 @@
                 return 'No components found';
             }
 
-                var componentid = object_componentid,
+            var componentid = object_componentid,
                 userid = {!! Session::get('user.global.id') !!},
                 content = id.getContent();
+
+            if(content == ''){
+                tinymce.get(GetId).setContent('');
+            }
 
             // Do you ajax call here, window.setTimeout fakes ajax call
             if(typeof content != "undefined"){
@@ -210,10 +228,10 @@
                     }else{
                         myObject.video = content;
                     }
-
-                return myObject;
             }
-        };
+
+            return myObject;
+        }
     }
 
     $(document).ready(function(e) {
