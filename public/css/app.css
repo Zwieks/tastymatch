@@ -7933,17 +7933,20 @@ form ol {
     margin-bottom: 1.2rem;
   }
 }
-.editable-default {
+.editable-default,
+.empty-content {
   color: rgba(0, 0, 0, 0.4);
   position: relative;
   cursor: pointer;
   border: 2px dashed rgba(0, 0, 0, 0);
   min-height: 2.4rem;
 }
-.editable-default:last-child {
+.editable-default:last-child,
+.empty-content:last-child {
   margin-bottom: 0;
 }
-.editable-default:after {
+.editable-default:after,
+.empty-content:after {
   transform: translateY(-50%);
   position: absolute;
   top: 50%;
@@ -7954,8 +7957,12 @@ form ol {
   color: #000000;
   font-size: 20px;
 }
-.editable-default.js-editable-video:after {
+.editable-default.js-editable-video:after,
+.empty-content.js-editable-video:after {
   content: '';
+}
+.mce-edit-focus {
+  color: #333;
 }
 .editable {
   min-height: 2.4rem;

@@ -37,11 +37,14 @@ class Detailpage extends Model
 	            ->with('getMenu')
 	            ->with('getHeaderimage')
 	            ->with('getMediaItems')
-	            ->with('agenda')
+	            ->with('getAgendaitems')
 	            ->with('getEvent')
 	            ->with('getFoodstand')	
 	            ->with('getEntertainer')		                        
 	            ->findOrFail($detailpage_id);
+	    
+	    $result['getAgendaitems'] = collect($result['getAgendaitems']->where('detailpage_id', $detailpage_id));
+
 	    return $result;        
 	}
 
@@ -82,6 +85,13 @@ class Detailpage extends Model
 				}
 			}
 
+			if(isset($value[0]['info'])){
+				foreach ($value as $key => $value) {
+					$agendaInfo[] = $value;
+					$eventInfo['getAgendaItems'] = $agendaInfo;
+				}
+			}
+
 			if(isset($value['elementid'])){
 				$pieces = explode("-", $value['elementid']);
 				$type = $pieces[1];
@@ -111,7 +121,7 @@ class Detailpage extends Model
 				}
 			}
 		}
-
+		
 		return $eventInfo;
 	}	
 
@@ -170,7 +180,7 @@ class Detailpage extends Model
 	/**
 	 * Get all the AGENDA ITEMS components of the detailpages
 	 */
-	public function agenda(){
+	public function getAgendaitems(){
 		return $this->hasMany('App\Agenda');
 	}
 
@@ -244,7 +254,7 @@ class Detailpage extends Model
 	public static function store($userid,$type){
 		$Detailpage = new Detailpage;
 
-		$Detailpage->state = 'concept';
+		$Detailpage->state = 'new';
 		$Detailpage->type = $type;
 		$Detailpage->public = 0;
 

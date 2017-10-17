@@ -36,7 +36,7 @@ class Event extends Model
             ->with('getHeaderimage')
             ->with('getMediaItems')
             ->with('getEvent')
-            ->with('agenda')
+            ->with('getAgendaitems')
             ->findOrFail($result->detailpage_id);
 
         //Get the AGENDA DETAILS and put them in the array

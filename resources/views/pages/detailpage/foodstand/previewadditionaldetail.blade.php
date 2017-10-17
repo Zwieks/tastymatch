@@ -1,11 +1,10 @@
 <!-- {{$debugpath}} -->
-@if(isset($page_content['info']['foodstand_types']))
+@if(isset($page_content['info']['foodstand_types']) && $page_content['info']['foodstand_types'] != '')
 	<div class="content product-wrapper details detailpage-items">
 	    <h2>{{ Lang::get('detailpage.foodstand-additinaldetails') }}</h2>
 	    @if(isset($page_content['info']['foodstand_types']))
 	     	@php ($types = Lang::get('foodstandtypes'))
 	     	@php ($foodstandtypes_array = explode(',',$page_content['info']['foodstand_types']))
-
 	        <section class="detailitem-wrapper">
 		    	<h3>{{ Lang::get('forms.foodstandtype') }}</h3>
 		    	<div class="block-items-wrapper">

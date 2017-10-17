@@ -44,7 +44,7 @@
                 if(typeof newAgendaObject.eventid != 'undefined' && value.event_id == newAgendaObject.eventid){
                     //Now we know the item already exist in de database
                     //It have to be an update but check if it only need to update the dates or other fields
-                    if(newAgendaObject.status == 'update-agenda-only'){
+                    if(newAgendaObject.updateagenda == 'true'){
                         $.fn.locations_object[index]['info'].status = 'update-agenda-only';
                          //Set the update DATE START
                         $.fn.locations_object[index].date_start = newAgendaObject.datestart;
@@ -52,7 +52,7 @@
                         $.fn.locations_object[index].date_end = newAgendaObject.dateend;
 
                         inCheck = true;
-                    }else if(newAgendaObject.status == 'update'){
+                    }else if(newAgendaObject.update == 'true'){
                         //Check if the location has been changed
                         //This needs to be check because of the new marker thats needs to be added/removed
                         if(value['info'].location != newAgendaObject.location){
@@ -80,14 +80,14 @@
                         }    
 
                         inCheck = true;
-                    }else if(newAgendaObject.status == 'delete'){   
+                    }else if(newAgendaObject.delete == 'true'){   
                         $.fn.locations_object[index]['info'].status = 'delete';
                         createRemoveArray(parseInt(value.id), parseInt(value['info'].id), value['info'].searchable);
                         //Remove the item from the location object
                         delete_array.push(index); 
 
                         inCheck = true;
-                    }else if(newAgendaObject.status == 'new'){
+                    }else if(newAgendaObject.new == 'true'){
                         var newObject = {};
                             newObject['searchable'] = '1';
                         agendaitem.push(newObject);
@@ -103,7 +103,7 @@
                     }   
 
                     isUpdate = true;
-                }else if(typeof newAgendaObject.eventid == 'undefined' && typeof value.event_id == 'undefined' && typeof newAgendaObject.status != 'undefined' && newAgendaObject.status == 'delete'){
+                }else if(typeof newAgendaObject.eventid == 'undefined' && typeof value.event_id == 'undefined' && typeof newAgendaObject.status != 'undefined' && newAgendaObject.delete == 'true'){
                     createRemoveArray(parseInt(value.id), parseInt(value['info'].id), value['info'].searchable);
                     //Remove the item from the location object
                     delete_array.push(index); 
@@ -137,7 +137,7 @@
             create_new_marker(agendaitem);
         }
 
-        //Update the agenda items
+        //Update the agenda items  createMap
         setAgendaItems(agendaitem);
         //Close the modal
         $('#modal-form').modal('toggle');
@@ -424,6 +424,7 @@
         function objectReplaceKeyNamesToNumbers(obj) {
             var result = [],
             num = 1;
+
             for(var prop in obj) {
                 if (obj.hasOwnProperty(prop)) {
 
@@ -433,6 +434,11 @@
                         if(typeof result[0].file != 'undefined'){
                             result[0].file =  'uploaded';
                         }
+                    }else if(prop == 'agenda'){
+                        result[num] = obj[prop];
+                        result[num].componentid = 'agenda';
+                        result[num].table = 'agendas';
+                        num++;
                     }else{
                         result[num] = obj[prop];
 
@@ -961,6 +967,7 @@
                     }
                 }
             });
+            $.fn.Global.SAVE_COMPONENTS['agenda'] = $.fn.locations_object;
 
             //Get the DROPZONE files en put them in the object
             var previewCount = 0;

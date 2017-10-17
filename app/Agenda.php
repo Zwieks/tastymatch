@@ -70,6 +70,8 @@ class Agenda extends Model
         	$page_content['agenda'][$i]->date_start = Carbon::parse($item->date_start)->formatLocalized('%e %b %Y');
         	$page_content['agenda'][$i]->date_end = Carbon::parse($item->date_end)->formatLocalized('%e %b %Y');
 			$item['info'] = event::where('id', '=', $item['event_id'])->first();
+			$item['info']->name = $item->name;
+			$item['info']->description = $item->name;
 			$i++;
 		}
 

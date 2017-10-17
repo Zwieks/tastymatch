@@ -222,8 +222,6 @@
             }
 
             createMap(map,animation,$.fn.locations_object);
-            //Set the bounds and zoom
-            setBounds();
 
             //Update the agenda items
             setAgendaItems();
@@ -238,12 +236,15 @@
             if(typeof map != 'undefined')
                 emptyMap();
         } 
+
+        //Set the bounds and zoom
+        setBounds();
     }
 
     function createMap(map,animation,set_markers){
         if(set_markers.length != 0){
             $.each(set_markers, function(key, fd) {
-                if(fd['info'] != ""){
+                if(fd['info'] != "" && typeof fd['info']['marker'] != 'undefined'){
                     var locations = set_locations(key,fd);
                     add_markers(key,map,locations,icons['events'].icon,animation);
                 }
@@ -575,6 +576,8 @@
 
     //Set the agenda items
     function setAgendaItems(){
+        deleteMarkers();
+
         //Get the agenda info
         var agenda_listitems = '',
             preview = false,
@@ -587,9 +590,17 @@
             $.fn.locations_object = jQuery.parseJSON(array);
         @endif
 
+        @if(isset($page_content['getAgendaItems']))   
+            preview = true;
+            var array = '{!! json_encode($page_content['getAgendaItems']) !!}';
+            $.fn.locations_object = jQuery.parseJSON(array);
+            console.log(array);
+        @endif      
+
         if($.fn.locations_object.length != 0 || preview == true){    
             for (var key in $.fn.locations_object) {
-                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && $.fn.locations_object[key]['info'].name != ''){
+                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && 
+                    $.fn.locations_object[key]['info'].name != ''){
                     var id = $.fn.locations_object[key].id;
 
                     if(typeof $.fn.locations_object[key].event_id != 'undefined'){
@@ -629,6 +640,7 @@
                                 "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
                                 "</li>";       
                     agenda_listitems = agenda_listitems+item;
+                    $.fn.locations_object[key]['info'].marker = 'true';
                 }
             }
         }else{
