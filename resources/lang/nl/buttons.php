@@ -4,6 +4,7 @@ return [
 	'register' => 'Gratis inschrijven',
 	'search' => 'Zoeken',
 	'save' => 'Opslaan',
+	'update' => 'Update',
 	'concept' => 'Concept',
 	'cancel' => 'Annuleren',
 	'create' => 'Aanmaken',

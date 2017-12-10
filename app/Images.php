@@ -92,7 +92,7 @@ class Images extends Model
 
 		//Loop through the array containing the url of the images that will be deleted
 		foreach ($data['jsondata'] as $image_data) {
-
+						var_dump($image_data);
 			foreach ($image_data as $image_item) {
 				if(substr( $image_item, 0, 7 ) === "uploads"){
 					$path = storage_path() .'/app/public/'. $image_item;
@@ -100,7 +100,7 @@ class Images extends Model
 			}
 
 			//Check if image exist
-			if(file_exists($path)) {
+			if(isset($path) && file_exists($path)) {
 				//Delete the image from the folder
 				File::delete($path);
 

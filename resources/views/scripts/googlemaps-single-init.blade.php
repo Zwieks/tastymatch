@@ -597,10 +597,12 @@
             console.log(array);
         @endif      
 
-        if($.fn.locations_object.length != 0 || preview == true){    
+        if($.fn.locations_object.length != 0 || preview == true){   
             for (var key in $.fn.locations_object) {
-                if(typeof $.fn.locations_object[key]['info'].name != 'undefined' && 
-                    $.fn.locations_object[key]['info'].name != ''){
+                console.log($.fn.locations_object[key]['info']);
+                if( $.isNumeric(key) == true && 
+                    typeof $.fn.locations_object[key]['info'].name != 'undefined' && 
+                    $.fn.locations_object[key]['info'].name != '' ){
                     var id = $.fn.locations_object[key].id;
 
                     if(typeof $.fn.locations_object[key].event_id != 'undefined'){
@@ -635,7 +637,7 @@
                         edit = "title='{!! Lang::get('agenda.edit-agenda') !!}' data-toggle='modal' data-target='#modal-form' data-icon='X'";
                     @endif
                     //Create the user agenda items
-                    var item = "<li id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
+                    var item = "<li data-toggle='modal' data-target='#modal-form' id='"+id+"' data-random='"+random+"' data-event-id='"+eventid+"' class='agendaitem js-googlemap-agendaitem' "+edit+"data-marker-id='"+key+"' data-searchable='"+searchable_id+"'>"+
                                 "<span class='agenda-date' data-icon='H'>"+date+"</span>"+
                                 "<span class='agenda-name'><b>"+location+"</b> - "+name+"</span>"+
                                 "</li>";       

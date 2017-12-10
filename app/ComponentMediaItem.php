@@ -28,7 +28,8 @@ class ComponentMediaItem extends Model
 	}
 
 	public static function updateFields($userid,$mediaitem_id,$data){
-		if(!isset($data['path']) || isset($data['video']))
+
+		if(!isset($data['path']) || (isset($data['video']) && $data['video'] != ''))
 			$data['path'] = '';
 
 		if(!isset($data['content']))

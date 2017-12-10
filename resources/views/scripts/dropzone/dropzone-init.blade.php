@@ -3,6 +3,19 @@
     var dropZoneObjects = [],
     componentWrapper = [];
 
+    function removeItemTest(file, myObject){
+        if (typeof myObject != "undefined" && typeof myObject == "object") {
+            var remove_array = [];
+
+            remove_array.push(myObject.path);
+            remove_array.push(myObject.elementid);
+            remove_array.push(myObject.mediaid);
+
+            $.fn.Global.DELETE_IMAGES.push(remove_array);
+        }     
+    }
+
+
     //Remove item from upload list in array
     function removeItem(file){
         if (typeof dropZoneObjects != "undefined" && typeof dropZoneObjects == "object") {

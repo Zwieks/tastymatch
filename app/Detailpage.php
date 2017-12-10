@@ -52,7 +52,7 @@ class Detailpage extends Model
 	public static function PreviewComponentData($data){
 		$eventInfo = [];
 		$agendaInfo = [];
-
+//dd(collect($data['jsondata'])->toJson());
 		foreach ($data['jsondata'] as $key => $value) {
 			if(isset($value['table'])){
 				$pieces = explode("_", $value['table']);

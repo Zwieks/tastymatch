@@ -1,4 +1,4 @@
-<script type="text/javascript">
+ <script type="text/javascript">
     $.fn.Global = {
         DELETE_IMAGES : [],
         DELETE_AGENDA_ITEMS : [],
@@ -482,7 +482,6 @@
             var DropzoneId = object.parent().find('form.dropzone').attr('id');
 
             console.log(DropzoneId);
-
             //Check if the object contains a media tag. If so it is in the database,
             //then add the number to the global delete components array 
             if(object.parent().attr('data-media').length > 0){
@@ -953,20 +952,22 @@
             }
 
             //Save the AGENDA FORM content
-            $.each($.fn.locations_object, function(index, value) {
-                if(typeof value['info'].status != 'undefined'){
-                    if(value['info'].status == 'new'){
-                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-new');
-                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
-                    }else if(value['info'].status == 'update-agenda-only'){
-                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-updateagendaonly');    
-                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-updateagendaonly-'+count] = value;
-                    }else if(value['info'].status == 'update'){
-                        var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-update');
-                        $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
-                    }
-                }
-            });
+            console.log($.fn.locations_object);
+            // $.each($.fn.locations_object, function(index, value) {
+            //     console.log('test');
+            //     if(typeof value['info'].status != 'undefined'){
+            //         if(value['info'].status == 'new'){
+            //             var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-new');
+            //             $.fn.Global.SAVE_COMPONENTS['component-agendaitems-new-'+count] = value;
+            //         }else if(value['info'].status == 'update-agenda-only'){
+            //             var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-updateagendaonly');    
+            //             $.fn.Global.SAVE_COMPONENTS['component-agendaitems-updateagendaonly-'+count] = value;
+            //         }else if(value['info'].status == 'update'){
+            //             var count = countStringNumberInKeys($.fn.Global.SAVE_COMPONENTS,'component-agendaitems-update');
+            //             $.fn.Global.SAVE_COMPONENTS['component-agendaitems-update-'+count] = value;
+            //         }
+            //     }
+            // });
             $.fn.Global.SAVE_COMPONENTS['agenda'] = $.fn.locations_object;
 
             //Get the DROPZONE files en put them in the object
@@ -1189,7 +1190,7 @@
             $('#js-filter-input').attr('data-changed','true');
 
             //Trigger the normal handling
-            $('.js-add-agenda-item').trigger('click');
+            agendaInit();
         });
             
         /**
@@ -1197,6 +1198,10 @@
          * TAG: AGENDAHANDLER
          */
         $(document).on('click','.js-add-agenda-item',function(){
+            agendaInit();
+        });
+
+        function agendaInit(){
             // Get the form data
             var dataArray = $('#js-modal-create-agenda-items').serializeArray(),
                 searchable = $('#js-filter-input').attr('data-searchable'),
@@ -1288,6 +1293,7 @@
 
             //Check form inputs
             validateForm(validateData,dataArray);
-        });
+        }
+
     });
 </script>

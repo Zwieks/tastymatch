@@ -61,6 +61,10 @@
                 }
                 //Set title
                 $(e.currentTarget).find('h2').text('{!! Lang::get('agenda.modal-agenda-update-title') !!}');
+
+                //Set the update button
+                $(e.currentTarget).find('.js-add-agenda-item').text('{!! Lang::get('buttons.update') !!}').addClass('js-update-agenda-item').removeClass('js-add-agenda-item');
+
                 //Show delete button
                 if($(e.currentTarget).find('input[name="searchevents"]').attr('data-new') == 'false' && 
                     $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid') != '')
@@ -100,6 +104,9 @@
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-update', false);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-new', true);
                 $(e.currentTarget).find('input[name="searchevents"]').attr('data-agendaid', '');
+
+                //Set the update button
+                $(e.currentTarget).find('.js-update-agenda-item').text('{!! Lang::get('buttons.create') !!}').addClass('js-add-agenda-item').removeClass('js-update-agenda-item');
                 removeAgendaItemBlocking(e);
             }
         });

@@ -259,7 +259,7 @@ class AjaxController extends Controller
                 $content = array_merge($content, $form_data);
 
                 //Create new cache
-                Sessions::setPreviewPageSession($request, $cache_id, json_encode($content));
+                Sessions::fillPreviewPageSession($request, $cache_id, json_encode($content));
                 if(session()->exists($cache_id)){
                     //Preview the page
                     return response()->json(array('userid' => $userid, 'cache_id' => $cache_id,'type' => $type,'preview' => true,'success' => false, 'content' => $request->session()->get($cache_id, 'default')));
@@ -279,7 +279,7 @@ class AjaxController extends Controller
             if(isset($pageid) && $pageid != ''){
                 //Check the type of the new created detailpage
                 if($type == 'event'){
-                    //Format the data for the event
+                    //Format the data for the event ONLY FORMS
                     $event_data = Event::dataFormat($data);
                     //Check if the detailpage is new or an excisting
                     //IF THE STATUS IS NEW CREATE A NEW PRODUCT BASED ON THE TYPE

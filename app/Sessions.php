@@ -25,7 +25,15 @@ class Sessions extends Model
         $request->session()->flash($cache_id, $data);
 
         return true;
-    }    
+    }
+
+    public static function fillPreviewPageSession(Request $request, $cache_id, $data){
+        //Set the Session
+        $request->session()->reflash($cache_id);
+        $request->session()->flash($cache_id, $data);
+        return true;
+    }
+
 
 	//When the user has been on the Blog detailpage the session will be set to affoid multple view counts in the database
 	//Session is set in the Blog Controller

@@ -78,7 +78,7 @@
                 });
 
                 this.on("removedfile", function(file) { 
-                    removeItem(file);
+                    removeItemTest(file, myObject);
                     console.log('hallo daar');
                     myObject.file = '';
                     myObject.path = '';
